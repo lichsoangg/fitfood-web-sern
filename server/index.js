@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const createError = require("http-errors");
 require("dotenv").config();
-require("./utils/connect_mongodb");
 //route
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
@@ -27,10 +26,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    res.json({
-        status: err.status || 500,
-        message: err.message
-    });
+    res.json(createError(err.status || 500, err.message));
 });
 
 const PORT = process.env.PORT || 8000;

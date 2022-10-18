@@ -1,20 +1,15 @@
-const mongoose = require("mongoose");
+const db = require("../utils/connect_mysql");
 
-const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        unique: true,
-        required: true,
+const User = {
+    getUsers: (callback) => {
+        db.query("SELECT * FROM User", callback);
     },
-    password: {
-        type: String,
-        required: true,
-        minlength: 6,
+    getUserWithName: (username, callback) => {
+        db.query("SELECT * FROM User WHERE Username=?", [username], callback);
     },
-    isAdmin: {
-        type: Boolean,
-        default: false,
+    postUser: (data, callback) => {
+        db.query("INSERT INTO User (`Username`,`Password`) VALUES (?)", [data], callback);
     }
-}, { timestamps: true });
+};
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = User;
