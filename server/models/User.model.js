@@ -8,7 +8,8 @@ const User = {
         db.query("SELECT * FROM User WHERE Username=?", [username], callback);
     },
     postUser: (data, callback) => {
-        db.query("INSERT INTO User (`Username`,`Password`) VALUES (?)", [data], callback);
+        const { username, password } = data;
+        db.query("INSERT INTO User (`Username`,`Password`) VALUES (?)", [[username, password]], callback);
     }
 };
 

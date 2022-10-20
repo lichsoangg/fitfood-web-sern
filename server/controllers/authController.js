@@ -19,7 +19,7 @@ const authController = {
                 const salt = await bcrypt.genSalt(10);
                 const passwordHashed = await bcrypt.hash(req.body.password, salt);
 
-                User.postUser([username, password], (err, data) => {
+                User.postUser(req.body, (err, data) => {
                     if (err) return res.json(createError(400, "Bad request"));
                     else {
                         const accessToken = jwt.sign({
