@@ -1,0 +1,44 @@
+@import "../scss//variables.scss";
+
+h1 {
+  font-size: 72px;
+  line-height: 74px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: $fz-largest;
+  line-height: 62px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: $fz-large;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: $fz-medium;
+  font-weight: 700;
+}
+
+.body1 {
+  font-size: $fz-medium;
+}
+
+.body2 {
+  font-size: $fz-medium;
+  font-weight: 600;
+}
+
+.body3 {
+  font-size: $fz-default;
+}
+
+.body4 {
+  font-size: $fz-default;
+}
+
+.body5 {
+  font-size: $fz-small;
+}

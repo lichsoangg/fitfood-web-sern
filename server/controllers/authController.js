@@ -1,11 +1,9 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User.model.js");
 const jwt = require("jsonwebtoken");
-const db = require("../utils/connect_mysql");
 const createError = require("../utils/createError.js");
 const { signAccessToken, signRefreshToken } = require("../utils/jwt_service.js");
 const client = require("../utils/connect_redis.js");
-const { json } = require("body-parser");
 const Customer = require("../models/Customer.model.js");
 const authController = {
     //REGISTER
