@@ -1,26 +1,26 @@
 const jwt = require("jsonwebtoken");
 const client = require("./connect_redis");
 const jwtService = {
-    signAccessToken: (ID, IsAdmin) => {
+    signAccessToken: (Username, IsAdmin) => {
         const accessToken = jwt.sign({
-            ID,
+            Username,
             IsAdmin,
-        }, process.env.ACCESS_SECRET_KEY, { expiresIn: "30s" });
+        }, process.env.ACCESS_SECRET_KEY, { expiresIn: "1d" });
         return accessToken;
     },
-    signRefreshToken: (ID, IsAdmin, res) => {
+    signRefreshToken: (Username, IsAdmin, res) => {
         const refreshToken = jwt.sign({
-            ID,
+            Username,
             IsAdmin
-        }, process.env.REFRESH_SECRET_KEY, { expiresIn: "1d" });
+        }, process.env.REFRESH_SECRET_KEY, { expiresIn: "3d" });
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             sameSite: "strict",
             secure: false,
             path: "/"
         });
-        client.set(ID.toString(), refreshToken);
-        client.expire(ID.toString(), 3 * 24 * 60 * 60);
+        client.set(Username.toString(), refreshToken);
+        client.expire(Username.toString(), 3 * 24 * 60 * 60);
     }
 };
 
