@@ -1,0 +1,57 @@
+@import "../../../scss/import.scss";
+.layout__logo {
+  @include flexMid(unset);
+  gap: 8px;
+  cursor: pointer;
+  &--image {
+    img {
+      width: 36px;
+      object-fit: cover;
+    }
+  }
+  h1 {
+    font-weight: 700 !important;
+    font-size: 28px !important;
+    line-height: 34px !important;
+    color: $cl-black;
+  }
+}
+
+.layout__menu {
+  @include flexMid(space-between);
+  gap: 48px;
+  text-transform: uppercase;
+  color: $cl-black;
+  &--item {
+    cursor: pointer;
+  }
+}
+
+.layout__function {
+  @include flexMid(unset);
+  gap: 28px;
+  &--cart {
+    cursor: pointer;
+  }
+  &--login {
+    cursor: pointer;
+    width: max-content;
+    padding: 0px 8px;
+    height: 44px;
+    border-radius: 18px;
+    background-color: $cl-black;
+    @include flexMid(center);
+    color: $cl-grey-light;
+  }
+}
+
+.layout__contact {
+  @include flexMid(unset);
+  gap: 8px;
+  span {
+    color: $cl-grey;
+  }
+  h1 {
+    color: $cl-black;
+  }
+}

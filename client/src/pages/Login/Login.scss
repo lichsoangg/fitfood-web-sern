@@ -1,0 +1,17 @@
+@import "../../scss/import.scss";
+.login {
+  height: max-content;
+  min-height: calc(100vh - 450px);
+  @include flexMid(unset);
+  flex-direction: column;
+  gap: 16px;
+  &__header {
+    color: $cl-black;
+  }
+  &__description {
+    color: $cl-grey;
+    a {
+      color: $cl-blue;
+    }
+  }
+}

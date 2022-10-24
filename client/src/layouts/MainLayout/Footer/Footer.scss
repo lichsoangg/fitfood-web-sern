@@ -1,0 +1,23 @@
+@import "../../../scss/import.scss";
+.footer {
+  padding: 60px 40px 40px;
+  background-color: #f5f5f5;
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  &__top {
+    @include flexMid(space-between);
+  }
+  &__center {
+    @include flexMid(center);
+    gap: 16px;
+  }
+  &__bottom {
+    @include flexMid(center);
+    flex-direction: column;
+    gap: 16px;
+    color: $cl-grey;
+  }
+}
