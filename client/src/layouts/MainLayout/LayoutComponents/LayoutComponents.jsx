@@ -2,7 +2,7 @@ import React from 'react';
 import "./LayoutComponents.scss";
 import logo from "../../../assets/images/logo.png";
 import cart from "../../../assets/svg/cart.svg";
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 export default function LayoutComponents() {
     return null;
 }
@@ -38,7 +38,7 @@ function Function() {
             <div className="layout__function--cart">
                 <img src={cart} alt="" />
             </div>
-            <Link to="/login"> <div className="layout__function--login body2">ĐĂNG NHẬP</div></Link>
+            <Link to="/login"> <div className="layout__function--login body2">Đăng nhập</div></Link>
         </div>
     );
 }

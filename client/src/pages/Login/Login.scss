@@ -14,4 +14,30 @@
       color: $cl-blue;
     }
   }
+  &__continue-title {
+    width: 320px;
+    @include flexMid(space-around);
+    display: flex;
+    span {
+      font-size: 12px;
+    }
+    hr {
+      width: 20%;
+      height: 0.5px;
+    }
+  }
+  &__difference-login {
+    @include flexMid(space-between);
+    width: 320px;
+    &__method {
+      cursor: pointer;
+      padding: 16px;
+      border: 0.5px solid $cl-grey;
+      border-radius: 8px;
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import "./Form.scss";
-import showPasswordIcon from "../../assets/svg/showPassword.svg";
-import hidePasswordIcon from "../../assets/svg/hidePassword.svg";
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
+import showPasswordIcon from "../../assets/icons/showPassword.png";
+import hidePasswordIcon from "../../assets/icons/hidePassword.png";
 export default function Form() {
     return null;
 }
@@ -11,9 +12,8 @@ export default function Form() {
 function Input({ placeHolder, icon }) {
     return (
         <div className="formInput">
-            <input type="text" className='formInput__input' required />
+            <input type="text" className='formInput__input' placeholder=" " />
             <span className='formInput__placeHolder'>{placeHolder}</span>
-
             <div className='formInput__icon'>
                 <img src={icon} alt="" />
             </div>
@@ -28,7 +28,7 @@ function InputPassword({ placeHolder }) {
     };
     return (
         <div className="formInput">
-            <input type={show ? "text" : "password"} className='formInput__input' required />
+            <input type={show ? "text" : "password"} className='formInput__input' placeholder=" " />
             <span className='formInput__placeHolder'>{placeHolder}</span>
             <div className='formInput__icon' onClick={handleClickTogglePassword}>
                 <img src={show ? showPasswordIcon : hidePasswordIcon} alt="Fitfood Password icon" />
@@ -38,6 +38,25 @@ function InputPassword({ placeHolder }) {
 
 };
 
+function ForgotPasswordText() {
+    return (
+        <div className='formForgotPasswordText'>
+            <Link>Quên mật khẩu?</Link>
+        </div>
+    );
+}
+
+function SubmitButton({ text, handleSubmit }) {
+    return (
+        <button type='submit' className='formSubmitButton' onClick={(e) => handleSubmit(e)}>
+            {text}
+        </button>
+    );
+}
+
+
 
 Form.Input = Input;
 Form.InputPassword = InputPassword;
+Form.ForgotPasswordText = ForgotPasswordText;
+Form.SubmitButton = SubmitButton;
