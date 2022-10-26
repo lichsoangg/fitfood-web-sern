@@ -1,9 +1,0 @@
-@import "../../../scss/import.scss";
-.loginForm {
-  width: 320px;
-  height: max-content;
-  margin-top: 24px;
-  @include flexMid(center);
-  flex-direction: column;
-  gap: 16px;
-}

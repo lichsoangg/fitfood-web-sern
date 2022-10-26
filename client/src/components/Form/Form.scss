@@ -65,3 +65,22 @@
   color: $cl-grey-light;
   cursor: pointer;
 }
+
+.formPaginateStepForm {
+  @include flexMid(unset);
+  width: 100%;
+  &__button-back,
+  &__button-submit {
+    width: 48%;
+    border: none;
+    border-radius: 3px;
+    padding: 12px 24px;
+    background-color: #1a48e9;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fdfbfa;
+  }
+  &__button-submit {
+    margin-left: auto;
+  }
+}

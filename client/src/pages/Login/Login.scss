@@ -1,8 +1,8 @@
 @import "../../scss/import.scss";
 .login {
   height: max-content;
-  min-height: calc(100vh - 450px);
-  @include flexMid(unset);
+  min-height: calc(100vh - 380px);
+  @include flexMid(center);
   flex-direction: column;
   gap: 16px;
   &__header {
@@ -39,5 +39,13 @@
         height: 24px;
       }
     }
+  }
+  .loginForm {
+    width: 320px;
+    height: max-content;
+    margin-top: 24px;
+    @include flexMid(center);
+    flex-direction: column;
+    gap: 16px;
   }
 }

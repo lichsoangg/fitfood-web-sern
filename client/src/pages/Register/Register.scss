@@ -1,0 +1,25 @@
+@import "../../scss/import.scss";
+.register {
+  height: max-content;
+  min-height: calc(100vh - 380px);
+  @include flexMid(center);
+  flex-direction: column;
+  gap: 16px;
+  &__header {
+    color: $cl-black;
+  }
+  &__description {
+    color: $cl-grey;
+    a {
+      color: $cl-blue;
+    }
+  }
+  .registerForm {
+    width: 320px;
+    height: max-content;
+    margin-top: 24px;
+    @include flexMid(center);
+    flex-direction: column;
+    gap: 16px;
+  }
+}
