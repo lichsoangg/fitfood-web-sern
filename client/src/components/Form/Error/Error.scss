@@ -1,0 +1,15 @@
+@import "../../../scss/import.scss";
+.error {
+  @include flexMid(unset);
+  gap: 8px;
+  margin-top: 6px;
+  &__image {
+    width: 12px;
+    height: 12px;
+    object-fit: cover;
+  }
+  &__message {
+    color: #df0606;
+    font-size: 14px;
+  }
+}

@@ -4,10 +4,11 @@ import Form from '../../../components/Form/Form';
 export default function AddressForm() {
     return (
         <>
-            <Form.InputPassword placeHolder="Tỉnh" />
-            <Form.InputPassword placeHolder="Quận" />
-            <Form.InputPassword placeHolder="Xã" />
-            <Form.InputPassword placeHolder="Địa chỉ" />
+            <Form.Dropdown placeHolder="Tỉnh" name="province" />
+            <Form.Dropdown placeHolder="Huyện" name="district"   />
+            <Form.Dropdown placeHolder="Xã" name="ward" />
+            <Form.Input placeHolder="Địa chỉ" name="address" />
         </>
     );
 }
+ 

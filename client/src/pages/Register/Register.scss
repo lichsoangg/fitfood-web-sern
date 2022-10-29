@@ -4,11 +4,11 @@
   min-height: calc(100vh - 380px);
   @include flexMid(center);
   flex-direction: column;
-  gap: 16px;
   &__header {
     color: $cl-black;
   }
   &__description {
+    margin-top: 16px;
     color: $cl-grey;
     a {
       color: $cl-blue;
@@ -20,6 +20,6 @@
     margin-top: 24px;
     @include flexMid(center);
     flex-direction: column;
-    gap: 16px;
+    gap: 36px;
   }
 }
