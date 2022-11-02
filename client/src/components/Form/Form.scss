@@ -82,7 +82,11 @@
   flex-direction: column;
   background-color: white;
   border-radius: 3px;
-  border: 0.5px solid $cl-grey;
+  border: 1px solid $cl-blue;
+  width: 100%;
+  max-height: 200px;
+  height: max-content;
+  overflow-y: auto;
   span {
     width: 100%;
     padding: 12px 16px;

@@ -6,8 +6,8 @@ export default function AccountForm() {
     return (
         <>
             <Form.Input placeHolder="Tài khoản*" icon={UsernameIcon} name="username" />
-            <Form.InputPassword placeHolder="Mật khẩu*" name="password" />
-            <Form.InputPassword placeHolder="Xác nhận mật khẩu*" name="confirmPassword" />
+            <Form.Input placeHolder="Mật khẩu*" name="password" type="password"/>
+            <Form.Input placeHolder="Xác nhận mật khẩu*" name="confirmPassword" type="password" />
         </>
     );
 }

@@ -20,7 +20,7 @@ export function useMultiStepForm(steps) {
     }
     return {
         currentStepIndex,
-        step: steps[currentStepIndex],
+        step:steps[currentStepIndex],
         back,
         next,
         isFirstStep: currentStepIndex === 0,

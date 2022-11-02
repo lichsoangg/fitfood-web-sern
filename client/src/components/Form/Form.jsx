@@ -14,41 +14,31 @@ export default function Form() {
     return null;
 }
 
-function Input({ placeHolder, icon, name, ...rest }) {
+function Input({ placeHolder, type, icon, name, ...rest }) {
     const { register, formState: { errors } } = useFormContext();
-
+    const [show, setShow] = useState(type === "password" ? false : true);
+    const handleClickTogglePassword = () => {
+        setShow(!show);
+    };
     return (
         <div className="formInput">
-            <input type="text" className='formInput__input' placeholder=" " {...rest} {...register(name)} />
+            <input type={show ? "text" : "password"} className='formInput__input' placeholder=" " {...rest} {...register(name)} />
             <span className='formInput__placeHolder'>{placeHolder}</span>
             {icon &&
                 <div className='formInput__icon'>
                     <img src={icon} alt="" />
                 </div>}
-
+            {
+                type === "password" &&
+                <div className='formInput__icon' onClick={handleClickTogglePassword}>
+                    <img src={show ? showPasswordIcon : hidePasswordIcon} alt="Fitfood Password icon" />
+                </div>
+            }
             {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
         </div>
     );
 }
-function InputPassword({ placeHolder, name, ...rest }) {
-    const { register, formState: { errors } } = useFormContext();
-    const [show, setShow] = useState(false);
-    const handleClickTogglePassword = () => {
-        setShow(!show);
-    };
 
-    return (
-        <div className="formInput">
-            <input type={show ? "text" : "password"} className='formInput__input' placeholder=" " {...rest} {...register(name)} />
-            <span className='formInput__placeHolder'>{placeHolder}</span>
-            <div className='formInput__icon' onClick={handleClickTogglePassword}>
-                <img src={show ? showPasswordIcon : hidePasswordIcon} alt="Fitfood Password icon" />
-            </div>
-            {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
-        </div>
-    );
-
-};
 function InputDate({ placeHolder, name, ...rest }) {
     const { register, formState: { errors } } = useFormContext();
 
@@ -69,8 +59,8 @@ function InputDate({ placeHolder, name, ...rest }) {
     );
 
 };
-function Dropdown({ data, placeHolder, icon, name, ...rest }) {
-    const { register, setValue, getValues, formState: { errors } } = useFormContext();
+function Dropdown({ data,loading, trigger, placeHolder, icon, name, ...rest }) {
+    const { register, setValue, getValues, watch, formState: { errors } } = useFormContext();
     const [rect, setRect] = useState(null);
     const { open, setOpen, modalRef } = useClickOutsideModal();
     const handleClickDropdown = (e) => {
@@ -84,7 +74,8 @@ function Dropdown({ data, placeHolder, icon, name, ...rest }) {
         return data.filter(item => item.id === key * 1)[0]?.value;
     }
     const handleClickDropdownValue = (e) => {
-        e.target.nextSibling.focus();
+        trigger && watch(trigger) && e.target.nextSibling.focus();
+        !trigger && e.target.nextSibling.focus();
     };
     return (
         <div className="formInput formDropdown" ref={modalRef} onClick={handleClickOpenModal}>
@@ -93,13 +84,20 @@ function Dropdown({ data, placeHolder, icon, name, ...rest }) {
                 placeholder=" "
                 readOnly
                 {...rest}
-                {...register(name)} />
+                {...register(name)}
+                style={trigger ? {
+                    pointerEvents: `${watch(trigger) ? "all" : "none"}`,
+                    opacity: `${watch(trigger) ? 1 : 0.4}`
+                } : {}}
+
+            />
 
             <span className='formInput__placeHolder' >{placeHolder}</span>
             <div className='formInput__icon'>
                 <img src={downIcon} alt="Fitfood Dropdown Icon" />
             </div>
-            {(open && data) && <Portal overlay={false} styleContent={{ position: "absolute", left: `${rect.left + window.scrollX}px`, top: `${rect.top + rect.height + window.scrollY}px`, width: `${rect.width}px` }}>
+            {(open && data) && <Portal overlay={false} styleContent={{ position: "absolute", left: `${rect.left + window.scrollX}px`, top: `${rect.top + rect.height + window.scrollY + 4}px`, width: `${rect.width}px` }}>
+
                 <div className="formInput__dropdown" onClick={handleClickDropdown} >
                     {data && data.map((item) => {
                         return <span key={item.id} data-id={item.id}>{item.value}</span>;
@@ -108,7 +106,7 @@ function Dropdown({ data, placeHolder, icon, name, ...rest }) {
             </Portal>}
             {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
         </div>
-        );
+    );
 }
 function ForgotPasswordText() {
     return (
@@ -137,7 +135,6 @@ function PaginateStepForm({ isFirstStep, isLastStep, back, textSubmit }) {
 
 
 Form.Input = Input;
-Form.InputPassword = InputPassword;
 Form.InputDate = InputDate;
 Form.ForgotPasswordText = ForgotPasswordText;
 Form.SubmitButton = SubmitButton;

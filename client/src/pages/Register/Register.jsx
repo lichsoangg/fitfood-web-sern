@@ -12,14 +12,13 @@ import * as yup from "yup";
 
 
 const schema = yup.object({
-    username: yup.string().required("Tài khoản là bắt buộc"),
-    password: yup.string().min(6, "Mật khẩu tối thiểu là 6 kí tự").required("Mật khẩu là bắt buộc"),
-    confirmPassword: yup.string().required("Xác nhận mật khẩu là bắt buộc").oneOf([yup.ref("password")], "Xác nhận mật khẩu không đúng"),
-    name: yup.string().required("Họ tên là bắt buộc"),
-    dayOfBirth: yup.string().required("Ngày sinh là bắt buộc"),
-    phoneNumber: yup.string().required("Số điện thoại là bắt buộc").matches(/((09|03|07|08|05)+([0-9]{8})\b)/g, "Số điện thoại không đúng định dạng"),
-    gender: yup.string().required("Giới tính là bắt buộc")
-
+    // username: yup.string().required("Tài khoản là bắt buộc"),
+    // password: yup.string().min(6, "Mật khẩu tối thiểu là 6 kí tự").required("Mật khẩu là bắt buộc"),
+    // confirmPassword: yup.string().required("Xác nhận mật khẩu là bắt buộc").oneOf([yup.ref("password")], "Xác nhận mật khẩu không đúng"),
+    // name: yup.string().required("Họ tên là bắt buộc"),
+    // dayOfBirth: yup.string().required("Ngày sinh là bắt buộc"),
+    // phoneNumber: yup.string().required("Số điện thoại là bắt buộc").matches(/((09|03|07|08|05)+([0-9]{8})\b)/g, "Số điện thoại không đúng định dạng"),
+    // gender: yup.string().required("Giới tính là bắt buộc"),
 }).required();
 
 export default function Register() {
