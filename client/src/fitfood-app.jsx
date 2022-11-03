@@ -19,6 +19,8 @@ function FitFoodAppRoutes() {
                 <Route path="/caloriecaculator" element={<CalorieCaculatorPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/hihi" element={<HomePage />} />
+
             </Route>
         </Routes>
     );

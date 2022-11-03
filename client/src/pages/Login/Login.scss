@@ -18,6 +18,7 @@
     width: 320px;
     @include flexMid(space-around);
     display: flex;
+    margin: 8px 0px;
     span {
       font-size: 12px;
     }

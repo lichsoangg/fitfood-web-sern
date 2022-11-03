@@ -4,12 +4,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiProvince = createApi({
     reducerPath: 'api-province',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://provinces.open-api.vn/api/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_PROVINCE_URL}),
     endpoints: builder => ({
         getProvinces: builder.query({
-            query: () => 'p/',
+            query: () => '/province',
             transformResponse: data => {
-                data = data.map(province => {
+           
+                data = data.results.map(province => {
                     return {
                         id: province.code,
                         value: province.name,
@@ -19,9 +20,9 @@ export const apiProvince = createApi({
             }
         }),
         getDistricts: builder.query({
-            query: (idProvince) =>`p/${idProvince}?depth=2`,
+            query: (idProvince) =>`district?province=${idProvince}`,
             transformResponse: data => {
-                data = data.districts.map(district => {
+                data = data.results.map(district => {
                     return {
                         id: district.code,
                         value: district.name,
@@ -31,9 +32,9 @@ export const apiProvince = createApi({
             }
         }),
         getWards: builder.query({
-            query:(idDistrict)=>`d/${idDistrict}?depth=2`,
+            query: (idDistrict) =>`commune?district=${idDistrict}`,
             transformResponse: data => {
-                data = data.wards.map(ward => {
+                data = data.results.map(ward => {
                     return {
                         id: ward.code,
                         value: ward.name,

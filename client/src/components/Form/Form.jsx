@@ -7,7 +7,7 @@ import showPasswordIcon from "../../assets/icons/showPassword.png";
 import hidePasswordIcon from "../../assets/icons/hidePassword.png";
 import dateIcon from "../../assets/icons/calendar.png";
 import downIcon from "../../assets/icons/down.png";
-import Error from './Error/Error';
+import Error from '../Error/Error';
 import Portal from '../Portal/Portal';
 import { useClickOutsideModal } from '../../hooks/useClickOutsideModal';
 export default function Form() {
@@ -22,8 +22,18 @@ function Input({ placeHolder, type, icon, name, ...rest }) {
     };
     return (
         <div className="formInput">
-            <input type={show ? "text" : "password"} className='formInput__input' placeholder=" " {...rest} {...register(name)} />
-            <span className='formInput__placeHolder'>{placeHolder}</span>
+            <input
+                type={show ? "text" : "password"}
+                className='formInput__input' placeholder=" "
+                style={{ border: `${errors[name] ? "0.8px solid red" : ""}` }}
+                autoComplete="off"
+                {...rest}
+                {...register(name)}
+            />
+            <span 
+            className='formInput__placeHolder' 
+            style={{ color: `${errors[name] ? "red" : ""}` }}
+            >{placeHolder}</span>
             {icon &&
                 <div className='formInput__icon'>
                     <img src={icon} alt="" />
@@ -48,9 +58,13 @@ function InputDate({ placeHolder, name, ...rest }) {
                 onFocus={(e) => (e.target.type = "date")}
                 onBlur={(e) => (e.target.type = "text")}
                 placeholder=" "
+                autoComplete="off"
+                style={{ border: `${errors[name] ? "0.8px solid red" : ""}` }}
                 {...rest}
                 {...register(name)} />
-            <span className='formInput__placeHolder'>{placeHolder}</span>
+            <span className='formInput__placeHolder'
+                style={{ color: `${errors[name] ? "red" : ""}` }}
+            >{placeHolder}</span>
             <div className='formInput__icon'>
                 <img src={dateIcon} alt="" />
             </div>
@@ -59,7 +73,7 @@ function InputDate({ placeHolder, name, ...rest }) {
     );
 
 };
-function Dropdown({ data,loading, trigger, placeHolder, icon, name, ...rest }) {
+function Dropdown({ data, loading, trigger, placeHolder, icon, name, ...rest }) {
     const { register, setValue, getValues, watch, formState: { errors } } = useFormContext();
     const [rect, setRect] = useState(null);
     const { open, setOpen, modalRef } = useClickOutsideModal();
@@ -71,7 +85,7 @@ function Dropdown({ data,loading, trigger, placeHolder, icon, name, ...rest }) {
         setOpen(true);
     };
     function getDataValueWithKey(key, data) {
-        return data.filter(item => item.id === key * 1)[0]?.value;
+        return data.filter(item => Number(item.id) === Number(key))[0]?.value;
     }
     const handleClickDropdownValue = (e) => {
         trigger && watch(trigger) && e.target.nextSibling.focus();
@@ -83,16 +97,20 @@ function Dropdown({ data,loading, trigger, placeHolder, icon, name, ...rest }) {
             <input type="text" className='formInput__input '
                 placeholder=" "
                 readOnly
+                autoComplete="off"
                 {...rest}
                 {...register(name)}
                 style={trigger ? {
                     pointerEvents: `${watch(trigger) ? "all" : "none"}`,
-                    opacity: `${watch(trigger) ? 1 : 0.4}`
-                } : {}}
+                    opacity: `${watch(trigger) ? 1 : 0.4}`,
+                    border: `${errors[name] ? "0.8px solid red" : ""}`
+                } : { border: `${errors[name] ? "0.8px solid red" : ""}` }}
 
             />
 
-            <span className='formInput__placeHolder' >{placeHolder}</span>
+            <span className='formInput__placeHolder' 
+                style={{ color: `${errors[name] ? "red" : ""}` }}
+            >{placeHolder}</span>
             <div className='formInput__icon'>
                 <img src={downIcon} alt="Fitfood Dropdown Icon" />
             </div>
@@ -122,12 +140,14 @@ function SubmitButton({ text, handleSubmit }) {
         </button>
     );
 }
-function PaginateStepForm({ isFirstStep, isLastStep, back, textSubmit }) {
+function PaginateStepForm({ isFirstStep, isLastStep, back, textSubmit,isLoading }) {
+    const textButton = isLoading? "": isLastStep?textSubmit:"Tiếp tục";
     return (
-        <div className="formPaginateStepForm">
-            {!isFirstStep && <button type="button" onClick={back} className="formPaginateStepForm__button-back">Trở về</button>}
-            <button type="submit" className="formPaginateStepForm__button-submit">
-                {isLastStep ? textSubmit : "Tiếp tục"}
+        <div className="formPaginateStepForm" style={{opacity:`${isLoading?"0.6":"1"}`}}>
+            {!isFirstStep && <button type="button" onClick={back} className="formPaginateStepForm__button-back" disabled={isLoading} >Trở về</button>}
+            <button type="submit" className="formPaginateStepForm__button-submit" disabled={isLoading}>
+                {isLoading && <i className="fa fa-spinner fa-spin"></i>}
+                {textButton}
             </button>
         </div>
     );

@@ -6,7 +6,7 @@ const jwtService = {
             Username,
             IsAdmin,
         }, process.env.ACCESS_SECRET_KEY, { expiresIn: "1d" });
-        return accessToken;
+        return accessToken; 
     },
     signRefreshToken: (Username, IsAdmin, res) => {
         const refreshToken = jwt.sign({

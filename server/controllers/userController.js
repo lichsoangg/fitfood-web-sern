@@ -1,14 +1,15 @@
 const User = require("../models/User.model");
 const db = require("../utils/connect_mysql");
-const createError = require("../utils/createError");
 const userController = {
     getAllUsers: async (req, res, next) => {
         try {
             User.getUsers((err, data) => {
                 if (!err) {
-                    res.json({ data, status: 200 });
+                    res.status(200).json({ data });
                 } else {
-                    return createError(400, "Bad Request");
+                    const err= new Error("Bad request");
+                    err.status=400;
+                    return err;
                 }
             });
         } catch (err) {

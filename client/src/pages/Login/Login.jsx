@@ -6,22 +6,41 @@ import UsernameIcon from "../../assets/icons/username.png";
 import facebookIcon from "../../assets/icons/facebook.png";
 import appleIcon from "../../assets/icons/appleid.png";
 import googleIcon from "../../assets/icons/google.png";
+import * as yup from "yup";
+import { FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
+const schema = yup.object({
+    username: yup.string().required("Tài khoản là bắt buộc"),
+    password: yup.string().required("Mật khẩu là bắt buộc"),
+   
+}).required();
 
 export default function Login() {
-    const handleSubmit = (e) => {
-        e.preventDefault();
+
+    const methods=useForm({
+        resolver: yupResolver(schema)
+    });
+
+    const {handleSubmit}=methods;
+
+    const onSubmit = (data) => {
+        
+        console.log(data);
     };
     return (
         <div className='login'>
             <h3 className="login__header">Đăng nhập vào Fitfood</h3>
             <div className="login__description body4">Bạn không có tài khoản? <Link to='/register'>Đăng ký tại đây</Link></div>
-            <form className='loginForm'>
-                <Form.Input placeHolder="Tài khoản" icon={UsernameIcon} />
-                <Form.InputPassword placeHolder="Mật khẩu" />
-                <Form.ForgotPasswordText />
-                <Form.SubmitButton text="Đăng nhập" handleSubmit={handleSubmit} />
-            </form>
+            <FormProvider {...methods}>
+                <form className='loginForm' onSubmit={handleSubmit(onSubmit)}>
+                    <Form.Input placeHolder="Tài khoản*" icon={UsernameIcon} name="username" />
+                    <Form.Input placeHolder="Mật khẩu*" name="password" type="password" />
+                    <Form.ForgotPasswordText />
+                    <Form.SubmitButton text="Đăng nhập" handleSubmit={handleSubmit} />
+                </form>
+            </FormProvider>
+          
 
             <div className="login__continue-title">
                 <hr />

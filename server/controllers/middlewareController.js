@@ -1,6 +1,5 @@
 const { json } = require("body-parser");
 const jwt = require("jsonwebtoken");
-const createError = require("../utils/createError");
 const middlewareController = ({
     //verifyToken
     verifyToken: (req, res, next) => {
@@ -9,12 +8,12 @@ const middlewareController = ({
             if (token) {
                 const accessToken = token.split(" ")[1];
                 jwt.verify(accessToken, process.env.ACCESS_SECRET_KEY, (err, user) => {
-                    if (err) return res.json(createError(401, "You're not authenticated"));
+                    if (err) return res.status(401).json("You're not authenticated");
                     req.user = user;
                     next();
                 });
             } else {
-                res.json(createError(403, "Token not valid"));
+                res.status(403).json("Token not valid");
             }
         } catch (err) {
             next(err);

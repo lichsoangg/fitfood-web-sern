@@ -1,6 +1,5 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import Form from '../../../components/Form/Form';
 import {useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from "../../../features/api/apiProvince.js";
 export default function AddressForm() {
@@ -17,7 +16,7 @@ export default function AddressForm() {
         <>
             <Form.Dropdown placeHolder="Tỉnh" name="province" data={provinces} loading={provincesLoading}/>
             <Form.Dropdown placeHolder="Huyện" name="district" trigger="province" data={districts} loading={districtsLoading} />
-            <Form.Dropdown placeHolder="Xã" name="ward" trigger="ward" data={wards}/>
+            <Form.Dropdown placeHolder="Xã" name="ward" trigger="ward" data={wards} loading={wardsLoading}/>
             <Form.Input placeHolder="Địa chỉ" name="address" />
         </>
     );

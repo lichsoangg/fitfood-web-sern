@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const createError = require("http-errors");
 require("dotenv").config();
 //route
 const authRoute = require("./routes/auth");
@@ -13,7 +12,11 @@ const app = express();
 
 
 //middlewares
-app.use(cors());
+app.use(cors({
+    origin: process.env.CORS_ORIGIN_URL,
+    credentials: true,
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -21,11 +24,13 @@ app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 
 app.use((req, res, next) => {
-    next(createError.NotFound("This route doesn't exist"));
+   const err=new Error("This route doesn't exist")
+   err.status=500;
+   next(err);
 });
 
 app.use((err, req, res, next) => {
-    res.json(createError(err.status || 500, err.message));
+    res.status(err.status).json(err.message);
 });
 
 const PORT = process.env.PORT || 8000;

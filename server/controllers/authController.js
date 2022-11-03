@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User.model.js");
 const jwt = require("jsonwebtoken");
-const createError = require("../utils/createError.js");
 const { signAccessToken, signRefreshToken } = require("../utils/jwt_service.js");
 const client = require("../utils/connect_redis.js");
 const Customer = require("../models/Customer.model.js");
@@ -10,19 +9,20 @@ const authController = {
     register: async (req, res, next) => {
         try {
             const { username, password, ...otherInfo } = req.body;
-            if (!username || !password) return res.json(createError(400, "Bad request"));
+            if (!username || !password) return res.status(400).json( "Bad request");
             User.getUserWithName(username, async (err, data) => {
-                if (err) return res.json(createError(400, "Bad request"));
-                if (data.length) return res.json(createError(409, "Username already registered"));
+                if (err) return res.status(400).json("Bad request");
+                if (data.length) return res.status(409).json( "Username already registered");
 
                 const salt = await bcrypt.genSalt(10);
                 const passwordHashed = await bcrypt.hash(req.body.password, salt);
                 Customer.postCustomer({ ...req.body, password: passwordHashed }, (err, data) => {
                     if (err) {
-                        return res.json(createError(400, err));
+                        return res.status(400).json( err);
                     }
                     const accessToken = signAccessToken(username, false);
-                    return res.json({ username, accessToken, status: 200 });
+                    signRefreshToken(username, false, res);
+                    return res.status(201).json({ username, accessToken, status: 201 });
                 });
             }
             );
@@ -31,21 +31,48 @@ const authController = {
             next(err);
         }
     },
+
+    //CHECK USERNAME EXIST
+    checkUsername: async (req,res,next)=>{
+        try {
+            const { username } = req.body;
+            User.getUserWithName(username, async (err, data) => {
+                if (err) return res.status(400).json("Bad request");
+                if (data.length) return res.status(409).json("Username already registered");
+                return res.status(200).json({});
+            })
+        } catch (err) {
+            next(err)
+        }
+    },
+    //CHECK PHONE NUMBER EXIST
+    checkPhoneNumber: async(req,res,next)=>{
+        try {
+            const { phoneNumber } = req.body;
+            Customer.getCustomerWithPhone(phoneNumber, async (err, data) => {
+                if (err) return res.status(400).json("Bad request");
+                if (data.length) return res.status(409).json("Phone Number already registered");
+                return res.status(200).json({});
+            })
+        } catch (err) {
+            next(err)
+        }
+    },
     //LOGIN
     login: async (req, res, next) => {
         try {
             const { username, password } = req.body;
-            if (!username || !password) return res.json(createError(400, "Bad request"));
+            if (!username || !password) return res.status(400).json("Bad request");
             User.getUserWithName(username, async (err, data) => {
                 if (data.length) {
                     const validPassword = await bcrypt.compare(password, data[0].Password);
-                    if (!validPassword) return res.json(createError(400, "User and password is not correct"));
+                    if (!validPassword) return res.status(401).json("User and password is not correct");
                     const { Password, ...otherInfo } = data[0];
                     const accessToken = signAccessToken(username, data[0].IsAdmin);
                     signRefreshToken(username, data[0].IsAdmin, res);
-                    return res.json({ ...otherInfo, accessToken, status: 200 });
+                    return res.status(200).json({ ...otherInfo, accessToken, status: 200 });
                 } else {
-                    return res.json(createError(400, "User and password is not correct"));
+                    return res.status(401).json("User and password is not correct");
                 }
             });
 
@@ -59,14 +86,14 @@ const authController = {
     refresh: (req, res, next) => {
         try {
             const refreshTokenClient = req.cookies.refreshToken;
-            if (!refreshTokenClient) return res.json(createError(403, "Token not valid"));
+            if (!refreshTokenClient) return res.status(403).json("Token not valid");
             jwt.verify(refreshTokenClient, process.env.REFRESH_SECRET_KEY, async (err, user) => {
-                if (err) return res.json(createError(401, "You're not authenticated"));
+                if (err) return res.status(401).json("You're not authenticated");
                 const refreshTokenServer = await client.get(user.Username.toString());
-                if (refreshTokenServer !== refreshTokenClient) return res.json(createError(404, "Incorrect Token"));
+                if (refreshTokenServer !== refreshTokenClient) return res.status(404).json("Incorrect Token");
                 const newAccessToken = signAccessToken(user.Username, user.IsAdmin);
                 signRefreshToken(user.Username, user.IsAdmin, res);
-                return res.json({ status: 200, accessToken: newAccessToken });
+                return res.status(200).json({ status: 200, accessToken: newAccessToken });
             });
         } catch (err) {
             next(err);
@@ -78,7 +105,7 @@ const authController = {
         try {
             res.clearCookie("refreshToken");
             client.del(req.user.Username);
-            return res.json({ status: 200, message: "Logout Successfully" });
+            return res.status(200).json({ status: 200, message: "Logout Successfully" });
         } catch (err) {
             next(err);
         }
