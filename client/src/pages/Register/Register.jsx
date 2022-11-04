@@ -10,7 +10,8 @@ import AddressForm from './AddressForm/AddressForm';
 import InformationForm from './InformationForm/InformationForm';
 import "./Register.scss";
 import { useAddNewCustomerMutation, useCheckPhoneNumberMutation, useCheckUsernameMutation } from './registerApi';
-
+import { ErrorBoundary } from 'react-error-boundary'
+import ErrorBoundaryComponent from '../../components/ErrorComponent/ErrorComponent';
 
 const schema = yup.object({
     username: yup.string().required("Tài khoản là bắt buộc"),
@@ -22,7 +23,6 @@ const schema = yup.object({
     gender: yup.string().required("Giới tính là bắt buộc"),
     province: yup.string().required("Tỉnh là bắt buộc"),
     district: yup.string().required("Huyện là bắt buộc"),
-    ward:yup.string().required("Xã là bắt buộc"),
     address:yup.string().required("Địa chỉ là bắt buộc"),
 }).required();
 
@@ -42,7 +42,7 @@ export default function Register() {
         <InformationForm />,
         <AddressForm />]);
     //registerAPI RTK
-    const [addNewCustomer, {isLoading:isLoadingForm,error}]=useAddNewCustomerMutation();
+    const [addNewCustomer, {isLoading:isLoadingForm}]=useAddNewCustomerMutation();
     const [checkUsername,{isLoading:isLoadingCheckUsername}]= useCheckUsernameMutation();
     const [checkPhoneNumber,{isLoading:isLoadingCheckPhoneNumber}]=useCheckPhoneNumberMutation();
     //Handle submit form
@@ -50,41 +50,65 @@ export default function Register() {
         e.preventDefault();
         let isValid = false;
         const value = getValues();
+
+
         if (currentStepIndex === 0){
             isValid = await trigger(['username', 'password', 'confirmPassword']);
             if (isValid)
             {
-                await checkUsername(value).unwrap().catch(err => {
-                    if (err.status === 409) {
-                        isValid = false;
-                        setError('username', { type: "custom", message: "Tài khoản đã tồn tại" });
-                    }
-                });
+
+                // check register username already exist
+
+                try {
+                    await checkUsername(value).unwrap().catch(err => {
+                        if (err.status === 409) {
+                            isValid = false;
+                            setError('username', { type: "custom", message: "Tài khoản đã tồn tại" });
+                        }
+                    });
+                } catch (err) {
+                    console.log(err);
+                }
+               
             }  
         } 
         if (currentStepIndex === 1){
             isValid = await trigger(['name', 'dayOfBirth', 'phoneNumber', 'gender']);
             if(isValid){
-                await checkPhoneNumber(value).unwrap().catch(err=>{
-                    if(err.status===409){
-                        isValid=false;
-                        setError('phoneNumber', { type: "custom", message: "Số điện thoại đã tồn tại" });
-                    }
-                })
+
+                // check register phoneNumber already exist
+                try {
+                    await checkPhoneNumber(value).unwrap().catch(err => {
+                        if (err.status === 409) {
+                            isValid = false;
+                            setError('phoneNumber', { type: "custom", message: "Số điện thoại đã tồn tại" });
+                        }
+                    })
+                } catch (error) {
+                    console.log(error)
+                }
+           
             }
         } 
         if (currentStepIndex === 2) isValid = await trigger(['province', 'district', 'ward', 'address']);
         if (!isLastStep && isValid) next();
+        
+        //last step and valid validation submit register
         if (isLastStep && isValid) {
-                await addNewCustomer(value).unwrap().then((response)=>{
-                    if (response.status===201){
+            try {
+                await addNewCustomer(value).unwrap().then((response) => {
+                    if (response.status === 201) {
                         navigate(-1);
                     }
-                 
                 });
+            } catch (err) {
+                console.log(err);
+            }
+          
         }
     };  
     return (
+        <ErrorBoundaryComponent>
         <div className='register' >
             <h3 className="register__header">Tạo tài khoản Fitfood</h3>
             <div className="register__description body4">Bạn đã có tài khoản? <Link to='/login'>Đăng nhập tại đây</Link></div>
@@ -92,9 +116,17 @@ export default function Register() {
             <FormProvider {...methods}>
                 <form className='registerForm' onSubmit={onSubmit}>
                     {step}
-                    <Form.PaginateStepForm back={back} isFirstStep={isFirstStep} isLastStep={isLastStep} textSubmit="Đăng ký" isLoading={isLoadingForm|| isLoadingCheckPhoneNumber|| isLoadingCheckUsername} />
+                    <Form.PaginateStepForm 
+                    back={back} 
+                    isFirstStep={isFirstStep} 
+                    isLastStep={isLastStep} 
+                    textSubmit="Đăng ký" 
+                    isLoading={isLoadingForm|| isLoadingCheckPhoneNumber|| isLoadingCheckUsername} 
+                    />
                 </form>
+
             </FormProvider>
         </div>
+        </ErrorBoundaryComponent>
     );
 }

@@ -1,0 +1,11 @@
+@import "../../scss/import.scss";
+.errorFallback {
+  background-color: rgba(240, 55, 90, 0.8);
+  border: 1px solid red;
+  color: $cl-grey-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0;
+}

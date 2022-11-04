@@ -1,9 +1,8 @@
 @import "../../scss/import.scss";
 .register {
-  height: max-content;
-  min-height: calc(100vh - 380px);
   @include flexMid(center);
   flex-direction: column;
+  height: 100%;
   &__header {
     color: $cl-black;
   }

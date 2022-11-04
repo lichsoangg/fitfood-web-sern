@@ -1,0 +1,9 @@
+@import "../../scss/import.scss";
+.mainLayout
+{
+    &__outlet{
+            height: calc(100vh - 380px);  
+            overflow: scroll;
+            @include flexMid(center);
+    }
+}

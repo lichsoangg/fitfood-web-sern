@@ -14,9 +14,9 @@ export default function AddressForm() {
     
     return (
         <>
-            <Form.Dropdown placeHolder="Tỉnh" name="province" data={provinces} loading={provincesLoading}/>
-            <Form.Dropdown placeHolder="Huyện" name="district" trigger="province" data={districts} loading={districtsLoading} />
-            <Form.Dropdown placeHolder="Xã" name="ward" trigger="ward" data={wards} loading={wardsLoading}/>
+            <Form.Dropdown placeHolder="Tỉnh" name="province" data={provinces} isLoading={provincesLoading}/>
+            <Form.Dropdown placeHolder="Huyện" name="district" trigger="province" data={districts} isLoading={districtsLoading} />
+            <Form.Dropdown placeHolder="Xã" name="ward" trigger="ward" data={wards} isLoading={wardsLoading}/>
             <Form.Input placeHolder="Địa chỉ" name="address" />
         </>
     );
