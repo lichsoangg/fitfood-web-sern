@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 router.post("/register", authController.register);
 router.post("/login", authController.login);
-router.post("/refresh", authController.refresh);
+router.get("/refresh", authController.refresh);
 router.post("/checkusername", authController.checkUsername);
 router.post("/checkphonenumber",authController.checkPhoneNumber);
 router.post("/logout", verifyToken, authController.logout);

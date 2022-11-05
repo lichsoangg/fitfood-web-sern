@@ -63,6 +63,9 @@
   input {
     color: white;
   }
+   i{
+    color: $cl-blue !important;
+  }
   .formInput__icon {
     pointer-events: none;
   }
@@ -77,9 +80,7 @@
     @include flexMid(unset);
   }
 }
- i{
-    color: $cl-blue !important;
-  }
+
 .formInput__dropdown {
   display: flex;
   flex-direction: column;

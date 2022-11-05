@@ -1,7 +1,7 @@
 const User = require("../models/User.model");
 const db = require("../utils/connect_mysql");
 const userController = {
-    getAllUsers: async (req, res, next) => {
+    getAllUsers:  (req, res, next) => {
         try {
             User.getUsers((err, data) => {
                 if (!err) {

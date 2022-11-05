@@ -59,7 +59,7 @@ Input.propTypes = {
 };
 Form.Input = Input;
 
-//input data
+//input date
 function InputDate({ placeHolder, name, ...rest }) {
     const { register, formState: { errors } } = useFormContext();
 
@@ -181,10 +181,17 @@ function ForgotPasswordText() {
 Form.ForgotPasswordText = ForgotPasswordText;
 
 //Submit button
-function SubmitButton({ text, handleSubmit }) {
+function SubmitButton({ text, handleSubmit,isLoading }) {
+    const textButton = isLoading ? "" :text;
     return (
-        <button type='submit' className='formSubmitButton' onClick={(e) => handleSubmit(e)}>
-            {text}
+        <button 
+        className='formSubmitButton' 
+        type='submit' 
+        onClick={(e) => handleSubmit(e)} 
+        style={{ opacity: `${isLoading ? "0.6" : "1"}` }}
+        disabled={isLoading} >
+            {isLoading && <i className="fa fa-spinner fa-spin"></i>}
+            {textButton}
         </button>
     );
 }
@@ -200,7 +207,10 @@ function PaginateStepForm({ isFirstStep, isLastStep, back, textSubmit, isLoading
     return (
         <div className="formPaginateStepForm" style={{ opacity: `${isLoading ? "0.6" : "1"}` }}>
             {!isFirstStep && <button type="button" onClick={back} className="formPaginateStepForm__button-back" disabled={isLoading} >Trở về</button>}
-            <button type="submit" className="formPaginateStepForm__button-submit" disabled={isLoading}>
+            <button 
+            className="formPaginateStepForm__button-submit" 
+            type="submit" 
+            disabled={isLoading}>
                 {isLoading && <i className="fa fa-spinner fa-spin"></i>}
                 {textButton}
             </button>
