@@ -8,5 +8,5 @@ router.post("/login", authController.login);
 router.get("/refresh", authController.refresh);
 router.post("/checkusername", authController.checkUsername);
 router.post("/checkphonenumber",authController.checkPhoneNumber);
-router.post("/logout", verifyToken, authController.logout);
+router.post("/logout", authController.logout);
 module.exports = router;

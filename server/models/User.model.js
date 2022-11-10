@@ -6,6 +6,9 @@ const User = {
     },
     getUsers:(callback)=>{
         db.query("SELECT * FROM USER",callback);
+    },
+    getUserInfo: (username,callback)=>{
+        db.query("CALL GetInfoUser(?);",[[username]],callback);
     }
  
 };

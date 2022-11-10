@@ -101,10 +101,14 @@ const authController = {
     },
 
     //LOG OUT
-    logout: (req, res, next) => {
+    logout:async (req, res, next) => {
         try {
-            res.clearCookie("refreshToken");
-            client.del(req.user.Username);
+            const refreshToken=req.cookies.refreshToken;
+            if(refreshToken){
+                const payload=  jwt.verify(refreshToken,process.env.REFRESH_SECRET_KEY,{ignoreExpiration:true});
+                client.del(payload.Username);
+                res.clearCookie("refreshToken")
+            }
             return res.status(200).json({ status: 200, message: "Logout Successfully" });
         } catch (err) {
             next(err);

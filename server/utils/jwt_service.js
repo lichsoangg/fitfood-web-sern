@@ -5,7 +5,7 @@ const jwtService = {
         const accessToken = jwt.sign({
             Username,
             IsAdmin,
-        }, process.env.ACCESS_SECRET_KEY, { expiresIn: "10s" });
+        }, process.env.ACCESS_SECRET_KEY, { expiresIn: "600s" });
         return accessToken; 
     },
     signRefreshToken: (Username, IsAdmin, res) => {
@@ -16,7 +16,7 @@ const jwtService = {
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             sameSite: "strict",
-            secure: false,
+            secure: true,
             path: "/"
         });
         client.set(Username.toString(), refreshToken);
