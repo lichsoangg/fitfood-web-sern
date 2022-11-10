@@ -9,7 +9,6 @@ export const apiProvince = createApi({
         getProvinces: builder.query({
             query: () => '/province',
             transformResponse: data => {
-           
                 data = data.results.map(province => {
                     return {
                         id: province.code,

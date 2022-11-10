@@ -13,13 +13,11 @@ export default function Header() {
 }
 
 function HeaderWrapper({ children }) {
-
     return (
         <div className='header'>
             {children}
         </div>
     );
-
 }
 
 

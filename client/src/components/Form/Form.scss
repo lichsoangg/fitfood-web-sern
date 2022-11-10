@@ -45,6 +45,7 @@
     transform: translateY(-50%);
     background-color: white;
     transition: all 0.4s;
+    pointer-events: none;
   }
   &__icon {
     position: absolute;
@@ -77,6 +78,7 @@
     left: 16px;
     width: calc(100% - 52px);
     height: 100%;
+    pointer-events: none;
     @include flexMid(unset);
   }
 }

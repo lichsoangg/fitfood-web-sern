@@ -4,6 +4,8 @@
   gap: 8px;
   cursor: pointer;
   &--image {
+    display: flex;
+    align-items: center;
     img {
       width: 36px;
       object-fit: cover;
@@ -20,10 +22,19 @@
 .layout__menu {
   @include flexMid(space-between);
   gap: 48px;
+  position: relative;
   text-transform: uppercase;
   color: $cl-black;
   &--item {
     cursor: pointer;
+  }
+  &--underBorder {
+    position: absolute;
+    top: calc(100% + 16px);
+    height: 3px;
+    border-radius: 2px;
+    background-color: $cl-black;
+    transition: 0.4s all $cubic;
   }
 }
 
@@ -39,12 +50,51 @@
     padding: 12px 24px;
     height: 44px;
     border-radius: 32px;
-    background-color: #111112;
+    background-color: $cl-black;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fdfbfa;
+    color: $cl-grey-light;
     box-shadow: 0 20px 20px -15px rgb(17 17 18 / 49%);
+  }
+  &--user {
+    img {
+      pointer-events: none;
+      border-radius: 50%;
+      cursor: pointer;
+      object-fit: cover;
+      width: 28px;
+      height: 28px;
+    }
+    &-modal {
+      display: flex;
+      flex-direction: column;
+      padding: 4px 0px;
+      border: 1px solid $cl-grey-dimmed;
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+      li:first-child {
+        padding: 24px 12px;
+      }
+      li:not(:first-child) {
+        padding: 8px 12px;
+        &:hover {
+          background-color: $cl-grey-dimmed-hover;
+        }
+      }
+      a {
+        padding: 8px 12px;
+        &:hover {
+          background-color: $cl-grey-dimmed-hover;
+        }
+      }
+      hr {
+        width: 100%;
+        height: 1px;
+        background: $cl-grey-dimmed;
+        border: none;
+      }
+    }
   }
 }
 

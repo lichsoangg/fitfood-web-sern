@@ -1,8 +1,17 @@
-import { apiSlice } from "../../features/api/apiSlice.js";
+import { apiSlice } from "../api/apiSlice.jsx";
 
 
 export const registerAPI = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
+        login: builder.mutation({
+            query: user => ({
+                url: "/auth/login",
+                method: 'POST',
+                body: user,
+                credentials: 'include'
+            }),
+            invalidatesTags: ['Account'],
+        }),
         addNewCustomer: builder.mutation({
             query: customer => ({
                 url: "/auth/register",
@@ -13,7 +22,7 @@ export const registerAPI = apiSlice.injectEndpoints({
         }),
         checkUsername: builder.mutation({
             query: data => ({
-                url: "/auth/ch`eckusername",
+                url: "/auth/checkusername",
                 method: 'POST',
                 body: data,
             })
@@ -24,9 +33,21 @@ export const registerAPI = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: data,
             })
+        }),
+        logout: builder.mutation({
+            query: () => ({
+                url: "/auth/logout",
+                method: 'POST',
+            })
         })
 
     })
 });
 
-export const { useAddNewCustomerMutation, useCheckUsernameMutation, useCheckPhoneNumberMutation } = registerAPI;   
+export const { 
+    useAddNewCustomerMutation, 
+    useCheckUsernameMutation, 
+    useCheckPhoneNumberMutation, 
+    useLoginMutation,
+    useLogoutMutation,
+} = registerAPI;   

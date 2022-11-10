@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import Form from '../../../components/Form/Form';
-import {useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from "../../../features/api/apiProvince.js";
+import {useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from "../../../features/api/apiProvince.jsx";
 export default function AddressForm() {
     const {watch}=useFormContext();
     const {data:provinces,isFetching:provincesLoading}=useGetProvincesQuery();

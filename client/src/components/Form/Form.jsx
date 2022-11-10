@@ -9,8 +9,9 @@ import dateIcon from "../../assets/icons/calendar.png";
 import downIcon from "../../assets/icons/down.png";
 import Error from '../Error/Error';
 import Portal from '../Portal/Portal';
-import { useClickOutsideModal } from '../../hooks/useClickOutsideModal';
 import PropTypes from "prop-types";
+import { useModal } from '../../hooks/useModal';
+import { useDisableClick } from '../../hooks/useDisableClick';
 export default function Form() {
     return null;
 }
@@ -52,7 +53,7 @@ function Input({ placeHolder, type, icon, name, ...rest }) {
     );
 }
 Input.propTypes = {
-    placeHolder:PropTypes.string.isRequired,
+    placeHolder: PropTypes.string.isRequired,
     type: PropTypes.string,
     icon: PropTypes.string,
     name: PropTypes.string.isRequired,
@@ -85,36 +86,37 @@ function InputDate({ placeHolder, name, ...rest }) {
 
 };
 
-InputDate.propTypes={
+InputDate.propTypes = {
     placeHolder: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-}
+};
 Form.InputDate = InputDate;
 
 //dropdown
 function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, ...rest }) {
+ 
+    const { modalRef,activeModalRef,open,rect,setOpen } = useModal();
 
     //useFormComtext api react hook form
     const { register, setValue, getValues, watch, formState: { errors } } = useFormContext();
     //handle open modal
-    const { open, setOpen, modalRef } = useClickOutsideModal();
-    const [rect, setRect] = useState(null);
-    const handleClickOpenModal = (e) => {
-        setRect(e.target.parentNode.getBoundingClientRect());
-        setOpen(true);
-    };
+
+
     function getDataValueWithKey(key, data) {
         return data.filter(item => Number(item.id) === Number(key))[0]?.value;
     }
     const handleClickDropdown = (e) => {
         setValue(name, e.target.getAttribute("data-id"));
+        setOpen(false);
     };
     const handleClickDropdownValue = (e) => {
         trigger && watch(trigger) && e.target.nextSibling.focus();
         !trigger && e.target.nextSibling.focus();
     };
+
     return (
-        <div className="formInput formDropdown" ref={modalRef} onClick={handleClickOpenModal}>
+        <>    
+        <div className="formInput formDropdown"  ref={activeModalRef}>
             <span className='formInput__dropdownValue' onClick={handleClickDropdownValue}>{getValues(name) ? getDataValueWithKey(getValues(name), data) : ""}</span>
             <input type="text" className='formInput__input '
                 placeholder=" "
@@ -127,10 +129,9 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
                     opacity: `${watch(trigger) ? 1 : 0.4}`,
                     border: `${errors[name] ? "0.8px solid red" : ""}`
                 } :
-                    { border: `${errors[name] ? "0.8px solid red" : ""}` }}
+                { border: `${errors[name] ? "0.8px solid red" : ""}` }}
 
             />
-
             <span className='formInput__placeHolder'
                 style={{ color: `${errors[name] ? "red" : ""}` }}
             >{placeHolder}
@@ -138,12 +139,19 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
                     <i className="fa fa-spinner fa-spin" style={{ marginLeft: "20px" }}></i>
                 }
             </span>
-
             <div className='formInput__icon'>
                 <img src={downIcon} alt="Fitfood Dropdown Icon" />
             </div>
-            {(open && data) && <Portal overlay={false} styleContent={{ position: "absolute", left: `${rect.left + window.scrollX}px`, top: `${rect.top + rect.height + window.scrollY + 4}px`, width: `${rect.width}px` }}>
-                <div className="formInput__dropdown" onClick={handleClickDropdown} >
+        </div>
+        {open && <Portal
+                overlay={false}
+                styleContent={{
+                    position: "absolute",
+                    left: `${rect.left + window.scrollX}px`,
+                    top: `${rect.top + rect.height + window.scrollY + 4}px`,
+                    width: `${rect.width}px`
+                }}>
+                <div className="formInput__dropdown" onClick={handleClickDropdown} ref={modalRef}>
                     {(isLoading) &&
                         <div className='formInput__dropdown--loadingIcon'>
                             <i className="fa fa-spinner fa-spin fa-2x"></i>
@@ -153,20 +161,20 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
                         return <span key={item.id} data-id={item.id}>{item.value}</span>;
                     })}
                 </div>
-            </Portal>}
-            {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
-        </div>
+        </Portal>}
+        {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
+        </>
     );
 }
 
-Dropdown.propTypes={
+Dropdown.propTypes = {
     data: PropTypes.array,
-    isLoading:PropTypes.bool,
-    trigger:PropTypes.string,
+    isLoading: PropTypes.bool,
+    trigger: PropTypes.string,
     placeHolder: PropTypes.string.isRequired,
     icon: PropTypes.string,
     name: PropTypes.string.isRequired,
-}
+};
 Form.Dropdown = Dropdown;
 
 
@@ -181,48 +189,51 @@ function ForgotPasswordText() {
 Form.ForgotPasswordText = ForgotPasswordText;
 
 //Submit button
-function SubmitButton({ text, handleSubmit,isLoading }) {
-    const textButton = isLoading ? "" :text;
+function SubmitButton({ text, handleSubmit, isLoading }) {
+    const textButton = isLoading ? "" : text;
+    useDisableClick(isLoading);
     return (
-        <button 
-        className='formSubmitButton' 
-        type='submit' 
-        onClick={(e) => handleSubmit(e)} 
-        style={{ opacity: `${isLoading ? "0.6" : "1"}` }}
-        disabled={isLoading} >
+        <button
+            className='formSubmitButton'
+            type='submit'
+            onClick={(e) => handleSubmit(e)}
+            style={{ opacity: `${isLoading ? "0.6" : "1"}` }}
+             >
             {isLoading && <i className="fa fa-spinner fa-spin"></i>}
             {textButton}
         </button>
     );
 }
-SubmitButton.propTypes={
-    text:PropTypes.string.isRequired,
-    handleSubmit:PropTypes.func.isRequired,
-}
+SubmitButton.propTypes = {
+    text: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+};
 Form.SubmitButton = SubmitButton;
 
 //paginate step form
 function PaginateStepForm({ isFirstStep, isLastStep, back, textSubmit, isLoading }) {
     const textButton = isLoading ? "" : isLastStep ? textSubmit : "Tiếp tục";
+    useDisableClick(isLoading);
     return (
         <div className="formPaginateStepForm" style={{ opacity: `${isLoading ? "0.6" : "1"}` }}>
-            {!isFirstStep && <button type="button" onClick={back} className="formPaginateStepForm__button-back" disabled={isLoading} >Trở về</button>}
-            <button 
-            className="formPaginateStepForm__button-submit" 
-            type="submit" 
-            disabled={isLoading}>
+            {!isFirstStep &&
+                <button type="button" onClick={back} className="formPaginateStepForm__button-back"  >Trở về</button>}
+            <button
+                className="formPaginateStepForm__button-submit"
+                type="submit"
+                >
                 {isLoading && <i className="fa fa-spinner fa-spin"></i>}
                 {textButton}
             </button>
         </div>
     );
 }
-PaginateStepForm.propTypes={
+PaginateStepForm.propTypes = {
     isFirstStep: PropTypes.bool.isRequired,
     isLastStep: PropTypes.bool.isRequired,
     back: PropTypes.func.isRequired,
     textSubmit: PropTypes.string.isRequired,
     isLoading: PropTypes.bool.isRequired,
-}
+};
 
 Form.PaginateStepForm = PaginateStepForm;

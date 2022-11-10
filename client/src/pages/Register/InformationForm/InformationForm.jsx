@@ -4,7 +4,7 @@ import phoneNumberIcon from "../../../assets/icons/phonenumber.png";
 import nameIcon from "../../../assets/icons/name.png";
 import genderIcon from "../../../assets/icons/gender.png";
 
-const dataGender = [{ id: 1, value: "Nam" }, { id: 2, value: "Nữ" }];
+const dataGender = [{ id: 0, value: "Nam" }, { id: 1, value: "Nữ" }];
 export default function InformationForm() {
     return (
         <>

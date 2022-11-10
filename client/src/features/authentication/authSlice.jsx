@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     data:{
@@ -26,12 +26,15 @@ const authSlide = createSlice({
                 };
             }
         },
+        logOut:(state,action)=>{
+            state.data=initialState.data;
+        }
 
     }
 }
 );
 export const selectCurrentToken = (state) => state.auth.data.accessToken;
 
-export const { setCredentials } = authSlide.actions;
+export const { setCredentials,logOut } = authSlide.actions;
 
 export default authSlide.reducer;
