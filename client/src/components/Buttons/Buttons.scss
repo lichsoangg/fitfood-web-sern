@@ -1,0 +1,63 @@
+@import "../../scss/import.scss";
+.button-three-dimension {
+  position: relative;
+  top: 0px;
+  padding: 15px 25px;
+  border: solid $cl-primary 3px;
+  border-radius: 20px;
+  margin: 10px;
+  background: $cl-grey-light;
+  box-shadow: 0px 10px 0px $cl-primary;
+  &:hover {
+    transition: 100ms ease;
+    top: 2px;
+    box-shadow: 0px 8px 0px $cl-primary;
+  }
+  &:active {
+    top: 8px;
+    box-shadow: 0px 2px 0px $cl-primary;
+  }
+}
+
+.button-box-shadow {
+  cursor: pointer;
+  width: max-content;
+  padding: 12px 24px;
+  height: 44px;
+  border-radius: 32px;
+  background-color: $cl-grey-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $cl-primary;
+  box-shadow: -1px 3px 3px 0 rgba(80, 80, 80, 0.2);
+  transition: all 0.25s ease-out;
+  &:hover {
+    position: relative;
+    top: -3px;
+    box-shadow: -6px 14px 12px 2px rgba(90, 90, 90, 0.12);
+  }
+}
+
+.button-main {
+  padding: 12px 24px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 700;
+    &:hover{
+    opacity: 0.7;
+  }
+}
+.button-accept {
+  border: 1px solid transparent;
+  background: $cl-primary;
+  color: $cl-grey-light;
+  cursor: pointer;
+
+}
+
+.button-cancel {
+  border:1px solid $cl-primary;
+  background: $cl-primary-light;
+  color: $cl-primary;
+}

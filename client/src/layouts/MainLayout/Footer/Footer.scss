@@ -1,23 +1,31 @@
 @import "../../../scss/import.scss";
 .footer {
-  padding: 60px 40px 40px;
-  background-color: #f5f5f5;
-  width: 100%;
-  height: max-content;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  &__top {
-    @include flexMid(space-between);
-  }
-  &__center {
-    @include flexMid(center);
-    gap: 16px;
-  }
-  &__bottom {
-    @include flexMid(center);
+  background: $cl-orange-gradient;
+  .mainWrapper {
+    padding: 60px 40px 40px;
+    width: 100%;
+    height: max-content;
+    display: flex;
     flex-direction: column;
-    gap: 16px;
-    color: $cl-grey;
+    gap: 40px;
+    .footer__top {
+      @include flexMid(space-between);
+    }
+    .footer__center {
+      @include flexMid(center);
+      gap: 16px;
+      svg{
+        path{
+        stroke: $cl-grey-light;
+          fill: $cl-grey-light;
+        }
+      }
+    }
+    .footer__bottom {
+      @include flexMid(center);
+      flex-direction: column;
+      gap: 16px;
+      color: $cl-grey-dimmed-hover;
+    }
   }
 }

@@ -9,10 +9,13 @@ export function useModal() {
     const modalRef = useRef(null);
     const activeModalRef=useRef(null);
 
-    const handleClickOpenModal =(e) => {
+    const handleClickOpenModal =useCallback((e) => {
+        if(activeModalRef.current){
             setRect(e.target.getBoundingClientRect());
             setOpen(true);
-    }
+        }
+           
+    },[activeModalRef])
     const handleOutside =useCallback((e) => {
         if (modalRef.current &&
             !modalRef.current.contains(e.target)
@@ -26,7 +29,6 @@ export function useModal() {
         window.addEventListener("click", handleOutside);
         const nodeActiveModal=activeModalRef.current;
         if (nodeActiveModal){
-         
             activeModalRef.current.addEventListener("click",handleClickOpenModal)
          };
         return () => {
@@ -35,7 +37,7 @@ export function useModal() {
                 nodeActiveModal.removeEventListener("click", handleClickOpenModal)
             }
         };
-    }, []);
+    }, [handleClickOpenModal,handleOutside]);
 
     return {
         open,

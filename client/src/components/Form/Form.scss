@@ -27,12 +27,12 @@
     padding: 0px 36px 0px 16px;
     &:focus-visible {
       outline: none;
-      border: 1px solid $cl-blue;
+      border: 1px solid $cl-primary;
     }
     &:focus + .formInput__placeHolder,
     &:not(:placeholder-shown) + .formInput__placeHolder {
       top: 0;
-      color: $cl-blue;
+      color: $cl-primary;
       padding-right: 8px;
     }
   }
@@ -65,7 +65,7 @@
     color: white;
   }
    i{
-    color: $cl-blue !important;
+    color: $cl-primary !important;
   }
   .formInput__icon {
     pointer-events: none;
@@ -88,7 +88,7 @@
   flex-direction: column;
   background-color: white;
   border-radius: 3px;
-  border: 1px solid $cl-blue;
+  border: 1px solid $cl-primary;
   width: 100%;
   max-height: 200px;
   height: max-content;
@@ -107,7 +107,7 @@
     border-radius: 3px;
     &:hover {
       color: white;
-      background-color: $cl-blue;
+      background-color: $cl-primary;
     }
   }
 }
@@ -117,37 +117,13 @@
   width: 100%;
   font-size: 12px;
   a {
-    color: $cl-blue;
+    color: $cl-primary;
   }
 }
 
-.formSubmitButton {
-  width: 100%;
-  height: 50px;
-  border-radius: 3px;
-  border: none;
-  background-color: $cl-blue;
-  font-size: 16px;
-  font-weight: 700;
-  color: $cl-grey-light;
-  cursor: pointer;
-}
 
 .formPaginateStepForm {
   @include flexMid(unset);
   width: 100%;
-  &__button-back,
-  &__button-submit {
-    width: 48%;
-    border: none;
-    border-radius: 3px;
-    padding: 12px 24px;
-    background-color: #1a48e9;
-    font-size: 16px;
-    font-weight: 700;
-    color: #fdfbfa;
-  }
-  &__button-submit {
-    margin-left: auto;
-  }
+
 }

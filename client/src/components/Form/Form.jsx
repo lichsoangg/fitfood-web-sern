@@ -12,6 +12,7 @@ import Portal from '../Portal/Portal';
 import PropTypes from "prop-types";
 import { useModal } from '../../hooks/useModal';
 import { useDisableClick } from '../../hooks/useDisableClick';
+import { AcceptButton, CancelButton } from '../Buttons/Buttons';
 export default function Form() {
     return null;
 }
@@ -94,8 +95,8 @@ Form.InputDate = InputDate;
 
 //dropdown
 function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, ...rest }) {
- 
-    const { modalRef,activeModalRef,open,rect,setOpen } = useModal();
+
+    const { modalRef, activeModalRef, open, rect, setOpen } = useModal();
 
     //useFormComtext api react hook form
     const { register, setValue, getValues, watch, formState: { errors } } = useFormContext();
@@ -115,35 +116,35 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
     };
 
     return (
-        <>    
-        <div className="formInput formDropdown"  ref={activeModalRef}>
-            <span className='formInput__dropdownValue' onClick={handleClickDropdownValue}>{getValues(name) ? getDataValueWithKey(getValues(name), data) : ""}</span>
-            <input type="text" className='formInput__input '
-                placeholder=" "
-                readOnly
-                autoComplete="off"
-                {...rest}
-                {...register(name)}
-                style={trigger ? {
-                    pointerEvents: `${watch(trigger) ? "all" : "none"}`,
-                    opacity: `${watch(trigger) ? 1 : 0.4}`,
-                    border: `${errors[name] ? "0.8px solid red" : ""}`
-                } :
-                { border: `${errors[name] ? "0.8px solid red" : ""}` }}
+        <>
+            <div className="formInput formDropdown" ref={activeModalRef}>
+                <span className='formInput__dropdownValue' onClick={handleClickDropdownValue}>{getValues(name) ? getDataValueWithKey(getValues(name), data) : ""}</span>
+                <input type="text" className='formInput__input '
+                    placeholder=" "
+                    readOnly
+                    autoComplete="off"
+                    {...rest}
+                    {...register(name)}
+                    style={trigger ? {
+                        pointerEvents: `${watch(trigger) ? "all" : "none"}`,
+                        opacity: `${watch(trigger) ? 1 : 0.4}`,
+                        border: `${errors[name] ? "0.8px solid red" : ""}`
+                    } :
+                        { border: `${errors[name] ? "0.8px solid red" : ""}` }}
 
-            />
-            <span className='formInput__placeHolder'
-                style={{ color: `${errors[name] ? "red" : ""}` }}
-            >{placeHolder}
-                {(isLoading) &&
-                    <i className="fa fa-spinner fa-spin" style={{ marginLeft: "20px" }}></i>
-                }
-            </span>
-            <div className='formInput__icon'>
-                <img src={downIcon} alt="Fitfood Dropdown Icon" />
+                />
+                <span className='formInput__placeHolder'
+                    style={{ color: `${errors[name] ? "red" : ""}` }}
+                >{placeHolder}
+                    {(isLoading) &&
+                        <i className="fa fa-spinner fa-spin" style={{ marginLeft: "20px" }}></i>
+                    }
+                </span>
+                <div className='formInput__icon'>
+                    <img src={downIcon} alt="Fitfood Dropdown Icon" />
+                </div>
             </div>
-        </div>
-        {open && <Portal
+            {open && <Portal
                 overlay={false}
                 styleContent={{
                     position: "absolute",
@@ -161,8 +162,8 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
                         return <span key={item.id} data-id={item.id}>{item.value}</span>;
                     })}
                 </div>
-        </Portal>}
-        {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
+            </Portal>}
+            {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
         </>
     );
 }
@@ -193,15 +194,15 @@ function SubmitButton({ text, handleSubmit, isLoading }) {
     const textButton = isLoading ? "" : text;
     useDisableClick(isLoading);
     return (
-        <button
-            className='formSubmitButton'
+        <AcceptButton
             type='submit'
+            width="100%"
             onClick={(e) => handleSubmit(e)}
-            style={{ opacity: `${isLoading ? "0.6" : "1"}` }}
-             >
+            styleButton={{ opacity: `${isLoading ? "0.6" : "1"}` }}
+        >
             {isLoading && <i className="fa fa-spinner fa-spin"></i>}
             {textButton}
-        </button>
+        </AcceptButton>
     );
 }
 SubmitButton.propTypes = {
@@ -217,14 +218,15 @@ function PaginateStepForm({ isFirstStep, isLastStep, back, textSubmit, isLoading
     return (
         <div className="formPaginateStepForm" style={{ opacity: `${isLoading ? "0.6" : "1"}` }}>
             {!isFirstStep &&
-                <button type="button" onClick={back} className="formPaginateStepForm__button-back"  >Trở về</button>}
-            <button
-                className="formPaginateStepForm__button-submit"
+                <CancelButton type="button" onClick={back} width="48%">Trở về</CancelButton>}
+            <AcceptButton
                 type="submit"
-                >
+                width="48%"
+                styleButton={{marginLeft:"auto"}}
+            >
                 {isLoading && <i className="fa fa-spinner fa-spin"></i>}
                 {textButton}
-            </button>
+            </AcceptButton>
         </div>
     );
 }

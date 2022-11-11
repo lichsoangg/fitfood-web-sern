@@ -5,6 +5,7 @@ import LayoutComponents from '../LayoutComponents/LayoutComponents';
 export default function Header() {
     return (
         <HeaderWrapper>
+
             <LayoutComponents.Logo />
             <LayoutComponents.Menu />
             <LayoutComponents.Function />
@@ -15,7 +16,9 @@ export default function Header() {
 function HeaderWrapper({ children }) {
     return (
         <div className='header'>
-            {children}
+            <div className="mainWrapper">
+                {children}
+            </div>
         </div>
     );
 }

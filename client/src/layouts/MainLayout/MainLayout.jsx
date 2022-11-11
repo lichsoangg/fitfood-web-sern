@@ -5,12 +5,12 @@ import Header from './Header/Header';
 import "./MainLayout.scss";
 export default function MainLayout() {
     return (
-            <div className='mainLayout' >
-                <Header />
-                <div className="mainLayout__outlet">
-                    <Outlet />
-                </div>
-                <Footer />
+        <div className='mainLayout ' >
+            <Header />
+            <div className="mainLayout__outlet mainWrapper" >
+                <Outlet />
             </div>
+            <Footer />
+        </div>
     );
 }

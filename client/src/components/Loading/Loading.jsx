@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Loading.scss";
-export default function Loading({ size, full, ...rest }) {
+export default function Loading({ size, full, ...styleOther }) {
   let style = {};
   if (full) {
     style = {
@@ -9,9 +9,10 @@ export default function Loading({ size, full, ...rest }) {
       display: 'flex', justifyContent: 'center', alignItems: 'center'
     };
   }
+  
   return (
-    <div className='loading' style={{ ...style, ...rest, zIndex: 5 }}>
-      <i className={`fa fa-spinner fa-spin fa-${size}x`}></i>
+    <div className='loading' style={{ ...style, ...styleOther, zIndex: 5 }}>
+      <i className={`fa fa-spinner fa-spin fa-${size}x`} style={{}}></i>
     </div>
   );
 }

@@ -36,7 +36,7 @@ export default function AuthLogin() {
         }
     }, [token, navigate]);
     //handle submit login
-    const onSubmit = async (data) => {
+    const onSubmit = async (data,e) => {
         try {
             const user = await login(data).unwrap();
             const { Username, IsAdmin, accessToken } = user;

@@ -34,6 +34,8 @@ const authSlide = createSlice({
 }
 );
 export const selectCurrentToken = (state) => state.auth.data.accessToken;
+export const selectCurrentAuth = (state) => state.auth.data;
+
 
 export const { setCredentials,logOut } = authSlide.actions;
 

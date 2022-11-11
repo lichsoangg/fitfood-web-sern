@@ -7,16 +7,10 @@
     display: flex;
     align-items: center;
     img {
-      width: 36px;
       object-fit: cover;
     }
   }
-  h1 {
-    font-weight: 700 !important;
-    font-size: 28px !important;
-    line-height: 34px !important;
-    color: $cl-black;
-  }
+
 }
 
 .layout__menu {
@@ -24,7 +18,7 @@
   gap: 48px;
   position: relative;
   text-transform: uppercase;
-  color: $cl-black;
+  color: $cl-grey-light;
   &--item {
     cursor: pointer;
   }
@@ -33,30 +27,23 @@
     top: calc(100% + 16px);
     height: 3px;
     border-radius: 2px;
-    background-color: $cl-black;
+    background-color: $cl-grey-dimmed-hover;
     transition: 0.4s all $cubic;
   }
 }
 
 .layout__function {
   @include flexMid(unset);
-  gap: 28px;
+  gap: 14px;
   &--cart {
     cursor: pointer;
+    svg{
+      path{
+        stroke: $cl-grey-light;
+      }
+    }
   }
-  &--login {
-    cursor: pointer;
-    width: max-content;
-    padding: 12px 24px;
-    height: 44px;
-    border-radius: 32px;
-    background-color: $cl-black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: $cl-grey-light;
-    box-shadow: 0 20px 20px -15px rgb(17 17 18 / 49%);
-  }
+
   &--user {
     img {
       pointer-events: none;
@@ -71,6 +58,7 @@
       flex-direction: column;
       padding: 4px 0px;
       border: 1px solid $cl-grey-dimmed;
+      background: $cl-grey-light;
       border-radius: 0.25rem;
       box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
       li:first-child {
@@ -80,12 +68,14 @@
         padding: 8px 12px;
         &:hover {
           background-color: $cl-grey-dimmed-hover;
+          color: $cl-primary;
         }
       }
       a {
         padding: 8px 12px;
         &:hover {
           background-color: $cl-grey-dimmed-hover;
+          color: $cl-primary;
         }
       }
       hr {
@@ -102,9 +92,12 @@
   @include flexMid(unset);
   gap: 8px;
   span {
-    color: $cl-grey;
+    color: $cl-grey-light;
   }
   h1 {
-    color: $cl-black;
+    color: $cl-grey-light;
+  }
+  a{
+    color: $cl-grey-dimmed-hover;
   }
 }
