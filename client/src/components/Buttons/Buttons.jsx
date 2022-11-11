@@ -3,7 +3,7 @@ import "./Buttons.scss";
 
 export function ThreeDimensionButton({ children, handleClickButton }) {
   return (
-    <div className='button-three-dimension' href="#" onClick={handleClickButton}>
+    <div className='button-three-dimension'  onClick={handleClickButton}>
       {children}
     </div>
   );
