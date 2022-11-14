@@ -143,8 +143,9 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
                 <div className='formInput__icon'>
                     <img src={downIcon} alt="Fitfood Dropdown Icon" />
                 </div>
+                {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
             </div>
-            {open && <Portal
+            {(open && data) && <Portal
                 overlay={false}
                 styleContent={{
                     position: "absolute",
@@ -163,7 +164,7 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
                     })}
                 </div>
             </Portal>}
-            {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
+       
         </>
     );
 }

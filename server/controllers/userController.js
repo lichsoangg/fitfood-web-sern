@@ -7,7 +7,7 @@ const userController = {
                 if (!err) {
                     res.status(200).json({ data });
                 } else {
-                    const err= new Error("Bad request");
+                    const err= new Error("Yêu cầu không hợp lệ");
                     err.status=400;
                     return err;
                 }
@@ -22,7 +22,7 @@ const userController = {
                 if(!err){    
                     res.status(200).json(data[0][0]);
                 }else{
-                    const err = new Error("Bad request");
+                    const err = new Error("Yêu cầu không hợp lệ");
                     err.status = 400;
                     return err;
                 }

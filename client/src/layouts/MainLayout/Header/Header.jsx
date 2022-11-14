@@ -5,7 +5,6 @@ import LayoutComponents from '../LayoutComponents/LayoutComponents';
 export default function Header() {
     return (
         <HeaderWrapper>
-
             <LayoutComponents.Logo />
             <LayoutComponents.Menu />
             <LayoutComponents.Function />

@@ -79,6 +79,7 @@
       }
       li:not(:first-child) {
         padding: 8px 12px;
+        cursor: pointer;
         &:hover {
           background-color: $cl-grey-dimmed;
           color: $cl-primary;
@@ -86,6 +87,7 @@
       }
       a {
         padding: 8px 12px;
+      
         &:hover {
           background-color: $cl-grey-dimmed;
           color: $cl-primary;
