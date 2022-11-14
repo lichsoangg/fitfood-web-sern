@@ -1,6 +1,6 @@
 @import "../../../scss/import.scss";
 .footer {
-  background: $cl-orange-gradient;
+  background: $cl-white;
   .mainWrapper {
     padding: 60px 40px 40px;
     width: 100%;
@@ -16,8 +16,8 @@
       gap: 16px;
       svg{
         path{
-        stroke: $cl-grey-light;
-          fill: $cl-grey-light;
+        stroke: $cl-primary;
+          fill: $cl-primary;
         }
       }
     }
@@ -25,7 +25,7 @@
       @include flexMid(center);
       flex-direction: column;
       gap: 16px;
-      color: $cl-grey-dimmed-hover;
+      color: $cl-grey;
     }
   }
 }

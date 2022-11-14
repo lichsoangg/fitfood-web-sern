@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import "./ErrorComponent.scss";
-export default function ErrorBoundaryComponent({children}) {
-  return (
-      <ErrorBoundary 
-      FallbackComponent={ErrorFallBack}
-      >
-       {children}
-      </ErrorBoundary>
-  )
+export default function ErrorBoundaryComponent({ children }) {
+    return (
+        <ErrorBoundary
+            FallbackComponent={ErrorFallBack}
+        >
+            {children}
+        </ErrorBoundary>
+    );
 }
 
-function ErrorFallBack({ error }){
+function ErrorFallBack({ error }) {
     console.log(error);
     return (
         <div

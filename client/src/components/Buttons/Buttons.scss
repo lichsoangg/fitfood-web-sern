@@ -25,11 +25,11 @@
   padding: 12px 24px;
   height: 44px;
   border-radius: 32px;
-  background-color: $cl-grey-light;
+  background-color:$cl-primary;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $cl-primary;
+  color: $cl-grey-dimmed;
   box-shadow: -1px 3px 3px 0 rgba(80, 80, 80, 0.2);
   transition: all 0.25s ease-out;
   &:hover {
