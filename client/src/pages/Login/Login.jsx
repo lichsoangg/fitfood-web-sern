@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import appleIcon from "../../assets/icons/appleid.png";
 import facebookIcon from "../../assets/icons/facebook.png";
 import googleIcon from "../../assets/icons/google.png";
@@ -10,11 +10,12 @@ import "./Login.scss";
 
 
 export default function Login() {
+    const location=useLocation();
     return (
         <ErrorBoundaryComponent>
             <div className='login'>
                 <h3 className="login__header">Đăng nhập vào Fitfood</h3>
-                <div className="login__description body4">Bạn không có tài khoản? <Link to='/dang-ky'>Đăng ký tại đây</Link></div>
+                <div className="login__description body4">Bạn không có tài khoản? <Link to='/dang-ky' state={location.state}>Đăng ký tại đây</Link></div>
                 <AuthLogin/>
                 <div className="login__continue-title">
                     <hr />

@@ -3,7 +3,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as yup from "yup";
 import Form from '../../components/Form/Form';
 import { useMultiStepForm } from '../../hooks/useMultiStepForm';
@@ -16,7 +16,7 @@ import { useAddNewCustomerMutation, useCheckPhoneNumberMutation, useCheckUsernam
 
 const schema = yup.object({
     username: yup.string().required("Tài khoản là bắt buộc"),
-    password: yup.string().min(6, "Mật khẩu tối thiểu là 6 kí tự").required("Mật khẩu là bắt buộc"),
+    password: yup.string().required("Mật khẩu là bắt buộc").min(6, "Mật khẩu tối thiểu là 6 kí tự"),
     confirmPassword: yup.string().required("Xác nhận mật khẩu là bắt buộc").oneOf([yup.ref("password")], "Xác nhận mật khẩu không đúng"),
     name: yup.string().required("Họ tên là bắt buộc"),
     dayOfBirth: yup.string().required("Ngày sinh là bắt buộc"),
@@ -36,7 +36,7 @@ export default function AuthRegister() {
 
     //react router dom
     const navigate = useNavigate();
-
+    const location=useLocation();
     //Custom hook: multiple step form
     const { currentStepIndex, step, next, back, isFirstStep, isLastStep } = useMultiStepForm([
         <AccountForm />,
@@ -51,9 +51,9 @@ export default function AuthRegister() {
     const token = useSelector(selectCurrentToken);
     useEffect(() => {
         if (token) {
-            navigate("/", { replace: true });
+            navigate(location?.state?.from?.pathname || "/" , { replace: true });
         }
-    }, [token, navigate]);
+    }, [token, navigate,location]);
 
     //Handle submit form
     const onSubmit = async (e) => {
@@ -75,7 +75,6 @@ export default function AuthRegister() {
                 } catch (err) {
                     console.log(err);
                 }
-
             }
         }
         if (currentStepIndex === 1) {

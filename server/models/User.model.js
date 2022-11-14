@@ -9,8 +9,11 @@ const User = {
     },
     getUserInfo: (username,callback)=>{
         db.query("CALL GetInfoUser(?);",[[username]],callback);
+    },
+    updatePassword:(data,callback)=>{
+        const { Username, passwordHashed }=data;
+        db.query("UPDATE User SET Password=? WHERE Username=?", [passwordHashed, Username],callback);
     }
- 
 };
 
 

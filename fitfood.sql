@@ -10,7 +10,7 @@ CREATE TABLE User(
 	ID int NOT NULL AUTO_INCREMENT,
 	Username varchar(100) NOT NULL,
     Password varchar(255) NOT NULL,
---     IsAdmin boolean NOT NULL DEFAULT false,
+    -- IsAdmin boolean NOT NULL DEFAULT false,
 	CONSTRAINT PK_User_Id PRIMARY KEY(ID),
     CONSTRAINT UQ_User_Username UNIQUE(Username)
 );	

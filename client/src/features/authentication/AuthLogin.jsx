@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Form from '../../components/Form/Form';
 import { selectCurrentToken, setCredentials } from './authSlice';
 import * as yup from "yup";
@@ -17,7 +17,7 @@ const schema = yup.object({
 }).required();
 export default function AuthLogin() {
     const navigate = useNavigate();
-
+    const location=useLocation();
     //react-hook-form
     const methods = useForm({
         resolver: yupResolver(schema)
@@ -32,17 +32,17 @@ export default function AuthLogin() {
     const token = useSelector(selectCurrentToken);
     useEffect(() => {
         if (token) {
-            navigate("/", { replace: true });
+            navigate(location?.state?.from?.pathname || "/", { replace: true});
         }
-    }, [token, navigate]);
+    }, [token, navigate,location]);
     //handle submit login
-    const onSubmit = async (data,e) => {
+    const onSubmit = async (data) => {
         try {
             const user = await login(data).unwrap();
             const { Username, IsAdmin, accessToken } = user;
             dispatch(setCredentials(Username, IsAdmin, accessToken));
         } catch (err) {
-            console.log(err);
+            console.warn(err);
         }
     };
   return (

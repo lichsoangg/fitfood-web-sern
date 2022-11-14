@@ -191,15 +191,14 @@ function ForgotPasswordText() {
 Form.ForgotPasswordText = ForgotPasswordText;
 
 //Submit button
-function SubmitButton({ text, handleSubmit, isLoading }) {
+function SubmitButton({ text, isLoading,styleButton }) {
     const textButton = isLoading ? "" : text;
     useDisableClick(isLoading);
     return (
         <AcceptButton
             type='submit'
             width="100%"
-            onClick={(e) => handleSubmit(e)}
-            styleButton={{ opacity: `${isLoading ? "0.6" : "1"}` }}
+            styleButton={{ opacity: `${isLoading ? "0.6" : "1"}`, ...styleButton }}
         >
             {isLoading && <i className="fa fa-spinner fa-spin"></i>}
             {textButton}
@@ -208,7 +207,6 @@ function SubmitButton({ text, handleSubmit, isLoading }) {
 }
 SubmitButton.propTypes = {
     text: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
 };
 Form.SubmitButton = SubmitButton;
 

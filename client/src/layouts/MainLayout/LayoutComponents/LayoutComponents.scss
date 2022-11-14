@@ -93,11 +93,8 @@
           color: $cl-primary;
         }
       }
-      hr {
-        width: 100%;
-        height: 1px;
-        background: $cl-grey-dimmed;
-        border: none;
+      hr{
+        background-color: $cl-grey-dimmed;
       }
     }
   }

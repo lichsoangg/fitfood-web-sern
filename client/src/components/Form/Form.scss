@@ -27,12 +27,12 @@
     padding: 0px 36px 0px 16px;
     &:focus-visible {
       outline: none;
-      border: 1px solid $cl-primary;
+      border: 1px solid $cl-blue;
     }
     &:focus + .formInput__placeHolder,
     &:not(:placeholder-shown) + .formInput__placeHolder {
       top: 0;
-      color: $cl-primary;
+      color: $cl-blue;
       padding-right: 8px;
     }
   }
