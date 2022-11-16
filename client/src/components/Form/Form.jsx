@@ -8,11 +8,11 @@ import hidePasswordIcon from "../../assets/icons/hidePassword.png";
 import dateIcon from "../../assets/icons/calendar.png";
 import downIcon from "../../assets/icons/down.png";
 import Error from '../Error/Error';
-import Portal from '../Portal/Portal';
 import PropTypes from "prop-types";
 import { useModal } from '../../hooks/useModal';
 import { useDisableClick } from '../../hooks/useDisableClick';
 import { AcceptButton, CancelButton } from '../Buttons/Buttons';
+import DropdownBase from '../DropdownBase/DropdownBase';
 export default function Form() {
     return null;
 }
@@ -145,14 +145,8 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
                 </div>
                 {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
             </div>
-            {(open && data) && <Portal
-                overlay={false}
-                styleContent={{
-                    position: "absolute",
-                    left: `${rect.left + window.scrollX}px`,
-                    top: `${rect.top + rect.height + window.scrollY + 4}px`,
-                    width: `${rect.width}px`
-                }}>
+            {(open && data) && 
+            <DropdownBase rect={rect}>
                 <div className="formInput__dropdown" onClick={handleClickDropdown} ref={modalRef}>
                     {(isLoading) &&
                         <div className='formInput__dropdown--loadingIcon'>
@@ -163,7 +157,7 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
                         return <span key={item.id} data-id={item.id}>{item.value}</span>;
                     })}
                 </div>
-            </Portal>}
+            </DropdownBase>}
        
         </>
     );

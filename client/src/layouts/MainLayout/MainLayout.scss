@@ -3,7 +3,7 @@
 {
     &__outlet{
             height: calc(100vh - 380px);  
-            overflow: scroll;
+            overflow-y: auto;
             @include flexMid(center);
     }
 }

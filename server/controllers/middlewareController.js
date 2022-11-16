@@ -17,7 +17,7 @@ const middlewareController = ({
             }
         } catch (err) {
             next(err);
-        }
+        }   
     }
 });
 

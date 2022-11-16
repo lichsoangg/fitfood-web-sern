@@ -13,7 +13,6 @@ const authController = {
             User.getUserWithName(username, async (err, data) => {
                 if (err) return res.status(400).json({message:"Yêu cầu không hợp lệ"});
                 if (data.length) return res.status(409).json({message:"Tên tài khoản đã tồn tại"});
-
                 const salt = await bcrypt.genSalt(10);
                 const passwordHashed = await bcrypt.hash(req.body.password, salt);
                 Customer.postCustomer({ ...req.body, password: passwordHashed }, (err, data) => {
@@ -103,12 +102,8 @@ const authController = {
     //LOG OUT
     logout:async (req, res, next) => {
         try {
-            const refreshToken=req.cookies.refreshToken;
-            if(refreshToken){
-                const payload=  jwt.verify(refreshToken,process.env.REFRESH_SECRET_KEY,{ignoreExpiration:true});
-                client.del(payload.Username);
-                res.clearCookie("refreshToken")
-            }
+            client.del(req.user.Username);
+            res.clearCookie("refreshToken")
             return res.status(200).json({ status: 200, message: "Logout Successfully" });
         } catch (err) {
             next(err);

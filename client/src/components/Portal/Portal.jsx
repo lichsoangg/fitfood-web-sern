@@ -21,7 +21,7 @@ const Portal = ({
     const renderContent = (
         <div className="portal">
             {overlay && <div className="overlay"></div>}
-            <div className="content" style={styleContent}>
+            <div className="    content" style={styleContent}>
                 {children}
             </div>
         </div>

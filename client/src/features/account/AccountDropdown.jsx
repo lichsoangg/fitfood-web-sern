@@ -11,6 +11,7 @@ import { logOut } from '../authentication/authSlice';
 import { useLogoutMutation } from '../authentication/authApi';
 import Loading from '../../components/Loading/Loading';
 import { BoxShadowButton } from '../../components/Buttons/Buttons';
+import DropdownBase from '../../components/DropdownBase/DropdownBase';
 
 export default function AccountDropdown() {
     const { accessToken: token, isAdmin } = useSelector(selectCurrentAuth);
@@ -37,14 +38,7 @@ export default function AccountDropdown() {
             </div>
             {(token) ?
                 <>
-                    {(open && user) && <Portal
-                        overlay={false}
-                        styleContent={{
-                            position: "absolute",
-                            left: `${rect.right + window.scrollX - 200}px`,
-                            top: `${rect.top + rect.height + window.scrollY + 4}px`,
-                            width: `${200}px`
-                        }}>
+                    {(open && user) && <DropdownBase rect={rect} width={200} alignRight>
                         <ul className="layout__function--user-modal"
                             ref={modalRef}
                             onClick={() => setOpen(false)}
@@ -57,7 +51,7 @@ export default function AccountDropdown() {
                             <hr />
                             <li onClick={handleClickLogout}>Đăng xuất</li>
                         </ul>
-                    </Portal>}
+                    </DropdownBase>}
 
                 </>
                 :
