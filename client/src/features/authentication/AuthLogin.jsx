@@ -51,7 +51,9 @@ export default function AuthLogin() {
               <Form.Input placeHolder="Tài khoản*" icon={UsernameIcon} name="username" />
               <Form.Input placeHolder="Mật khẩu*" name="password" type="password" />
               <Form.ForgotPasswordText />
-              {error  && <Error errorMessage={error.data.message}/>}
+              {error?.data  && <Error errorMessage={error.data.message}/>}
+              {error?.error && <Error errorMessage={error.error} />}
+
               <Form.SubmitButton text="Đăng nhập" handleSubmit={handleSubmit} isLoading={isLoading} />
           </form>
       </FormProvider>

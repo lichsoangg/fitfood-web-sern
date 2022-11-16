@@ -13,6 +13,7 @@ import InformationForm from '../../pages/Register/InformationForm/InformationFor
 
 import { selectCurrentToken, setCredentials } from './authSlice';
 import { useAddNewCustomerMutation, useCheckPhoneNumberMutation, useCheckUsernameMutation } from './authApi';
+import Error from '../../components/Error/Error';
 
 const schema = yup.object({
     username: yup.string().required("Tài khoản là bắt buộc"),
@@ -43,9 +44,9 @@ export default function AuthRegister() {
         <InformationForm />,
         <AddressForm />]);
     //registerAPI RTK
-    const [addNewCustomer, { isLoading: isLoadingForm }] = useAddNewCustomerMutation();
-    const [checkUsername, { isLoading: isLoadingCheckUsername }] = useCheckUsernameMutation();
-    const [checkPhoneNumber, { isLoading: isLoadingCheckPhoneNumber }] = useCheckPhoneNumberMutation();
+    const [addNewCustomer, { isLoading: isLoadingForm,error:errorAddNewCustomer }] = useAddNewCustomerMutation();
+    const [checkUsername, { isLoading: isLoadingCheckUsername,error: errorCheckUsername }] = useCheckUsernameMutation();
+    const [checkPhoneNumber, { isLoading: isLoadingCheckPhoneNumber, error: errorCheckPhonenumber }] = useCheckPhoneNumberMutation();
 
     //change to page previous when have token
     const token = useSelector(selectCurrentToken);
@@ -109,6 +110,7 @@ export default function AuthRegister() {
 
         }
     };
+    console.log(errorCheckUsername);
   return (
       <FormProvider {...methods}>
           <form className='registerForm' onSubmit={onSubmit}>
@@ -120,6 +122,9 @@ export default function AuthRegister() {
                   textSubmit="Đăng ký"
                   isLoading={isLoadingForm || isLoadingCheckPhoneNumber || isLoadingCheckUsername}
               />
+              {errorAddNewCustomer?.error && <Error errorMessage={errorAddNewCustomer.error} />}
+              {errorAddNewCustomer?.data && <Error errorMessage={errorAddNewCustomer.data.message} />}
+
           </form>
 
       </FormProvider>
