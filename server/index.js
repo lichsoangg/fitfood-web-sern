@@ -5,12 +5,11 @@ require("dotenv").config();
 //route
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
+const customerRoute=require("./routes/customer");
 
 
 
 const app = express();
-
-
 //middlewares
 app.use(cors({
     origin: process.env.CORS_ORIGIN_URL,
@@ -20,8 +19,10 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/images",express.static(__dirname+"/upload/images"))
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
+app.use("/api/customer",customerRoute);
 
 app.use((req, res, next) => {
    const err=new Error("This route doesn't exist")

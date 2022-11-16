@@ -83,7 +83,7 @@ export default function AuthRegister() {
             if (isValid) {
                 // check register phoneNumber already exist
                 try {
-                    await checkPhoneNumber(value).unwrap().catch(err => {
+                  await checkPhoneNumber(value).unwrap().catch(err => {
                         if (err.status === 409) {
                             isValid = false;
                             setError('phoneNumber', { type: "custom", message: "Số điện thoại đã tồn tại" });

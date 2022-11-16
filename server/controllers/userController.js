@@ -2,6 +2,7 @@ const User = require("../models/User.model");
 const bcrypt=require("bcrypt");
 const e = require("express");
 const userController = {
+    //Get all users
     getAllUsers:  (req, res, next) => {
         try {
             User.getUsers((err, data) => {
@@ -17,10 +18,13 @@ const userController = {
             next(err);
         }
     },
+
+    // Get me
     getMe:(req,res,next)=>{
         try {
             User.getUserInfo(req.user.Username,(err,data)=>{
-                if(!err){    
+                if(!err){
+                    data[0][0].Avatar = `${process.env.IMAGE_DATA_URL}/${data[0][0].Avatar}`
                     res.status(200).json(data[0][0]);
                 }else{
                     const err = new Error("Yêu cầu không hợp lệ");
@@ -32,6 +36,8 @@ const userController = {
             next(err)
         }
     },
+
+    // Update password
     updatePassword:(req,res,next) =>{
         const {password,newPassword}=req.body;
         const {Username}=req.user;
@@ -59,7 +65,10 @@ const userController = {
         } catch (err) {
             next(err)
         }
-    }
+    },
+
+    
+    
 };
 
 module.exports = userController;
