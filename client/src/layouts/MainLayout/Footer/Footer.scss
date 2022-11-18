@@ -1,6 +1,9 @@
-@import "../../../scss/import.scss";
+@import '../../../scss/import.scss';
+
 .footer {
   background: $cl-white;
+  border-top: 0.5px solid;
+
   .mainWrapper {
     padding: 60px 40px 40px;
     width: 100%;
@@ -8,19 +11,23 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+
     .footer__top {
       @include flexMid(space-between);
     }
+
     .footer__center {
       @include flexMid(center);
       gap: 16px;
-      svg{
-        path{
-        stroke: $cl-primary;
+
+      svg {
+        path {
+          stroke: $cl-primary;
           fill: $cl-primary;
         }
       }
     }
+
     .footer__bottom {
       @include flexMid(center);
       flex-direction: column;

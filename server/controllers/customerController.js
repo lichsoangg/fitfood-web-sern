@@ -1,21 +1,38 @@
 const Customer = require("../models/Customer.model");
+const fs = require("fs");
+const path = require("path");
+const customerController = {
+  updateCustomer: (req, res, next) => {
+    const data = req.body;
+    username = req.user.Username;
+    if (req.file) {
+      Customer.getCustomerWithUsername(username, async (err, customer) => {
+        if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
+        if (customer[0].Avatar) {
+          let fileOldNameWithPath = path.join(__dirname, `../upload/images/${customer[0].Avatar}`);
+          if (fs.existsSync(fileOldNameWithPath)) {
+            fs.unlink(fileOldNameWithPath, (err) => {
+              if (err) {
+                console.log(err);
+              }
+            });
+          }
+        }
+      });
+      data["Avatar"] = req.file.filename;
 
-const customerController={
-    updateCustomer:(req,res,next)=>{
-        const data=req.body
-        if(req.file){
-            data["Avatar"] = req.file.filename
-        }
-        try {
-            Customer.updateCustomer(data,req.user.Username,(err,data)=>{
-                if(err) return res.status(400).json({message:"Yêu cầu không hợp lệ"});
-                return res.status(203).json({data});
-            })
-        
-        } catch (err) {
-            next(err)
-        }
     }
-}
+    try {
+      Customer.updateCustomer(data, username, (err, data) => {
+        if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
+        return res.status(203).json({ data });
+      });
 
-module.exports=customerController;
+    } catch (err) {
+      next(err);
+    }
+
+  }
+};
+
+module.exports = customerController;

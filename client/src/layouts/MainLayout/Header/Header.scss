@@ -1,6 +1,9 @@
-@import "../../../scss/import.scss";
+@import '../../../scss/import.scss';
+
 .header {
   background: $cl-white;
+  border-bottom: 0.5px solid;
+
   .mainWrapper {
     display: flex;
     justify-content: space-between;

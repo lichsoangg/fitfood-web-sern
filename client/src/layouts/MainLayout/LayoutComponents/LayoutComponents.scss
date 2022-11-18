@@ -1,4 +1,4 @@
-@import "../../../scss/import.scss";
+@import '../../../scss/import.scss';
 .layout__logo {
   @include flexMid(unset);
   gap: 8px;
@@ -10,15 +10,13 @@
     img {
       object-fit: cover;
     }
-      h1{
-    position: absolute;
-    left: 60px;
-    font-weight: 600;
-    font-size: 24px;
+    h1 {
+      position: absolute;
+      left: 60px;
+      font-weight: 600;
+      font-size: 24px;
+    }
   }
-  }
-
-
 }
 
 .layout__menu {
@@ -29,9 +27,8 @@
   color: $cl-grey;
   &--item {
     cursor: pointer;
-   
   }
-  &--item.active{
+  &--item.active {
     color: $cl-primary;
   }
 
@@ -40,7 +37,7 @@
     top: calc(100% + 16px);
     height: 3px;
     border-radius: 2px;
-    background-color:$cl-primary;
+    background-color: $cl-primary;
     transition: 0.4s all $cubic;
   }
 }
@@ -50,8 +47,8 @@
   gap: 14px;
   &--cart {
     cursor: pointer;
-    svg{
-      path{
+    svg {
+      path {
         stroke: $cl-black;
       }
     }
@@ -87,13 +84,13 @@
       }
       a {
         padding: 8px 12px;
-      
+
         &:hover {
           background-color: $cl-grey-dimmed;
           color: $cl-primary;
         }
       }
-      hr{
+      hr {
         background-color: $cl-grey-dimmed;
       }
     }
@@ -104,10 +101,9 @@
   @include flexMid(unset);
   gap: 8px;
   color: $cl-grey;
-  h4{
-    a{
-  color: $cl-grey;
-
+  h4 {
+    a {
+      color: $cl-grey;
     }
   }
 }

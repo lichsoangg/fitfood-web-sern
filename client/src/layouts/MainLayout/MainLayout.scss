@@ -1,9 +1,8 @@
-@import "../../scss/import.scss";
-.mainLayout
-{
-    &__outlet{
-            height: calc(100vh - 380px);  
-            overflow-y: auto;
-            @include flexMid(center);
-    }
+@import '../../scss/import.scss';
+.mainLayout {
+  &__outlet {
+    margin-top: 40px;
+    height: calc(100vh - 420px);
+    @include flexMid(center);
+  }
 }

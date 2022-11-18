@@ -1,11 +1,11 @@
-@import "../../scss/import.scss";
-.unauthorized{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap:16px;
-  img{
+@import '../../scss/import.scss';
+.unauthorized {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  img {
     width: 320px;
     height: 320px;
     object-fit: cover;

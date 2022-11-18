@@ -1,4 +1,4 @@
-@import "../../scss/import.scss";
+@import '../../scss/import.scss';
 .error {
   @include flexMid(unset);
   gap: 8px;
@@ -9,7 +9,7 @@
     object-fit: cover;
   }
   &__message {
-    color:$cl-red ;
+    color: $cl-red;
     font-size: 14px;
   }
 }

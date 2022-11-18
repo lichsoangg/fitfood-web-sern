@@ -1,10 +1,11 @@
-@import "../../scss/import.scss";
+@import '../../scss/import.scss';
 
 .formInput {
   position: relative;
   height: 50px;
   width: 100%;
   border: none;
+
   ::-webkit-calendar-picker-indicator {
     color: rgba(0, 0, 0, 0);
     width: 24px;
@@ -19,20 +20,23 @@
     height: 100%;
     opacity: 0;
   }
+
   input {
     width: 100%;
     height: 100%;
     border: 0.5px solid $cl-grey;
     border-radius: 3px;
     padding: 0px 36px 0px 16px;
+
     &:focus-visible {
       outline: none;
-      border: 1px solid $cl-blue;
+      border: 1px solid $cl-black;
     }
-    &:focus + .formInput__placeHolder,
-    &:not(:placeholder-shown) + .formInput__placeHolder {
+
+    &:focus+.formInput__placeHolder,
+    &:not(:placeholder-shown)+.formInput__placeHolder {
       top: 0;
-      color: $cl-blue;
+      color: $cl-black;
       padding-right: 8px;
     }
   }
@@ -47,6 +51,7 @@
     transition: all 0.4s;
     pointer-events: none;
   }
+
   &__icon {
     position: absolute;
     top: 50%;
@@ -54,19 +59,23 @@
     right: 16px;
     width: 24px;
     height: 24px;
+
     img {
       width: 100%;
       object-fit: cover;
     }
   }
 }
+
 .formDropdown {
   input {
     color: white;
   }
-   i{
-    color: $cl-primary !important;
+
+  i {
+    color: $cl-primary  !important;
   }
+
   .formInput__icon {
     pointer-events: none;
   }
@@ -79,6 +88,9 @@
     width: calc(100% - 52px);
     height: 100%;
     pointer-events: none;
+    color: $cl-black;
+    font-size: $fz-default;
+    font-weight: 400;
     @include flexMid(unset);
   }
 }
@@ -88,42 +100,44 @@
   flex-direction: column;
   background-color: white;
   border-radius: 3px;
-  border: 1px solid $cl-primary;
+  border: 1px solid $cl-black;
   width: 100%;
   max-height: 200px;
   height: max-content;
   min-height: 50px;
   overflow-y: auto;
- 
-  &--loadingIcon{
+
+  &--loadingIcon {
     position: absolute;
     left: 50%;
-    top:50%;
-    transform: translate(-50%,-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
+
   span {
     width: 100%;
     padding: 12px 16px;
     border-radius: 3px;
+
     &:hover {
       color: white;
       background-color: $cl-primary;
     }
   }
 }
+
 .formForgotPasswordText {
   display: flex;
   flex-direction: row-reverse;
   width: 100%;
   font-size: 12px;
+
   a {
     color: $cl-primary;
   }
 }
 
-
 .formPaginateStepForm {
   @include flexMid(unset);
   width: 100%;
-
 }

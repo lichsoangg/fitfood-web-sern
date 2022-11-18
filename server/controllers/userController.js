@@ -24,7 +24,9 @@ const userController = {
         try {
             User.getUserInfo(req.user.Username,(err,data)=>{
                 if(!err){
-                    data[0][0].Avatar = `${process.env.IMAGE_DATA_URL}/${data[0][0].Avatar}`
+                    if(data[0][0].Avatar){
+                        data[0][0].Avatar = `${process.env.IMAGE_DATA_URL}/${data[0][0].Avatar}`
+                    }
                     res.status(200).json(data[0][0]);
                 }else{
                     const err = new Error("Yêu cầu không hợp lệ");
