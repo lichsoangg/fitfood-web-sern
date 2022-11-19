@@ -33,8 +33,8 @@
       border: 1px solid $cl-black;
     }
 
-    &:focus+.formInput__placeHolder,
-    &:not(:placeholder-shown)+.formInput__placeHolder {
+    &:focus + .formInput__placeHolder,
+    &:not(:placeholder-shown) + .formInput__placeHolder {
       top: 0;
       color: $cl-black;
       padding-right: 8px;
@@ -73,7 +73,7 @@
   }
 
   i {
-    color: $cl-primary  !important;
+    color: $cl-primary !important;
   }
 
   .formInput__icon {

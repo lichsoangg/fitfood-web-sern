@@ -12,7 +12,7 @@ import { useCallback } from 'react';
 import Loading from '../../components/Loading/Loading';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Error from "../../components/Error/Error";
+import Error from '../../components/Error/Error';
 import { useCheckPhoneNumberMutation } from '../authentication/authApi';
 const dataGender = [
   { id: 0, value: 'Nam' },
@@ -115,8 +115,6 @@ export default function AccountUpdate() {
         <FormProvider {...methods}>
           <form className='accountInformation__form' onSubmit={handleSubmit(onSubmit)} onReset={reset}>
             <div className='accountInformation__form--top'>
-
-
               <div className='accountInformation__form--top-image'>
                 <img src={fileAvatar ? URL.createObjectURL(fileAvatar) : avatar} alt='' />
               </div>
@@ -153,7 +151,9 @@ export default function AccountUpdate() {
           </form>
         </FormProvider>
       )}
-      {errorUpdateAccount && <Error styleError={{ marginTop: "24px" }} errorMessage={errorUpdateAccount.data.message}></Error>}
+      {errorUpdateAccount && (
+        <Error styleError={{ marginTop: '24px' }} errorMessage={errorUpdateAccount.data.message}></Error>
+      )}
       {isUpdateLoading && <Loading size={3} full />}
     </>
   );
