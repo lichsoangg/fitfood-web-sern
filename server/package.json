@@ -4,7 +4,7 @@
   "description": "Server for Fitfood E-commerce website",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.sjs"
+    "start": "nodemon index.js"
   },
   "author": "Khanh Duy",
   "license": "ISC",

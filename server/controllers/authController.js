@@ -20,7 +20,8 @@ const authController = {
           if (err) {
             return res.status(400).json(err);
           }
-          const accessToken = signAccessToken(username, false);
+
+          const accessToken = signAccessToken(username, `Customer`);
           signRefreshToken(username, false, res);
           return res.status(201).json({ username, accessToken, status: 201 });
         });
@@ -56,6 +57,7 @@ const authController = {
           if (data[0].Username !== username) {
             return res.status(409).json({ message: "Số điện thoại đã được đăng ký" });
           }
+
         }
         return res.status(200).json({});
       });
@@ -69,12 +71,13 @@ const authController = {
       const { username, password } = req.body;
       if (!username || !password) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
       User.getUserWithName(username, async (err, data) => {
-        if (data.length) {
+        if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
+        if (data?.length) {
           const validPassword = await bcrypt.compare(password, data[0].Password);
           if (!validPassword) return res.status(401).json({ message: "Tài khoản hoặc mật khẩu không đúng" });
           const { Password, ...otherInfo } = data[0];
-          const accessToken = signAccessToken(username, data[0].IsAdmin);
-          signRefreshToken(username, data[0].IsAdmin, res);
+          const accessToken = signAccessToken(username, data[0].Role);
+          signRefreshToken(username, data[0].Role, res);
           return res.status(200).json({ ...otherInfo, accessToken, status: 200 });
         } else {
           return res.status(401).json({ message: "Tài khoản hoặc mật khẩu không đúng" });
@@ -96,8 +99,8 @@ const authController = {
         if (err) return res.status(401).json({ message: "Bạn không có quyền truy cập" });
         const refreshTokenServer = await client.get(user.Username.toString());
         if (refreshTokenServer !== refreshTokenClient) return res.status(404).json({ message: "Token không hợp lệ" });
-        const newAccessToken = signAccessToken(user.Username, user.IsAdmin);
-        signRefreshToken(user.Username, user.IsAdmin, res);
+        const newAccessToken = signAccessToken(user.Username, user.Role);
+        signRefreshToken(user.Username, user.Role, res);
         return res.status(200).json({ status: 200, accessToken: newAccessToken });
       });
     } catch (err) {

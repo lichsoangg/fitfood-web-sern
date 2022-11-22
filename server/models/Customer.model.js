@@ -9,7 +9,6 @@ const Customer = {
         db.query("SELECT * FROM Customer WHERE PhoneNumber=?", [phoneNumber], callback);
     },
     getCustomerWithUsername: (username, callback) => {
-
         db.query("SELECT * FROM Customer WHERE Username=?", [username], callback);
     },
     updateCustomer: (objectData, username, callback) => {

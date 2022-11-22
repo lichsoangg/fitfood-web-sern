@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const customerController = {
   updateCustomer: (req, res, next) => {
+
     const data = req.body;
     username = req.user.Username;
     if (req.file) {
@@ -25,7 +26,7 @@ const customerController = {
     try {
       Customer.updateCustomer(data, username, (err, data) => {
         if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
-        return res.status(203).json({ data });
+        return res.status(200).json({ status: 200, message: "Cập nhật khách hàng thành công" });
       });
 
     } catch (err) {

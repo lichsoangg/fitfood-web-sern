@@ -8,17 +8,17 @@ const middlewareController = ({
             if (token) {
                 const accessToken = token.split(" ")[1];
                 jwt.verify(accessToken, process.env.ACCESS_SECRET_KEY, (err, user) => {
-                    if (err) return res.status(401).json({message:"Bạn không có quyền truy cập"});
+                    if (err) return res.status(401).json({ message: "Bạn không có quyền truy cập" });
                     req.user = user;
                     next();
                 });
             } else {
-                res.status(403).json({message:"Không có token"});
+                res.status(403).json({ message: "Không có token" });
             }
         } catch (err) {
             next(err);
-        }   
-    }
+        }
+    },
 });
 
 module.exports = middlewareController;

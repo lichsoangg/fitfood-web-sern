@@ -1,6 +1,5 @@
-const customerController = require("../controllers/customerController");
+const employeeController = require("../controllers/employeeController");
 const middlewareController = require("../controllers/middlewareController");
-
 const router = require("express").Router();
 const multer = require("multer");
 const path = require('path');
@@ -22,8 +21,9 @@ const upload = multer({
         }
         cb(null, true);
     }
-}).single("CustomerAvatar");
-
-router.put("/update", [middlewareController.verifyToken], customerController.updateCustomer);
+}).single("EmployeeAvatar");
+router.get("/", middlewareController.verifyToken, employeeController.getEmployees);
+router.put("/:username", [middlewareController.verifyToken, upload], employeeController.updateEmployee);
+router.post("/add", [middlewareController.verifyToken, upload], employeeController.addEmployee);
 
 module.exports = router;
