@@ -6,9 +6,11 @@ const fs = require("fs");
 const employeeController = {
     getEmployees: (req, res, next) => {
         const role = req.user.Role;
+        const limit = req.query.limit || 10;
+        const page = req.query.page || 1;
         if (RolePermissions.Employee.Get.includes(role)) {
             try {
-                Employee.getEmployees((err, data) => {
+                Employee.getEmployees(page, limit, (err, data) => {
                     if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
                     res.status(200).json({ data });
                 });
