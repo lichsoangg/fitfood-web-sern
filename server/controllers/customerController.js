@@ -8,7 +8,7 @@ const customerController = {
     username = req.user.Username;
     if (req.file) {
       Customer.getCustomerWithUsername(username, async (err, customer) => {
-        if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
+        if (err) return res.status(400).json({ message: err.message });
         if (customer[0].Avatar) {
           let fileOldNameWithPath = path.join(__dirname, `../upload/images/${customer[0].Avatar}`);
           if (fs.existsSync(fileOldNameWithPath)) {
@@ -25,7 +25,7 @@ const customerController = {
     }
     try {
       Customer.updateCustomer(data, username, (err, data) => {
-        if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
+        if (err) return res.status(400).json({ message: err.message });
         return res.status(200).json({ status: 200, message: "Cập nhật khách hàng thành công" });
       });
 

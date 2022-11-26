@@ -2,7 +2,7 @@ import React from 'react';
 import './Form.scss';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useFormContext } from 'react-hook-form';
+import { useForm, useFormContext } from 'react-hook-form';
 import showPasswordIcon from '../../assets/icons/showPassword.png';
 import hidePasswordIcon from '../../assets/icons/hidePassword.png';
 import dateIcon from '../../assets/icons/calendar.png';
@@ -18,7 +18,7 @@ const Form = () => {
   return null;
 };
 export default Form;
-// input
+// ------------------------------- Input ----------------------------------
 function Input({ placeHolder, type, icon, name, ...rest }) {
   const {
     register,
@@ -101,7 +101,32 @@ InputDate.propTypes = {
 };
 Form.InputDate = React.memo(InputDate);
 
-//dropdown
+function InputNumberVerify({ maxLength, name }) {
+  const { register, formState: { errors } } = useFormContext();
+  const handleInputKeyUp = (e) => {
+    const keyCode = e.keyCode;
+    if (keyCode === 8 || keyCode === 37) {
+      if (e.target?.previousSibling?.className === "formInputNumberVerify") {
+        e.target.previousSibling.focus();
+      }
+    }
+    if (e.target.value.length === maxLength || keyCode === 39) {
+      if (e.target?.nextSibling?.className === "formInputNumberVerify") {
+        e.target.nextSibling.focus();
+      }
+    }
+  };
+  return (
+    <input type="text" maxLength={maxLength} className="formInputNumberVerify" style={{ width: `${50 + maxLength * 8}px`, border: `${errors[name] ? '0.8px solid red' : ''}` }} onKeyUp={handleInputKeyUp} {...register(name)} />
+  );
+}
+Form.InputNumberVerify = InputNumberVerify;
+
+InputNumberVerify.propTypes = {
+  maxLength: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired
+};
+// ------------------------------- Dropdown ----------------------------------
 function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, ...rest }) {
   const { modalRef, activeModalRef, open, rect, setOpen } = useModal();
 
@@ -143,9 +168,9 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
           style={
             trigger
               ? {
-                  opacity: `${getValues(trigger) ? 1 : 0.4}`,
-                  border: `${errors[name] ? '0.8px solid red' : ''}`
-                }
+                opacity: `${getValues(trigger) ? 1 : 0.4}`,
+                border: `${errors[name] ? '0.8px solid red' : ''}`
+              }
               : { border: `${errors[name] ? '0.8px solid red' : ''}` }
           }
         />
@@ -192,7 +217,7 @@ Dropdown.propTypes = {
 };
 Form.Dropdown = React.memo(Dropdown);
 
-//Forgot Password Text
+// ------------------------------- ForgotPasswordText ----------------------------------
 function ForgotPasswordText() {
   return (
     <div className='formForgotPasswordText'>
@@ -202,7 +227,8 @@ function ForgotPasswordText() {
 }
 Form.ForgotPasswordText = React.memo(ForgotPasswordText);
 
-//Submit button
+
+// ------------------------------- SubmitButton ----------------------------------
 function SubmitButton({ text, isLoading, styleButton }) {
   const textButton = isLoading ? '' : text;
   useDisableClick(isLoading);
@@ -218,8 +244,8 @@ SubmitButton.propTypes = {
 };
 Form.SubmitButton = React.memo(SubmitButton);
 
-//paginate step form
-function PaginateStepForm({ isFirstStep, isLastStep, back, textSubmit, isLoading }) {
+// ------------------------------- PaginateStepForm ----------------------------------
+function GroupButton({ isFirstStep, isLastStep, back, textSubmit, isLoading }) {
   const textButton = isLoading ? '' : isLastStep ? textSubmit : 'Tiếp tục';
   useDisableClick(isLoading);
   return (
@@ -236,7 +262,7 @@ function PaginateStepForm({ isFirstStep, isLastStep, back, textSubmit, isLoading
     </div>
   );
 }
-PaginateStepForm.propTypes = {
+GroupButton.propTypes = {
   isFirstStep: PropTypes.bool.isRequired,
   isLastStep: PropTypes.bool.isRequired,
   back: PropTypes.func.isRequired,
@@ -244,4 +270,6 @@ PaginateStepForm.propTypes = {
   isLoading: PropTypes.bool.isRequired
 };
 
-Form.PaginateStepForm = React.memo(PaginateStepForm);
+Form.GroupButton = React.memo(GroupButton);
+
+

@@ -1,0 +1,55 @@
+@import "../../scss/import.scss";
+
+.activePage {
+  width: 30%;
+  @include flexMid(center);
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    margin-top: 16px;
+  }
+
+  &__description {
+    line-height: 1.4;
+    font-size: 15px;
+    margin-bottom: 8px;
+    display: block;
+    width: 80%;
+
+    strong {
+      color: $cl-primary;
+    }
+  }
+
+  .description-left {
+    text-align: left !important;
+  }
+
+  .description-right {
+    cursor: pointer;
+    width: 100%;
+    text-align: right !important;
+  }
+
+  .activePage__image {
+    @include flexMid(center);
+
+    img {
+      width: 200px;
+      object-fit: cover;
+    }
+  }
+
+  .activePage__form {
+    @include flexMid(space-around);
+    flex-direction: column;
+    width: 80%;
+    gap: 12px;
+
+    &--inputs {
+      width: 100%;
+      @include flexMid(space-between)
+    }
+  }
+}

@@ -13,7 +13,7 @@ import { useLoginMutation } from './authApi';
 
 const schema = yup
   .object({
-    username: yup.string().required('Tài khoản là bắt buộc'),
+    username: yup.string().required('Email là bắt buộc').email("Email không đúng định dạng"),
     password: yup.string().required('Mật khẩu là bắt buộc')
   })
   .required();
@@ -41,8 +41,8 @@ export default function AuthLogin() {
   const onSubmit = async (data) => {
     try {
       const user = await login(data).unwrap();
-      const { Username, IsAdmin, accessToken } = user;
-      dispatch(setCredentials(Username, IsAdmin, accessToken));
+      const { Username, IsActive, Role, accessToken } = user;
+      dispatch(setCredentials(Username, IsActive, Role, accessToken));
     } catch (err) {
       console.warn(err);
     }
@@ -50,13 +50,13 @@ export default function AuthLogin() {
   return (
     <FormProvider {...methods}>
       <form className='loginForm' onSubmit={handleSubmit(onSubmit)}>
-        <Form.Input placeHolder='Tài khoản*' icon={UsernameIcon} name='username' />
+        <Form.Input placeHolder='Email *' icon={UsernameIcon} name='username' />
         <Form.Input placeHolder='Mật khẩu*' name='password' type='password' />
         <Form.ForgotPasswordText />
         {error?.data && <Error errorMessage={error.data.message} />}
         {error?.error && <Error errorMessage={error.error} />}
 
-        <Form.SubmitButton text='Đăng nhập' handleSubmit={handleSubmit} isLoading={isLoading} />
+        <Form.SubmitButton text='Đăng nhập' isLoading={isLoading} />
       </form>
     </FormProvider>
   );

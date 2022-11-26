@@ -9,5 +9,7 @@ router.get("/refresh", authController.refresh);
 router.post("/checkusername", authController.checkUsername);
 router.post("/checkphonenumber", authController.checkPhoneNumber);
 router.post("/logout", verifyToken, authController.logout);
+router.post("/verify-email", verifyToken, authController.verifyEmail);
+router.post("/send-email-verify", verifyToken, authController.sendEmailVerify);
 
 module.exports = router;

@@ -19,6 +19,7 @@ const jwtService = {
             secure: true,
             path: "/"
         });
+
         client.set(Username.toString(), refreshToken);
         client.expire(Username.toString(), 3 * 24 * 60 * 60);
     }

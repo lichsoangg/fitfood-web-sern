@@ -14,6 +14,9 @@ const User = {
         const { Username, passwordHashed } = data;
         db.query("UPDATE User SET Password=? WHERE Username=?", [passwordHashed, Username], callback);
     },
+    updateActive: (username, callback) => {
+        db.query("UPDATE USER SET IsActive=1 WHERE Username=?", [username], callback);
+    },
 };
 
 

@@ -13,7 +13,7 @@ import { BoxShadowButton } from '../../components/Buttons/Buttons';
 import DropdownBase from '../../components/DropdownBase/DropdownBase';
 
 export default function AccountDropdown() {
-  const { accessToken: token, isAdmin } = useSelector(selectCurrentAuth);
+  const { accessToken: token, role } = useSelector(selectCurrentAuth);
   const { data: user } = useGetMeQuery(undefined, { skip: !token });
   const { modalRef, activeModalRef, rect, open, setOpen } = useModal();
   const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation();
@@ -38,7 +38,7 @@ export default function AccountDropdown() {
               <ul className='layout__function--user-modal' ref={modalRef} onClick={() => setOpen(false)}>
                 <li>{user?.Name}</li>
                 <hr />
-                {isAdmin ? <Link to='/admin'>Trang Admin </Link> : <></>}
+                {role !== `Khách hàng` ? <Link to='/admin'>Trang Admin </Link> : <></>}
                 <Link to='/thong-tin-ca-nhan'>Thông tin cá nhân </Link>
                 <Link to='/doi-mat-khau'>Đổi mật khẩu </Link>
                 <hr />

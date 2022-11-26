@@ -76,9 +76,9 @@ export default function AccountUpdate() {
         formData.append(key, data[key]);
       }
       if (fileAvatar) {
-        formData.append('Avatar', fileAvatar);
+        formData.append('CustomerAvatar', fileAvatar);
       } else {
-        formData.delete('Avatar');
+        formData.delete('CustomerAvatar');
       }
       await updateAccount(formData).unwrap();
       setFileAvatar(null);

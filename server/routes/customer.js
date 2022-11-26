@@ -24,6 +24,6 @@ const upload = multer({
     }
 }).single("CustomerAvatar");
 
-router.put("/update", [middlewareController.verifyToken], customerController.updateCustomer);
+router.put("/update", [middlewareController.verifyToken, upload], customerController.updateCustomer);
 
 module.exports = router;

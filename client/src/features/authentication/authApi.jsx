@@ -40,6 +40,20 @@ export const registerAPI = apiSlice.injectEndpoints({
         method: 'POST'
       }),
       invalidatesTags: ['Account']
+    }),
+    verifyEmail: builder.mutation({
+      query: (data) => ({
+        url: '/auth/verify-email',
+        method: 'POST',
+        body: data
+      }),
+      invalidatesTags: ['Account']
+    }),
+    sendVerifyEmail: builder.mutation({
+      query: () => ({
+        url: '/auth/send-email-verify',
+        method: 'POST',
+      })
     })
   })
 });
@@ -49,5 +63,7 @@ export const {
   useCheckUsernameMutation,
   useCheckPhoneNumberMutation,
   useLoginMutation,
-  useLogoutMutation
+  useLogoutMutation,
+  useVerifyEmailMutation,
+  useSendVerifyEmailMutation
 } = registerAPI;

@@ -10,6 +10,7 @@ import AccountInformation from './pages/Account/AccountInformation/AccountInform
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Admin from './pages/Admin/Admin';
 import Unauthorized from './pages/Unauthorized/Unauthorized';
+import ActivePage from './pages/ActivePage/ActivePage';
 function FitFoodApp() {
   return (
     <ErrorBoundaryComponent>
@@ -30,14 +31,13 @@ function FitFoodAppRoutes() {
         <Route path='/ve-chung-toi' element={<CalorieCaculatorPage />} />
         <Route path='/dang-nhap' element={<Login />} />
         <Route path='/dang-ky' element={<Register />} />
-
         {/* private route */}
         <Route element={<PrivateRoute />}>
           <Route path='/doi-mat-khau' element={<ChangePassword />} />
           <Route path='/thong-tin-ca-nhan' element={<AccountInformation />} />
           <Route path='/unauthorized' element={<Unauthorized />} />
         </Route>
-        <Route element={<PrivateRoute requiredAdmin />}>
+        <Route element={<PrivateRoute requiredRole={['Admin']} />}>
           <Route path='/admin' element={<Admin />} />
         </Route>
       </Route>

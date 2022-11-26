@@ -3,8 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   data: {
     username: null,
-    isAdmin: null,
-    accessToken: null
+    role: null,
+    accessToken: null,
+    isActive: null
   }
 };
 const authSlide = createSlice({
@@ -16,11 +17,12 @@ const authSlide = createSlice({
       reducer(state, action) {
         state.data = action.payload;
       },
-      prepare(username, isAdmin, accessToken) {
+      prepare(username, isActive, role, accessToken) {
         return {
           payload: {
             username,
-            isAdmin,
+            isActive,
+            role,
             accessToken
           }
         };
@@ -28,12 +30,15 @@ const authSlide = createSlice({
     },
     logOut: (state, action) => {
       state.data = initialState.data;
+    },
+    setActiveUser: (state, action) => {
+      state.data.isActive = action.payload;
     }
   }
 });
 export const selectCurrentToken = (state) => state.auth.data.accessToken;
 export const selectCurrentAuth = (state) => state.auth.data;
 
-export const { setCredentials, logOut } = authSlide.actions;
+export const { setCredentials, logOut, setActiveUser } = authSlide.actions;
 
 export default authSlide.reducer;

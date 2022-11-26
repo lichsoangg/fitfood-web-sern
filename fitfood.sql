@@ -1,16 +1,17 @@
-CREATE DATABASE fitfood;
+ CREATE DATABASE fitfood;
 
 USE fitfood;
 
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 flush privileges;
 
+ 
 -- Table User
 CREATE TABLE user(
-	ID int NOT NULL AUTO_INCREMENT,
 	Username varchar(100) NOT NULL,
     Password varchar(255) NOT NULL,
   	Role varchar(20) NOT NULL,
+    IsActive Boolean DEFAULT 0,
 	CONSTRAINT PK_User_ID PRIMARY KEY(ID)
 );	
 
@@ -28,14 +29,13 @@ CREATE TABLE customer(
     Ward varchar(10) NOT NULL,
     Address varchar(255) NOT NULL,
     Avatar varchar(255),
-	UserID int NOT NULL,
+	Username varchar(100) NOT NULL,
 	CONSTRAINT CK_Customer_PhoneNumber UNIQUE(PhoneNumber),
 	CONSTRAINT CK_Customer_Gender CHECK(Gender=0 OR Gender=1),
-    CONSTRAINT CK_Customer_UserID UNIQUE(UserID),
+    CONSTRAINT CK_Customer_Username UNIQUE(Username),
     CONSTRAINT PK_Customer_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_Customer_Username FOREIGN KEY(UserID) REFERENCES User(ID)
+    CONSTRAINT FK_Customer_Username FOREIGN KEY(Username) REFERENCES User(Username)
 );
-
 
 -- Table Employee
 CREATE TABLE employee(
@@ -49,13 +49,13 @@ CREATE TABLE employee(
     Ward varchar(10),
     Address varchar(255) NOT NULL,
 	Avatar varchar(255),
-	UserID int NOT NULL,
+	Username varchar(100) NOT NULL,
 
 	CONSTRAINT CK_Employee_PhoneNumber UNIQUE(PhoneNumber),
 	CONSTRAINT CK_Employee_Gender CHECK(Gender=0 OR Gender=1),
-    CONSTRAINT CK_Employee_UserID UNIQUE(UserID),
+    CONSTRAINT CK_Employee_Username UNIQUE(Username),
     CONSTRAINT PK_Employee_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_Employee_User FOREIGN KEY(UserID) REFERENCES User(ID)
+    CONSTRAINT FK_Employee_User FOREIGN KEY(Username) REFERENCES User(Username)
 );
 
 -- Table Provider
@@ -159,19 +159,16 @@ DELIMITER //
 CREATE PROCEDURE InsertCustomerUser(IN Username varchar(100), IN Password varchar(255), IN Name varchar(100),
 IN DayofBirth date, IN PhoneNumber varchar(10), IN Gender int, IN Province varchar(10), IN District varchar(10),IN Ward varchar(10),IN Address varchar(255)) 
 BEGIN
-DECLARE Last_User_ID INT DEFAULT 0;
 DECLARE EXIT HANDLER FOR SQLEXCEPTION 
     BEGIN
           ROLLBACK;
           RESIGNAL;
     END;
 START TRANSACTION;
-
 INSERT INTO User (`username`,`password`,`Role`)
-VALUES (Username,Password,'Customer');
-SELECT Max(ID) INTO Last_User_ID From User;
-INSERT INTO Customer (`Name`,`DayOfBirth`,`PhoneNumber`,`Gender`,`Province`,`District`,`Ward`,`Address`,`UserID`)
-VALUES (Name,DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Last_User_ID);
+VALUES (Username,Password,'Khách hàng');
+INSERT INTO Customer (`Name`,`DayOfBirth`,`PhoneNumber`,`Gender`,`Province`,`District`,`Ward`,`Address`,`Username`)
+VALUES (Name,DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Username);
 COMMIT;
 END
 //
@@ -197,34 +194,33 @@ COMMIT;
 END
 //
 DELIMITER ;
-Call InsertEmployeeUser('taikhoan4','Tài khoản 3 nè','2001-11-14','0333521474',1,'79','773','27283','Ho Chi Minh 2','','Gì đó');
+Call InsertEmployeeUser('taikhoan1','Tài khoản 1 ne','2001-11-14','0333333301',1,'79','773','27283','Ho Chi Minh 2','','Admin');
 
 select * from user;
 
 
+SELECT ID, Employee.Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username LIMIT 1,10
 
-
-SELECT COALESCE(max(id),0) FROM Employee Where Name='Tài khoản 3 nè';
 -- get info user
 DELIMITER //
-CREATE PROCEDURE GetInfoUser(IN Username varchar(100)) 
+CREATE PROCEDURE GetInfoUser(IN UsernameInput varchar(100)) 
 BEGIN
 If EXISTS (SELECT 1 FROM Customer WHERE Customer.Username=Username) THEN 
-SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,Username FROM Customer WHERE Customer.Username=Username; END IF;
+SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,Username,Role,IsActive FROM Customer INNER JOIN User ON Customer.Username=User.Username WHERE Customer.Username=UsernameInput; END IF;
 
 If EXISTS (SELECT 1 FROM Employee WHERE Employee.Username=Username) THEN 
-SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,Username FROM Employee WHERE Employee.Username=Username; END IF;
+SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,Username,Role,IsActive FROM Employee INNER JOIN User ON Employee.Username=User.Username  WHERE Employee.Username=UsernameInput; END IF;
 
 END
 //
 DELIMITER ;
 
-
+drop procedure GetInfoUser
 
 select * from user;
 select * from customer;
+select * from employee;
 
 
-
-;
+SELECT ID, Employee.Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username;
 
