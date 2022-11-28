@@ -12,12 +12,17 @@ import AddressForm from '../../pages/Register/AddressForm/AddressForm';
 import InformationForm from '../../pages/Register/InformationForm/InformationForm';
 
 import { selectCurrentToken, setCredentials } from './authSlice';
-import { useAddNewCustomerMutation, useCheckPhoneNumberMutation, useCheckUsernameMutation, useSendVerifyEmailMutation } from './authApi';
+import {
+  useAddNewCustomerMutation,
+  useCheckPhoneNumberMutation,
+  useCheckUsernameMutation,
+  useSendVerifyEmailMutation
+} from './authApi';
 import Error from '../../components/Error/Error';
 
 const schema = yup
   .object({
-    username: yup.string().required('Email là bắt buộc').email("Email không đúng định dạng"),
+    username: yup.string().required('Email là bắt buộc').email('Email không đúng định dạng'),
     password: yup.string().required('Mật khẩu là bắt buộc').min(6, 'Mật khẩu tối thiểu là 6 kí tự'),
     confirmPassword: yup
       .string()

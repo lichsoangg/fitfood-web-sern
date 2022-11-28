@@ -57,23 +57,21 @@ export default function AccountUpdate() {
 
   //handle submit save update account
   const onSubmit = async (data) => {
+    const { ID, IsActive, Role, ...dataSubmit } = data;
     let isValid = true;
-    try {
-      await checkPhoneNumber({ phoneNumber: data.PhoneNumber, username: data.Username })
-        .unwrap()
-        .catch((err) => {
-          if (err.status === 409) {
-            isValid = false;
-            setError('PhoneNumber', { type: 'custom', message: 'Số điện thoại đã tồn tại' });
-          }
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    await checkPhoneNumber({ phoneNumber: data.PhoneNumber, username: data.Username })
+      .unwrap()
+      .catch((err) => {
+        if (err.status === 409) {
+          isValid = false;
+          setError('PhoneNumber', { type: 'custom', message: 'Số điện thoại đã tồn tại' });
+        }
+      });
+
     if (isValid) {
       let formData = new FormData();
-      for (const key in data) {
-        formData.append(key, data[key]);
+      for (const key in dataSubmit) {
+        formData.append(key, dataSubmit[key]);
       }
       if (fileAvatar) {
         formData.append('CustomerAvatar', fileAvatar);

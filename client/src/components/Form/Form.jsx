@@ -102,22 +102,32 @@ InputDate.propTypes = {
 Form.InputDate = React.memo(InputDate);
 
 function InputNumberVerify({ maxLength, name }) {
-  const { register, formState: { errors } } = useFormContext();
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext();
   const handleInputKeyUp = (e) => {
     const keyCode = e.keyCode;
     if (keyCode === 8 || keyCode === 37) {
-      if (e.target?.previousSibling?.className === "formInputNumberVerify") {
+      if (e.target?.previousSibling?.className === 'formInputNumberVerify') {
         e.target.previousSibling.focus();
       }
     }
     if (e.target.value.length === maxLength || keyCode === 39) {
-      if (e.target?.nextSibling?.className === "formInputNumberVerify") {
+      if (e.target?.nextSibling?.className === 'formInputNumberVerify') {
         e.target.nextSibling.focus();
       }
     }
   };
   return (
-    <input type="text" maxLength={maxLength} className="formInputNumberVerify" style={{ width: `${50 + maxLength * 8}px`, border: `${errors[name] ? '0.8px solid red' : ''}` }} onKeyUp={handleInputKeyUp} {...register(name)} />
+    <input
+      type='text'
+      maxLength={maxLength}
+      className='formInputNumberVerify'
+      style={{ width: `${50 + maxLength * 8}px`, border: `${errors[name] ? '0.8px solid red' : ''}` }}
+      onKeyUp={handleInputKeyUp}
+      {...register(name)}
+    />
   );
 }
 Form.InputNumberVerify = InputNumberVerify;
@@ -168,9 +178,9 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
           style={
             trigger
               ? {
-                opacity: `${getValues(trigger) ? 1 : 0.4}`,
-                border: `${errors[name] ? '0.8px solid red' : ''}`
-              }
+                  opacity: `${getValues(trigger) ? 1 : 0.4}`,
+                  border: `${errors[name] ? '0.8px solid red' : ''}`
+                }
               : { border: `${errors[name] ? '0.8px solid red' : ''}` }
           }
         />
@@ -227,7 +237,6 @@ function ForgotPasswordText() {
 }
 Form.ForgotPasswordText = React.memo(ForgotPasswordText);
 
-
 // ------------------------------- SubmitButton ----------------------------------
 function SubmitButton({ text, isLoading, styleButton }) {
   const textButton = isLoading ? '' : text;
@@ -271,5 +280,3 @@ GroupButton.propTypes = {
 };
 
 Form.GroupButton = React.memo(GroupButton);
-
-

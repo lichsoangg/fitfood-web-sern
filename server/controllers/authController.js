@@ -134,7 +134,7 @@ const authController = {
 
     }
     else {
-      return res.status(401).json({ status: 401, message: "Mã xác thực không đúng" });
+      return res.status(400).json({ status: 400, message: "Mã xác thực không đúng" });
 
     }
   },

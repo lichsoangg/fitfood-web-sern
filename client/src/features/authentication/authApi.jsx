@@ -52,7 +52,7 @@ export const registerAPI = apiSlice.injectEndpoints({
     sendVerifyEmail: builder.mutation({
       query: () => ({
         url: '/auth/send-email-verify',
-        method: 'POST',
+        method: 'POST'
       })
     })
   })

@@ -24,10 +24,11 @@ const userController = {
         try {
             User.getUserInfo(req.user.Username, (err, data) => {
                 if (!err) {
-                    if (data[0][0]?.Avatar) {
-                        data[0][0].Avatar = `${process.env.IMAGE_DATA_URL}/${data[0][0].Avatar}`;
+                    let avatar = data[0][0]?.Avatar;
+                    if (avatar) {
+                        avatar = `${process.env.IMAGE_DATA_URL}/${data[0][0]?.Avatar}`;
                     }
-                    res.status(200).json(data[0][0]);
+                    res.status(200).json({ ...data[0][0], Avatar: avatar });
                 } else {
                     const err = new Error("Yêu cầu không hợp lệ");
                     err.status = 400;

@@ -13,7 +13,7 @@ import { useLoginMutation } from './authApi';
 
 const schema = yup
   .object({
-    username: yup.string().required('Email là bắt buộc').email("Email không đúng định dạng"),
+    username: yup.string().required('Email là bắt buộc').email('Email không đúng định dạng'),
     password: yup.string().required('Mật khẩu là bắt buộc')
   })
   .required();
