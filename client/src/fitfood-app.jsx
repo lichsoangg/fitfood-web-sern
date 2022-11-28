@@ -1,16 +1,16 @@
-import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage/HomePage';
-import CalorieCaculatorPage from './pages/CalorieCaculatorPage/CalorieCaculatorPage';
+import { Route, Routes } from 'react-router-dom';
+import ErrorBoundaryComponent from './components/ErrorComponent/ErrorComponent';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import MainLayout from './layouts/MainLayout/MainLayout';
+import AccountInformation from './pages/Account/AccountInformation/AccountInformation';
+import ChangePassword from './pages/Account/ChangePassword/ChangePassword';
+import Admin from './pages/Admin/Admin';
+import CalorieCaculatorPage from './pages/CalorieCaculatorPage/CalorieCaculatorPage';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import HomePage from './pages/HomePage/HomePage';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-import ErrorBoundaryComponent from './components/ErrorComponent/ErrorComponent';
-import ChangePassword from './pages/Account/ChangePassword/ChangePassword';
-import AccountInformation from './pages/Account/AccountInformation/AccountInformation';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import Admin from './pages/Admin/Admin';
 import Unauthorized from './pages/Unauthorized/Unauthorized';
-import ActivePage from './pages/ActivePage/ActivePage';
 function FitFoodApp() {
   return (
     <ErrorBoundaryComponent>
@@ -31,6 +31,8 @@ function FitFoodAppRoutes() {
         <Route path='/ve-chung-toi' element={<CalorieCaculatorPage />} />
         <Route path='/dang-nhap' element={<Login />} />
         <Route path='/dang-ky' element={<Register />} />
+        <Route path='/quen-mat-khau' element={<ForgotPassword />} />
+
         {/* private route */}
         <Route element={<PrivateRoute />}>
           <Route path='/doi-mat-khau' element={<ChangePassword />} />

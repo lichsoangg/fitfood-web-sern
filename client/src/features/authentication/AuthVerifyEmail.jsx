@@ -1,14 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { isSchema } from 'yup';
-import Form from '../../components/Form/Form';
-import { useSendVerifyEmailMutation, useVerifyEmailMutation } from './authApi';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import Error from '../../components/Error/Error';
+import Form from '../../components/Form/Form';
 import Loading from '../../components/Loading/Loading';
 import { SuccessNotify } from '../../components/Notify/Notify';
-import { useDispatch } from 'react-redux';
+import { useSendVerifyEmailMutation, useVerifyEmailMutation } from './authApi';
 import { setActiveUser } from './authSlice';
 
 const schema = yup

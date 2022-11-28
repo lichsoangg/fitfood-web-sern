@@ -160,7 +160,7 @@ const authController = {
       to: username,
       subject: 'Xác thực tài khoản Fitfood',
       text: 'Fitfood gửi đến bạn mã code xác thực',
-      html: stringVerifyEmailTemplate(randomNumber),
+      html: stringVerifyEmailTemplate("Fitfood Company","Xác thực Email","Mã xác thực là","Mã xác thực có thời hạn trong vòng 10 phút.",randomNumber),
     };
     transporter.sendMail(mainOptions, function (err, info) {
       if (err) {
@@ -169,7 +169,59 @@ const authController = {
         return res.status(200).json({ status: 200, message: "Gửi Email thành công!" });
       }
     });
-  }
+  },
+   // Reset Password
+   resetPassword: (req, res, next) => {
+    const { Username } = req.body;
+    const randomNumber = Math.floor(Math.random() * 899999 + 100000);
+    //transporter config mail server
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        secure: false,
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASSWORD,
+        },
+    });
+    var mainOptions = {
+        from: 'Fitfood Company',
+        to: Username,
+        subject: 'Khôi phục mật khẩu Fitfood',
+        text: 'Fitfood gửi đến mật khẩu đã được khôi phục',
+        html: stringVerifyEmailTemplate("Fitfood Company", "Khôi phục mật khẩu", "Mật khẩu mới là", "Vui lòng không cung cấp mật khẩu cho bất cứ ai!.", randomNumber),
+    };
+
+    User.getUserWithName(Username, async (err, data) => {
+        if (!err) {
+            if (data.length > 0) {
+                const salt = await bcrypt.genSalt(10);
+                const passwordHashed = await bcrypt.hash(randomNumber.toString(), salt);
+                User.updatePassword({ Username, passwordHashed }, (err, data) => {
+                    if (!err) {
+                        transporter.sendMail(mainOptions, function (err, info) {
+                            if (!err) {
+                                return res.status(200).json({ status: 200, message: "Khôi phục mật khẩu thành công.Bạn vui lòng kiểm tra Email" });
+                            } else {
+                                return res.status(400).json({ status: 400, message: err.message });
+
+                            }
+                        });
+                    }
+                    else {
+                        return res.status(400).json({ status: 400, message: err.message });
+                    }
+                });
+            }
+            else {
+                return res.status(400).json({ status: 400, message: "Email chưa được đăng ký" });
+            }
+        }
+        else {
+            return res.status(400).json({ status: 400, message: err.message });
+        }
+    });
+}
 };
 
 module.exports = authController;

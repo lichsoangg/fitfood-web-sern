@@ -1,6 +1,9 @@
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const e = require("express");
+const nodemailer = require('nodemailer');
+const stringVerifyEmailTemplate = require("../utils/stringEmailTemplate");
+
 const userController = {
     //Get all users
     getAllUsers: (req, res, next) => {
@@ -56,20 +59,20 @@ const userController = {
                             if (!err) {
                                 return res.status(200).json({ status: 200, message: "Đổi mật khẩu thành công" });
                             } else {
-                                return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
+                                return res.status(400).json({ status: 400, message: "Yêu cầu không hợp lệ" });
                             }
                         });
 
                     }
                 } else {
-                    return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
+                    return res.status(400).json({ status: 400, message: "Yêu cầu không hợp lệ" });
                 }
             });
         } catch (err) {
             next(err);
         }
     },
-
+   
 
 
 };

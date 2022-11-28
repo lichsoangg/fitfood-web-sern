@@ -1,25 +1,24 @@
-import React from 'react';
-import './Form.scss';
-import { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { useForm, useFormContext } from 'react-hook-form';
-import showPasswordIcon from '../../assets/icons/showPassword.png';
-import hidePasswordIcon from '../../assets/icons/hidePassword.png';
 import dateIcon from '../../assets/icons/calendar.png';
 import downIcon from '../../assets/icons/down.png';
-import Error from '../Error/Error';
-import PropTypes from 'prop-types';
-import { useModal } from '../../hooks/useModal';
+import hidePasswordIcon from '../../assets/icons/hidePassword.png';
+import showPasswordIcon from '../../assets/icons/showPassword.png';
 import { useDisableClick } from '../../hooks/useDisableClick';
+import { useModal } from '../../hooks/useModal';
 import { AcceptButton, CancelButton } from '../Buttons/Buttons';
 import DropdownBase from '../DropdownBase/DropdownBase';
+import Error from '../Error/Error';
+import './Form.scss';
 
 const Form = () => {
   return null;
 };
 export default Form;
 // ------------------------------- Input ----------------------------------
-function Input({ placeHolder, type, icon, name, ...rest }) {
+function Input({ placeHolder, styleInput, type, icon, name, ...rest }) {
   const {
     register,
     formState: { errors }
@@ -34,7 +33,7 @@ function Input({ placeHolder, type, icon, name, ...rest }) {
         type={show ? 'text' : 'password'}
         className='formInput__input'
         placeholder=' '
-        style={{ border: `${errors[name] ? '0.8px solid red' : ''}` }}
+        style={{ ...styleInput, border: `${errors[name] ? '0.8px solid red' : ''}` }}
         autoComplete='off'
         {...rest}
         {...register(name)}
@@ -57,7 +56,7 @@ function Input({ placeHolder, type, icon, name, ...rest }) {
   );
 }
 Input.propTypes = {
-  placeHolder: PropTypes.string.isRequired,
+  placeHolder: PropTypes.string,
   type: PropTypes.string,
   icon: PropTypes.string,
   name: PropTypes.string.isRequired
@@ -231,7 +230,7 @@ Form.Dropdown = React.memo(Dropdown);
 function ForgotPasswordText() {
   return (
     <div className='formForgotPasswordText'>
-      <Link>Quên mật khẩu?</Link>
+      <Link to="/quen-mat-khau">Quên mật khẩu?</Link>
     </div>
   );
 }

@@ -18,12 +18,17 @@ const schema = yup
   })
   .required();
 
+const initialData={
+  password:'',
+  newPassword:'',
+  confirmNewPassword:'',
+}
 export default function AccountChangePassword() {
   //react-hook-form
   const methods = useForm({
     resolver: yupResolver(schema)
   });
-  const { handleSubmit, setError } = methods;
+  const { handleSubmit, reset, setError } = methods;
 
   const [changePassword, { isLoading, error }] = useChangePasswordMutation();
   const onSubmit = async (data) => {
@@ -34,6 +39,7 @@ export default function AccountChangePassword() {
     }
     if (response?.data?.status === 200) {
       SuccessNotify(response.data.message);
+      reset(initialData);
     }
   };
 

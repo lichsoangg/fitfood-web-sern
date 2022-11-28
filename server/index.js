@@ -23,6 +23,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/images", express.static(__dirname + process.env.IMAGE_ENDPOINT_URL));
+
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/customer", customerRoute);

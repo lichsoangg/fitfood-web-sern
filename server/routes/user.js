@@ -10,4 +10,5 @@ router.get("/getusers", middlewareController.verifyToken, userController.getAllU
 router.get("/me", middlewareController.verifyToken, userController.getMe); 
 router.post("/updatepassword",middlewareController.verifyToken,userController.updatePassword);
 
+
 module.exports = router;

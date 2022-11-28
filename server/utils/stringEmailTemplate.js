@@ -1,4 +1,4 @@
-const stringVerifyEmailTemplate = (randomNumber) => {
+const stringVerifyEmailTemplate = (company,title,name,description, randomNumber) => {
   return `
      <body bgcolor="#E1E1E1" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
   <center style="background-color:#E1E1E1;">
@@ -52,8 +52,8 @@ const stringVerifyEmailTemplate = (randomNumber) => {
                             <table border="0" cellpadding="30" cellspacing="0" width="100%">
                               <tr>
                                 <td align="center" valign="top" class="textContent">
-                                  <h1 style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:35px;font-weight:normal;margin-bottom:5px;text-align:center;"> Fitfood Company</h1>
-                                  <h2 style="text-align:center;font-weight:normal;font-family:Helvetica,Arial,sans-serif;font-size:23px;margin-bottom:10px;color:#FFFFFF;line-height:135%;">Xác thực Email</h2>
+                                  <h1 style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:35px;font-weight:normal;margin-bottom:5px;text-align:center;">${company}</h1>
+                                  <h2 style="text-align:center;font-weight:normal;font-family:Helvetica,Arial,sans-serif;font-size:23px;margin-bottom:10px;color:#FFFFFF;line-height:135%;">${title}</h2>
                                 </td>
                               </tr>
                             </table>
@@ -79,9 +79,9 @@ const stringVerifyEmailTemplate = (randomNumber) => {
                                   <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
                                       <td valign="top" class="textContent">
-                                        <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Mã xác thực là:</h3>
+                                        <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">${name}</h3>
                                         <h3 style="color:#000;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:40px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:center;">${randomNumber}</h3>
-                                        <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;margin-top:3px;color:#5F5F5F;line-height:135%;">Mã xác thực có thời hạn trong vòng 10 phút.</div>
+                                        <div style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;margin-top:3px;color:#5F5F5F;line-height:135%;">${description}</div>
                                       </td>
                                     </tr>
                                     <tr>

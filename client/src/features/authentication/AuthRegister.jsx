@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -11,14 +10,14 @@ import AccountForm from '../../pages/Register/AccountForm/AccountForm';
 import AddressForm from '../../pages/Register/AddressForm/AddressForm';
 import InformationForm from '../../pages/Register/InformationForm/InformationForm';
 
-import { selectCurrentToken, setCredentials } from './authSlice';
+import Error from '../../components/Error/Error';
 import {
   useAddNewCustomerMutation,
   useCheckPhoneNumberMutation,
   useCheckUsernameMutation,
   useSendVerifyEmailMutation
 } from './authApi';
-import Error from '../../components/Error/Error';
+import { selectCurrentToken, setCredentials } from './authSlice';
 
 const schema = yup
   .object({
@@ -68,9 +67,10 @@ export default function AuthRegister() {
   const token = useSelector(selectCurrentToken);
   useEffect(() => {
     if (token) {
-      navigate(location?.state?.from?.pathname || '/thong-tin-ca-nhan', { replace: true });
+      const previousPathname = location?.state?.from?.pathname;
+      navigate(previousPathname || '/thong-tin-ca-nhan', { replace: true });
     }
-  }, [token, navigate]);
+  }, [token, navigate, location?.state?.from?.pathname]);
 
   //Handle submit form
   const onSubmit = async (e) => {

@@ -21,7 +21,6 @@ const customerController = {
         }
       });
       data["Avatar"] = req.file.filename;
-
     }
     try {
       Customer.updateCustomer(data, username, (err, data) => {

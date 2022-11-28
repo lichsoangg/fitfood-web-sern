@@ -54,6 +54,13 @@ export const registerAPI = apiSlice.injectEndpoints({
         url: '/auth/send-email-verify',
         method: 'POST'
       })
+    }),
+    resetPassword: builder.mutation({
+      query:(data)=>({
+        url:'/auth/reset-password',
+        method:'POST',
+        body: data,
+      })
     })
   })
 });
@@ -65,5 +72,6 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useVerifyEmailMutation,
-  useSendVerifyEmailMutation
+  useSendVerifyEmailMutation,
+  useResetPasswordMutation,
 } = registerAPI;
