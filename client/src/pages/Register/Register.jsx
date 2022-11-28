@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ErrorBoundaryComponent from '../../components/ErrorComponent/ErrorComponent';
+import path from '../../constants/path';
 import AuthRegister from '../../features/authentication/AuthRegister';
 import './Register.scss';
 
@@ -12,7 +13,7 @@ export default function Register() {
         <h3 className='register__header'>Tạo tài khoản Fitfood</h3>
         <div className='register__description body4'>
           Bạn đã có tài khoản?{' '}
-          <Link to='/dang-nhap' state={location.state}>
+          <Link to={path.login} state={location.state}>
             Đăng nhập tại đây
           </Link>
         </div>

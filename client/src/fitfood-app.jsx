@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import ErrorBoundaryComponent from './components/ErrorComponent/ErrorComponent';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import path from './constants/path';
 import MainLayout from './layouts/MainLayout/MainLayout';
 import AccountInformation from './pages/Account/AccountInformation/AccountInformation';
 import ChangePassword from './pages/Account/ChangePassword/ChangePassword';
@@ -22,25 +23,25 @@ function FitFoodApp() {
 function FitFoodAppRoutes() {
   return (
     <Routes>
-      <Route path='/' element={<MainLayout />}>
+      <Route path={path.home} element={<MainLayout />}>
         {/* public route */}
         <Route index element={<HomePage />} />
-        <Route path='/tinh-calo' element={<CalorieCaculatorPage />} />
-        <Route path='/thuc-don' element={<CalorieCaculatorPage />} />
-        <Route path='/faqs' element={<CalorieCaculatorPage />} />
-        <Route path='/ve-chung-toi' element={<CalorieCaculatorPage />} />
-        <Route path='/dang-nhap' element={<Login />} />
-        <Route path='/dang-ky' element={<Register />} />
-        <Route path='/quen-mat-khau' element={<ForgotPassword />} />
+        <Route path={path.calorieCaculator} element={<CalorieCaculatorPage />} />
+        <Route path={path.menu} element={<CalorieCaculatorPage />} />
+        <Route path={path.faqs} element={<CalorieCaculatorPage />} />
+        <Route path={path.about} element={<CalorieCaculatorPage />} />
+        <Route path={path.login} element={<Login />} />
+        <Route path={path.register} element={<Register />} />
+        <Route path={path.forgotPassword} element={<ForgotPassword />} />
 
         {/* private route */}
         <Route element={<PrivateRoute />}>
-          <Route path='/doi-mat-khau' element={<ChangePassword />} />
-          <Route path='/thong-tin-ca-nhan' element={<AccountInformation />} />
-          <Route path='/unauthorized' element={<Unauthorized />} />
+          <Route path={path.changePassword} element={<ChangePassword />} />
+          <Route path={path.accountInfo} element={<AccountInformation />} />
+          <Route path={path.unauthorized} element={<Unauthorized />} />
         </Route>
         <Route element={<PrivateRoute requiredRole={['Admin']} />}>
-          <Route path='/admin' element={<Admin />} />
+          <Route path={path.admin} element={<Admin />} />
         </Route>
       </Route>
     </Routes>

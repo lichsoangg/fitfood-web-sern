@@ -18,6 +18,7 @@ import {
   useSendVerifyEmailMutation
 } from './authApi';
 import { selectCurrentToken, setCredentials } from './authSlice';
+import path from '../../constants/path';
 
 const schema = yup
   .object({
@@ -68,7 +69,7 @@ export default function AuthRegister() {
   useEffect(() => {
     if (token) {
       const previousPathname = location?.state?.from?.pathname;
-      navigate(previousPathname || '/thong-tin-ca-nhan', { replace: true });
+      navigate(previousPathname || path.accountInfo, { replace: true });
     }
   }, [token, navigate, location?.state?.from?.pathname]);
 

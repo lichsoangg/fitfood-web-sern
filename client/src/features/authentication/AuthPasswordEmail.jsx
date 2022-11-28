@@ -7,6 +7,7 @@ import Error from '../../components/Error/Error';
 import Form from '../../components/Form/Form';
 import Loading from '../../components/Loading/Loading';
 import { SuccessNotify } from '../../components/Notify/Notify';
+import path from '../../constants/path';
 import { useResetPasswordMutation } from './authApi';
 
 
@@ -23,7 +24,7 @@ export default function AuthPasswordEmail() {
       const response = await resetPassword(data).unwrap();
       if(response?.status===200){
         SuccessNotify(response?.message, 5000);
-        navigate("/dang-nhap")
+        navigate(path.login)
       }
   }
   return (
@@ -33,7 +34,6 @@ export default function AuthPasswordEmail() {
           {errorResetPassword && <Error errorMessage={errorResetPassword.data.message}></Error>}
           <Form.SubmitButton text="Khôi phục mật khẩu" styleButton = {{ marginTop:"40px" }} isLoading = {isResetPasswordLoading}/>
       </form>
-      {isResetPasswordLoading && <Loading size={3} full />}
     </FormProvider>
   )
 }

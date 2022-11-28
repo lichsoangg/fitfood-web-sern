@@ -6,6 +6,7 @@ import dateIcon from '../../assets/icons/calendar.png';
 import downIcon from '../../assets/icons/down.png';
 import hidePasswordIcon from '../../assets/icons/hidePassword.png';
 import showPasswordIcon from '../../assets/icons/showPassword.png';
+import path from '../../constants/path';
 import { useDisableClick } from '../../hooks/useDisableClick';
 import { useModal } from '../../hooks/useModal';
 import { AcceptButton, CancelButton } from '../Buttons/Buttons';
@@ -230,7 +231,7 @@ Form.Dropdown = React.memo(Dropdown);
 function ForgotPasswordText() {
   return (
     <div className='formForgotPasswordText'>
-      <Link to="/quen-mat-khau">Quên mật khẩu?</Link>
+      <Link to={path.forgotPassword}>Quên mật khẩu?</Link>
     </div>
   );
 }

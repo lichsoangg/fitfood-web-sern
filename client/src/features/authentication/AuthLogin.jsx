@@ -10,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Error from '../../components/Error/Error';
 import UsernameIcon from '../../assets/icons/username.png';
 import { useLoginMutation } from './authApi';
+import path from '../../constants/path';
 
 const schema = yup
   .object({
@@ -34,7 +35,7 @@ export default function AuthLogin() {
   const token = useSelector(selectCurrentToken);
   useEffect(() => {
     if (token) {
-      navigate(location?.state?.from?.pathname || '/', { replace: true });
+      navigate(location?.state?.from?.pathname || path.home, { replace: true });
     }
   }, [token, navigate, location]);
   //handle submit login

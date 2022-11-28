@@ -11,6 +11,7 @@ import { useLogoutMutation } from '../authentication/authApi';
 import Loading from '../../components/Loading/Loading';
 import { BoxShadowButton } from '../../components/Buttons/Buttons';
 import DropdownBase from '../../components/DropdownBase/DropdownBase';
+import path from '../../constants/path';
 
 export default function AccountDropdown() {
   const { accessToken: token, role } = useSelector(selectCurrentAuth);
@@ -22,7 +23,7 @@ export default function AccountDropdown() {
   const handleClickLogout = async () => {
     await logout().unwrap();
     dispatch(logOut());
-    navigate('/dang-nhap');
+    navigate(path.login);
   };
   let avatar = user?.Avatar ? user?.Avatar : user?.Gender === 0 ? manAvatar : womanAvatar;
 
@@ -38,9 +39,9 @@ export default function AccountDropdown() {
               <ul className='layout__function--user-modal' ref={modalRef} onClick={() => setOpen(false)}>
                 <li>{user?.Name}</li>
                 <hr />
-                {role !== `Khách hàng` ? <Link to='/admin'>Trang Admin </Link> : <></>}
-                <Link to='/thong-tin-ca-nhan'>Thông tin cá nhân </Link>
-                <Link to='/doi-mat-khau'>Đổi mật khẩu </Link>
+                {role !== `Khách hàng` ? <Link to={path.admin}>Trang Admin </Link> : <></>}
+                <Link to={path.accountInfo}>Thông tin cá nhân </Link>
+                <Link to={path.changePassword}>Đổi mật khẩu </Link>
                 <hr />
                 <li onClick={handleClickLogout}>Đăng xuất</li>
               </ul>
@@ -48,7 +49,7 @@ export default function AccountDropdown() {
           )}
         </>
       ) : (
-        <Link to='/dang-nhap'>
+        <Link to={path.login}>
           <BoxShadowButton>Đăng nhập</BoxShadowButton>
         </Link>
       )}

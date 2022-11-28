@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ForgotPasswordImage from '../../assets/images/forgot_password.png';
+import path from '../../constants/path';
 import AuthPasswordEmail from '../../features/authentication/AuthPasswordEmail';
 import { selectCurrentToken } from '../../features/authentication/authSlice';
 import "./ForgotPassword.scss";
@@ -13,7 +14,7 @@ export default function ForgotPassword() {
 
   useEffect(() => {
     if (token) {
-      navigate('/');
+      navigate(path.home);
     }
   }, [token, navigate, location]);
   return (

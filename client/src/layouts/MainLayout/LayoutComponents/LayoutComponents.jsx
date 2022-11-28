@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '../../../assets/images/logo.png';
+import path from '../../../constants/path';
 import AccountDropdown from '../../../features/account/AccountDropdown';
 import './LayoutComponents.scss';
 export default function LayoutComponents() {
@@ -9,7 +10,7 @@ export default function LayoutComponents() {
 
 function Logo() {
   return (
-    <Link to='/'>
+    <Link to={path.home}>
       <div className='layout__logo'>
         <div className='layout__logo--image'>
           <img src={logo} alt='Fitfood logo' />
@@ -39,19 +40,19 @@ function Menu() {
   }, [location]);
   return (
     <ul className='layout__menu body4'>
-      <NavLink to='/' className='layout__menu--item' end>
+      <NavLink to={path.home} className='layout__menu--item' end>
         Trang chủ
       </NavLink>
-      <NavLink to='/tinh-calo' className='layout__menu--item'>
+      <NavLink to={path.calorieCaculator} className='layout__menu--item'>
         Tính calo
       </NavLink>
-      <NavLink to='/thuc-don' className='layout__menu--item'>
+      <NavLink to={path.menu} className='layout__menu--item'>
         Thực đơn
       </NavLink>
-      <NavLink to='/faqs' className='layout__menu--item'>
+      <NavLink to={path.faqs} className='layout__menu--item'>
         FAQs
       </NavLink>
-      <NavLink to='/ve-chung-toi' className='layout__menu--item'>
+      <NavLink to={path.about} className='layout__menu--item'>
         Về chúng tôi
       </NavLink>
       <div
