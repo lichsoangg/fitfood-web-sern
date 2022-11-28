@@ -1,8 +1,9 @@
 @import '../../scss/import.scss';
+
 .mainLayout {
   &__outlet {
     margin-top: 40px;
-    height: calc(100vh - 420px);
+    min-height: calc(100vh - 336px);
     @include flexMid(center);
   }
 }

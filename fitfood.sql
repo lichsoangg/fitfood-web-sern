@@ -217,6 +217,7 @@ DELIMITER ;
 
 drop procedure GetInfoUser;
 
+
 select * from user;
 select * from customer;
 select * from employee;

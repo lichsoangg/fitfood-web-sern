@@ -5,12 +5,12 @@
   border-top: 0.5px solid;
 
   .mainWrapper {
-    padding: 60px 40px 40px;
+    padding: 20px 40px 20px;
     width: 100%;
     height: max-content;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
 
     .footer__top {
       @include flexMid(space-between);
