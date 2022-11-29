@@ -24,8 +24,8 @@ export default function ForgotPassword() {
         </div>
         <h2 className='forgotPassword__title'>Khôi phục mật khẩu</h2>
         <span className='forgotPassword__description'>
-        Nhập Email để khôi phục mật khẩu 
-      </span>
+          Nhập Email để khôi phục mật khẩu 
+        </span>
       <AuthPasswordEmail/>
     </div>
   )

@@ -1,5 +1,7 @@
-import React from 'react';
-
+import { Outlet } from 'react-router-dom';
+import "./Admin.scss"
 export default function Admin() {
-  return <div>Admin</div>;
+  return <div>
+    <Outlet/>
+  </div>;
 }
