@@ -14,6 +14,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Error from '../../components/Error/Error';
 import { useCheckPhoneNumberMutation } from '../authentication/authApi';
+import { useUpdateEmployeeMutation } from '../employees/employeesApi';
 const dataGender = [
   { id: 0, value: 'Nam' },
   { id: 1, value: 'Nữ' }
@@ -51,13 +52,15 @@ export default function AccountUpdate() {
   const { data: wards, isFetching: wardsLoading } = useGetWardsQuery(watch('District'), {
     skip: !watch('District')
   });
-  const [updateAccount, { isLoading: isUpdateLoading, error: errorUpdateAccount }] = useUpdateAccountMutation();
+  const [updateAccount, { isLoading: isUpdateAccountLoading, error: errorUpdateAccount }] = useUpdateAccountMutation();
+  const [updateEmployee, { isLoading: isUpdateEmployeeLoading, error: errorUpdateEmployee }] =
+    useUpdateEmployeeMutation();
   const [checkPhoneNumber] = useCheckPhoneNumberMutation();
   let avatar = user?.Avatar ? user?.Avatar : user?.Gender === 0 ? manAvatar : womanAvatar;
 
   //handle submit save update account
   const onSubmit = async (data) => {
-    const { ID, IsActive, Role, ...dataSubmit } = data;
+    const { ID, IsActive, Role, Username, ...dataSubmit } = data;
     let isValid = true;
     await checkPhoneNumber({ phoneNumber: data.PhoneNumber, username: data.Username })
       .unwrap()
@@ -73,13 +76,30 @@ export default function AccountUpdate() {
       for (const key in dataSubmit) {
         formData.append(key, dataSubmit[key]);
       }
-      if (fileAvatar) {
-        formData.append('CustomerAvatar', fileAvatar);
+
+      if (Role === 'Khách hàng') {
+        if (fileAvatar) {
+          formData.append('CustomerAvatar', fileAvatar);
+        } else {
+          formData.delete('CustomerAvatar');
+        }
+        const response = await updateAccount(formData).unwrap();
+        if (response.status === 200) {
+          setFileAvatar(null);
+        }
       } else {
-        formData.delete('CustomerAvatar');
+        if (fileAvatar) {
+          formData.append('EmployeeAvatar', fileAvatar);
+        } else {
+          formData.delete('EmployeeAvatar');
+        }
+
+        const response = await updateEmployee({ Username, data: formData }).unwrap();
+
+        if (response.status === 200) {
+          setFileAvatar(null);
+        }
       }
-      await updateAccount(formData).unwrap();
-      setFileAvatar(null);
     }
   };
 
@@ -152,7 +172,11 @@ export default function AccountUpdate() {
       {errorUpdateAccount && (
         <Error styleError={{ marginTop: '24px' }} errorMessage={errorUpdateAccount.data.message}></Error>
       )}
-      {isUpdateLoading && <Loading size={3} full />}
+      {errorUpdateEmployee && (
+        <Error styleError={{ marginTop: '24px' }} errorMessage={errorUpdateEmployee.data.message}></Error>
+      )}
+      {isUpdateAccountLoading && <Loading size={3} full />}
+      {isUpdateEmployeeLoading && <Loading size={3} full />}
     </>
   );
 }

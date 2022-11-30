@@ -53,7 +53,7 @@ const authController = {
   checkPhoneNumber: async (req, res, next) => {
     try {
       const { phoneNumber, username } = req.body;
-      Customer.getCustomerWithPhone(phoneNumber, async (err, data) => {
+      User.getUserWithPhoneNumber(phoneNumber, async (err, data) => {
         if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
         if (data.length) {
 

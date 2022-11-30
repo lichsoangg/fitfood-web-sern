@@ -10,9 +10,11 @@ const employeeController = {
         const page = req.query.page || 1;
         if (RolePermissions.Employee.Get.includes(role)) {
             try {
-                Employee.getEmployees(page, limit, (err, data) => {
+                Employee.getEmployees((err, data) => {
+                    const pageSize=Math.ceil(data.length/limit);
+                    data=data.splice(page*limit-limit, limit);
                     if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
-                    res.status(200).json({ data });
+                    res.status(200).json({pageSize, data });
                 });
             } catch (err) {
                 next(err);;
@@ -43,9 +45,12 @@ const employeeController = {
                     });
                     data["Avatar"] = req.file.filename;
                 }
+                data["Avatar"]=data["Avatar"].replace(process.env.IMAGE_DATA_URL,'');
 
                 Employee.updateEmployee(data, req.params.username, (err, response) => {
-                    if (err) throw err;
+                    if(err){
+                        return res.status(400).json({status:400,message:err.message});
+                    }
                     return res.status(200).json({ status: 200, message: "Cập nhật thành công" });
                 });
             } catch (err) {

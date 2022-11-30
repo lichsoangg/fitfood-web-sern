@@ -1,6 +1,4 @@
-import "./EmployeeManagement.scss";
+import './EmployeeManagement.scss';
 export default function EmployeeManagement() {
-  return (
-    <div>EmployeeManagement</div>
-  )
+  return <div>EmployeeManagement</div>;
 }

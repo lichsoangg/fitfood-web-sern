@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import * as yup from "yup";
+import * as yup from 'yup';
 import Error from '../../components/Error/Error';
 import Form from '../../components/Form/Form';
 import Loading from '../../components/Loading/Loading';
@@ -10,10 +10,11 @@ import { SuccessNotify } from '../../components/Notify/Notify';
 import path from '../../constants/path';
 import { useResetPasswordMutation } from './authApi';
 
-
-const schema = yup.object({
-  Username: yup.string().email("Không đúng định dạng Email").required("Tài khoản là bắt buộc"),
-}).required();
+const schema = yup
+  .object({
+    Username: yup.string().email('Không đúng định dạng Email').required('Tài khoản là bắt buộc')
+  })
+  .required();
 
 export default function AuthPasswordEmail() {
   const navigate = useNavigate();
@@ -32,7 +33,11 @@ export default function AuthPasswordEmail() {
       <form className='forgotPassword__form' onSubmit={handleSubmit(onSubmit)}>
         <Form.Input name='Username'></Form.Input>
         {errorResetPassword && <Error errorMessage={errorResetPassword.data.message}></Error>}
-        <Form.SubmitButton text="Khôi phục mật khẩu" styleButton={{ marginTop: "40px" }} isLoading={isResetPasswordLoading} />
+        <Form.SubmitButton
+          text='Khôi phục mật khẩu'
+          styleButton={{ marginTop: '40px' }}
+          isLoading={isResetPasswordLoading}
+        />
       </form>
     </FormProvider>
   );

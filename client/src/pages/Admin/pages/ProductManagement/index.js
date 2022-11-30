@@ -1,3 +1,3 @@
-import ProductManagement from "./ProductManagement";
+import ProductManagement from './ProductManagement';
 
-export default ProductManagement
+export default ProductManagement;

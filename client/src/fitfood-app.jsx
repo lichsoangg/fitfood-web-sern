@@ -48,10 +48,10 @@ function FitFoodAppRoutes() {
         </Route>
         <Route element={<PrivateRoute requiredRole={['Admin']} />}>
           <Route path={path.admin} element={<Admin />}>
-              <Route index element={<AdminHomepage/>}/>
-              <Route path={path.employeeManagement} element={<EmployeeManagement/>}/>
-              <Route path={path.productManagement} element={<ProductManagement/>}/>
-          </Route> 
+            <Route index element={<AdminHomepage />} />
+            <Route path={path.employeeManagement} element={<EmployeeManagement />} />
+            <Route path={path.productManagement} element={<ProductManagement />} />
+          </Route>
         </Route>
       </Route>
     </Routes>

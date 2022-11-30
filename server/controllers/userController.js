@@ -26,12 +26,13 @@ const userController = {
     getMe: (req, res, next) => {
         try {
             User.getUserInfo(req.user.Username, (err, data) => {
+               const dataUser= data[0][0] || data[1][0];
                 if (!err) {
-                    let avatar = data[0][0]?.Avatar;
+                    let avatar = dataUser?.Avatar;
                     if (avatar) {
-                        avatar = `${process.env.IMAGE_DATA_URL}/${data[0][0]?.Avatar}`;
+                        avatar = `${process.env.IMAGE_DATA_URL}${dataUser?.Avatar}`;
                     }
-                    res.status(200).json({ ...data[0][0], Avatar: avatar });
+                    res.status(200).json({ ...dataUser, Avatar: avatar });
                 } else {
                     const err = new Error("Yêu cầu không hợp lệ");
                     err.status = 400;

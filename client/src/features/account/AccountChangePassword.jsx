@@ -18,11 +18,11 @@ const schema = yup
   })
   .required();
 
-const initialData={
-  password:'',
-  newPassword:'',
-  confirmNewPassword:'',
-}
+const initialData = {
+  password: '',
+  newPassword: '',
+  confirmNewPassword: ''
+};
 export default function AccountChangePassword() {
   //react-hook-form
   const methods = useForm({
