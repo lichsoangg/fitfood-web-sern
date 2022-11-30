@@ -2,7 +2,6 @@
 
 .mainLayout {
   &__outlet {
-    margin-top: 40px;
     min-height: calc(100vh - 336px);
     @include flexMid(center);
   }
