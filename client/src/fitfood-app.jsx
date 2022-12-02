@@ -29,6 +29,7 @@ function FitFoodApp() {
 function FitFoodAppRoutes() {
   return (
     <Routes>
+      {/* main layout */}
       <Route path={path.home} element={<MainLayout />}>
         {/* public route */}
         <Route index element={<HomePage />} />
@@ -46,12 +47,12 @@ function FitFoodAppRoutes() {
           <Route path={path.accountInfo} element={<AccountInformation />} />
           <Route path={path.unauthorized} element={<Unauthorized />} />
         </Route>
-        <Route element={<PrivateRoute requiredRole={['Admin']} />}>
-          <Route path={path.admin} element={<Admin />}>
-            <Route index element={<AdminHomepage />} />
-            <Route path={path.employeeManagement} element={<EmployeeManagement />} />
-            <Route path={path.productManagement} element={<ProductManagement />} />
-          </Route>
+      </Route>
+      {/* private route admin layout*/}
+      <Route element={<PrivateRoute requiredRole={['Admin']} />}>
+        <Route path={path.admin} element={<Admin />}>
+          <Route index element={<EmployeeManagement />} />
+          <Route path={path.productManagement} element={<ProductManagement />} />
         </Route>
       </Route>
     </Routes>

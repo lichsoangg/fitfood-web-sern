@@ -6,13 +6,38 @@ const fs = require("fs");
 const employeeController = {
     getEmployees: (req, res, next) => {
         const role = req.user.Role;
-        const limit = req.query.limit || 10;
+        const limit = req.query.limit || 5;
         const page = req.query.page || 1;
+        const search=req.query.search|| null;
+        const roleQuery=req.query.role|| null;
         if (RolePermissions.Employee.Get.includes(role)) {
             try {
-                Employee.getEmployees((err, data) => {
-                    const pageSize=Math.ceil(data.length/limit);
+                let query=''
+                if(search){
+                   query= query.concat(" ",`CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),'',PhoneNumber,Role) Like '%${search}%'`," ")
+                }
+                if(roleQuery){
+                    if(query.length>0){
+                        query=query.concat(" ",`AND Role Like '%${roleQuery}%'`)
+                    }
+                    else{
+                        query=query.concat(" ",`Role Like '%${roleQuery}%'`," ");
+                    }
+                }
+                if(query.length>0){
+                    query="WHERE".concat(" ",query);
+                }
+                
+                Employee.getEmployees(query,(err, data) => {
+                    const pageSize=Math.ceil(data?.length/limit);
                     data=data.splice(page*limit-limit, limit);
+                    data.map(item=>{
+                        let avatar = item?.Avatar;
+                        if (avatar) {
+                            avatar = `${process.env.IMAGE_DATA_URL}${item?.Avatar}`;
+                        }
+                        return item.Avatar=avatar;
+                    })
                     if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
                     res.status(200).json({pageSize, data });
                 });

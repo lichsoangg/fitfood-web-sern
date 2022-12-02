@@ -1,7 +1,6 @@
+import PropTypes from 'prop-types';
 import { createSearchParams, Link } from 'react-router-dom';
 import './Pagination.scss';
-import path from '../../constants/path';
-import PropTypes from 'prop-types';
 
 const RANGE = 2;
 export default function Pagination({ stylePagination, queryConfig, pageSize, pathname }) {
@@ -42,7 +41,7 @@ export default function Pagination({ stylePagination, queryConfig, pageSize, pat
             pathname: pathname,
             search: createSearchParams({ ...queryConfig, page: pageNumber.toString() }).toString()
           }}
-          className={`pagination__item ${pageNumber == currentPage ? 'pagination__item-active' : ''}`}
+          className={`pagination__item ${pageNumber === currentPage ? 'pagination__item-active' : ''}`}
           key={pageNumber}
         >
           {pageNumber}
