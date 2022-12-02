@@ -1,4 +1,153 @@
-.divemployees {
+@import '../../../../scss/import.scss';
+
+.employees-management {
   display: flex;
   flex-direction: column;
+
+
+  h4 {
+    margin-top: 28px;
+    margin-bottom: 28px;
+    font-size: 24px;
+    padding-left: 2%;
+  }
+
+  &__operation{
+    width: 96%;
+    margin: 0 auto 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    &--search{
+      position: relative;
+      width: 300px;
+      height: 100%;
+
+      svg{
+        position: absolute;
+        top:50%;
+        left:4px;
+        transform: translateY(-50%);
+      }
+      input{
+        height: 100%;
+        width: 100%;
+        padding-left: 40px;
+        border-radius: 4px;
+        border: 1px solid $cl-black;  
+        background-color: $cl-white;
+        &:focus-visible{
+          outline: none;
+        border: 1px solid $cl-primary;  
+          color: $cl-primary;
+        }
+        &:focus-visible + svg{
+          fill: $cl-primary;
+          path{
+            fill:$cl-primary;
+          }
+        }
+      }
+    }
+    &--role{
+      margin-left: 50px;
+      display: flex;
+      align-items: center;
+      gap:16px;
+      height: 100%;
+      span{
+        display: flex;
+        align-items: center;
+        background-color: $cl-white;
+        padding-left: 16px;
+        width: 200px;
+        height: 100%;
+        border: 1px solid $cl-black;
+        border-radius: 4px;
+      }
+  
+    
+    }
+  }
+ 
+  &__table-wrapper{
+    min-height: 540px;
+    width: 100%;
+
+  }
+  &__table {
+    display: grid;
+    width: 96%;
+    row-gap: 0;
+    margin: 0 auto;
+    &--row {
+      display: grid;
+      grid-template-columns: 230px 0.8fr 0.8fr 0.8fr 1.5fr 1.5fr 0.6fr;
+      align-items: center;
+      .table-data {
+        display: block;
+        width: 100%;
+        padding-left: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-height: max-content;
+
+        &__image-name {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+          img {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+          }
+        }
+        &__operation{
+          display: flex;
+          align-items: center;
+          gap:8px;
+          &--icon{
+            cursor: pointer;
+          }
+        }
+      }
+
+    }
+
+    &--row:first-child {
+      margin-bottom: 12px;
+      font-size: $fz-medium;
+      font-weight: 500;
+    }
+
+    &--row:not(:first-child) {
+      height: 80px;
+      max-height: 80px;
+      border-radius: 20px;
+      background-color: white;
+      margin-bottom: 20px;
+
+    }
+  }
+}
+.employee-management__operation--role-dropdown{
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  gap:8px;
+  margin-top: 8px;
+    border: 1px solid $cl-black;
+    background-color: white;
+    border-radius: 4px;
+    span{
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      padding-left: 16px;
+      &:hover{
+        background-color: $cl-primary;
+        color: white
+      }
+    }
 }

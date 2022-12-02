@@ -1,8 +1,8 @@
 const db = require("../utils/connect_mysql");
 
 const Employee = {
-    getEmployees: (callback) => {
-        db.query(`SELECT ID, Employee.Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username `, callback);
+    getEmployees: (query,callback) => {
+        db.query(`SELECT ID, Employee.Username, Name, DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username ${query}`, callback);
     },
     getEmployeeWithPhone: (PhoneNumber, callback) => {
         db.query("SELECT * FROM Employee WHERE PhoneNumber=?", [PhoneNumber], callback);
