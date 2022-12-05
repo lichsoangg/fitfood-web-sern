@@ -1,16 +1,16 @@
-import React from 'react';
-import { useFormContext } from 'react-hook-form';
-import Form from '../../../components/Form/Form';
-import { useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from '../../../features/api/apiProvince.jsx';
+import React from 'react'
+import { useFormContext } from 'react-hook-form'
+import Form from '../../../components/Form/Form'
+import { useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from '../../../features/api/apiProvince.jsx'
 export default function AddressForm() {
-  const { watch } = useFormContext();
-  const { data: provinces, isFetching: provincesLoading } = useGetProvincesQuery();
+  const { watch } = useFormContext()
+  const { data: provinces, isFetching: provincesLoading } = useGetProvincesQuery()
   const { data: districts, isFetching: districtsLoading } = useGetDistrictsQuery(watch('province'), {
     skip: !watch('province')
-  });
+  })
   const { data: wards, isFetching: wardsLoading } = useGetWardsQuery(watch('district'), {
     skip: !watch('district')
-  });
+  })
 
   return (
     <>
@@ -25,5 +25,5 @@ export default function AddressForm() {
       <Form.Dropdown placeHolder='Xã' name='ward' trigger='ward' data={wards} isLoading={wardsLoading} />
       <Form.Input placeHolder='Địa chỉ' name='address' />
     </>
-  );
+  )
 }

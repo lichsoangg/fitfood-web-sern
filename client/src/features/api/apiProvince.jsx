@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiProvince = createApi({
   reducerPath: 'api-province',
@@ -11,9 +11,9 @@ export const apiProvince = createApi({
           return {
             id: province.code,
             value: province.name
-          };
-        });
-        return data;
+          }
+        })
+        return data
       }
     }),
     getDistricts: builder.query({
@@ -23,9 +23,9 @@ export const apiProvince = createApi({
           return {
             id: district.code,
             value: district.name
-          };
-        });
-        return data;
+          }
+        })
+        return data
       }
     }),
     getWards: builder.query({
@@ -35,12 +35,12 @@ export const apiProvince = createApi({
           return {
             id: ward.code,
             value: ward.name
-          };
-        });
-        return data;
+          }
+        })
+        return data
       }
     })
   })
-});
+})
 
-export const { useGetProvincesQuery, useGetDistrictsQuery, useGetWardsQuery } = apiProvince;
+export const { useGetProvincesQuery, useGetDistrictsQuery, useGetWardsQuery } = apiProvince

@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import Navbar from '../../components/Navbar';
-import path from '../../constants/path';
-import './Admin.scss';
-import fitfoodImage from '../../assets/images/logo_fitfood.png';
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import fitfoodImage from '../../assets/images/logo_fitfood.png'
+import Navbar from '../../components/Navbar'
+import path from '../../constants/path'
+import './Admin.scss'
 
 const homeIcon = () => (
   <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -18,7 +18,7 @@ const homeIcon = () => (
       fill='#111112'
     />
   </svg>
-);
+)
 
 const employeesIcon = () => (
   <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -43,7 +43,7 @@ const employeesIcon = () => (
       fill='#111112'
     />
   </svg>
-);
+)
 
 const productsIcon = () => (
   <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -60,10 +60,10 @@ const productsIcon = () => (
       fill='#111112'
     />
   </svg>
-);
+)
 
 export default function Admin() {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(false)
 
   return (
     <div className='admin'>
@@ -86,5 +86,5 @@ export default function Admin() {
         <Outlet />
       </div>
     </div>
-  );
+  )
 }

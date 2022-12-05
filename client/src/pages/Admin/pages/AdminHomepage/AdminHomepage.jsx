@@ -1,5 +1,5 @@
-import './AdminHomepage.scss';
+import './AdminHomepage.scss'
 
 export default function AdminHomepage() {
-  return <div>adminHomePage</div>;
+  return <div>adminHomePage</div>
 }

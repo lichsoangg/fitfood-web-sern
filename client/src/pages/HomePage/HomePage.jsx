@@ -1,14 +1,14 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 export default function HomePage() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const handleClickGoPage = () => {
-    navigate('/login');
-  };
+    navigate('/login')
+  }
   return (
     <div>
       <h2>homepage</h2>
       <button onClick={handleClickGoPage}>Go Another Page</button>
     </div>
-  );
+  )
 }

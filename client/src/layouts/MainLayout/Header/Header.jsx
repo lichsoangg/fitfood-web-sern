@@ -1,7 +1,7 @@
-import React from 'react';
-import './Header.scss';
+import React from 'react'
+import './Header.scss'
 
-import LayoutComponents from '../LayoutComponents/LayoutComponents';
+import LayoutComponents from '../LayoutComponents/LayoutComponents'
 export default function Header() {
   return (
     <HeaderWrapper>
@@ -9,7 +9,7 @@ export default function Header() {
       <LayoutComponents.Menu />
       <LayoutComponents.Function />
     </HeaderWrapper>
-  );
+  )
 }
 
 function HeaderWrapper({ children }) {
@@ -17,5 +17,5 @@ function HeaderWrapper({ children }) {
     <div className='header'>
       <div className='mainWrapper'>{children}</div>
     </div>
-  );
+  )
 }

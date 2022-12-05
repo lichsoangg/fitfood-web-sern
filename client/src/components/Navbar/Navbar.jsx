@@ -1,23 +1,20 @@
-import React from 'react';
-import { useContext } from 'react';
-import { createContext } from 'react';
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import './Navbar.scss';
-const NavbarContext = createContext(null);
+import React, { createContext, useContext } from 'react'
+import { NavLink } from 'react-router-dom'
+import './Navbar.scss'
+const NavbarContext = createContext(null)
 export default function Navbar({ children, toggle, setToggle }) {
   return (
     <NavbarContext.Provider value={{ toggle, setToggle }}>
       <div className='navbar'>{children}</div>
     </NavbarContext.Provider>
-  );
+  )
 }
 
 function NavbarToggle() {
-  const { toggle, setToggle } = useContext(NavbarContext);
+  const { toggle, setToggle } = useContext(NavbarContext)
   const handleClickToggle = () => {
-    setToggle(!toggle);
-  };
+    setToggle(!toggle)
+  }
   return (
     <div className='navbar__toggle' onClick={handleClickToggle}>
       <div className='navbar__toggle--icon' style={{ transform: `${toggle ? 'rotate(180deg)' : ''}` }}>
@@ -26,19 +23,19 @@ function NavbarToggle() {
         </svg>
       </div>
     </div>
-  );
+  )
 }
 
-Navbar.Toggle = NavbarToggle;
+Navbar.Toggle = NavbarToggle
 
 function NavbarItem({ navigate, image, title, Svg, ...rest }) {
-  const { toggle } = useContext(NavbarContext);
+  const { toggle } = useContext(NavbarContext)
   return (
     <>
       {navigate ? (
         <NavLink to={navigate} className='navbar__item' {...rest}>
           <div className='navbar__item--image'>
-            {image && <img src={image} alt='Navbar image' />}
+            {image && <img src={image} alt='Navbar' />}
             {Svg && <Svg />}
           </div>
           <span
@@ -51,7 +48,7 @@ function NavbarItem({ navigate, image, title, Svg, ...rest }) {
       ) : (
         <div className='navbar__item'>
           <div className='navbar__item--image'>
-            {image && <img src={image} alt='Navbar image' />}
+            {image && <img src={image} alt='Navbar' />}
             {Svg && <Svg />}
           </div>
           <span
@@ -63,16 +60,16 @@ function NavbarItem({ navigate, image, title, Svg, ...rest }) {
         </div>
       )}
     </>
-  );
+  )
 }
-Navbar.Item = NavbarItem;
+Navbar.Item = NavbarItem
 
 function NavbarBorder() {
-  return <div className='navbar__border'></div>;
+  return <div className='navbar__border'></div>
 }
-Navbar.Border = NavbarBorder;
+Navbar.Border = NavbarBorder
 
 function NavbarList({ children }) {
-  return <div className='navbar__list'>{children}</div>;
+  return <div className='navbar__list'>{children}</div>
 }
-Navbar.List = NavbarList;
+Navbar.List = NavbarList

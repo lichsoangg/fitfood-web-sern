@@ -1,38 +1,38 @@
-import PropTypes from 'prop-types';
-import { createSearchParams, Link } from 'react-router-dom';
-import './Pagination.scss';
+import PropTypes from 'prop-types'
+import { createSearchParams, Link } from 'react-router-dom'
+import './Pagination.scss'
 
-const RANGE = 2;
+const RANGE = 2
 export default function Pagination({ stylePagination, queryConfig, pageSize, pathname }) {
-  const currentPage = Number(queryConfig.page);
+  const currentPage = Number(queryConfig.page)
   const renderPagination = () => {
-    let dotAfter = false;
-    let dotBefore = false;
+    let dotAfter = false
+    let dotBefore = false
 
     const renderDotAfter = (pageNumber) => {
       if (!dotAfter) {
-        dotAfter = true;
+        dotAfter = true
         return (
           <span key={pageNumber} className='pagination__item'>
             ...
           </span>
-        );
+        )
       }
-      return null;
-    };
+      return null
+    }
 
     const renderDotBefore = (pageNumber) => {
       if (!dotBefore) {
-        dotBefore = true;
+        dotBefore = true
 
         return (
           <span key={pageNumber} className='pagination__item'>
             ...
           </span>
-        );
+        )
       }
-      return null;
-    };
+      return null
+    }
 
     const renderPageNumber = (pageNumber) => {
       return (
@@ -46,24 +46,24 @@ export default function Pagination({ stylePagination, queryConfig, pageSize, pat
         >
           {pageNumber}
         </Link>
-      );
-    };
+      )
+    }
     return Array(pageSize)
       .fill(0)
       .map((_, index) => {
-        const pageNumber = index + 1;
+        const pageNumber = index + 1
 
         if (pageNumber <= RANGE || pageNumber > pageSize - RANGE) {
-          return renderPageNumber(pageNumber);
+          return renderPageNumber(pageNumber)
         } else if (pageNumber > currentPage - RANGE - 1 && pageNumber < currentPage + RANGE + 1) {
-          return renderPageNumber(pageNumber);
+          return renderPageNumber(pageNumber)
         } else if (pageNumber <= currentPage - RANGE - 1) {
-          return renderDotBefore(pageNumber);
+          return renderDotBefore(pageNumber)
         } else {
-          return renderDotAfter(pageNumber);
+          return renderDotAfter(pageNumber)
         }
-      });
-  };
+      })
+  }
   return (
     <div className='pagination' style={{ ...stylePagination }}>
       {currentPage > 1 && (
@@ -95,7 +95,7 @@ export default function Pagination({ stylePagination, queryConfig, pageSize, pat
         </Link>
       )}
     </div>
-  );
+  )
 }
 
 Pagination.propTypes = {
@@ -103,4 +103,4 @@ Pagination.propTypes = {
   pageSize: PropTypes.number,
   stylePagination: PropTypes.object,
   pathname: PropTypes.string
-};
+}

@@ -13,6 +13,6 @@ const path = {
   admin: '/admin',
   employeeManagement: 'quan-ly-nhan-vien',
   productManagement: 'quan-ly-san-pham'
-};
+}
 
-export default path;
+export default path

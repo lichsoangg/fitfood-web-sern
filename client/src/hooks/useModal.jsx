@@ -1,55 +1,39 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
-import { useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 export function useModal() {
-  const [open, setOpen] = useState(false);
-  const [rect, setRect] = useState(null);
-  const modalRef = useRef(null);
-  const activeModalRef = useRef(null);
+  const [open, setOpen] = useState(false)
+  const [rect, setRect] = useState(null)
+  const activeModalRef = useRef(null)
 
   const handleClickOpenModal = useCallback(
     (e) => {
       if (activeModalRef.current) {
-        setRect(e.target.getBoundingClientRect());
-        setOpen(true);
+        setRect(activeModalRef.current.getBoundingClientRect())
+        setOpen(true)
       }
     },
     [activeModalRef]
-  );
-  const handleOutside = useCallback(
-    (e) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(e.target) &&
-        activeModalRef.current &&
-        !activeModalRef.current.contains(e.target)
-      ) {
-        setOpen(false);
-      }
-    },
-    [modalRef]
-  );
+  )
+  const handleClickOutside = () => {
+    setOpen(false)
+  }
   useEffect(() => {
-    window.addEventListener('click', handleOutside);
-    const nodeActiveModal = activeModalRef.current;
+    const nodeActiveModal = activeModalRef.current
     if (nodeActiveModal) {
-      activeModalRef.current.addEventListener('click', handleClickOpenModal);
+      activeModalRef.current.addEventListener('click', handleClickOpenModal)
     }
     return () => {
-      window.removeEventListener('click', handleOutside);
       if (nodeActiveModal) {
-        nodeActiveModal.removeEventListener('click', handleClickOpenModal);
+        nodeActiveModal.removeEventListener('click', handleClickOpenModal)
       }
-    };
-  }, [handleClickOpenModal, handleOutside]);
+    }
+  }, [handleClickOpenModal])
 
   return {
     open,
-    setOpen,
+    handleClickOutside,
     rect,
     activeModalRef,
-    modalRef
-  };
+    setOpen
+  }
 }

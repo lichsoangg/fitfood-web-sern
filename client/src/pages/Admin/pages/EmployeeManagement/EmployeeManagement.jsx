@@ -1,93 +1,123 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { createSearchParams, useLocation, useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import manAvatar from '../../../../assets/images/man_avatar.png';
-import womanAvatar from '../../../../assets/images/woman_avatar.png';
-import { AcceptButton, MainButton } from '../../../../components/Buttons/Buttons';
-import DropdownBase from '../../../../components/DropdownBase/DropdownBase';
-import Pagination from '../../../../components/Pagination/Pagination';
-import provinces from '../../../../constants/provinces';
-import { useGetEmployeesQuery } from '../../../../features/employees/employeesApi';
-import useDebounce from '../../../../hooks/useDebounce';
-import { useModal } from '../../../../hooks/useModal';
-import useQueryParams from '../../../../hooks/useQueryParams';
-import SearchObjectArray from '../../../../utils/SearchObjectArray';
-import Loading from '../../../../components/Loading/Loading';
-import './EmployeeManagement.scss';
+import { useEffect, useState } from 'react'
+import { createSearchParams, useLocation, useNavigate } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
+import manAvatar from '../../../../assets/images/man_avatar.png'
+import womanAvatar from '../../../../assets/images/woman_avatar.png'
+import { AcceptButton } from '../../../../components/Buttons/Buttons'
+import DropdownBase from '../../../../components/DropdownBase/DropdownBase'
+import Loading from '../../../../components/Loading/Loading'
+import Pagination from '../../../../components/Pagination/Pagination'
+import provinces from '../../../../constants/provinces'
+import EmployeeInput from '../../../../features/employees/EmployeeInput'
+import { useGetEmployeesQuery } from '../../../../features/employees/employeesApi'
+import useDebounce from '../../../../hooks/useDebounce'
+import { useModal } from '../../../../hooks/useModal'
+import useQueryParams from '../../../../hooks/useQueryParams'
+import ModalBase from '../../../../ModalBase'
+import SearchObjectArray from '../../../../utils/SearchObjectArray'
+import './EmployeeManagement.scss'
+
 const initialQuery = {
   limit: 5,
   page: 1
-};
-const roles = ["Tất cả", "Admin", "Kế toán", "Kinh doanh", "Nhân viên kho"];
+}
+const roles = ['Tất cả', 'Admin', 'Kế toán', 'Kinh doanh', 'Nhân viên kho']
 export default function EmployeeManagement() {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  let queryConfig = useQueryParams();
+  const location = useLocation()
+  const navigate = useNavigate()
+  let queryConfig = useQueryParams()
   if (Object.keys(queryConfig).length === 0) {
-    queryConfig = { ...initialQuery };
+    queryConfig = { ...initialQuery }
   }
-  const { data: employees, isFetching: isGetEmployeeFetching } = useGetEmployeesQuery(queryConfig);
-  const { modalRef, activeModalRef, open, rect } = useModal();
-  const [search,setSearch]=useState("");
-  const debounceSearch=useDebounce(search,500);
-  useEffect(()=>{
-      navigate({
-        pathname: location?.pathname,
-        search: createSearchParams({ ...queryConfig, page: 1, search: debounceSearch }).toString(),
-      });
-  },[debounceSearch])
+  const { data: employees, isFetching: isGetEmployeeFetching } = useGetEmployeesQuery(queryConfig)
+  const { activeModalRef, open, rect, setOpen } = useModal()
+  const {
+    activeModalRef: activeModalInputEmployeeRef,
+    open: openInputEmployee,
+    setOpen: setOpenInputEmployee
+  } = useModal()
+  //debounce search
+  const [search, setSearch] = useState('')
+  const debounceSearch = useDebounce(search, 500)
+  useEffect(() => {
+    navigate({
+      pathname: location?.pathname,
+      search: createSearchParams({ ...queryConfig, page: 1, search: debounceSearch }).toString()
+    })
+  }, [debounceSearch, navigate, location?.pathname, queryConfig])
 
+  // dropdown roles filter
   const handleClickDropdownRoles = (e) => {
-    if (e.target.innerHTML === "Tất cả") {
+    if (e.target.innerHTML === 'Tất cả') {
       navigate({
         pathname: location?.pathname,
-        search: createSearchParams({ ...queryConfig, page: 1, role: "" }).toString()
-      });
+        search: createSearchParams({ ...queryConfig, page: 1, role: '' }).toString()
+      })
     } else {
       navigate({
         pathname: location?.pathname,
         search: createSearchParams({ ...queryConfig, page: 1, role: e.target.innerHTML.toString() }).toString()
-      });
+      })
     }
-  };
-  console.log(isGetEmployeeFetching);
+    setOpen(false)
+  }
   return (
     <>
       <div className='employees-management'>
         <h4>Quản lý nhân viên</h4>
 
-        <div className="employees-management__operation">
-          <div className="employees-management__operation--search">
-          <input type="text" onChange={(e)=>setSearch(e.target.value)} value={search} defaultValue={queryConfig?.config} placeholder="Tìm kiếm"/>
-
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M11 0.25C5.61522 0.25 1.25 4.61522 1.25 10C1.25 15.3848 5.61522 19.75 11 19.75C16.3848 19.75 20.75 15.3848 20.75 10C20.75 4.61522 16.3848 0.25 11 0.25ZM2.75 10C2.75 5.44365 6.44365 1.75 11 1.75C15.5563 1.75 19.25 5.44365 19.25 10C19.25 14.5563 15.5563 18.25 11 18.25C6.44365 18.25 2.75 14.5563 2.75 10Z" fill="#000000" />
-              <path d="M19.5304 17.4698C19.2375 17.1769 18.7626 17.1769 18.4697 17.4698C18.1768 17.7626 18.1768 18.2375 18.4697 18.5304L22.4696 22.5304C22.7625 22.8233 23.2374 22.8233 23.5303 22.5304C23.8232 22.2375 23.8232 21.7626 23.5303 21.4697L19.5304 17.4698Z" fill="#000000" />
+        <div className='employees-management__operation'>
+          <div className='employees-management__operation--search'>
+            <input
+              type='text'
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
+              defaultValue={queryConfig?.config}
+              placeholder='Tìm kiếm'
+            />
+            <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <path
+                fillRule='evenodd'
+                clipRule='evenodd'
+                d='M11 0.25C5.61522 0.25 1.25 4.61522 1.25 10C1.25 15.3848 5.61522 19.75 11 19.75C16.3848 19.75 20.75 15.3848 20.75 10C20.75 4.61522 16.3848 0.25 11 0.25ZM2.75 10C2.75 5.44365 6.44365 1.75 11 1.75C15.5563 1.75 19.25 5.44365 19.25 10C19.25 14.5563 15.5563 18.25 11 18.25C6.44365 18.25 2.75 14.5563 2.75 10Z'
+                fill='#000000'
+              />
+              <path
+                d='M19.5304 17.4698C19.2375 17.1769 18.7626 17.1769 18.4697 17.4698C18.1768 17.7626 18.1768 18.2375 18.4697 18.5304L22.4696 22.5304C22.7625 22.8233 23.2374 22.8233 23.5303 22.5304C23.8232 22.2375 23.8232 21.7626 23.5303 21.4697L19.5304 17.4698Z'
+                fill='#000000'
+              />
             </svg>
-
           </div>
-          <div className="employees-management__operation--role">
+          <div className='employees-management__operation--role'>
             <label>Chọn chức vụ</label>
-            <span ref={activeModalRef}>{queryConfig?.role ? queryConfig?.role : "Tất cả"}</span>
-            {open &&
-              <DropdownBase rect={rect}>
-                <div className='employee-management__operation--role-dropdown' ref={modalRef}>
+            <span ref={activeModalRef}>{queryConfig?.role ? queryConfig?.role : 'Tất cả'}</span>
+            {open && (
+              <DropdownBase rect={rect} setOpen={setOpen}>
+                <div className='employee-management__operation--role-dropdown'>
                   {roles.map((role) => {
                     if (role !== queryConfig?.role) {
-                      return <span key={uuidv4()} onClick={handleClickDropdownRoles}>{role}</span>;
+                      return (
+                        <span key={uuidv4()} onClick={handleClickDropdownRoles}>
+                          {role}
+                        </span>
+                      )
                     }
+                    return null
                   })}
                 </div>
-
-              </DropdownBase>}
-
+              </DropdownBase>
+            )}
           </div>
-          <AcceptButton width="200px" styleButton={{height:"100%",borderRadius:"4px",marginLeft:"auto"}}>Thêm nhân viên</AcceptButton>
+          <AcceptButton
+            width='200px'
+            styleButton={{ height: '100%', borderRadius: '4px', marginLeft: 'auto' }}
+            ref={activeModalInputEmployeeRef}
+          >
+            Thêm nhân viên
+          </AcceptButton>
         </div>
-        <div className="employees-management__table-wrapper">
-          <div className="employees-management__table">
+        <div className='employees-management__table-wrapper'>
+          <div className='employees-management__table'>
             {/* header */}
             <div className='employees-management__table--row'>
               <div className='table-data'>Nhân viên</div>
@@ -102,13 +132,13 @@ export default function EmployeeManagement() {
             {/* table data */}
             {employees?.data &&
               employees.data.map((employee) => {
-                const avatar = employee?.Avatar ? employee?.Avatar : employee?.Gender === 0 ? manAvatar : womanAvatar;
-                const province = SearchObjectArray(employee.Province * 1, provinces, 'code').name;
+                const avatar = employee?.Avatar ? employee?.Avatar : employee?.Gender === 0 ? manAvatar : womanAvatar
+                const province = SearchObjectArray(employee.Province * 1, provinces, 'code').name
                 return (
                   <div key={employee?.ID} className='employees-management__table--row'>
                     <div className='table-data'>
                       <div className='table-data__image-name'>
-                        <img src={avatar} alt={`Fitfood ${employee?.Name} image`} />
+                        <img src={avatar} alt={`Fitfood ${employee?.Name}`} />
                         <span>{employee.Name}</span>
                       </div>
                     </div>
@@ -168,22 +198,29 @@ export default function EmployeeManagement() {
                       </div>
                     </div>
                   </div>
-                );
+                )
               })}
-
           </div>
         </div>
-        {
-          employees?.pageSize > 1 &&
+        {/* Pagination */}
+        {employees?.pageSize > 1 && (
           <Pagination
             queryConfig={queryConfig}
             pageSize={employees?.pageSize}
             pathname={location?.pathname}
-            stylePagination={{ margin: '20px auto 0', }}
+            stylePagination={{ margin: '20px auto 0' }}
           />
-        }
-      {isGetEmployeeFetching && <Loading size={3} full/>}  
+        )}
+        {/* Input Employee */}
+        {openInputEmployee && (
+          <ModalBase styleContent={{ width: '1100px', height: 'max-content' }} setOpen={setOpenInputEmployee}>
+            <EmployeeInput />
+          </ModalBase>
+        )}
+
+        {/* Loading */}
+        {isGetEmployeeFetching && <Loading size={3} full />}
       </div>
     </>
-  );
+  )
 }

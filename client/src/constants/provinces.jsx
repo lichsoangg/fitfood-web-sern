@@ -251,6 +251,6 @@ const provinces = [
     code: '15',
     name: 'Tỉnh Yên Bái'
   }
-];
+]
 
-export default provinces;
+export default provinces

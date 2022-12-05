@@ -1,4 +1,4 @@
-import { apiSlice } from '../api/apiSlice.jsx';
+import { apiSlice } from '../api/apiSlice.jsx'
 
 export const registerAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -63,7 +63,7 @@ export const registerAPI = apiSlice.injectEndpoints({
       })
     })
   })
-});
+})
 
 export const {
   useAddNewCustomerMutation,
@@ -74,4 +74,4 @@ export const {
   useVerifyEmailMutation,
   useSendVerifyEmailMutation,
   useResetPasswordMutation
-} = registerAPI;
+} = registerAPI

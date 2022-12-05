@@ -1,12 +1,12 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import NewEmail from '../../assets/images/email.png';
-import { selectCurrentAuth } from '../../features/authentication/authSlice';
-import AuthVerifyEmail from '../../features/authentication/AuthVerifyEmail';
-import './ActivePage.scss';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import NewEmail from '../../assets/images/email.png'
+import { selectCurrentAuth } from '../../features/authentication/authSlice'
+import AuthVerifyEmail from '../../features/authentication/AuthVerifyEmail'
+import './ActivePage.scss'
 
 export default function ActivePage({ children }) {
-  const { username } = useSelector(selectCurrentAuth);
+  const { username } = useSelector(selectCurrentAuth)
   const renderActivePage = (
     <div className='activePage'>
       <div className='activePage__image'>
@@ -20,6 +20,6 @@ export default function ActivePage({ children }) {
       <span className='activePage__description description-left'>Vui lòng nhập mã xác thực: </span>
       <AuthVerifyEmail />
     </div>
-  );
-  return renderActivePage;
+  )
+  return renderActivePage
 }

@@ -1,3 +1,3 @@
-import CalorieCaculatorPage from './CalorieCaculatorPage';
+import CalorieCaculatorPage from './CalorieCaculatorPage'
 
-export default CalorieCaculatorPage;
+export default CalorieCaculatorPage

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import logo from '../../../assets/images/logo.png';
-import path from '../../../constants/path';
-import AccountDropdown from '../../../features/account/AccountDropdown';
-import './LayoutComponents.scss';
+import React, { useEffect, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import logo from '../../../assets/images/logo.png'
+import path from '../../../constants/path'
+import AccountDropdown from '../../../features/account/AccountDropdown'
+import './LayoutComponents.scss'
 export default function LayoutComponents() {
-  return null;
+  return null
 }
 
 function Logo() {
@@ -18,26 +18,26 @@ function Logo() {
         </div>
       </div>
     </Link>
-  );
+  )
 }
 
 function Menu() {
-  const [coords, setCoords] = useState();
-  const location = useLocation();
+  const [coords, setCoords] = useState()
+  const location = useLocation()
   useEffect(() => {
-    const activeItem = document.querySelector('.layout__menu--item.active');
+    const activeItem = document.querySelector('.layout__menu--item.active')
     if (activeItem) {
       setCoords({
         left: activeItem.offsetLeft,
         width: activeItem.offsetWidth
-      });
+      })
     } else {
       setCoords({
         left: 0,
         width: 0
-      });
+      })
     }
-  }, [location]);
+  }, [location])
   return (
     <ul className='layout__menu body4'>
       <NavLink to={path.home} className='layout__menu--item' end>
@@ -60,7 +60,7 @@ function Menu() {
         style={{ left: `${coords?.left}px`, width: `${coords?.width}px` }}
       ></div>
     </ul>
-  );
+  )
 }
 
 function Function() {
@@ -85,7 +85,7 @@ function Function() {
       </div>
       <AccountDropdown />
     </div>
-  );
+  )
 }
 
 function Contact() {
@@ -96,9 +96,9 @@ function Contact() {
         <a href='tel:0333521488'>0333521488</a>
       </h4>
     </div>
-  );
+  )
 }
-LayoutComponents.Logo = Logo;
-LayoutComponents.Menu = Menu;
-LayoutComponents.Function = Function;
-LayoutComponents.Contact = Contact;
+LayoutComponents.Logo = Logo
+LayoutComponents.Menu = Menu
+LayoutComponents.Function = Function
+LayoutComponents.Contact = Contact

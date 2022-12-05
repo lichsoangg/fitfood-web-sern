@@ -1,13 +1,13 @@
-import React from 'react';
-import Form from '../../../components/Form/Form';
-import phoneNumberIcon from '../../../assets/icons/phonenumber.png';
-import nameIcon from '../../../assets/icons/name.png';
-import genderIcon from '../../../assets/icons/gender.png';
+import React from 'react'
+import Form from '../../../components/Form/Form'
+import phoneNumberIcon from '../../../assets/icons/phonenumber.png'
+import nameIcon from '../../../assets/icons/name.png'
+import genderIcon from '../../../assets/icons/gender.png'
 
 const dataGender = [
   { id: 0, value: 'Nam' },
   { id: 1, value: 'Nữ' }
-];
+]
 export default function InformationForm() {
   return (
     <>
@@ -16,5 +16,5 @@ export default function InformationForm() {
       <Form.Input placeHolder='Số điện thoại' icon={phoneNumberIcon} name='phoneNumber' />
       <Form.Dropdown placeHolder='Giới tính' icon={genderIcon} name='gender' data={dataGender} />
     </>
-  );
+  )
 }

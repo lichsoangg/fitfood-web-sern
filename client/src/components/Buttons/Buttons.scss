@@ -24,6 +24,8 @@
 
 .button-box-shadow {
   cursor: pointer;
+  width: -webkit-max-content;
+  width: -moz-max-content;
   width: max-content;
   padding: 12px 24px;
   height: 44px;
@@ -57,6 +59,7 @@
   border: 1px solid $cl-black;
   cursor: pointer;
   position: relative;
+  @include flexMid(center);
 
   &__input {
     cursor: pointer;
@@ -83,6 +86,7 @@
   font-size: 16px;
   font-weight: 600;
   @include flexMid(center);
+
   &:hover {
     opacity: 0.5;
   }
