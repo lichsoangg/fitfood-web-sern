@@ -62,15 +62,16 @@ export default function AccountUpdate() {
   const onSubmit = async (data) => {
     const { ID, IsActive, Role, Username, ...dataSubmit } = data
     let isValid = true
-    await checkPhoneNumber({ phoneNumber: data.PhoneNumber, username: data.Username })
-      .unwrap()
-      .catch((err) => {
-        if (err.status === 409) {
-          isValid = false
-          setError('PhoneNumber', { type: 'custom', message: 'Số điện thoại đã tồn tại' })
-        }
-      })
-
+    if (data.PhoneNumber !== user.PhoneNumber) {
+      await checkPhoneNumber({ phoneNumber: data.PhoneNumber, username: data.Username })
+        .unwrap()
+        .catch((err) => {
+          if (err.status === 409) {
+            isValid = false
+            setError('PhoneNumber', { type: 'custom', message: 'Số điện thoại đã tồn tại' })
+          }
+        })
+    }
     if (isValid) {
       let formData = new FormData()
       for (const key in dataSubmit) {

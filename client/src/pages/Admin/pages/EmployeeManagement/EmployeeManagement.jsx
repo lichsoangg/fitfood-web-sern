@@ -44,7 +44,7 @@ export default function EmployeeManagement() {
       pathname: location?.pathname,
       search: createSearchParams({ ...queryConfig, page: 1, search: debounceSearch }).toString()
     })
-  }, [debounceSearch, navigate, location?.pathname, queryConfig])
+  }, [debounceSearch])
 
   // dropdown roles filter
   const handleClickDropdownRoles = (e) => {

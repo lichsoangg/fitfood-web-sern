@@ -9,6 +9,7 @@ import showPasswordIcon from '../../assets/icons/showPassword.png'
 import path from '../../constants/path'
 import { useDisableClick } from '../../hooks/useDisableClick'
 import { useModal } from '../../hooks/useModal'
+import SearchObjectArray from '../../utils/SearchObjectArray'
 import { AcceptButton, CancelButton } from '../Buttons/Buttons'
 import DropdownBase from '../DropdownBase/DropdownBase'
 import Error from '../Error/Error'
@@ -137,7 +138,7 @@ InputNumberVerify.propTypes = {
   name: PropTypes.string.isRequired
 }
 // ------------------------------- Dropdown ----------------------------------
-function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, ...rest }) {
+function Dropdown({ data, isLoading = false, trigger, styleFormInput, placeHolder, icon, name, ...rest }) {
   const { activeModalRef, open, rect, setOpen } = useModal()
   //useFormComtext api react hook form
   const {
@@ -146,31 +147,16 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
     getValues,
     formState: { errors }
   } = useFormContext()
-  //handle open modal
-
-  function getDataValueWithKey(key, data) {
-    if (data) {
-      if (isNaN(data[0]?.id)) {
-        return data?.filter((item) => item.id === key)[0]?.value
-      } else return data?.filter((item) => item.id * 1 === key * 1)[0]?.value
-    }
-    return null
-  }
 
   const handleClickDropdown = (e) => {
     setValue(name, e.target.getAttribute('data-id'))
     setOpen(false)
   }
-  const handleClickDropdownValue = (e) => {
-    trigger && getValues(trigger) && e.target.nextSibling.focus()
-    !trigger && e.target.nextSibling.focus()
-  }
+
   return (
     <>
-      <div className='formInput formDropdown' ref={activeModalRef}>
-        <span className='formInput__dropdownValue' onClick={handleClickDropdownValue}>
-          {getDataValueWithKey(getValues(name), data)}
-        </span>
+      <div className='formInput formDropdown' ref={activeModalRef} style={{ ...styleFormInput }}>
+        <span className='formInput__dropdownValue'>{SearchObjectArray(getValues(name), data, `id`)?.value}</span>
         <input
           type='text'
           className='formInput__input '
