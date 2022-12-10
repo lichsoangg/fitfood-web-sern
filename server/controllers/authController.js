@@ -103,6 +103,7 @@ const authController = {
         const refreshTokenServer = await client.get(user.Username.toString());
         if (refreshTokenServer !== refreshTokenClient) return res.status(404).json({ message: "Token không hợp lệ" });
         const newAccessToken = signAccessToken(user.Username, user.Role);
+
         signRefreshToken(user.Username, user.Role, res);
         return res.status(200).json({ status: 200, accessToken: newAccessToken });
       });
@@ -134,7 +135,7 @@ const authController = {
 
     }
     else {
-      return res.status(401).json({ status: 401, message: "Mã xác thực không đúng" });
+      return res.status(400).json({ status: 400, message: "Mã xác thực không đúng" });
 
     }
   },

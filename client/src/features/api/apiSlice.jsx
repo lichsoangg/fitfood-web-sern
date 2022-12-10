@@ -18,10 +18,11 @@ const baseQuery = fetchBaseQuery({
 });
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  if (result?.error?.status === 403) {
+  if (result?.error?.status === 403 || result?.error?.status === 401) {
     const refreshResult = await baseQuery('/auth/refresh', api, extraOptions);
     //refresh token valid
     if (refreshResult?.data) {
+
       const decodeToken = jwt_decode(refreshResult.data.accessToken);
       const accountActive = api.getState().auth.data.isActive;
       api.dispatch(

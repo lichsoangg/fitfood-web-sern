@@ -41,6 +41,7 @@ export default function AccountUpdate() {
     reset,
     watch,
     setError,
+    getValues,
     formState: { isDirty }
   } = methods;
   const { data: user } = useGetMeQuery();
@@ -57,6 +58,8 @@ export default function AccountUpdate() {
 
   //handle submit save update account
   const onSubmit = async (data) => {
+    const { ID, Role, IsActive, ...dataSubmit } = data;
+
     let isValid = true;
     try {
       await checkPhoneNumber({ phoneNumber: data.PhoneNumber, username: data.Username })
@@ -72,8 +75,8 @@ export default function AccountUpdate() {
     }
     if (isValid) {
       let formData = new FormData();
-      for (const key in data) {
-        formData.append(key, data[key]);
+      for (const key in dataSubmit) {
+        formData.append(key, dataSubmit[key]);
       }
       if (fileAvatar) {
         formData.append('CustomerAvatar', fileAvatar);

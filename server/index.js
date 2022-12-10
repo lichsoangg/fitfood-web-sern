@@ -36,6 +36,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   const status = err.status || 400;
+  console.log(err);
   res.status(status).json({ message: err.message });
 });
 
