@@ -1,35 +1,37 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import dateIcon from '../../assets/icons/calendar.png';
-import downIcon from '../../assets/icons/down.png';
-import hidePasswordIcon from '../../assets/icons/hidePassword.png';
-import showPasswordIcon from '../../assets/icons/showPassword.png';
-import path from '../../constants/path';
-import { useDisableClick } from '../../hooks/useDisableClick';
-import { useModal } from '../../hooks/useModal';
-import { AcceptButton, CancelButton } from '../Buttons/Buttons';
-import DropdownBase from '../DropdownBase/DropdownBase';
-import Error from '../Error/Error';
-import './Form.scss';
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import { useFormContext } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import dateIcon from '../../assets/icons/calendar.png'
+import downIcon from '../../assets/icons/down.png'
+import hidePasswordIcon from '../../assets/icons/hidePassword.png'
+import showPasswordIcon from '../../assets/icons/showPassword.png'
+import path from '../../constants/path'
+import { useDisableClick } from '../../hooks/useDisableClick'
+import { useModal } from '../../hooks/useModal'
+import SearchObjectArray from '../../utils/SearchObjectArray'
+import { AcceptButton, CancelButton } from '../Buttons/Buttons'
+import DropdownBase from '../DropdownBase/DropdownBase'
+import Error from '../Error/Error'
+import './Form.scss'
 
 const Form = () => {
-  return null;
-};
-export default Form;
+  return null
+}
+export default Form
 // ------------------------------- Input ----------------------------------
-function Input({ placeHolder, styleInput, type, icon, name, ...rest }) {
+function Input({ placeHolder, styleInput, styleFormInput, type, icon, name, ...rest }) {
   const {
     register,
+
     formState: { errors }
-  } = useFormContext();
-  const [show, setShow] = useState(type === 'password' ? false : true);
+  } = useFormContext()
+  const [show, setShow] = useState(type === 'password' ? false : true)
   const handleClickTogglePassword = () => {
-    setShow(!show);
-  };
+    setShow(!show)
+  }
   return (
-    <div className='formInput'>
+    <div className='formInput' style={{ ...styleFormInput }}>
       <input
         type={show ? 'text' : 'password'}
         className='formInput__input'
@@ -54,25 +56,25 @@ function Input({ placeHolder, styleInput, type, icon, name, ...rest }) {
       )}
       {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
     </div>
-  );
+  )
 }
 Input.propTypes = {
   placeHolder: PropTypes.string,
   type: PropTypes.string,
   icon: PropTypes.string,
   name: PropTypes.string.isRequired
-};
-Form.Input = React.memo(Input);
+}
+Form.Input = React.memo(Input)
 
 //input date
-function InputDate({ placeHolder, name, ...rest }) {
+function InputDate({ placeHolder, styleFormInput, name, ...rest }) {
   const {
     register,
     formState: { errors }
-  } = useFormContext();
+  } = useFormContext()
 
   return (
-    <div className='formInput'>
+    <div className='formInput' style={{ ...styleFormInput }}>
       <input
         type='text'
         className='formInput__input'
@@ -92,33 +94,33 @@ function InputDate({ placeHolder, name, ...rest }) {
       </div>
       {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
     </div>
-  );
+  )
 }
 
 InputDate.propTypes = {
   placeHolder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired
-};
-Form.InputDate = React.memo(InputDate);
+}
+Form.InputDate = React.memo(InputDate)
 
 function InputNumberVerify({ maxLength, name }) {
   const {
     register,
     formState: { errors }
-  } = useFormContext();
+  } = useFormContext()
   const handleInputKeyUp = (e) => {
-    const keyCode = e.keyCode;
+    const keyCode = e.keyCode
     if (keyCode === 8 || keyCode === 37) {
       if (e.target?.previousSibling?.className === 'formInputNumberVerify') {
-        e.target.previousSibling.focus();
+        e.target.previousSibling.focus()
       }
     }
     if (e.target.value.length === maxLength || keyCode === 39) {
       if (e.target?.nextSibling?.className === 'formInputNumberVerify') {
-        e.target.nextSibling.focus();
+        e.target.nextSibling.focus()
       }
     }
-  };
+  }
   return (
     <input
       type='text'
@@ -128,45 +130,34 @@ function InputNumberVerify({ maxLength, name }) {
       onKeyUp={handleInputKeyUp}
       {...register(name)}
     />
-  );
+  )
 }
-Form.InputNumberVerify = InputNumberVerify;
+Form.InputNumberVerify = InputNumberVerify
 
 InputNumberVerify.propTypes = {
   maxLength: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired
-};
+}
 // ------------------------------- Dropdown ----------------------------------
-function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, ...rest }) {
-  const { modalRef, activeModalRef, open, rect, setOpen } = useModal();
-
+function Dropdown({ data, isLoading = false, trigger, styleFormInput, placeHolder, icon, name, ...rest }) {
+  const { activeModalRef, open, rect, setOpen } = useModal()
   //useFormComtext api react hook form
   const {
     register,
     setValue,
     getValues,
     formState: { errors }
-  } = useFormContext();
-  //handle open modal
-
-  function getDataValueWithKey(key, data) {
-    return data?.filter((item) => item.id * 1 === key * 1)[0]?.value;
-  }
+  } = useFormContext()
 
   const handleClickDropdown = (e) => {
-    setValue(name, e.target.getAttribute('data-id'));
-    setOpen(false);
-  };
-  const handleClickDropdownValue = (e) => {
-    trigger && getValues(trigger) && e.target.nextSibling.focus();
-    !trigger && e.target.nextSibling.focus();
-  };
+    setValue(name, e.target.getAttribute('data-id'))
+    setOpen(false)
+  }
+
   return (
     <>
-      <div className='formInput formDropdown' ref={activeModalRef}>
-        <span className='formInput__dropdownValue' onClick={handleClickDropdownValue}>
-          {getDataValueWithKey(getValues(name), data)}
-        </span>
+      <div className='formInput formDropdown' ref={activeModalRef} style={{ ...styleFormInput }}>
+        <span className='formInput__dropdownValue'>{SearchObjectArray(getValues(name), data, `id`)?.value}</span>
         <input
           type='text'
           className='formInput__input '
@@ -178,9 +169,9 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
           style={
             trigger
               ? {
-                  opacity: `${getValues(trigger) ? 1 : 0.4}`,
-                  border: `${errors[name] ? '0.8px solid red' : ''}`
-                }
+                opacity: `${getValues(trigger) ? 1 : 0.4}`,
+                border: `${errors[name] ? '0.8px solid red' : ''}`
+              }
               : { border: `${errors[name] ? '0.8px solid red' : ''}` }
           }
         />
@@ -194,8 +185,12 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
         {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
       </div>
       {open && data && (
-        <DropdownBase rect={rect}>
-          <div className='formInput__dropdown' onClick={handleClickDropdown} ref={modalRef}>
+        <DropdownBase
+          rect={rect}
+          setOpen={setOpen}
+          styleContent={{ position: 'absolute', transform: `translate(${window.scrollX}px,${window.scrollY}px)` }}
+        >
+          <div className='formInput__dropdown' onClick={handleClickDropdown}>
             {isLoading && (
               <div className='formInput__dropdown--loadingIcon'>
                 <i className='fa fa-spinner fa-spin fa-2x'></i>
@@ -208,13 +203,13 @@ function Dropdown({ data, isLoading = false, trigger, placeHolder, icon, name, .
                   <span key={item.id} data-id={item.id}>
                     {item.value}
                   </span>
-                );
+                )
               })}
           </div>
         </DropdownBase>
       )}
     </>
-  );
+  )
 }
 
 Dropdown.propTypes = {
@@ -224,8 +219,8 @@ Dropdown.propTypes = {
   placeHolder: PropTypes.string.isRequired,
   icon: PropTypes.string,
   name: PropTypes.string.isRequired
-};
-Form.Dropdown = React.memo(Dropdown);
+}
+Form.Dropdown = React.memo(Dropdown)
 
 // ------------------------------- ForgotPasswordText ----------------------------------
 function ForgotPasswordText() {
@@ -233,30 +228,30 @@ function ForgotPasswordText() {
     <div className='formForgotPasswordText'>
       <Link to={path.forgotPassword}>Quên mật khẩu?</Link>
     </div>
-  );
+  )
 }
-Form.ForgotPasswordText = React.memo(ForgotPasswordText);
+Form.ForgotPasswordText = React.memo(ForgotPasswordText)
 
 // ------------------------------- SubmitButton ----------------------------------
 function SubmitButton({ text, isLoading, styleButton }) {
-  const textButton = isLoading ? '' : text;
-  useDisableClick(isLoading);
+  const textButton = isLoading ? '' : text
+  useDisableClick(isLoading)
   return (
     <AcceptButton type='submit' width='100%' styleButton={{ opacity: `${isLoading ? '0.6' : '1'}`, ...styleButton }}>
       {isLoading && <i className='fa fa-spinner fa-spin'></i>}
       {textButton}
     </AcceptButton>
-  );
+  )
 }
 SubmitButton.propTypes = {
   text: PropTypes.string.isRequired
-};
-Form.SubmitButton = React.memo(SubmitButton);
+}
+Form.SubmitButton = React.memo(SubmitButton)
 
 // ------------------------------- PaginateStepForm ----------------------------------
 function GroupButton({ isFirstStep, isLastStep, back, textSubmit, isLoading }) {
-  const textButton = isLoading ? '' : isLastStep ? textSubmit : 'Tiếp tục';
-  useDisableClick(isLoading);
+  const textButton = isLoading ? '' : isLastStep ? textSubmit : 'Tiếp tục'
+  useDisableClick(isLoading)
   return (
     <div className='formPaginateStepForm' style={{ opacity: `${isLoading ? '0.6' : '1'}` }}>
       {!isFirstStep && (
@@ -269,7 +264,7 @@ function GroupButton({ isFirstStep, isLastStep, back, textSubmit, isLoading }) {
         {textButton}
       </AcceptButton>
     </div>
-  );
+  )
 }
 GroupButton.propTypes = {
   isFirstStep: PropTypes.bool.isRequired,
@@ -277,6 +272,6 @@ GroupButton.propTypes = {
   back: PropTypes.func.isRequired,
   textSubmit: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired
-};
+}
 
-Form.GroupButton = React.memo(GroupButton);
+Form.GroupButton = React.memo(GroupButton)

@@ -1,3 +1,3 @@
-import ActivePage from './ActivePage';
+import ActivePage from './ActivePage'
 
-export default ActivePage;
+export default ActivePage

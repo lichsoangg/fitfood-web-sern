@@ -1,0 +1,57 @@
+.report-revenue {
+  padding: 24px;
+  h4 {
+    margin-top: 28px;
+    margin-bottom: 28px;
+    font-size: 24px;
+  }
+  &-operation {
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      .formInput {
+        width: 30%;
+      }
+    }
+  }
+  .bottom {
+    display: flex;
+    gap: 30px;
+    .filter {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      .formInput {
+        width: 40%;
+      }
+    }
+  }
+  &-main {
+    margin-top: 10px;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 24px 80px;
+  }
+  .employees-management__table-wrapper {
+    height: 300px;
+    min-height: 0;
+  }
+  .employees-management__table {
+    height: 300px;
+    min-height: 0;
+    overflow-y: auto;
+    width: 100%;
+  }
+  .employees-management__table--row {
+    grid-template-columns: 1fr 2fr 4fr !important;
+  }
+}

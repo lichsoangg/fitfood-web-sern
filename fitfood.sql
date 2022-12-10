@@ -5,11 +5,15 @@ USE fitfood;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 flush privileges;
 
- 
+ SET SQL_SAFE_UPDATES = 0;
+ -- 1: Admin, 2: Customer
+ -- 1: Non Active, 2: Active
+ -- 1: Male, 2: Female
 -- Table User
 CREATE TABLE user(
 	Username varchar(100) NOT NULL,
     Password varchar(255) NOT NULL,
+<<<<<<< HEAD
   	Role varchar(20) NOT NULL,
     IsActive Boolean DEFAULT 0,
 	CONSTRAINT PK_User_ID PRIMARY KEY(ID)
@@ -19,82 +23,57 @@ CREATE TABLE user(
 
 -- Table Customer
 CREATE TABLE customer(
-	ID int NOT NULL AUTO_INCREMENT,
+	CustomerID int NOT NULL AUTO_INCREMENT,
     Name varchar(100) NOT NULL,
     DayOfBirth date NOT NULL,
     PhoneNumber varchar(10) NOT NULL,
+=======
+  	Role int NOT NULl,
+    IsActive Boolean DEFAULT 1,
+	Name varchar(100) NOT NULL,
+    DayOfBirth date ,
+    PhoneNumber varchar(10),
+>>>>>>> 9b1aead (chore: provide data for database)
     Gender int NOT NULL,
-    Province varchar(10) NOT NULL,
-    District varchar(10) NOT NULL,
-    Ward varchar(10) NOT NULL,
-    Address varchar(255) NOT NULL,
+    Province varchar(10),
+    District varchar(10),
+    Ward varchar(10) ,
+    Address varchar(255),
     Avatar varchar(255),
-	Username varchar(100) NOT NULL,
-	CONSTRAINT CK_Customer_PhoneNumber UNIQUE(PhoneNumber),
-	CONSTRAINT CK_Customer_Gender CHECK(Gender=0 OR Gender=1),
-    CONSTRAINT CK_Customer_Username UNIQUE(Username),
-    CONSTRAINT PK_Customer_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_Customer_Username FOREIGN KEY(Username) REFERENCES User(Username)
-);
-
--- Table Employee
-CREATE TABLE employee(
-	ID int NOT NULL AUTO_INCREMENT,
-    Name varchar(100) NOT NULL,
-    DayOfBirth date NOT NULL,
-    PhoneNumber varchar(10) NOT NULL,
-    Gender int NOT NULL,
-    Province varchar(10) NOT NULL,
-    District varchar(10) NOT NULL,
-    Ward varchar(10),
-    Address varchar(255) NOT NULL,
-	Avatar varchar(255),
-	Username varchar(100) NOT NULL,
-
-	CONSTRAINT CK_Employee_PhoneNumber UNIQUE(PhoneNumber),
-	CONSTRAINT CK_Employee_Gender CHECK(Gender=0 OR Gender=1),
-    CONSTRAINT CK_Employee_Username UNIQUE(Username),
-    CONSTRAINT PK_Employee_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_Employee_User FOREIGN KEY(Username) REFERENCES User(Username)
-);
-
--- Table Provider
-CREATE TABLE provider(
-	ID int NOT NULL AUTO_INCREMENT,
-    Name varchar(100) NOT NULL,
-    PhoneNumber varchar(10) NOT NULL,
-    Address varchar(255) NOT NULL,
-    CONSTRAINT PK_Provider_ID PRIMARY KEY(ID)
-);
+    CONSTRAINT CK_User_PhoneNumber UNIQUE(PhoneNumber),
+	CONSTRAINT CK_User_Gender CHECK(Gender=1 OR Gender=2),
+    CONSTRAINT CK_User_Username UNIQUE(Username),
+	CONSTRAINT PK_User_ID PRIMARY KEY(Username)
+);	
 
 -- Table TypeProduct
-CREATE TABLE typeproduct(
-	ID int NOT NULL AUTO_INCREMENT,
+CREATE TABLE producttype(
+	ProductTypeID int NOT NULL AUTO_INCREMENT,
     Name varchar(100) NOT NULL,
-    CONSTRAINT PK_TypeProduct_ID PRIMARY KEY(ID)
+    CONSTRAINT PK_ProductTypeId_ID PRIMARY KEY(ProductTypeId)
 );
 -- Table Product
 CREATE TABLE product(
-	ID int NOT NULL AUTO_INCREMENT,
+	ProductID int NOT NULL AUTO_INCREMENT,
     Name varchar(100) NOT NULL,
     Price int NOT NULL,
     Quantity int NOT NULL,
 	Unit varchar(10) NOT NULL,
-    TypeProductID int NOT NULL,
-	CONSTRAINT PK_Product_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_Product_TypeProduct FOREIGN KEY(TypeProductID) REFERENCES TypeProduct(ID)
+    Avatar varchar(255),
+    Highlight int NOT NULL,
+    ProductTypeId int NOT NULL,
+	CONSTRAINT PK_Product_Id PRIMARY KEY(ProductID),
+    CONSTRAINT FK_ProductType_Product FOREIGN KEY(ProductTypeId) REFERENCES ProductType(ProductTypeId)
 );
+-- State -1: Cart, 1: Order: 2:Success
 -- Table Bill
 CREATE TABLE bill(
-	ID int NOT NULL AUTO_INCREMENT,
+	BillID int NOT NULL AUTO_INCREMENT,
     Date date NOT NULL,
-    State varchar(20) Not NULL,
-    CustomerID int NOT NULL,
-    EmployeeID int,
-    CONSTRAINT PK_Bill_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_Bill_Customer FOREIGN KEY(CustomerID) REFERENCES Customer(ID),
-    CONSTRAINT FK_Bill_Employee FOREIGN KEY(EmployeeID) REFERENCES Employee(ID)
-    
+    State int NOT NULL,
+    Username varchar(100) NOT NULL,
+    CONSTRAINT PK_Bill_Id PRIMARY KEY(BillID),
+    CONSTRAINT FK_Bill_Customer FOREIGN KEY(Username) REFERENCES User(Username)
 );
 
 -- Table DetailBill
@@ -104,150 +83,69 @@ CREATE TABLE detailbill(
     Quantity int NOT NULL,
     SalePrice int NOT NULL,
     CONSTRAINT PK_DetailBill_PK PRIMARY KEY(BillID,ProductID),
-    CONSTRAINT FK_DetailBill_Bill FOREIGN KEY(BillID) REFERENCES Bill(ID),
-    CONSTRAINT FK_DetailBill_Product FOREIGN KEY(ProductID) REFERENCES Product(ID)
-);
-
--- Table DeliveryNote
-CREATE TABLE deliverynote(
-	ID int NOT NULL AUTO_INCREMENT,
-    Date date NOT NULL,
-    ProviderID int NOT NULL,
-    EmployeeID int NOT NULL,
-    CONSTRAINT PK_DeliveryNote_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_DeliveryNote_Provider FOREIGN KEY(ProviderID) REFERENCES Provider(ID),
-    CONSTRAINT FK_DeliveryNote_Employee FOREIGN KEY(EmployeeID) REFERENCES Employee(ID)
-);
-
--- Table DetailDeliveryNote
-CREATE TABLE detaildeliverynote(
-	DeliveryNoteID int NOT NULL,
-    ProductID int NOT NULL,
-    Quantity int NOT NULL,
-    ImportPrice int NOT NULL,
-    CONSTRAINT PK_DetailDeliveryNote_PK PRIMARY KEY(DeliveryNoteID,ProductID),
-    CONSTRAINT FK_DetailDeliveryNote_DeliveryNote FOREIGN KEY(DeliveryNoteID) REFERENCES DeliveryNote(ID),
-    CONSTRAINT FK_DetailDeliveryNote__Product FOREIGN KEY(ProductID) REFERENCES Product(ID)
-);
-
--- Table Cart
-CREATE TABLE cart(
-	CustomerID int NOT NULL,
-    ProductID int NOT NULL,
-    Quantity int NOT NULL,
-    CONSTRAINT PK_Cart_Customer_Product PRIMARY KEY(CustomerID,ProductID),
-    CONSTRAINT FK_Cart_Cusotmer FOREIGN KEY(CustomerID) REFERENCES Customer(ID),
-    CONSTRAINT FK_Cart_Product FOREIGN KEY(ProductID) REFERENCES Product(ID)
-);
-
--- Table Review
-CREATE TABLE review(
-	CustomerID int NOT NULL,
-    ProductID int NOT NULL,
-    Score int NOT NULL,
-    Comment varchar(500),
-	CONSTRAINT PK_Review_Customer_Product PRIMARY KEY(CustomerID,ProductID),
-	CONSTRAINT FK_Review_Cusotmer FOREIGN KEY(CustomerID) REFERENCES Customer(ID),
-    CONSTRAINT FK_Review_Product FOREIGN KEY(ProductID) REFERENCES Product(ID),
-    CONSTRAINT CK_Review_Score CHECK(Score >=1 and Score <=5)
+    CONSTRAINT FK_DetailBill_Bill FOREIGN KEY(BillID) REFERENCES Bill(BillID),
+    CONSTRAINT FK_DetailBill_Product FOREIGN KEY(ProductID) REFERENCES Product(ProductID)
 );
 
 
 
--- insert customer
-DELIMITER //
-CREATE PROCEDURE InsertCustomerUser(IN Username varchar(100), IN Password varchar(255), IN Name varchar(100),
-IN DayofBirth date, IN PhoneNumber varchar(10), IN Gender int, IN Province varchar(10), IN District varchar(10),IN Ward varchar(10),IN Address varchar(255)) 
-BEGIN
-DECLARE EXIT HANDLER FOR SQLEXCEPTION 
-    BEGIN
-          ROLLBACK;
-          RESIGNAL;
-    END;
-START TRANSACTION;
-INSERT INTO User (`username`,`password`,`Role`)
-VALUES (Username,Password,'Khách hàng');
-INSERT INTO Customer (`Name`,`DayOfBirth`,`PhoneNumber`,`Gender`,`Province`,`District`,`Ward`,`Address`,`Username`)
-VALUES (Name,DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Username);
-COMMIT;
-END
-//
-DELIMITER ;
-
--- insert employee
-DELIMITER //
-CREATE PROCEDURE InsertEmployeeUser(IN Username varchar(100), IN Name varchar(100),
-IN DayOfBirth date, IN PhoneNumber varchar(10), IN Gender int, IN Province varchar(10), IN District varchar(10),IN Ward varchar(10),IN Address varchar(255), IN Avatar varchar(255), IN Role varchar(20)) 
-BEGIN
-DECLARE EXIT HANDLER FOR SQLEXCEPTION 
-    BEGIN
-          ROLLBACK;
-          RESIGNAL;
-    END;
-START TRANSACTION;
-INSERT INTO User (`username`,`password`,`Role`,`IsActive`)
-VALUES (Username,'$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',Role,1);
-
-INSERT INTO Employee (`Name`,`DayOfBirth`,`PhoneNumber`,`Gender`,`Province`,`District`,`Ward`,`Address`,`Username`,`Avatar`)
-VALUES (Name,DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Username,Avatar);
-COMMIT;
-END
-//
-DELIMITER ;
-Call InsertEmployeeUser('admin.fitfood2@gmail.com','Admin','2001-11-14','0333333402',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood3@gmail.com','Admin','2001-11-14','0333333403',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood4@gmail.com','Admin','2001-11-14','0333333404',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood5@gmail.com','Admin','2001-11-14','0333333405',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood6@gmail.com','Admin','2001-11-14','0333333406',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood7@gmail.com','Admin','2001-11-14','0333333407',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood8@gmail.com','Admin','2001-11-14','0333333408',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood9@gmail.com','Admin','2001-11-14','0333333409',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood10@gmail.com','Admin','2001-11-14','0333333410',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood11@gmail.com','Admin','2001-11-14','0333333411',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood12@gmail.com','Admin','2001-11-14','0333333412',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood13@gmail.com','Admin','2001-11-14','0333333413',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood14@gmail.com','Admin','2001-11-14','0333333414',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood15@gmail.com','Admin','2001-11-14','0333333415',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood16@gmail.com','Admin','2001-11-14','0333333416',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood17@gmail.com','Admin','2001-11-14','0333333417',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood18@gmail.com','Admin','2001-11-14','0333333418',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood19@gmail.com','Admin','2001-11-14','0333333419',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood20@gmail.com','Admin','2001-11-14','0333333420',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood21@gmail.com','Admin','2001-11-14','0333333421',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-     Call InsertEmployeeUser('tranhakhanhduynguyenkhanh.fitfood@gmail.com','Admin','2001-11-14','0333333422',1,'79','773','27283','Ho Chi Minh 2','','Admin');             
-     Call InsertEmployeeUser('tranhakhanhduynguyenkhanh12312312312312312312312312312312312321312.fitfood@gmail.com','Admin','2001-11-14','0333333423',1,'79','773','27283','Ho Chi Minh 2','','Admin');            
-
-
-select * from user;
-
-
-SELECT ID, Employee.Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username LIMIT 1,10
-
--- get info user
-DELIMITER //
-CREATE PROCEDURE GetInfoUser(IN UsernameInput varchar(100)) 
-BEGIN
-If EXISTS (SELECT 1 FROM Customer WHERE Customer.Username=Username) THEN 
-SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,User.Username,Role,IsActive FROM Customer INNER JOIN User ON Customer.Username=User.Username WHERE Customer.Username=UsernameInput; END IF;
-
-If EXISTS (SELECT 1 FROM Employee WHERE Employee.Username=Username) THEN 
-SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,User.Username,Role,IsActive FROM Employee INNER JOIN User ON Employee.Username=User.Username  WHERE Employee.Username=UsernameInput; END IF;
-
-END
-//
-DELIMITER ;
-
-drop procedure GetInfoUser;
-
-SELECT ID, Employee.Username, Name, DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username
-WHERE Match(Employee.Username,Name) AGAINST ('Tran');
+-- Data User
+Insert Into User(Username,Password, Role, IsActive, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar) Values(
+'duytran@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',2,2,'Khánh Duy','2000-09-01','0333121131','1','79','773','27283','Ho Chi Minh','EmployeeAvatar_1.png'
+);
+Insert Into User(Username,Password, Role, IsActive, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar) Values(
+'duytran1@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',2,2,'Khánh Duy','2000-09-01','0333121132','1','79','773','27283','Ho Chi Minh','EmployeeAvatar_2.png'
+);
 
 
 
-select * from user;
-select * from customer;
-select * from employee;
+-- Data ProductType
+
+INSERT INTO ProductType (`Name`) Values ('Đồ uống');
+INSERT INTO ProductType (`Name`) Values ('Đồ ăn');
 
 
-SELECT ID, Employee.Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username;
+-- Data Product
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('NƯỚC MÁT THẢO MỘC',100000,15,'Chai',2,'ProductAvatar_1.png','1');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('FITFOOD JUICE SWEETIE',200000,100,'Chai',2,'ProductAvatar_2.png','1');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('FITFOOD JUICE GREENIE',100000,100,'Chai',2,'ProductAvatar_3.png','1');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('BOX Ức gà mềm mọng',379000,100,'Hộp',2,'ProductAvatar_4.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Cơm gạo lức ăn liền ',100000,80,'Gói',2,'ProductAvatar_5.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Nhân Burger Gà Teriyaki',100000,87,'Gói',2,'ProductAvatar_6.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Ức gà ăn liền ',199000,100,'Hộp',2,'ProductAvatar_7.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gạo lứt Rong Biển',100000,80,'Hộp',2,'ProductAvatar_8.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gạo lứt Chà Bông',100000,100,'Hộp',2,'ProductAvatar_9.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Bánh ngói hạnh nhân',129000,100,'Hộp',2,'ProductAvatar_10.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Biscotti vị socola',129000,97,'Hộp',2,'ProductAvatar_11.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Biscotti vị trà xanh ',100000,100,'Hộp',2,'ProductAvatar_12.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Biscotti vị truyền thống',100000,100,'Hộp',2,'ProductAvatar_13.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Tempeh Tương Nén',100000,100,'Gói',2,'ProductAvatar_14.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Bánh mì ngũ cốc',85000,100,'Hộp',2,'ProductAvatar_15.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói FIT 1',600000,100,'Gói',2,'ProductAvatar_16.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói FIT 2',600000,100,'Gói',2,'ProductAvatar_17.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói FIT 3',600000,100,'Gói',2,'ProductAvatar_18.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói MEAT-S',1200000,100,'Gói',2,'ProductAvatar_19.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói MEAT',950000,100,'Gói',2,'ProductAvatar_20.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói chay',600000,100,'Gói',2,'ProductAvatar_21.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói Full',750000,100,'Gói',2,'ProductAvatar_21.png','2');
+
+
+
+
+-- Data Bill
+Insert Into Bill (Date, State, UserID) Values ('2020-10-11',-1,1);
+Insert Into Bill (Date, State, UserID) Values ('2020-10-11',-1,2);
+Insert Into Bill (Date, State, UserID) Values ('2021-10-11',1,1);
+Insert Into Bill (Date, State, UserID) Values ('2021-10-11',1,2);
+
+-- Data Detail Bill
+
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('1','1',11,'150000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('1','3',5,'100000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('2','2',7,'150000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('2','13',8,'130000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('3','12',2,'150000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('3','13',1,'210000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('4','5',1,'150000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('4','6',2,'200000');
 

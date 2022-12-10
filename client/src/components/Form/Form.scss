@@ -62,6 +62,7 @@
 
     img {
       width: 100%;
+      -o-object-fit: cover;
       object-fit: cover;
     }
   }
@@ -115,9 +116,10 @@
   border-radius: 3px;
   border: 1px solid $cl-black;
   width: 100%;
-  max-height: 200px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
   height: max-content;
-  min-height: 50px;
+  max-height: 200px;
   overflow-y: auto;
 
   &--loadingIcon {
@@ -153,4 +155,10 @@
 .formPaginateStepForm {
   @include flexMid(unset);
   width: 100%;
+}
+
+.employees-trigger-delete {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

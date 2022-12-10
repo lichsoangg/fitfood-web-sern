@@ -1,7 +1,12 @@
 @import '../../scss/import.scss';
+<<<<<<< HEAD
 
 .activePage {
   width: 30%;
+=======
+.activePageWrapper {
+  width: 100%;
+>>>>>>> 531139e (merge branch page-homepage and fix some bugs)
   @include flexMid(center);
   display: flex;
   flex-direction: column;

@@ -1,0 +1,49 @@
+@import '../../../../scss/import.scss';
+.testimonial-item {
+  background: $cl-white;
+  height: 180px;
+  border-radius: 6px;
+  padding: 16px;
+  @include flexMid(unset);
+  flex-direction: column;
+  &__content {
+    font-weight: 500;
+    color: $cl-black;
+    line-height: 1.2;
+    text-align: left;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+  &__info {
+    @include flexMid(unset);
+    width: 100%;
+    gap: 12px;
+    &--left {
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content;
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+    &--right {
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
+      h5 {
+        font-weight: 600;
+        font-size: $fz-medium;
+        color: $cl-black;
+        text-transform: uppercase;
+      }
+      span {
+        font-weight: 500;
+        font-size: $fz-default;
+        color: $cl-grey;
+        text-transform: capitalize;
+      }
+    }
+  }
+}

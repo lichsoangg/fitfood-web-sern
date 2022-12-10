@@ -1,15 +1,15 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import appleIcon from '../../assets/icons/appleid.png';
-import facebookIcon from '../../assets/icons/facebook.png';
-import googleIcon from '../../assets/icons/google.png';
-import ErrorBoundaryComponent from '../../components/ErrorComponent/ErrorComponent';
-import path from '../../constants/path';
-import AuthLogin from '../../features/authentication/AuthLogin';
-import './Login.scss';
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import appleIcon from '../../assets/icons/appleid.png'
+import facebookIcon from '../../assets/icons/facebook.png'
+import googleIcon from '../../assets/icons/google.png'
+import ErrorBoundaryComponent from '../../components/ErrorComponent/ErrorComponent'
+import path from '../../constants/path'
+import AuthLogin from '../../features/authentication/AuthLogin'
+import './Login.scss'
 
 export default function Login() {
-  const location = useLocation();
+  const location = useLocation()
   return (
     <ErrorBoundaryComponent>
       <div className='login'>
@@ -39,5 +39,5 @@ export default function Login() {
         </div>
       </div>
     </ErrorBoundaryComponent>
-  );
+  )
 }

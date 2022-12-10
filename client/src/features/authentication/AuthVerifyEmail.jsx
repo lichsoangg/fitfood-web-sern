@@ -1,14 +1,14 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import * as yup from 'yup';
-import Error from '../../components/Error/Error';
-import Form from '../../components/Form/Form';
-import Loading from '../../components/Loading/Loading';
-import { SuccessNotify } from '../../components/Notify/Notify';
-import { useSendVerifyEmailMutation, useVerifyEmailMutation } from './authApi';
-import { setActiveUser } from './authSlice';
+import { yupResolver } from '@hookform/resolvers/yup'
+import React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import * as yup from 'yup'
+import Error from '../../components/Error/Error'
+import Form from '../../components/Form/Form'
+import Loading from '../../components/Loading/Loading'
+import { SuccessNotify } from '../../components/Notify/Notify'
+import { useSendVerifyEmailMutation, useVerifyEmailMutation } from './authApi'
+import { setActiveUser } from './authSlice'
 
 const schema = yup
   .object({
@@ -17,31 +17,30 @@ const schema = yup
     number3: yup.string().required(),
     number4: yup.string().required()
   })
-  .required();
+  .required()
 export default function AuthVerifyEmail() {
-  const methods = useForm({ resolver: yupResolver(schema) });
-  const dispatch = useDispatch();
-  const { handleSubmit } = methods;
+  const methods = useForm({ resolver: yupResolver(schema) })
+  const dispatch = useDispatch()
+  const { handleSubmit } = methods
 
-  const [verifyEmail, { isLoading: isVerifyEmailLoading, error: errorVerifyEmail }] = useVerifyEmailMutation();
-  const [sendVerifyEmail, { isLoading: isSendEmailLoading, error: errorSendVerifyEmail }] =
-    useSendVerifyEmailMutation();
+  const [verifyEmail, { isLoading: isVerifyEmailLoading, error: errorVerifyEmail }] = useVerifyEmailMutation()
+  const [sendVerifyEmail, { isLoading: isSendEmailLoading, error: errorSendVerifyEmail }] = useSendVerifyEmailMutation()
   const onSubmit = async (data) => {
-    const code = `${data.number1}${data.number2}${data.number3}${data.number4}`;
-    const response = await verifyEmail({ code }).unwrap();
+    const code = `${data.number1}${data.number2}${data.number3}${data.number4}`
+    const response = await verifyEmail({ code }).unwrap()
     if (response?.status === 200) {
-      SuccessNotify(response?.message);
-      dispatch(setActiveUser(1));
+      SuccessNotify(response?.message)
+      dispatch(setActiveUser(1))
     }
-  };
+  }
 
   // const renderListInput=
   const handleSendEmail = async () => {
-    const response = await sendVerifyEmail().unwrap();
+    const response = await sendVerifyEmail().unwrap()
     if (response?.status === 200) {
-      SuccessNotify(response?.message);
+      SuccessNotify(response?.message)
     }
-  };
+  }
   return (
     <FormProvider {...methods}>
       <form className='activePage__form' onSubmit={handleSubmit(onSubmit)}>
@@ -61,5 +60,5 @@ export default function AuthVerifyEmail() {
       </form>
       {isSendEmailLoading && <Loading size={3} full />}
     </FormProvider>
-  );
+  )
 }

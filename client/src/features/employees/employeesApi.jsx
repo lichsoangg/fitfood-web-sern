@@ -1,4 +1,4 @@
-import { apiSlice } from '../api/apiSlice';
+import { apiSlice } from '../api/apiSlice'
 
 export const employeesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,8 +8,17 @@ export const employeesApi = apiSlice.injectEndpoints({
           url: '/employees',
           method: 'GET',
           params: queryConfig
-        };
-      }
+        }
+      },
+      providesTags: ['Employees']
+    }),
+    addEmployee: builder.mutation({
+      query: (data) => ({
+        url: '/employees/add',
+        method: 'POST',
+        body: data
+      }),
+      invalidatesTags: ['Employees']
     }),
     updateEmployee: builder.mutation({
       query: ({ Username, data }) => {
@@ -17,11 +26,11 @@ export const employeesApi = apiSlice.injectEndpoints({
           url: `/employees/${Username}`,
           method: 'PUT',
           body: data
-        };
+        }
       },
-      invalidatesTags: ['Account']
+      invalidatesTags: ['Employees']
     })
   })
-});
+})
 
-export const { useGetEmployeesQuery, useUpdateEmployeeMutation } = employeesApi;
+export const { useGetEmployeesQuery, useUpdateEmployeeMutation, useAddEmployeeMutation } = employeesApi

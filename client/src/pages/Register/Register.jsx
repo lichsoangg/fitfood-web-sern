@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import ErrorBoundaryComponent from '../../components/ErrorComponent/ErrorComponent';
-import path from '../../constants/path';
-import AuthRegister from '../../features/authentication/AuthRegister';
-import './Register.scss';
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import ErrorBoundaryComponent from '../../components/ErrorComponent/ErrorComponent'
+import path from '../../constants/path'
+import AuthRegister from '../../features/authentication/AuthRegister'
+import './Register.scss'
 
 export default function Register() {
-  const location = useLocation();
+  const location = useLocation()
   return (
     <ErrorBoundaryComponent>
       <div className='register'>
@@ -20,5 +20,5 @@ export default function Register() {
         <AuthRegister />
       </div>
     </ErrorBoundaryComponent>
-  );
+  )
 }

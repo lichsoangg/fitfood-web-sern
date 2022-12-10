@@ -12,7 +12,12 @@ const path = {
   unauthorized: '/unauthorized',
   admin: '/admin',
   employeeManagement: 'quan-ly-nhan-vien',
-  productManagement: 'quan-ly-san-pham'
-};
+  productManagement: 'quan-ly-san-pham',
+  productTypeManagement: 'quan-ly-loai-san-pham',
+  billManagement: 'quan-ly-hoa-don',
+  revenueReport: 'bao-cao-doanh-thu',
+  backup: 'back-up'
 
-export default path;
+}
+
+export default path

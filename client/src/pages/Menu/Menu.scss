@@ -1,0 +1,117 @@
+@import '../../scss/import.scss';
+.menu {
+  width: 100%;
+  min-height: calc(100vh - 300px);
+  &-top {
+    height: 200px;
+    width: 100%;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+    background: $cl-primary;
+  }
+  .products {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    &__filter {
+      height: 800px;
+      padding: 14px;
+      width: calc(30% - 40px);
+      border-radius: 6px;
+      box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.28);
+      -webkit-box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.28);
+      background-color: $cl-white;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      label {
+        font-size: $fz-medium;
+        font-weight: 500;
+        position: relative;
+        &::after {
+          content: '';
+          width: 30%;
+          border-bottom: 1px solid $cl-primary;
+          position: absolute;
+          left: 0;
+          bottom: -8px;
+        }
+      }
+      &--search {
+        border: 1px solid rgba($color: $cl-grey, $alpha: 0.4);
+        border-radius: 6px;
+        font-size: 16px;
+        padding: 12px;
+        &:focus-visible {
+          box-shadow: 0 0 9px rgba($cl-primary, 0.5);
+          outline: none;
+        }
+      }
+    }
+    .MuiSlider-root {
+      margin-top: 48px;
+      color: $cl-primary !important;
+
+      .MuiSlider-valueLabel {
+        transform: scale(1.5) translateY(-10px);
+        font-size: 8px !important;
+      }
+    }
+
+    &__wrapper {
+      width: 70%;
+      height: 800px;
+      border-radius: 6px;
+      background-color: $cl-white;
+      box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.28);
+      -webkit-box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.28);
+      &--list {
+        padding: 12px;
+        width: 100%;
+        height: -webkit-max-content;
+        height: -moz-max-content;
+        height: max-content;
+        display: grid;
+        grid-gap: 12px;
+        grid-template-columns: repeat(3, minmax(250px, 1fr));
+        grid-template-rows: repeat(2, minmax(250px, 1fr));
+      }
+    }
+    .employees-management__operation--role {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-left: 0;
+      height: -webkit-max-content;
+      height: -moz-max-content;
+      height: max-content;
+      label {
+        width: 100%;
+      }
+      span {
+        width: 100%;
+        height: 60px;
+      }
+    }
+    .employees-management__operation--rating {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      label {
+        margin-bottom: 6px;
+      }
+      span {
+        padding-left: 12px;
+        border: 1px solid rgba($cl-grey, 0.4);
+        width: 100%;
+        height: 60px;
+        @include flexMid(unset);
+        border-radius: 6px;
+        &:hover {
+          background-color: rgba($cl-primary, 0.5);
+        }
+      }
+    }
+  }
+}
