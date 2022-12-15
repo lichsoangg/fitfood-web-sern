@@ -1,6 +1,6 @@
-import React from 'react';
-import AccountUpdate from '../../../features/account/AccountUpdate';
-import './AccountInformation.scss';
+import React from 'react'
+import AccountUpdate from '../../../features/account/AccountUpdate'
+import './AccountInformation.scss'
 export default function AccountInformation() {
   return (
     <div className='accountInformation'>
@@ -8,5 +8,5 @@ export default function AccountInformation() {
       <hr />
       <AccountUpdate />
     </div>
-  );
+  )
 }

@@ -21,8 +21,9 @@ const customerController = {
         }
       });
       data["Avatar"] = req.file.filename;
-
     }
+    data["Avatar"]=data["Avatar"].replace(process.env.IMAGE_DATA_URL,'');
+
     try {
       Customer.updateCustomer(data, username, (err, data) => {
         if (err) return res.status(400).json({ message: err.message });

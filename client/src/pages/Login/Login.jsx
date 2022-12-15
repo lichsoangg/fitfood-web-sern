@@ -1,21 +1,22 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import appleIcon from '../../assets/icons/appleid.png';
-import facebookIcon from '../../assets/icons/facebook.png';
-import googleIcon from '../../assets/icons/google.png';
-import ErrorBoundaryComponent from '../../components/ErrorComponent/ErrorComponent';
-import AuthLogin from '../../features/authentication/AuthLogin';
-import './Login.scss';
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import appleIcon from '../../assets/icons/appleid.png'
+import facebookIcon from '../../assets/icons/facebook.png'
+import googleIcon from '../../assets/icons/google.png'
+import ErrorBoundaryComponent from '../../components/ErrorComponent/ErrorComponent'
+import path from '../../constants/path'
+import AuthLogin from '../../features/authentication/AuthLogin'
+import './Login.scss'
 
 export default function Login() {
-  const location = useLocation();
+  const location = useLocation()
   return (
     <ErrorBoundaryComponent>
       <div className='login'>
         <h3 className='login__header'>Đăng nhập vào Fitfood</h3>
         <div className='login__description body4'>
           Bạn không có tài khoản?{' '}
-          <Link to='/dang-ky' state={location.state}>
+          <Link to={path.register} state={location.state}>
             Đăng ký tại đây
           </Link>
         </div>
@@ -38,5 +39,5 @@ export default function Login() {
         </div>
       </div>
     </ErrorBoundaryComponent>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import React from 'react';
-import LayoutComponents from '../LayoutComponents/LayoutComponents';
-import './Footer.scss';
+import React from 'react'
+import LayoutComponents from '../LayoutComponents/LayoutComponents'
+import './Footer.scss'
 
 export default function Footer() {
   return (
@@ -13,7 +13,7 @@ export default function Footer() {
       <Footer.Center />
       <Footer.Bottom />
     </FooterWrapper>
-  );
+  )
 }
 
 function FooterWrapper({ children }) {
@@ -21,11 +21,11 @@ function FooterWrapper({ children }) {
     <div className='footer'>
       <div className='mainWrapper'>{children}</div>
     </div>
-  );
+  )
 }
 
 function Top({ children }) {
-  return <div className='footer__top'>{children}</div>;
+  return <div className='footer__top'>{children}</div>
 }
 
 function Center() {
@@ -63,7 +63,7 @@ function Center() {
         </svg>
       </a>
     </div>
-  );
+  )
 }
 
 function Bottom() {
@@ -72,9 +72,9 @@ function Bottom() {
       <span>Bảo mật và điều khoản</span>
       <span>© 2022 Một sản phẩm của KhanhDuy</span>
     </div>
-  );
+  )
 }
 
-Footer.Top = Top;
-Footer.Center = Center;
-Footer.Bottom = Bottom;
+Footer.Top = Top
+Footer.Center = Center
+Footer.Bottom = Bottom

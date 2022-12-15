@@ -1,4 +1,4 @@
-import { apiSlice } from '../api/apiSlice.jsx';
+import { apiSlice } from '../api/apiSlice.jsx'
 
 export const registerAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -52,11 +52,18 @@ export const registerAPI = apiSlice.injectEndpoints({
     sendVerifyEmail: builder.mutation({
       query: () => ({
         url: '/auth/send-email-verify',
+        method: 'POST'
+      })
+    }),
+    resetPassword: builder.mutation({
+      query: (data) => ({
+        url: '/auth/reset-password',
         method: 'POST',
+        body: data
       })
     })
   })
-});
+})
 
 export const {
   useAddNewCustomerMutation,
@@ -65,5 +72,6 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useVerifyEmailMutation,
-  useSendVerifyEmailMutation
-} = registerAPI;
+  useSendVerifyEmailMutation,
+  useResetPasswordMutation
+} = registerAPI

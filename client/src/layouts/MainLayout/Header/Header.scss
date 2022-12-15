@@ -1,15 +1,13 @@
 @import '../../../scss/import.scss';
 
 .header {
-  background: $cl-white;
+  background: $cl-black;
   border-bottom: 0.5px solid;
-
   .mainWrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 46px;
-    padding: 50px 40px 50px;
+    height: 70px;
   }
 }

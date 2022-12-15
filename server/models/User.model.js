@@ -17,6 +17,9 @@ const User = {
     updateActive: (username, callback) => {
         db.query("UPDATE USER SET IsActive=1 WHERE Username=?", [username], callback);
     },
+    getUserWithPhoneNumber: (phoneNumber, callback) => {
+        db.query("SELECT * FROM User LEFT JOIN Customer ON User.Username=Customer.Username LEFT JOIN Employee ON Employee.Username = User.Username WHERE  Customer.PhoneNumber=? OR Employee.PhoneNumber=?", [phoneNumber,phoneNumber], callback);
+    },
 };
 
 

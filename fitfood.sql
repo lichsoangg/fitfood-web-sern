@@ -12,7 +12,7 @@ CREATE TABLE user(
     Password varchar(255) NOT NULL,
   	Role varchar(20) NOT NULL,
     IsActive Boolean DEFAULT 0,
-	CONSTRAINT PK_User_ID PRIMARY KEY(ID)
+	CONSTRAINT PK_User_ID PRIMARY KEY(Username)
 );	
 
 
@@ -185,8 +185,8 @@ DECLARE EXIT HANDLER FOR SQLEXCEPTION
           RESIGNAL;
     END;
 START TRANSACTION;
-INSERT INTO User (`username`,`password`,`Role`)
-VALUES (Username,'$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',Role);
+INSERT INTO User (`username`,`password`,`Role`,`IsActive`)
+VALUES (Username,'$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',Role,1);
 
 INSERT INTO Employee (`Name`,`DayOfBirth`,`PhoneNumber`,`Gender`,`Province`,`District`,`Ward`,`Address`,`Username`,`Avatar`)
 VALUES (Name,DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Username,Avatar);
@@ -194,7 +194,29 @@ COMMIT;
 END
 //
 DELIMITER ;
-Call InsertEmployeeUser('taikhoan1','Tài khoản 1 ne','2001-11-14','0333333301',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood2@gmail.com','Admin','2001-11-14','0333333402',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood3@gmail.com','Admin','2001-11-14','0333333403',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood4@gmail.com','Admin','2001-11-14','0333333404',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood5@gmail.com','Admin','2001-11-14','0333333405',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood6@gmail.com','Admin','2001-11-14','0333333406',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood7@gmail.com','Admin','2001-11-14','0333333407',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood8@gmail.com','Admin','2001-11-14','0333333408',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood9@gmail.com','Admin','2001-11-14','0333333409',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood10@gmail.com','Admin','2001-11-14','0333333410',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood11@gmail.com','Admin','2001-11-14','0333333411',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood12@gmail.com','Admin','2001-11-14','0333333412',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood13@gmail.com','Admin','2001-11-14','0333333413',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood14@gmail.com','Admin','2001-11-14','0333333414',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood15@gmail.com','Admin','2001-11-14','0333333415',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood16@gmail.com','Admin','2001-11-14','0333333416',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood17@gmail.com','Admin','2001-11-14','0333333417',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood18@gmail.com','Admin','2001-11-14','0333333418',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood19@gmail.com','Admin','2001-11-14','0333333419',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood20@gmail.com','Admin','2001-11-14','0333333420',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+Call InsertEmployeeUser('admin.fitfood21@gmail.com','Admin','2001-11-14','0333333421',1,'79','773','27283','Ho Chi Minh 2','','Admin');
+     Call InsertEmployeeUser('tranhakhanhduynguyenkhanh.fitfood@gmail.com','Admin','2001-11-14','0333333422',1,'79','773','27283','Ho Chi Minh 2','','Admin');             
+     Call InsertEmployeeUser('tranhakhanhduynguyenkhanh12312312312312312312312312312312312321312.fitfood@gmail.com','Admin','2001-11-14','0333333423',1,'79','773','27283','Ho Chi Minh 2','','Admin');            
+
 
 select * from user;
 
@@ -206,16 +228,21 @@ DELIMITER //
 CREATE PROCEDURE GetInfoUser(IN UsernameInput varchar(100)) 
 BEGIN
 If EXISTS (SELECT 1 FROM Customer WHERE Customer.Username=Username) THEN 
-SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,Username,Role,IsActive FROM Customer INNER JOIN User ON Customer.Username=User.Username WHERE Customer.Username=UsernameInput; END IF;
+SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,User.Username,Role,IsActive FROM Customer INNER JOIN User ON Customer.Username=User.Username WHERE Customer.Username=UsernameInput; END IF;
 
 If EXISTS (SELECT 1 FROM Employee WHERE Employee.Username=Username) THEN 
-SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,Username,Role,IsActive FROM Employee INNER JOIN User ON Employee.Username=User.Username  WHERE Employee.Username=UsernameInput; END IF;
+SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,User.Username,Role,IsActive FROM Employee INNER JOIN User ON Employee.Username=User.Username  WHERE Employee.Username=UsernameInput; END IF;
 
 END
 //
 DELIMITER ;
 
-drop procedure GetInfoUser
+drop procedure GetInfoUser;
+
+SELECT ID, Employee.Username, Name, DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username
+WHERE Match(Employee.Username,Name) AGAINST ('Tran');
+
+
 
 select * from user;
 select * from customer;

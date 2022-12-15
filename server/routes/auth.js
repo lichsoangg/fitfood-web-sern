@@ -11,5 +11,5 @@ router.post("/checkphonenumber", authController.checkPhoneNumber);
 router.post("/logout", verifyToken, authController.logout);
 router.post("/verify-email", verifyToken, authController.verifyEmail);
 router.post("/send-email-verify", verifyToken, authController.sendEmailVerify);
-
+router.post("/reset-password",authController.resetPassword);
 module.exports = router;

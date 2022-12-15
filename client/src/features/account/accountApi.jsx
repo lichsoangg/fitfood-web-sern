@@ -1,4 +1,4 @@
-import { apiSlice } from '../api/apiSlice';
+import { apiSlice } from '../api/apiSlice'
 
 export const accountApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -22,6 +22,6 @@ export const accountApi = apiSlice.injectEndpoints({
       invalidatesTags: ['Account']
     })
   })
-});
+})
 
-export const { useGetMeQuery, useChangePasswordMutation, useUpdateAccountMutation } = accountApi;
+export const { useGetMeQuery, useChangePasswordMutation, useUpdateAccountMutation } = accountApi
