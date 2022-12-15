@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useReducer } from 'react'
 import { createPortal } from 'react-dom'
 import './Portal.scss'
 const createPortalWrapper = () => {
@@ -8,16 +9,14 @@ const createPortalWrapper = () => {
 }
 
 const portalWrapper = createPortalWrapper()
-
 const Portal = React.forwardRef(({ overlay = true, children, styleContent = {}, stylePortal = {}, setOpen }, ref) => {
   useEffect(() => {
     document.body.appendChild(portalWrapper)
   }, [])
-
+  const [, forceUpdate] = useReducer((x) => x + 1, 0)
   const handleClickOutside = () => {
     setOpen(false)
   }
-
   const renderContent = (
     <div className='portal' style={stylePortal}>
       {overlay && <div className='overlay' onClick={handleClickOutside}></div>}

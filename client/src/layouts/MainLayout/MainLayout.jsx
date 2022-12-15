@@ -7,7 +7,7 @@ export default function MainLayout() {
   return (
     <div className='mainLayout '>
       <Header />
-      <div className='mainLayout__outlet mainWrapper'>
+      <div className='mainLayout__outlet'>
         <Outlet />
       </div>
       <Footer />

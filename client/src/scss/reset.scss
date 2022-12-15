@@ -194,6 +194,9 @@ hr {
 
 /* width */
 ::-webkit-scrollbar {
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 6px;
   height: 6px;
 }
@@ -201,15 +204,35 @@ hr {
 /* Track */
 ::-webkit-scrollbar-track {
   background: transparent;
+  border-radius: 6px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $cl-primary-light;
+  background: rgba($cl-primary, 0.9);
   border-radius: 6px;
 }
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: $cl-primary !important;
+}
 
-// /* Handle on hover */
-// ::-webkit-scrollbar-thumb:hover {
-//   background-color: rgba($cl-primary-light, 0.8);
-// }
+.swiper-scrollbar {
+  opacity: 1 !important;
+  margin: 0 auto;
+  left: 50%;
+  // transform: translateX(-50%);
+  width: 80%;
+  height: 2px !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  display: flex;
+  align-items: center;
+  &-drag {
+    border-radius: 6px !important;
+    background-color: $cl-white !important;
+    padding: 3px;
+  }
+}

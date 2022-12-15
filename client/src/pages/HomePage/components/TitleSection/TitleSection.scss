@@ -1,0 +1,20 @@
+@import '../../../../scss/import.scss';
+.title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 3rem;
+  &__text {
+    line-height: 40px;
+    font-size: 40px;
+    letter-spacing: 2px;
+    color: $cl-white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  &__border {
+    width: 36px;
+    border-top: 8px solid;
+    border-color: $cl-primary;
+  }
+}

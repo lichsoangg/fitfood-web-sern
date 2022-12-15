@@ -169,9 +169,9 @@ function Dropdown({ data, isLoading = false, trigger, styleFormInput, placeHolde
           style={
             trigger
               ? {
-                opacity: `${getValues(trigger) ? 1 : 0.4}`,
-                border: `${errors[name] ? '0.8px solid red' : ''}`
-              }
+                  opacity: `${getValues(trigger) ? 1 : 0.4}`,
+                  border: `${errors[name] ? '0.8px solid red' : ''}`
+                }
               : { border: `${errors[name] ? '0.8px solid red' : ''}` }
           }
         />
@@ -185,7 +185,11 @@ function Dropdown({ data, isLoading = false, trigger, styleFormInput, placeHolde
         {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
       </div>
       {open && data && (
-        <DropdownBase rect={rect} setOpen={setOpen}>
+        <DropdownBase
+          rect={rect}
+          setOpen={setOpen}
+          styleContent={{ position: 'absolute', transform: `translate(${window.scrollX}px,${window.scrollY}px)` }}
+        >
           <div className='formInput__dropdown' onClick={handleClickDropdown}>
             {isLoading && (
               <div className='formInput__dropdown--loadingIcon'>

@@ -92,7 +92,11 @@ export default function EmployeeManagement() {
             <label>Chọn chức vụ</label>
             <span ref={activeModalRef}>{queryConfig?.role ? queryConfig?.role : 'Tất cả'}</span>
             {open && (
-              <DropdownBase rect={rect} setOpen={setOpen}>
+              <DropdownBase
+                rect={rect}
+                setOpen={setOpen}
+                styleContent={{ position: 'absolute', transform: `translate(${window.scrollX}px,${window.scrollY}px)` }}
+              >
                 <div className='employee-management__operation--role-dropdown'>
                   {roles.map((role) => {
                     if (role !== queryConfig?.role) {
@@ -202,10 +206,10 @@ export default function EmployeeManagement() {
               })}
           </div>
         </div>
-        <div className="employees-management__bottom-bar">
-          <div className="employees-management__bottom-bar--input-limit">
+        <div className='employees-management__bottom-bar'>
+          <div className='employees-management__bottom-bar--input-limit'>
             <span>Hiển thị</span>
-            <input type="number" defaultValue={5} />
+            <input type='number' defaultValue={5} />
             <span>trong tổng số 100 dữ liệu</span>
           </div>
           {employees?.pageSize > 1 && (
@@ -213,7 +217,7 @@ export default function EmployeeManagement() {
               queryConfig={queryConfig}
               pageSize={employees?.pageSize}
               pathname={location?.pathname}
-            // stylePagination={{ margin: '20px auto 0' }}
+              // stylePagination={{ margin: '20px auto 0' }}
             />
           )}
         </div>

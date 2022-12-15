@@ -1,0 +1,74 @@
+@import '../../scss/import.scss';
+.product-item {
+  position: relative;
+  border-radius: 6px;
+  height: 320px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: $cl-white;
+  cursor: pointer;
+  &:hover > &__icon,
+  &:hover > &__overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+  &__overlay {
+    @include fullPage();
+    background: transparent;
+    outline: 3px solid;
+    outline-color: $cl-white;
+    background: rgba(0, 0, 0, 0.6);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    border-radius: 6px;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+  &__icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  &__image {
+    height: 70%;
+    img {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      width: 100%;
+      height: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+  &__info {
+    height: 30%;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 20px;
+
+    h5 {
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: $cl-black;
+    }
+    span {
+      font-weight: 500;
+      font-size: 1rem;
+      color: $cl-black;
+      primary {
+        color: $cl-primary;
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ import fitfoodImage from '../../assets/images/logo_fitfood.png'
 import Navbar from '../../components/Navbar'
 import path from '../../constants/path'
 import './Admin.scss'
-import Header from "../../layouts/MainLayout/Header/Header"
+import Header from '../../layouts/MainLayout/Header/Header'
 const homeIcon = () => (
   <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
     <path

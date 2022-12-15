@@ -1,23 +1,19 @@
 import React from 'react'
 import Portal from '../Portal/Portal'
 import PropTypes from 'prop-types'
-export default function DropdownBase({ rect, alignRight, width, children, setOpen }) {
-  let leftStyle = `${rect?.left + window?.scrollX}px`
-
-  let widthValue = width ? width : rect?.width
-  let widthStyle = `${widthValue}px`
-  if (alignRight) {
-    leftStyle = `${rect?.left + rect?.width - widthValue + window?.scrollX}px`
-  }
+import { useState } from 'react'
+import { useReducer } from 'react'
+export default function DropdownBase({ rect, styleContent, stylePortal, width, children, setOpen }) {
   return (
     <Portal
       styleContent={{
-        position: 'absolute',
-        left: leftStyle,
-        top: `${rect?.top + rect?.height + window?.scrollY + 4}px`,
-        width: widthStyle
+        left: `${rect?.left + window?.scrollX}px`,
+        top: `${rect?.top + rect?.height + 4}px`,
+        width: `${width ? width : rect.width}px`,
+        ...styleContent
       }}
       setOpen={setOpen}
+      stylePortal={{ ...stylePortal }}
     >
       {children}
     </Portal>

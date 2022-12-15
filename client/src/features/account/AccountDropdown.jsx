@@ -35,7 +35,13 @@ export default function AccountDropdown() {
       {token ? (
         <>
           {open && user && (
-            <DropdownBase rect={rect} width={200} alignRight setOpen={setOpen}>
+            <DropdownBase
+              rect={rect}
+              width={200}
+              setOpen={setOpen}
+              styleContent={{ position: 'fixed', transform: `translateX(-160px)` }}
+              stylePortal={{ zIndex: '100' }}
+            >
               <ul className='layout__function--user-modal' onClick={() => setOpen(false)}>
                 <li>{user?.Name}</li>
                 <hr />

@@ -8,7 +8,7 @@ import './ActivePage.scss'
 export default function ActivePage({ children }) {
   const { username } = useSelector(selectCurrentAuth)
   const renderActivePage = (
-    <div className="activePageWrapper">
+    <div className='activePageWrapper'>
       <div className='activePage'>
         <div className='activePage__image'>
           <img src={NewEmail} alt='Verification Email Fitfood' />
