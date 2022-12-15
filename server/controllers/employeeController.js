@@ -10,36 +10,50 @@ const employeeController = {
         const page = req.query.page || 1
         const search = req.query.search || null
         const roleQuery = req.query.role || null
+        const NUMBER_ROWS_OFFSET = page * limit - limit
+        const NUMBER_ROWS_FETCH_NEXT = limit
         if (RolePermissions.Employee.Get.includes(role)) {
             try {
-                let query = ''
+                let queriesGroup = []
+                let queryString = ''
+                let offsetString = ''
                 if (search) {
-                    query = query.concat(" ", `CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),'',PhoneNumber,Role) Like '%${search}%'`, " ")
+                    queriesGroup.push(`CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),'',PhoneNumber,Role) Like '%${search}%'`)
                 }
                 if (roleQuery) {
-                    if (query.length > 0) {
-                        query = query.concat(" ", `AND Role Like '%${roleQuery}%'`)
-                    }
-                    else {
-                        query = query.concat(" ", `Role Like '%${roleQuery}%'`, " ")
-                    }
+                    queriesGroup.push(`Role Like '%${roleQuery}%'`)
                 }
-                if (query.length > 0) {
-                    query = "WHERE".concat(" ", query)
+                if (queriesGroup.length > 0) {
+                    queriesGroup.map(query => {
+
+                        if (queryString.length > 0) {
+                            queryString = queryString.concat('AND ', query, ' ')
+                        }
+                        else {
+                            queryString = queryString.concat('WHERE ', query, ' ')
+                        }
+                    })
                 }
 
-                Employee.getEmployees(query, (err, data) => {
-                    const pageSize = Math.ceil(data?.length / limit)
-                    data = data.splice(page * limit - limit, limit)
-                    data.map(item => {
-                        let avatar = item?.Avatar
-                        if (avatar) {
-                            avatar = `${process.env.IMAGE_DATA_URL}/${item?.Avatar}`
-                        }
-                        return item.Avatar = avatar
-                    })
+                if (limit && page) {
+                    offsetString = offsetString.concat(' ', ` LIMIT ${NUMBER_ROWS_OFFSET},${NUMBER_ROWS_FETCH_NEXT}`)
+                }
+
+                Employee.getEmployees(queryString, offsetString, (err, data) => {
                     if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" })
-                    res.status(200).json({ pageSize, data })
+                    Employee.countEmployees((errCount, dataCount) => {
+                        if (errCount) return res.status(400).json({ message: "Yêu cầu không hợp lệ" })
+                        const pageSize = Math.ceil(dataCount[0].NumberOfEmployees / limit)
+                        data.map(item => {
+                            let avatar = item?.Avatar
+                            if (avatar) {
+                                avatar = `${process.env.IMAGE_DATA_URL}${item?.Avatar}`
+                            }
+                            return item.Avatar = avatar
+                        })
+                        res.status(200).json({ pageSize, data })
+                    })
+
                 })
             } catch (err) {
                 next(err);;

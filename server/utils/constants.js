@@ -5,6 +5,6 @@ const RolePermissions = {
         Update: ["Admin"],
         Add: ["Admin"]
     }
-};
+}
 
-module.exports = RolePermissions;
+module.exports = RolePermissions

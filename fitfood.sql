@@ -214,8 +214,8 @@ Call InsertEmployeeUser('admin.fitfood18@gmail.com','Admin','2001-11-14','033333
 Call InsertEmployeeUser('admin.fitfood19@gmail.com','Admin','2001-11-14','0333333419',1,'79','773','27283','Ho Chi Minh 2','','Admin');
 Call InsertEmployeeUser('admin.fitfood20@gmail.com','Admin','2001-11-14','0333333420',1,'79','773','27283','Ho Chi Minh 2','','Admin');
 Call InsertEmployeeUser('admin.fitfood21@gmail.com','Admin','2001-11-14','0333333421',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-     Call InsertEmployeeUser('tranhakhanhduynguyenkhanh.fitfood@gmail.com','Admin','2001-11-14','0333333422',1,'79','773','27283','Ho Chi Minh 2','','Admin');             
-     Call InsertEmployeeUser('tranhakhanhduynguyenkhanh12312312312312312312312312312312312321312.fitfood@gmail.com','Admin','2001-11-14','0333333423',1,'79','773','27283','Ho Chi Minh 2','','Admin');            
+Call InsertEmployeeUser('tranhakhanhduynguyenkhanh.fitfood@gmail.com','Admin','2001-11-14','0333333422',1,'79','773','27283','Ho Chi Minh 2','','Admin');             
+Call InsertEmployeeUser('tranhakhanhduynguyenkhanh27.fitfood@gmail.com','Khánh Nguyễn','2001-11-14','0333333427',1,'79','773','27283','Ho Chi Minh 2','','Kinh doanh');            
 
 
 select * from user;
@@ -240,7 +240,9 @@ DELIMITER ;
 drop procedure GetInfoUser;
 
 SELECT ID, Employee.Username, Name, DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username
-WHERE Match(Employee.Username,Name) AGAINST ('Tran');
+WHERE CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),'',PhoneNumber) Like '';
+
+
 
 
 
@@ -250,4 +252,10 @@ select * from employee;
 
 
 SELECT ID, Employee.Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username;
+
+
+SELECT ID, Employee.Username, Name, DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role 
+From Employee INNER JOIN User ON Employee.Username=User.Username Where AND CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),'',PhoneNumber,Role) Like '%A%'  Role Like '%Admin%' 
+ OFFSET 0 ROWS Fetch NEXT 10 ONLY
+
 
