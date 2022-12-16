@@ -1,7 +1,6 @@
 @import '../../scss/import.scss';
 .activePageWrapper {
   width: 100%;
-  height: 100vh;
   @include flexMid(center);
   .activePage {
     width: 30%;

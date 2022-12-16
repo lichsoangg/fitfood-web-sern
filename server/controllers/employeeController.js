@@ -47,7 +47,7 @@ const employeeController = {
                         data.map(item => {
                             let avatar = item?.Avatar
                             if (avatar) {
-                                avatar = `${process.env.IMAGE_DATA_URL}${item?.Avatar}`
+                                avatar = `${process.env.IMAGE_DATA_URL}/${item?.Avatar}`
                             }
                             return item.Avatar = avatar
                         })

@@ -1,6 +1,6 @@
 @import '../../../../scss/import.scss';
 .banner-item {
-  height: 100vh;
+  height: calc(100vh - 70px);
   width: 100%;
   background-color: red;
   position: relative;
