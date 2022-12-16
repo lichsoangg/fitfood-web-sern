@@ -1,0 +1,8 @@
+.faqs {
+  width: 100%;
+  min-height: calc(100vh - 300px);
+  padding-top: 120px;
+  &-description {
+    text-align: left;
+  }
+}

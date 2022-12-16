@@ -16,6 +16,8 @@ import Unauthorized from './pages/Unauthorized'
 import Admin from './pages/Admin'
 import EmployeeManagement from './pages/Admin/pages/EmployeeManagement'
 import ProductManagement from './pages/Admin/pages/ProductManagement'
+import FaqsPage from './pages/FaqsPage'
+import Menu from './pages/Menu'
 
 function FitFoodApp() {
   return (
@@ -33,8 +35,8 @@ function FitFoodAppRoutes() {
         {/* public route */}
         <Route index element={<HomePage />} />
         <Route path={path.calorieCaculator} element={<CalorieCaculatorPage />} />
-        <Route path={path.menu} element={<CalorieCaculatorPage />} />
-        <Route path={path.faqs} element={<CalorieCaculatorPage />} />
+        <Route path={path.menu} element={<Menu />} />
+        <Route path={path.faqs} element={<FaqsPage />} />
         <Route path={path.about} element={<CalorieCaculatorPage />} />
         <Route path={path.login} element={<Login />} />
         <Route path={path.register} element={<Register />} />

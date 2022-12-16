@@ -13,7 +13,7 @@ import { useGetEmployeesQuery } from '../../../../features/employees/employeesAp
 import useDebounce from '../../../../hooks/useDebounce'
 import { useModal } from '../../../../hooks/useModal'
 import useQueryParams from '../../../../hooks/useQueryParams'
-import ModalBase from '../../../../ModalBase'
+import ModalBase from '../../../../components/ModalBase'
 import SearchObjectArray from '../../../../utils/SearchObjectArray'
 import './EmployeeManagement.scss'
 
@@ -217,7 +217,7 @@ export default function EmployeeManagement() {
               queryConfig={queryConfig}
               pageSize={employees?.pageSize}
               pathname={location?.pathname}
-              // stylePagination={{ margin: '20px auto 0' }}
+            // stylePagination={{ margin: '20px auto 0' }}
             />
           )}
         </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Portal from '../components/Portal/Portal'
+import Portal from '../Portal/Portal'
 
 const ModalBase = React.forwardRef(({ children, styleContent, setOpen }, ref) => {
   return (
