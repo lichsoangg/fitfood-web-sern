@@ -19,7 +19,7 @@ CREATE TABLE user(
 
 -- Table Customer
 CREATE TABLE customer(
-	ID int NOT NULL AUTO_INCREMENT,
+	CustomerID int NOT NULL AUTO_INCREMENT,
     Name varchar(100) NOT NULL,
     DayOfBirth date NOT NULL,
     PhoneNumber varchar(10) NOT NULL,
@@ -31,15 +31,15 @@ CREATE TABLE customer(
     Avatar varchar(255),
 	Username varchar(100) NOT NULL,
 	CONSTRAINT CK_Customer_PhoneNumber UNIQUE(PhoneNumber),
-	CONSTRAINT CK_Customer_Gender CHECK(Gender=0 OR Gender=1),
+	CONSTRAINT CK_Customer_Gender CHECK(Gender=1 OR Gender=2),
     CONSTRAINT CK_Customer_Username UNIQUE(Username),
-    CONSTRAINT PK_Customer_Id PRIMARY KEY(ID),
+    CONSTRAINT PK_Customer_Id PRIMARY KEY(CustomerID),
     CONSTRAINT FK_Customer_Username FOREIGN KEY(Username) REFERENCES User(Username)
 );
 
 -- Table Employee
 CREATE TABLE employee(
-	ID int NOT NULL AUTO_INCREMENT,
+	EmployeeID int NOT NULL AUTO_INCREMENT,
     Name varchar(100) NOT NULL,
     DayOfBirth date NOT NULL,
     PhoneNumber varchar(10) NOT NULL,
@@ -52,48 +52,49 @@ CREATE TABLE employee(
 	Username varchar(100) NOT NULL,
 
 	CONSTRAINT CK_Employee_PhoneNumber UNIQUE(PhoneNumber),
-	CONSTRAINT CK_Employee_Gender CHECK(Gender=0 OR Gender=1),
+	CONSTRAINT CK_Employee_Gender CHECK(Gender=1 OR Gender=2),
     CONSTRAINT CK_Employee_Username UNIQUE(Username),
-    CONSTRAINT PK_Employee_Id PRIMARY KEY(ID),
+    CONSTRAINT PK_Employee_Id PRIMARY KEY(EmployeeID),
     CONSTRAINT FK_Employee_User FOREIGN KEY(Username) REFERENCES User(Username)
 );
 
 -- Table Provider
 CREATE TABLE provider(
-	ID int NOT NULL AUTO_INCREMENT,
+	ProviderID int NOT NULL AUTO_INCREMENT,
     Name varchar(100) NOT NULL,
     PhoneNumber varchar(10) NOT NULL,
     Address varchar(255) NOT NULL,
-    CONSTRAINT PK_Provider_ID PRIMARY KEY(ID)
+    CONSTRAINT PK_Provider_ID PRIMARY KEY(ProviderID)
 );
 
 -- Table TypeProduct
 CREATE TABLE typeproduct(
-	ID int NOT NULL AUTO_INCREMENT,
+	TypeProductID int NOT NULL AUTO_INCREMENT,
     Name varchar(100) NOT NULL,
-    CONSTRAINT PK_TypeProduct_ID PRIMARY KEY(ID)
+    CONSTRAINT PK_TypeProduct_ID PRIMARY KEY(TypeProductID)
 );
 -- Table Product
 CREATE TABLE product(
-	ID int NOT NULL AUTO_INCREMENT,
+	ProductID int NOT NULL AUTO_INCREMENT,
     Name varchar(100) NOT NULL,
     Price int NOT NULL,
     Quantity int NOT NULL,
 	Unit varchar(10) NOT NULL,
+    Highlight int NOT NULL,
     TypeProductID int NOT NULL,
-	CONSTRAINT PK_Product_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_Product_TypeProduct FOREIGN KEY(TypeProductID) REFERENCES TypeProduct(ID)
+	CONSTRAINT PK_Product_Id PRIMARY KEY(ProductID),
+    CONSTRAINT FK_Product_TypeProduct FOREIGN KEY(TypeProductID) REFERENCES TypeProduct(TypeProductID)
 );
 -- Table Bill
 CREATE TABLE bill(
-	ID int NOT NULL AUTO_INCREMENT,
+	BillID int NOT NULL AUTO_INCREMENT,
     Date date NOT NULL,
     State varchar(20) Not NULL,
     CustomerID int NOT NULL,
     EmployeeID int,
-    CONSTRAINT PK_Bill_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_Bill_Customer FOREIGN KEY(CustomerID) REFERENCES Customer(ID),
-    CONSTRAINT FK_Bill_Employee FOREIGN KEY(EmployeeID) REFERENCES Employee(ID)
+    CONSTRAINT PK_Bill_Id PRIMARY KEY(BillID),
+    CONSTRAINT FK_Bill_Customer FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID),
+    CONSTRAINT FK_Bill_Employee FOREIGN KEY(EmployeeID) REFERENCES Employee(EmployeeID)
     
 );
 
@@ -104,19 +105,19 @@ CREATE TABLE detailbill(
     Quantity int NOT NULL,
     SalePrice int NOT NULL,
     CONSTRAINT PK_DetailBill_PK PRIMARY KEY(BillID,ProductID),
-    CONSTRAINT FK_DetailBill_Bill FOREIGN KEY(BillID) REFERENCES Bill(ID),
-    CONSTRAINT FK_DetailBill_Product FOREIGN KEY(ProductID) REFERENCES Product(ID)
+    CONSTRAINT FK_DetailBill_Bill FOREIGN KEY(BillID) REFERENCES Bill(BillID),
+    CONSTRAINT FK_DetailBill_Product FOREIGN KEY(ProductID) REFERENCES Product(ProductID)
 );
 
 -- Table DeliveryNote
 CREATE TABLE deliverynote(
-	ID int NOT NULL AUTO_INCREMENT,
+	DeliveryNoteID int NOT NULL AUTO_INCREMENT,
     Date date NOT NULL,
     ProviderID int NOT NULL,
     EmployeeID int NOT NULL,
-    CONSTRAINT PK_DeliveryNote_Id PRIMARY KEY(ID),
-    CONSTRAINT FK_DeliveryNote_Provider FOREIGN KEY(ProviderID) REFERENCES Provider(ID),
-    CONSTRAINT FK_DeliveryNote_Employee FOREIGN KEY(EmployeeID) REFERENCES Employee(ID)
+    CONSTRAINT PK_DeliveryNote_Id PRIMARY KEY(DeliveryNoteID),
+    CONSTRAINT FK_DeliveryNote_Provider FOREIGN KEY(ProviderID) REFERENCES Provider(ProviderID),
+    CONSTRAINT FK_DeliveryNote_Employee FOREIGN KEY(EmployeeID) REFERENCES Employee(EmployeeID)
 );
 
 -- Table DetailDeliveryNote
@@ -126,8 +127,8 @@ CREATE TABLE detaildeliverynote(
     Quantity int NOT NULL,
     ImportPrice int NOT NULL,
     CONSTRAINT PK_DetailDeliveryNote_PK PRIMARY KEY(DeliveryNoteID,ProductID),
-    CONSTRAINT FK_DetailDeliveryNote_DeliveryNote FOREIGN KEY(DeliveryNoteID) REFERENCES DeliveryNote(ID),
-    CONSTRAINT FK_DetailDeliveryNote__Product FOREIGN KEY(ProductID) REFERENCES Product(ID)
+    CONSTRAINT FK_DetailDeliveryNote_DeliveryNote FOREIGN KEY(DeliveryNoteID) REFERENCES DeliveryNote(DeliveryNoteID),
+    CONSTRAINT FK_DetailDeliveryNote__Product FOREIGN KEY(ProductID) REFERENCES Product(ProductID)
 );
 
 -- Table Cart
@@ -136,22 +137,22 @@ CREATE TABLE cart(
     ProductID int NOT NULL,
     Quantity int NOT NULL,
     CONSTRAINT PK_Cart_Customer_Product PRIMARY KEY(CustomerID,ProductID),
-    CONSTRAINT FK_Cart_Cusotmer FOREIGN KEY(CustomerID) REFERENCES Customer(ID),
-    CONSTRAINT FK_Cart_Product FOREIGN KEY(ProductID) REFERENCES Product(ID)
+    CONSTRAINT FK_Cart_Cusotmer FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID),
+    CONSTRAINT FK_Cart_Product FOREIGN KEY(ProductID) REFERENCES Product(ProductID)
 );
 
 -- Table Review
 CREATE TABLE review(
+	ReviewID int NOT NULL AUTO_INCREMENT,
 	CustomerID int NOT NULL,
     ProductID int NOT NULL,
     Score int NOT NULL,
     Comment varchar(500),
-	CONSTRAINT PK_Review_Customer_Product PRIMARY KEY(CustomerID,ProductID),
-	CONSTRAINT FK_Review_Cusotmer FOREIGN KEY(CustomerID) REFERENCES Customer(ID),
-    CONSTRAINT FK_Review_Product FOREIGN KEY(ProductID) REFERENCES Product(ID),
+	CONSTRAINT PK_Review_ReviewID PRIMARY KEY(ReviewID),
+	CONSTRAINT FK_Review_Customer FOREIGN KEY(CustomerID) REFERENCES Customer(CustomerID),
+    CONSTRAINT FK_Review_Product FOREIGN KEY(ProductID) REFERENCES Product(ProductID),
     CONSTRAINT CK_Review_Score CHECK(Score >=1 and Score <=5)
 );
-
 
 
 -- insert customer
@@ -228,10 +229,10 @@ DELIMITER //
 CREATE PROCEDURE GetInfoUser(IN UsernameInput varchar(100)) 
 BEGIN
 If EXISTS (SELECT 1 FROM Customer WHERE Customer.Username=Username) THEN 
-SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,User.Username,Role,IsActive FROM Customer INNER JOIN User ON Customer.Username=User.Username WHERE Customer.Username=UsernameInput; END IF;
+SELECT CustomerID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,User.Username,Role,IsActive FROM Customer INNER JOIN User ON Customer.Username=User.Username WHERE Customer.Username=UsernameInput; END IF;
 
 If EXISTS (SELECT 1 FROM Employee WHERE Employee.Username=Username) THEN 
-SELECT ID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,User.Username,Role,IsActive FROM Employee INNER JOIN User ON Employee.Username=User.Username  WHERE Employee.Username=UsernameInput; END IF;
+SELECT EmployeeID,Name,DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth,PhoneNumber,Gender,Province,District,Ward,Address,Avatar,User.Username,Role,IsActive FROM Employee INNER JOIN User ON Employee.Username=User.Username  WHERE Employee.Username=UsernameInput; END IF;
 
 END
 //
@@ -258,4 +259,4 @@ SELECT ID, Employee.Username, Name, DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOf
 From Employee INNER JOIN User ON Employee.Username=User.Username Where AND CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),'',PhoneNumber,Role) Like '%A%'  Role Like '%Admin%' 
  OFFSET 0 ROWS Fetch NEXT 10 ONLY
 
-
+select * from employee

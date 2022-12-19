@@ -66,6 +66,7 @@ const employeeController = {
     updateEmployee: (req, res, next) => {
         const role = req.user.Role
         const data = req.body
+
         if (RolePermissions.Employee.Update.includes(role) || req.params.username === req.user.Username) {
             try {
                 if (req.file) {
@@ -82,11 +83,15 @@ const employeeController = {
                             }
                         }
                     })
-                    data["Avatar"] = req.file.filename
-                }
-                data["Avatar"] = data["Avatar"].replace(process.env.IMAGE_DATA_URL, '')
 
+                    data["Avatar"] = req.file.filename
+
+                }
+                if (data["Avatar"]) {
+                    data["Avatar"] = data["Avatar"].replace(process.env.IMAGE_DATA_URL, '')
+                }
                 Employee.updateEmployee(data, req.params.username, (err, response) => {
+                    console.log(err)
                     if (err) {
                         return res.status(400).json({ status: 400, message: err.message })
                     }
@@ -117,6 +122,7 @@ const employeeController = {
                                     data["Avatar"] = req.file.filename
                                 }
                                 Employee.addEmployee(req.body, (err, response) => {
+                                    console.log(err)
                                     if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" })
                                     return res.status(200).json({ status: 200, message: "Thêm thành công" })
                                 })
@@ -132,7 +138,8 @@ const employeeController = {
         else {
             return res.status(401).json({ message: "Người dùng không có quyền" })
         }
-    }
+    },
+
 }
 
 module.exports = employeeController
