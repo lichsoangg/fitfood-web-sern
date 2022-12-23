@@ -5,7 +5,7 @@ USE fitfood;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 flush privileges;
 
- 
+ SET SQL_SAFE_UPDATES = 0;
 -- Table User
 CREATE TABLE user(
 	Username varchar(100) NOT NULL,
@@ -64,14 +64,15 @@ CREATE TABLE provider(
     Name varchar(100) NOT NULL,
     PhoneNumber varchar(10) NOT NULL,
     Address varchar(255) NOT NULL,
+	CONSTRAINT CK_Provider_PhoneNumber UNIQUE(PhoneNumber),
     CONSTRAINT PK_Provider_ID PRIMARY KEY(ProviderID)
 );
 
 -- Table TypeProduct
-CREATE TABLE typeproduct(
-	TypeProductID int NOT NULL AUTO_INCREMENT,
+CREATE TABLE producttype(
+	ProductTypeID int NOT NULL AUTO_INCREMENT,
     Name varchar(100) NOT NULL,
-    CONSTRAINT PK_TypeProduct_ID PRIMARY KEY(TypeProductID)
+    CONSTRAINT PK_ProductTypeId_ID PRIMARY KEY(ProductTypeId)
 );
 -- Table Product
 CREATE TABLE product(
@@ -81,9 +82,9 @@ CREATE TABLE product(
     Quantity int NOT NULL,
 	Unit varchar(10) NOT NULL,
     Highlight int NOT NULL,
-    TypeProductID int NOT NULL,
+    ProductTypeId int NOT NULL,
 	CONSTRAINT PK_Product_Id PRIMARY KEY(ProductID),
-    CONSTRAINT FK_Product_TypeProduct FOREIGN KEY(TypeProductID) REFERENCES TypeProduct(TypeProductID)
+    CONSTRAINT FK_ProductType_Product FOREIGN KEY(ProductTypeId) REFERENCES ProductType(ProductTypeId)
 );
 -- Table Bill
 CREATE TABLE bill(
@@ -219,10 +220,9 @@ Call InsertEmployeeUser('tranhakhanhduynguyenkhanh.fitfood@gmail.com','Admin','2
 Call InsertEmployeeUser('tranhakhanhduynguyenkhanh27.fitfood@gmail.com','Khánh Nguyễn','2001-11-14','0333333427',1,'79','773','27283','Ho Chi Minh 2','','Kinh doanh');            
 
 
-select * from user;
 
 
-SELECT ID, Employee.Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username LIMIT 1,10
+
 
 -- get info user
 DELIMITER //
@@ -245,18 +245,21 @@ WHERE CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),''
 
 
 
+INSERT INTO ProductType  SET Name='Type';
+INSERT INTO ProductType (`Name`) Values ('Đồ uống');
+INSERT INTO ProductType (`Name`) Values ('Đồ ăn lạnh');
+
+select * from Product;
+Insert Into Product (Name, Price, Quantity, Unit, Highlight, ProductTypeID) Values ('Trà sữa','15.000',15,'Chai',2,'2');
+Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-10-11',1,1,null);
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('1','3',12,'15000');
 
 
-select * from user;
-select * from customer;
-select * from employee;
-
-
-SELECT ID, Employee.Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username;
-
-
-SELECT ID, Employee.Username, Name, DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role 
-From Employee INNER JOIN User ON Employee.Username=User.Username Where AND CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),'',PhoneNumber,Role) Like '%A%'  Role Like '%Admin%' 
- OFFSET 0 ROWS Fetch NEXT 10 ONLY
-
-select * from employee
+select * from deliverynote;
+Select * from detaildeliverynote;
+DELETE FROM DetailDeliveryNote Where DeliveryNoteID="1" And (ProductID="" OR ProductID is NULL);
+--     
+-- Insert Into DeliveryNote (Date, ProviderID, EmployeeID) Values ('2022-10-11','1','1')
+-- SELECT DeliverNote.ProviderID From DeliveryNote
+-- Select * From DeliveryNote
+-- Insert Into DetailDeliveryNote (DeliveryNoteID, ProductID, Quantity,ImportPrice) Values ('1','2','10','15000')

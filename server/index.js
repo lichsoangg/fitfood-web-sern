@@ -8,8 +8,11 @@ const authRoute = require("./routes/auth")
 const userRoute = require("./routes/user")
 const customerRoute = require("./routes/customer")
 const employeeRoute = require("./routes/employee")
-
-
+const productTypeRoute = require("./routes/product_type")
+const productRoute = require("./routes/product")
+const providerRoute = require("./routes/provider")
+const deliveryNoteRoute = require("./routes/delivery_note")
+const deliveryNoteDetailRoute = require("./routes/delivery_note_detail")
 const app = express()
 
 
@@ -28,6 +31,12 @@ app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute)
 app.use("/api/customer", customerRoute)
 app.use("/api/employees", employeeRoute)
+app.use("/api/product-type", productTypeRoute)
+app.use("/api/products", productRoute)
+app.use("/api/providers", providerRoute)
+app.use("/api/delivery-note", deliveryNoteRoute)
+app.use("/api/delivery-note-detail", deliveryNoteDetailRoute)
+
 
 app.use((req, res, next) => {
   const err = new Error("This route doesn't exist")
@@ -37,7 +46,6 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   const status = err.status || 400
-  console.log(err)
   res.status(status).json({ message: err.message })
 })
 

@@ -1,6 +1,7 @@
 const Customer = require("../models/Customer.model")
 const fs = require("fs")
 const path = require("path")
+const convertObjectToRowUpdateString = require("../utils/convertObjectToRowUpdateString")
 const customerController = {
   updateCustomer: (req, res, next) => {
 
@@ -25,7 +26,7 @@ const customerController = {
     data["Avatar"] = data["Avatar"].replace(process.env.IMAGE_DATA_URL, '')
 
     try {
-      Customer.updateCustomer(data, username, (err, data) => {
+      Customer.updateCustomer(convertObjectToRowUpdateString(data), username, (err, response) => {
         if (err) return res.status(400).json({ message: err.message })
         return res.status(200).json({ status: 200, message: "Cập nhật khách hàng thành công" })
       })

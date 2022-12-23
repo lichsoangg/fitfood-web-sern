@@ -17,15 +17,10 @@ const Employee = {
         const { Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role } = data
         db.query("CALL InsertEmployeeUser(?)", [[Username, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role]], callback)
     },
-    updateEmployee: (objectData, Username, callback) => {
-        let q = ""
-        for (key in objectData) {
-            let value = objectData[key]
-            q += ` ${key}='${value}',`
-        }
-        q = q.slice(0, q.length - 1)
-        db.query(`Update Employee SET ${q} WHERE Employee.Username = ?`, [Username], callback)
+    updateEmployee: (rowUpdateString, Username, callback) => {
+        db.query(`Update Employee SET ${rowUpdateString} WHERE Employee.Username = ?`, [Username], callback)
     },
+
 }
 
 
