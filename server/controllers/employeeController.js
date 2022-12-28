@@ -48,7 +48,8 @@ const employeeController = {
                     data.map(item => {
                         let avatar = item?.Avatar
                         if (avatar) {
-                            avatar = `${process.env.IMAGE_DATA_URL}/${item?.Avatar}`
+                            const originalUrl = `${req.protocol}://${req.get('host')}`
+                            avatar = `${originalUrl}/images/${item?.Avatar}`
                         }
                         return item.Avatar = avatar
                     })
@@ -86,7 +87,8 @@ const employeeController = {
 
                 }
                 if (data["Avatar"]) {
-                    data["Avatar"] = data["Avatar"].replace(process.env.IMAGE_DATA_URL, '')
+                    const originalUrl = `${req.protocol}://${req.get('host')}/images/`
+                    data["Avatar"] = data["Avatar"].replace(originalUrl, '')
                 }
                 Employee.updateEmployee(convertObjectToRowUpdateString(data), req.params.username, (err, response) => {
                     if (err) {
@@ -114,7 +116,7 @@ const employeeController = {
                             if (req.file) {
                                 data["Avatar"] = req.file.filename
                             }
-                            Employee.addEmployee(req.body, (err, response) => {
+                            Employee.addEmployee(data, (err, response) => {
                                 console.log(err)
                                 if (err) return res.status(400).json({ message: "Yêu cầu không hợp lệ" })
                                 return res.status(200).json({ status: 200, message: "Thêm thành công" })

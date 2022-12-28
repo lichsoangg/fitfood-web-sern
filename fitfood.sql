@@ -81,6 +81,7 @@ CREATE TABLE product(
     Price int NOT NULL,
     Quantity int NOT NULL,
 	Unit varchar(10) NOT NULL,
+    Avatar varchar(255),
     Highlight int NOT NULL,
     ProductTypeId int NOT NULL,
 	CONSTRAINT PK_Product_Id PRIMARY KEY(ProductID),
@@ -238,28 +239,67 @@ END
 //
 DELIMITER ;
 
-drop procedure GetInfoUser;
+
 
 SELECT ID, Employee.Username, Name, DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username
 WHERE CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),'',PhoneNumber) Like '';
 
-
-
+select * from ProductType;
+select * from Product;
+select * from customer;
+select * from employee;
+select * from bill;
+select * from DetailBill;
 INSERT INTO ProductType  SET Name='Type';
 INSERT INTO ProductType (`Name`) Values ('Đồ uống');
 INSERT INTO ProductType (`Name`) Values ('Đồ ăn lạnh');
 
-select * from Product;
 Insert Into Product (Name, Price, Quantity, Unit, Highlight, ProductTypeID) Values ('Trà sữa','15.000',15,'Chai',2,'2');
-Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-10-11',1,1,null);
-Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('1','3',12,'15000');
 
+
+Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-10-11',1,1,null);
+Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-11-12',1,1,null);
+Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-11-13',1,1,null);
+Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-11-13',1,2,1);
+Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-11-13',1,2,2);
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('3','2',12,'15000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('3','3',12,'15000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('4','2',12,'15000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('9','3',5,'2000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('9','2',1,'4800');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('10','2',1,'15000');
+
+
+
+-- Query Revenue
+
+SELECT Sum(Quantity * SalePrice) as Revenue FROM Bill B INNER JOIN DetailBill DB ON B.BillID = DB.BillID  Where Date >= '2022-09-11' And Date <= '2022-12-13' And ProductID='3';
+-- Query Employees Revenue
+SELECT E.EmployeeID, E.Avatar, E.Name, Sum(Quantity* SalePrice) FROM Bill B 
+INNER JOIN DetailBill DB ON B.BillID=DB.BillID 
+INNER JOIN Employee E ON E.EmployeeID= B.EmployeeID Where Date >= '2022-09-11' and Date <= '2022-12-13'
+Group By E.EmployeeID, E.Avatar, E.Name
+Order by Sum(Quantity* SalePrice) DESC;
+
+-- Query Customers Revenue
+SELECT C.CustomerID, C.Avatar, C.Name, Sum(Quantity* SalePrice) FROM Bill B 
+INNER JOIN DetailBill DB ON B.BillID=DB.BillID 
+INNER JOIN Customer C ON C.CustomerID= B.CustomerID Where Date >= '2022-09-11' and Date <= '2022-12-13'
+Group By C.CustomerID, C.Avatar, C.Name
+Order by Sum(Quantity* SalePrice) DESC;
+
+-- Query Products Revenue
+SELECT P.ProductID,P.Name, Sum(DB.Quantity* SalePrice) FROM Bill B 
+INNER JOIN DetailBill DB ON B.BillID=DB.BillID 
+INNER JOIN Product P ON P.ProductID= DB.ProductID Where Date >= '2022-09-11' and Date <= '2022-12-13'
+Group By P.ProductID, P.Name
+Order by Sum(Quantity* SalePrice) DESC;
 
 select * from deliverynote;
 Select * from detaildeliverynote;
 DELETE FROM DetailDeliveryNote Where DeliveryNoteID="1" And (ProductID="" OR ProductID is NULL);
---     
--- Insert Into DeliveryNote (Date, ProviderID, EmployeeID) Values ('2022-10-11','1','1')
--- SELECT DeliverNote.ProviderID From DeliveryNote
--- Select * From DeliveryNote
--- Insert Into DetailDeliveryNote (DeliveryNoteID, ProductID, Quantity,ImportPrice) Values ('1','2','10','15000')
+    
+ Insert Into DeliveryNote (Date, ProviderID, EmployeeID) Values ('2022-10-11','1','1');
+ SELECT DeliverNote.ProviderID From DeliveryNote;
+ Select * From DeliveryNote;
+ Insert Into DetailDeliveryNote (DeliveryNoteID, ProductID, Quantity,ImportPrice) Values ('1','2','10','15000');

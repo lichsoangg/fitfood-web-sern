@@ -23,7 +23,8 @@ const customerController = {
       })
       data["Avatar"] = req.file.filename
     }
-    data["Avatar"] = data["Avatar"].replace(process.env.IMAGE_DATA_URL, '')
+    const originalUrl = `${req.protocol}://${req.get('host')}/images/`
+    data["Avatar"] = data["Avatar"].replace(originalUrl, '')
 
     try {
       Customer.updateCustomer(convertObjectToRowUpdateString(data), username, (err, response) => {

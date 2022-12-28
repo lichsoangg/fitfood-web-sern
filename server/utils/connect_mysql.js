@@ -12,7 +12,6 @@ connection.connect((err, connection) => {
         console.log(`MySQL error: ${JSON.stringify(err)}`)
         return
     }
-
 })
 
 

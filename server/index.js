@@ -13,6 +13,8 @@ const productRoute = require("./routes/product")
 const providerRoute = require("./routes/provider")
 const deliveryNoteRoute = require("./routes/delivery_note")
 const deliveryNoteDetailRoute = require("./routes/delivery_note_detail")
+const reportRevenueRoute = require("./routes/report_revenue")
+
 const app = express()
 
 
@@ -36,7 +38,7 @@ app.use("/api/products", productRoute)
 app.use("/api/providers", providerRoute)
 app.use("/api/delivery-note", deliveryNoteRoute)
 app.use("/api/delivery-note-detail", deliveryNoteDetailRoute)
-
+app.use("/api/report-revenue", reportRevenueRoute)
 
 app.use((req, res, next) => {
   const err = new Error("This route doesn't exist")
