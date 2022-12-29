@@ -1,0 +1,21 @@
+.backup {
+  h4 {
+    margin-top: 28px;
+    margin-bottom: 28px;
+    font-size: 24px;
+  }
+  &-operation {
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .group-button {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+  }
+}

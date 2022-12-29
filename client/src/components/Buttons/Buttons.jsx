@@ -20,9 +20,9 @@ export function MainButton({ children, ...rest }) {
 }
 export function InputButton({ children, ...rest }) {
   return (
-    <div className='button-main'>
+    <div className='button-main'  {...rest} >
       <span> {children}</span>
-      <input type='file' className='button-main__input' {...rest} />
+      <input type='file' className='button-main__input' />
     </div>
   )
 }

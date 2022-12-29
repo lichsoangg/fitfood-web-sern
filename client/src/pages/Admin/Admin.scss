@@ -10,6 +10,8 @@
   &__outlet {
     transition: 0.6s all $cubic;
     background-color: $cl-grey-dimmed;
+    padding: 80px;
+    position: relative;
   }
   &__navbar {
     transition: 0.6s all $cubic;

@@ -1,3 +1,3 @@
-import FaqsPage from "./FaqsPage"
+import FaqsPage from './FaqsPage'
 
 export default FaqsPage

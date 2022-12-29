@@ -197,33 +197,6 @@ COMMIT;
 END
 //
 DELIMITER ;
-Call InsertEmployeeUser('admin.fitfood2@gmail.com','Admin','2001-11-14','0333333402',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood3@gmail.com','Admin','2001-11-14','0333333403',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood4@gmail.com','Admin','2001-11-14','0333333404',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood5@gmail.com','Admin','2001-11-14','0333333405',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood6@gmail.com','Admin','2001-11-14','0333333406',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood7@gmail.com','Admin','2001-11-14','0333333407',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood8@gmail.com','Admin','2001-11-14','0333333408',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood9@gmail.com','Admin','2001-11-14','0333333409',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood10@gmail.com','Admin','2001-11-14','0333333410',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood11@gmail.com','Admin','2001-11-14','0333333411',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood12@gmail.com','Admin','2001-11-14','0333333412',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood13@gmail.com','Admin','2001-11-14','0333333413',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood14@gmail.com','Admin','2001-11-14','0333333414',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood15@gmail.com','Admin','2001-11-14','0333333415',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood16@gmail.com','Admin','2001-11-14','0333333416',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood17@gmail.com','Admin','2001-11-14','0333333417',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood18@gmail.com','Admin','2001-11-14','0333333418',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood19@gmail.com','Admin','2001-11-14','0333333419',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood20@gmail.com','Admin','2001-11-14','0333333420',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('admin.fitfood21@gmail.com','Admin','2001-11-14','0333333421',1,'79','773','27283','Ho Chi Minh 2','','Admin');
-Call InsertEmployeeUser('tranhakhanhduynguyenkhanh.fitfood@gmail.com','Admin','2001-11-14','0333333422',1,'79','773','27283','Ho Chi Minh 2','','Admin');             
-Call InsertEmployeeUser('tranhakhanhduynguyenkhanh27.fitfood@gmail.com','Khánh Nguyễn','2001-11-14','0333333427',1,'79','773','27283','Ho Chi Minh 2','','Kinh doanh');            
-
-
-
-
-
 
 -- get info user
 DELIMITER //
@@ -241,6 +214,76 @@ DELIMITER ;
 
 
 
+-- Data Employee
+Call InsertEmployeeUser('tranhakhanhduy.fitfood@gmail.com','Trần Hạ Khánh Duy','2001-11-14','0333333333',1,'79','773','27283','Ho Chi Minh','EmployeeAvatar_1.png','Admin');
+Call InsertEmployeeUser('levansu.fitfood@gmail.com','Lê Văn Sự','2001-11-14','0333333341',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_2.png','Admin');   
+Call InsertEmployeeUser('truongthaibao.fitfood@gmail.com','Trương Thái Bảo','2001-11-16','0333333342',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_3.png','Admin'); 
+Call InsertEmployeeUser('phamhuynhthaihoai.fitfood@gmail.com','Phạm Huỳnh Thái Hoài','2001-11-14','0333333343',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_4.png','Kế toán'); 
+Call InsertEmployeeUser('nhathoang.fitfood@gmail.com','Nhật Hoàng','2001-11-14','0333333344',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_4.png','Kinh doanh'); 
+Call InsertEmployeeUser('lethithuyvan.fitfood@gmail.com','Lê Thị Thuý Vân','2001-11-27','0333333345',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_5.png','Admin'); 
+Call InsertEmployeeUser('nguyentuongvy.fitfood@gmail.com','Nguyễn Tường Vy','2001-11-14','0333333346',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_6.png','Admin'); 
+Call InsertEmployeeUser('nguyenminhchau.fitfood@gmail.com','Nguyễn Minh Châu','2001-11-18','0333333347',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_1.png','Admin'); 
+Call InsertEmployeeUser('tranvucongkhanh.fitfood@gmail.com','Trần Vũ Công Khanh','2001-11-12','0333333348',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_2.png','Admin'); 
+Call InsertEmployeeUser('truongthainha.fitfood@gmail.com','Trương Thái Nhã','2001-11-13','0333333349',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_3.png','Admin'); 
+Call InsertEmployeeUser('lehuuthinh.fitfood@gmail.com','Lê Hữu Thịnh','1999-08-15','0333333350',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_2.png','Kế toán'); 
+Call InsertEmployeeUser('phamduynam.fitfood@gmail.com','Phạm Duy Nam','1999-11-14','0333333351',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_3.png','Kinh doanh'); 
+Call InsertEmployeeUser('kieunguyetnga.fitfood@gmail.com','Kiều Nguyệt Nga','2000-11-14','0333333352',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_4.png','Admin'); 
+Call InsertEmployeeUser('minhkhanh.fitfood@gmail.com','Minh Khánh','2002-11-20','0333333353',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_5.png','Kế toán'); 
+Call InsertEmployeeUser('hoanghoang.fitfood@gmail.com','Hoàng Hoàng','1999-11-14','0333333354',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_6.png','Admin'); 
+Call InsertEmployeeUser('duongthithuthuy.fitfood@gmail.com','Dương Thị Thu Thuỷ','1998-11-12','0333333355',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_3.png','Kinh doanh'); 
+Call InsertEmployeeUser('tranhakhuongduy.fitfood@gmail.com','Trần Hạ Khương Duy','2001-11-11','0333333356',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_1.png','Kinh doanh'); 
+Call InsertEmployeeUser('tranhongha.fitfood@gmail.com','Trần Hồng Hà','2000-10-05','0333333357',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_2.png','Admin'); 
+Call InsertEmployeeUser('nguyencaonguyen.fitfood@gmail.com','Nguyễn Cao Nguyên','1999-08-06','0333333358',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_3.png','Kế toán'); 
+Call InsertEmployeeUser('phamquanghuy.fitfood@gmail.com','Phạm Quang Huy','2000-12-11','0333333359',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_4.png','Admin'); 
+Call InsertEmployeeUser('tuankhai.fitfood@gmail.com','Tuần Khải','1999-09-12','0333333360',1,'81','773','27283','Ho Chi Minh','EmployeeAvatar_5.png','Kế toán'); 
+
+-- Data Customer
+Call InsertCustomerUser('biao200@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Thái Bảo','2000-09-01','0333121111','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('onlyplaymid@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Công Hoàng','1999-01-24','0333121112','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('calisas001@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Trương Hữu Tài','2001-09-01','0333121113','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('taihhtp01@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Cao Sơn Tài','1998-09-01','0333121114','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('devnguyen02@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Bao Thái Sơn','1997-09-01','0333121115','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('julia002@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Công Hoàng','2000-07-01','0333121116','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('annie003@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Khắc Vĩ','2000-09-01','0333121117','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('darius485@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Nguyễn Thành Nhân','2000-11-01','0333121118','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('annivia001@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Trương Thành Nhơn','2000-09-01','0333121119','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('qiyana@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Lê Văn Tấn','2001-09-01','0333121120','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('levantai002@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Lê Văn Tài','2002-12-01','0333121121','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('nguyenmanh@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Nguyễn Mạnh','1999-09-01','0333121122','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('hhnguyen@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Nguyễn Hữu Hảo','1999-09-01','0333121123','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('biiiii2000@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Nguyễn Quốc Huy','2000-06-01','0333121124','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('phnk@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Cao Sơn Lâm','2000-09-01','0333121125','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('biao@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Phạm Gia Tài','2001-09-01','0333121126','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('81ninh@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Nguyễn Ninh','2001-03-01','0333121127','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('22phong@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Cao Toàn Phong','2000-09-01','0333121128','1','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('njaod101@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Đông Sơn','2002-04-01','0333121129','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('phuong.work@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Huỳnh Phương','1995-02-01','0333121130','2','81','773','27283','Ho Chi Minh');
+Call InsertCustomerUser('nguyen.work@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC','Hoài Nguyên','2000-09-01','0333121131','1','81','773','27283','Ho Chi Minh');
+
+
+-- Data ProductType
+
+INSERT INTO ProductType (`Name`) Values ('Đồ uống');
+INSERT INTO ProductType (`Name`) Values ('Đồ ăn');
+
+
+-- Data Product
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('NƯỚC MÁT THẢO MỘC','100.000',15,'Chai',2,'ProductAvatar_1.png','1');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('FITFOOD JUICE SWEETIE','200.000',100,'Chai',2,'ProductAvatar_2.png','1');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('FITFOOD JUICE GREENIE','100.000',100,'Chai',2,'ProductAvatar_3.png','1');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('BOX Ức gà mềm mọng','379.000',100,'Hộp',2,'ProductAvatar_4.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Cơm gạo lức ăn liền ','100.000',80,'Gói',2,'ProductAvatar_5.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Nhân Burger Gà Teriyaki','100.000',87,'Gói',2,'ProductAvatar_6.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Ức gà ăn liền ','199.000',100,'Hộp',2,'ProductAvatar_7.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gạo lứt Rong Biển','100.000',80,'Hộp',2,'ProductAvatar_8.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gạo lứt Chà Bông','100.000',100,'Hộp',2,'ProductAvatar_9.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Bánh ngói hạnh nhân','129.000',100,'Hộp',2,'ProductAvatar_10.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Biscotti vị socola','129.000',97,'Hộp',2,'ProductAvatar_11.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Biscotti vị trà xanh ','100.000',100,'Hộp',2,'ProductAvatar_12.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('BOX Ức gà mềm mọng','379.000',100,'Hộp',2,'ProductAvatar_13.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('BOX Ức gà mềm mọng','379.000',100,'Hộp',2,'ProductAvatar_14.png','2');
+Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('BOX Ức gà mềm mọng','379.000',100,'Hộp',2,'ProductAvatar_15.png','2');
+
 SELECT ID, Employee.Username, Name, DATE_FORMAT(DayOfBirth, '%Y/%m/%d') as DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar, Role From Employee INNER JOIN User ON Employee.Username=User.Username
 WHERE CONCAT(Employee.Username,'',Name,'',DATE_FORMAT(DayOfBirth, '%Y/%m/%d'),'',PhoneNumber) Like '';
 
@@ -251,10 +294,9 @@ select * from employee;
 select * from bill;
 select * from DetailBill;
 INSERT INTO ProductType  SET Name='Type';
-INSERT INTO ProductType (`Name`) Values ('Đồ uống');
-INSERT INTO ProductType (`Name`) Values ('Đồ ăn lạnh');
 
-Insert Into Product (Name, Price, Quantity, Unit, Highlight, ProductTypeID) Values ('Trà sữa','15.000',15,'Chai',2,'2');
+
+
 
 
 Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-10-11',1,1,null);
@@ -262,12 +304,13 @@ Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-11-12',1,1,
 Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-11-13',1,1,null);
 Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-11-13',1,2,1);
 Insert Into Bill (Date, State, CustomerID, EmployeeID) Values ('2022-11-13',1,2,2);
-Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('3','2',12,'15000');
-Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('3','3',12,'15000');
-Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('4','2',12,'15000');
-Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('9','3',5,'2000');
-Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('9','2',1,'4800');
-Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('10','2',1,'15000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('1','2',12,'15000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('1','3',12,'15000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('2','2',12,'15000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('2','3',5,'2000');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('1','2',1,'4800');
+Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('1','2',1,'15000');
+
 
 
 

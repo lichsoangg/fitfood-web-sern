@@ -18,6 +18,8 @@ import EmployeeManagement from './pages/Admin/pages/EmployeeManagement'
 import ProductManagement from './pages/Admin/pages/ProductManagement'
 import FaqsPage from './pages/FaqsPage'
 import Menu from './pages/Menu'
+import ReportRevenue from './pages/ReportRevenue'
+import Backup from './pages/Backup'
 
 function FitFoodApp() {
   return (
@@ -54,6 +56,9 @@ function FitFoodAppRoutes() {
         <Route path={path.admin} element={<Admin />}>
           <Route index element={<EmployeeManagement />} />
           <Route path={path.productManagement} element={<ProductManagement />} />
+          <Route path={path.reportRevenue} element={<ReportRevenue />} />
+          <Route path={path.backup} element={<Backup />} />
+
         </Route>
       </Route>
     </Routes>

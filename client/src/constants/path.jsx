@@ -12,7 +12,9 @@ const path = {
   unauthorized: '/unauthorized',
   admin: '/admin',
   employeeManagement: 'quan-ly-nhan-vien',
-  productManagement: 'quan-ly-san-pham'
+  productManagement: 'quan-ly-san-pham',
+  reportRevenue: 'bao-cao-doanh-thu',
+  backup: 'sao-luu-phuc-hoi',
 }
 
 export default path

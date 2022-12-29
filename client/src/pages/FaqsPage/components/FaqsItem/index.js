@@ -1,3 +1,3 @@
-import FaqsItem from "./FaqsItem"
+import FaqsItem from './FaqsItem'
 
 export default FaqsItem

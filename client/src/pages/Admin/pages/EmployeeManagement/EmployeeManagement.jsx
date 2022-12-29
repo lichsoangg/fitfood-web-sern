@@ -217,7 +217,7 @@ export default function EmployeeManagement() {
               queryConfig={queryConfig}
               pageSize={employees?.pageSize}
               pathname={location?.pathname}
-            // stylePagination={{ margin: '20px auto 0' }}
+              // stylePagination={{ margin: '20px auto 0' }}
             />
           )}
         </div>

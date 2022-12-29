@@ -1,0 +1,50 @@
+.help {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  cursor: pointer;
+  &__image {
+    pointer-events: none;
+    width: 40px;
+    height: 40px;
+    img {
+      width: 40px;
+      -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+  &__text {
+    pointer-events: none;
+
+    font-size: 14px;
+    color: #ff2033;
+    font-weight: 500;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .filter {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    textarea {
+      border-radius: 6px;
+      border: 1px solid #141414;
+      padding: 24px;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import Navbar from '../../components/Navbar'
 import path from '../../constants/path'
 import './Admin.scss'
 import Header from '../../layouts/MainLayout/Header/Header'
+import Help from '../../components/Help/Help'
 const homeIcon = () => (
   <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
     <path
@@ -80,12 +81,14 @@ export default function Admin() {
               <Navbar.Item Svg={employeesIcon} title='Quản lý nhân viên' navigate={path.admin} end />
               <Navbar.Item Svg={productsIcon} title='Quản lý hàng hoá' navigate={path.productManagement} />
               <Navbar.Item Svg={productsIcon} title='Quản lý hàng hoá' navigate={path.productManagement} />
-              <Navbar.Item Svg={productsIcon} title='Quản lý hàng hoá' navigate={path.productManagement} />
+              <Navbar.Item Svg={productsIcon} title='Báo cáo doanh thu' navigate={path.reportRevenue} />
+              <Navbar.Item Svg={productsIcon} title='Sao lưu phục hồi' navigate={path.backup} />
             </Navbar.List>
           </Navbar>
         </div>
         <div className='admin__outlet' style={{ width: `${toggle ? '80%' : '95%'}` }}>
           <Outlet />
+          <Help position={{ right: '10px', top: '80px' }} />
         </div>
       </div>
     </>

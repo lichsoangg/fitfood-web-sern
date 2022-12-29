@@ -31,7 +31,7 @@ export default function AuthPasswordEmail() {
     <FormProvider {...methods}>
       <form className='forgotPassword__form' onSubmit={handleSubmit(onSubmit)}>
         <Form.Input name='Username'></Form.Input>
-        {errorResetPassword && <Error errorMessage={errorResetPassword.data.message}></Error>}
+        {errorResetPassword && <Error errorMessage={errorResetPassword?.data?.message}></Error>}
         <Form.SubmitButton
           text='Khôi phục mật khẩu'
           styleButton={{ marginTop: '40px' }}
