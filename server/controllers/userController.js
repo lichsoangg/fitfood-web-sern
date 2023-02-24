@@ -43,7 +43,52 @@ const userController = {
       next(err);
     }
   },
-
+  // Update User
+  updateUser: (req, res, next) => {
+    const role = req.user.Role;
+    const data = req.body;
+    try {
+      if (req.file) {
+        User.getUserWithUsername(req.user.Username, async (err, response) => {
+          if (err) throw err;
+          const userData = response[0];
+          if (userData && userData?.Avatar) {
+            let fileOldNameWithPath = path.join(
+              __dirname,
+              `../upload/images/${userData.Avatar}`
+            );
+            if (fs.existsSync(fileOldNameWithPath)) {
+              fs.unlink(fileOldNameWithPath, (err) => {
+                if (err) {
+                  throw err;
+                }
+              });
+            }
+          }
+        });
+        data["Avatar"] = req.file.filename;
+      }
+      if (data["Avatar"]) {
+        const originalUrl = `${req.protocol}://${req.get("host")}/images/`;
+        data["Avatar"] = data["Avatar"].replace(originalUrl, "");
+      }
+      User.updateUser(
+        convertObjectToRowUpdateString(data),
+        req.user.Username,
+        (err, response) => {
+          console.log(err);
+          if (err) {
+            return res.status(400).json({ status: 400, message: err.message });
+          }
+          return res
+            .status(200)
+            .json({ status: 200, message: "Cập nhật thành công" });
+        }
+      );
+    } catch (err) {
+      next(err);
+    }
+  },
   // Update password
   updatePassword: (req, res, next) => {
     const { password, newPassword } = req.body;
