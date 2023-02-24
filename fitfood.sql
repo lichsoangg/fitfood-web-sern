@@ -49,13 +49,14 @@ CREATE TABLE product(
 	CONSTRAINT PK_Product_Id PRIMARY KEY(ProductID),
     CONSTRAINT FK_ProductType_Product FOREIGN KEY(ProductTypeId) REFERENCES ProductType(ProductTypeId)
 );
--- State -1: Cart, 1: Order: 2:Success
+-- State 1: Order: 2:Success
 -- Table Bill
 CREATE TABLE bill(
 	BillID int NOT NULL AUTO_INCREMENT,
     Date date NOT NULL,
     State int NOT NULL,
     Username varchar(100) NOT NULL,
+    CONSTRAINT CK_Bill_State CHECK(State=1 OR State=2),
     CONSTRAINT PK_Bill_Id PRIMARY KEY(BillID),
     CONSTRAINT FK_Bill_Customer FOREIGN KEY(Username) REFERENCES User(Username)
 );
@@ -71,7 +72,15 @@ CREATE TABLE detailbill(
     CONSTRAINT FK_DetailBill_Product FOREIGN KEY(ProductID) REFERENCES Product(ProductID)
 );
 
-
+-- Table Cart 
+CREATE TABLE cart(
+	Username varchar(100) NOT NULL,
+    ProductID int NOT NULL,
+    Quantity int NOT NULL,
+    CONSTRAINT PK_Cart PRIMARY KEY(Username, ProductID),
+    CONSTRAINT FK_Cart_User FOREIGN KEY(Username) REFERENCES User(Username),
+    CONSTRAINT FK_Cart_Product FOREIGN KEY(ProductID) REFERENCES Product(ProductID)
+);
 
 -- Data User
 Insert Into User(Username,Password, Role, IsActive, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar) Values(
@@ -117,10 +126,10 @@ Insert Into Product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeI
 
 
 -- Data Bill
-Insert Into Bill (Date, State, UserID) Values ('2020-10-11',-1,1);
-Insert Into Bill (Date, State, UserID) Values ('2020-10-11',-1,2);
-Insert Into Bill (Date, State, UserID) Values ('2021-10-11',1,1);
-Insert Into Bill (Date, State, UserID) Values ('2021-10-11',1,2);
+Insert Into Bill (Date, State, Username) Values ('2020-10-11',1,'duytran@gmail.com');
+Insert Into Bill (Date, State, Username) Values ('2020-10-11',2,'duytran@gmail.com');
+Insert Into Bill (Date, State, Username) Values ('2021-10-11',1,'duytran@gmail.com');
+Insert Into Bill (Date, State, Username) Values ('2021-10-11',1,'duytran2@gmail.com');
 
 -- Data Detail Bill
 
@@ -133,3 +142,12 @@ Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('3','13',
 Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('4','5',1,'150000');
 Insert Into DetailBill (BillID, ProductID,Quantity, SalePrice) Values ('4','6',2,'200000');
 
+
+-- Data Cart
+Insert Into Cart(Username, ProductID, Quantity) Values('duytran@gmail.com','1',3);
+Insert Into Cart(Username, ProductID, Quantity) Values('duytran@gmail.com','2',3);
+Insert Into Cart(Username, ProductID, Quantity) Values('duytran@gmail.com','4',3);
+Insert Into Cart(Username, ProductID, Quantity) Values('duytran@gmail.com','5',3);
+Insert Into Cart(Username, ProductID, Quantity) Values('duytran1@gmail.com','1',3);
+Insert Into Cart(Username, ProductID, Quantity) Values('duytran1@gmail.com','2',2);
+Insert Into Cart(Username, ProductID, Quantity) Values('duytran1@gmail.com','3',4);

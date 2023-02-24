@@ -61,29 +61,10 @@ export default function AccountUpdate() {
 
   //handle submit save update account
   const onSubmit = async (data) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const { ID, IsActive, Role, Username, ...dataSubmit } = data;
-=======
-    const { ID, Role, IsActive, ...dataSubmit } = data;
-
->>>>>>> e7ad975 (chore: commit for pull)
-    let isValid = true;
-=======
     const { ID, IsActive, Role, Username, ...dataSubmit } = data
-    let isValid = true
-<<<<<<< HEAD
->>>>>>> a5f92d2 (fix: fix some bugs with dropdown and modal using portal)
-    await checkPhoneNumber({ phoneNumber: data.PhoneNumber, username: data.Username })
-      .unwrap()
-      .catch((err) => {
-        if (err.status === 409) {
-          isValid = false
-          setError('PhoneNumber', { type: 'custom', message: 'Số điện thoại đã tồn tại' })
-        }
-      })
 
-=======
+    let isValid = true
+
     if (data.PhoneNumber !== user.PhoneNumber) {
       await checkPhoneNumber({ phoneNumber: data.PhoneNumber, username: data.Username })
         .unwrap()
@@ -94,7 +75,6 @@ export default function AccountUpdate() {
           }
         })
     }
->>>>>>> 580dd97 (fix: fix some bugs dropdown logic)
     if (isValid) {
       let formData = new FormData()
       for (const key in dataSubmit) {

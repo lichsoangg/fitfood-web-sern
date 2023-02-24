@@ -1,32 +1,16 @@
 @import '../../../scss/import.scss';
 
 .header {
-<<<<<<< HEAD
-  background: $cl-white;
-  border-bottom: 0.5px solid;
-
-=======
   background: $cl-black;
   position: fixed;
   width: 100%;
   z-index: 99;
->>>>>>> a6f7cca (merge page-homepage)
   .mainWrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    height: 46px;
-    padding: 50px 40px 50px;
-=======
     height: 70px;
     padding: 0px 40px 0px;
->>>>>>> a6f7cca (merge page-homepage)
-=======
-    padding: 0 40px;
-    height: 70px;
->>>>>>> 531139e (merge branch page-homepage and fix some bugs)
   }
 }

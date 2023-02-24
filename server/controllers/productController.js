@@ -7,35 +7,40 @@ const ProductController = {
     const search = req.query?.search?.replaceAll(" ", "") || "";
     const productType = req.query.product_type || null;
     const orderPrice = req.query.order_price || "asc";
-
+    const priceMax = Number(req.query.price_max) || null;
+    const priceMin = Number(req.query.price_min) || null;
     const limit = req.query.limit * 1 || 5;
     const page = req.query.page * 1 || 1;
     const numberOffset = page * limit - limit;
     const numberFetchNext = limit;
     Product.getProducts(
-      { search, productType, orderPrice, numberOffset, numberFetchNext },
+      {
+        search,
+        productType,
+        orderPrice,
+        priceMax,
+        priceMin,
+        numberOffset,
+        numberFetchNext,
+      },
       (err, data) => {
-        if (err)
+        if (err) {
           return res.status(400).json({ status: 400, message: err.message });
-        if (!err) {
-          Product.countProducts((err, response) => {
-            if (err)
-              return res
-                .status(400)
-                .json({ status: 400, message: err.message });
-            const pageSize = Math.ceil(response[0]?.NumberProduct / limit);
-            res.status(200).json({ status: 200, data, pageSize });
-          });
-          data.map((item) => {
-            let avatar = item?.Avatar;
-            if (avatar) {
-              const originalUrl = `${req.protocol}://${req.get("host")}`;
-              avatar = `${originalUrl}/images/${item?.Avatar}`;
-            }
-            return (item.Avatar = avatar);
-          });
-          res.status(200).json({ status: 200, data });
         }
+        data.map((item) => {
+          let avatar = item?.Avatar;
+          if (avatar) {
+            const originalUrl = `${req.protocol}://${req.get("host")}`;
+            avatar = `${originalUrl}/images/${item?.Avatar}`;
+          }
+          return (item.Avatar = avatar);
+        });
+        Product.countProducts((err, response) => {
+          if (err)
+            return res.status(400).json({ status: 400, message: err.message });
+          const pageSize = Math.ceil(response[0]?.NumberProduct / limit);
+          return res.status(200).json({ status: 200, data, pageSize });
+        });
       }
     );
   },

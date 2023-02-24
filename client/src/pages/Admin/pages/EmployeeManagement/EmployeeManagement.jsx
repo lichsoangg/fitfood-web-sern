@@ -32,7 +32,11 @@ export default function EmployeeManagement() {
     queryConfig = { ...initialQuery }
   }
   const { data: employees, isFetching: isGetEmployeeFetching } = useGetEmployeesQuery(queryConfig)
-  const { activeModalRef: activeTriggerDeleteModalRef, open: OpenTriggerDeleteModalRef, setOpen: setOpenTriggerDeleteModalRef } = useModal()
+  const {
+    activeModalRef: activeTriggerDeleteModalRef,
+    open: OpenTriggerDeleteModalRef,
+    setOpen: setOpenTriggerDeleteModalRef
+  } = useModal()
   const { activeModalRef, open, rect, setOpen } = useModal()
   const [editEmployee, setEditEmployee] = useState(null)
   const {
@@ -73,15 +77,14 @@ export default function EmployeeManagement() {
   const handleClickDeleteEmployee = () => {
     Swal.fire({
       title: 'Bạn có chắc chắn muốn xóa nhân viên này?',
-      text: "Nhân viên này sẽ bị xóa khỏi cơ sở dữ liệu vĩnh viễn!",
+      text: 'Nhân viên này sẽ bị xóa khỏi cơ sở dữ liệu vĩnh viễn!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#ff2203',
-      cancelButtonText: "Trở về",
+      cancelButtonText: 'Trở về',
       confirmButtonText: 'Xóa'
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
     })
   }
@@ -101,7 +104,12 @@ export default function EmployeeManagement() {
   //   })
   // }
   const handleClickTriggerDelete = () => {
-    SuccessNotify(<span>Đã bàn giao cho nhân viên mã số 15 <br /> Bạn đã có thể xóa nhân viên này</span>, 10000)
+    SuccessNotify(
+      <span>
+        Đã bàn giao cho nhân viên mã số 15 <br /> Bạn đã có thể xóa nhân viên này
+      </span>,
+      10000
+    )
   }
   return (
     <>
@@ -183,7 +191,7 @@ export default function EmployeeManagement() {
                 const province = SearchObjectArray(employee.Province * 1, provinces, 'code').name
                 return (
                   <div key={employee?.EmployeeID} className='employees-management__table--row'>
-                    <div className='table-data' style={{ textAlign: "center" }}>
+                    <div className='table-data' style={{ textAlign: 'center' }}>
                       {employee.EmployeeID}
                     </div>
                     <div className='table-data'>
@@ -252,19 +260,6 @@ export default function EmployeeManagement() {
               })}
           </div>
         </div>
-<<<<<<< HEAD
-=======
-        <div className='employees-management__bottom-bar'>
-          {employees?.pageSize > 1 && (
-            <Pagination
-              queryConfig={queryConfig}
-              pageSize={employees?.pageSize}
-              pathname={location?.pathname}
-              stylePagination={{ marginLeft: 'auto' }}
-            />
-          )}
-        </div>
->>>>>>> a6f7cca (merge page-homepage)
         {/* Pagination */}
         {employees?.pageSize > 1 && (
           <Pagination
@@ -277,19 +272,21 @@ export default function EmployeeManagement() {
         {/* Input Employee */}
         {openInputEmployee && (
           <ModalBase styleContent={{ width: '1100px', height: 'max-content' }} setOpen={setOpenInputEmployee}>
-            <EmployeeInput editEmployee={editEmployee} setOpenInputEmployee={setOpenInputEmployee} setEditEmployee={setEditEmployee} />
+            <EmployeeInput
+              editEmployee={editEmployee}
+              setOpenInputEmployee={setOpenInputEmployee}
+              setEditEmployee={setEditEmployee}
+            />
           </ModalBase>
         )}
         {/* Trigger Delete Modal  */}
         {OpenTriggerDeleteModalRef && (
           <ModalBase styleContent={{ width: '600px', height: 'max-content' }} setOpen={setOpenTriggerDeleteModalRef}>
-            <div className="employees-trigger-delete">
+            <div className='employees-trigger-delete'>
               <h4>Vui lòng nhập mã nhân viên bàn giao công việc</h4>
-              <div className="formInput">
-                <input type="text" className='formInput__input' placeholder=' ' />
-                <span className='formInput__placeHolder' >
-                  Mã nhân viên
-                </span>
+              <div className='formInput'>
+                <input type='text' className='formInput__input' placeholder=' ' />
+                <span className='formInput__placeHolder'>Mã nhân viên</span>
               </div>
               <AcceptButton onClick={handleClickTriggerDelete}>Xác nhận bàn giao</AcceptButton>
             </div>
