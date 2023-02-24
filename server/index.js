@@ -6,6 +6,7 @@ require("dotenv").config();
 //route
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
+const purchaseRoute = require("./routes/purchase");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/images", express.static(__dirname + process.env.IMAGE_ENDPOINT_URL));
 
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
+app.use("/api/purchase", purchaseRoute);
 
 app.use((req, res, next) => {
   const err = new Error("This route doesn't exist");
