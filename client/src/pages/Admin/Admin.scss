@@ -11,15 +11,11 @@
   &__outlet {
     padding-top: 70px;
     transition: 0.6s all $cubic;
-<<<<<<< HEAD
-    background-color: #f6f6f6;
-=======
     background-color: $cl-grey-dimmed;
     position: relative;
   }
   &__navbar {
     transition: 0.6s all $cubic;
     background-color: $cl-black;
->>>>>>> 9b1aead (chore: provide data for database)
   }
 }

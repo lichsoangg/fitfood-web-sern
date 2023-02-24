@@ -8,11 +8,6 @@ import './ActivePage.scss'
 export default function ActivePage({ children }) {
   const { username } = useSelector(selectCurrentAuth)
   const renderActivePage = (
-<<<<<<< HEAD
-    <div className='activePage'>
-      <div className='activePage__image'>
-        <img src={NewEmail} alt='Verification Email Fitfood' />
-=======
     <div className='activePageWrapper'>
       <div className='activePage'>
         <div className='activePage__image'>
@@ -25,7 +20,6 @@ export default function ActivePage({ children }) {
         </span>
         <span className='activePage__description description-left'>Vui lòng nhập mã xác thực: </span>
         <AuthVerifyEmail />
->>>>>>> a6f7cca (merge page-homepage)
       </div>
       <h2 className='activePage__title'>Xác thực Email</h2>
       <span className='activePage__description description-left'>

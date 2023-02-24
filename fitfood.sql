@@ -13,27 +13,11 @@ flush privileges;
 CREATE TABLE user(
 	Username varchar(100) NOT NULL,
     Password varchar(255) NOT NULL,
-<<<<<<< HEAD
-  	Role varchar(20) NOT NULL,
-    IsActive Boolean DEFAULT 0,
-	CONSTRAINT PK_User_ID PRIMARY KEY(ID)
-);	
-
-
-
--- Table Customer
-CREATE TABLE customer(
-	CustomerID int NOT NULL AUTO_INCREMENT,
-    Name varchar(100) NOT NULL,
-    DayOfBirth date NOT NULL,
-    PhoneNumber varchar(10) NOT NULL,
-=======
   	Role int NOT NULl,
     IsActive Boolean DEFAULT 1,
 	Name varchar(100) NOT NULL,
     DayOfBirth date ,
     PhoneNumber varchar(10),
->>>>>>> 9b1aead (chore: provide data for database)
     Gender int NOT NULL,
     Province varchar(10),
     District varchar(10),
