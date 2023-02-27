@@ -2,7 +2,8 @@ const mysql = require("mysql")
 
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
+    port: process.env.PORT_MYSQL,
+    user: process.env.USER_MYSQL,
     password: process.env.PASSWORD_MYSQL,
     database: 'FITFOOD'
 })
