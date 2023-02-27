@@ -23,9 +23,14 @@ const authController = {
         const { username, role } = data;
         const AccessToken = signAccessToken(username, role);
         signRefreshToken(username, role, res);
-        return res
-          .status(201)
-          .json({ username, isValid: 0, AccessToken, status: 201 });
+        return res.status(201).json({
+          data: {
+            Username: username,
+            IsValid: 1,
+            AccessToken,
+          },
+          status: 201,
+        });
       });
     } catch (err) {
       next(err);
@@ -57,9 +62,9 @@ const authController = {
   },
   //CHECK PHONE NUMBER EXIST
   checkPhoneNumber: async (req, res, next) => {
-    if (req.body.phoneNumber) {
+    if (req.body.PhoneNumber) {
       const isUsed = await checkFieldExisted(
-        req.body.phoneNumber,
+        req.body.PhoneNumber,
         "phoneNumber",
         "User"
       );
@@ -99,9 +104,17 @@ const authController = {
           const { Password, ...otherInfo } = data[0];
           const AccessToken = signAccessToken(username, data[0].Role);
           signRefreshToken(username, data[0].Role, res);
+          //change url for avatar
+          let avatar = data[0]?.Avatar;
+          if (avatar) {
+            avatar = `${process.env.IMAGE_DATA_URL}${data[0]?.Avatar}`;
+          }
           return res.status(200).json({
-            ...otherInfo,
-            AccessToken,
+            data: {
+              ...otherInfo,
+              Avatar: avatar,
+              AccessToken: AccessToken,
+            },
             status: 200,
           });
         } else {
@@ -137,7 +150,7 @@ const authController = {
           signRefreshToken(user.Username, user.Role, res);
           return res
             .status(200)
-            .json({ status: 200, AccessToken: newAccessToken });
+            .json({ status: 200, data: { AccessToken: newAccessToken } });
         }
       );
     } catch (err) {
@@ -246,7 +259,7 @@ const authController = {
       ),
     };
 
-    User.getUserWithName(Username, async (err, data) => {
+    User.getUserWithUsername(Username, async (err, data) => {
       if (!err) {
         if (data.length > 0) {
           const salt = await bcrypt.genSalt(10);

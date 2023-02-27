@@ -1,9 +1,13 @@
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const e = require("express");
+const path = require("path");
+const fs = require("fs");
+
 const nodemailer = require("nodemailer");
 const stringVerifyEmailTemplate = require("../utils/stringEmailTemplate");
-
+const _ = require("lodash");
+const convertObjectToRowUpdateString = require("../utils/convertObjectToRowUpdateString");
 const userController = {
   //Get all users
   getAllUsers: (req, res, next) => {
@@ -25,14 +29,17 @@ const userController = {
   // Get me
   getMe: (req, res, next) => {
     try {
-      User.getUserInfo(req.user.Username, (err, response) => {
+      User.getUserWithUsername(req.user.Username, (err, response) => {
         const dataUser = response[0];
         if (!err) {
           let avatar = dataUser?.Avatar;
           if (avatar) {
             avatar = `${process.env.IMAGE_DATA_URL}${dataUser?.Avatar}`;
           }
-          res.status(200).json({ ...dataUser, Avatar: avatar });
+          res.status(200).json({
+            data: _.omit({ ...dataUser, Avatar: avatar }, "Password"),
+            status: 200,
+          });
         } else {
           const err = new Error("Yêu cầu không hợp lệ");
           err.status = 400;
@@ -76,7 +83,6 @@ const userController = {
         convertObjectToRowUpdateString(data),
         req.user.Username,
         (err, response) => {
-          console.log(err);
           if (err) {
             return res.status(400).json({ status: 400, message: err.message });
           }
@@ -94,7 +100,7 @@ const userController = {
     const { password, newPassword } = req.body;
     const { Username } = req.user;
     try {
-      User.getUserWithName(Username, async (err, data) => {
+      User.getUserWithUsername(Username, async (err, data) => {
         if (!err) {
           const validPassword = await bcrypt.compare(
             password,

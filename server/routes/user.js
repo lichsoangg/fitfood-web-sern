@@ -27,7 +27,7 @@ const upload = multer({
 
 router.get("/me", middlewareController.verifyToken, userController.getMe);
 router.post(
-  "/updatepassword",
+  "/update-password",
   middlewareController.verifyToken,
   userController.updatePassword
 );
