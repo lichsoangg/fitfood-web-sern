@@ -1,13 +1,15 @@
-const db = require("../utils/connect_mysql");
+const db = require("../utils/connect_mysql")
 const Product = {
   getProducts: (
     {
       search,
       productType,
       productID,
-      orderPrice,
+      order,
+      orderField,
       priceMax,
       priceMin,
+      highLight,
       numberOffset,
       numberFetchNext,
     },
@@ -15,14 +17,20 @@ const Product = {
   ) => {
     db.query(
       `
-        SELECT ProductID, Product.Name as ProductName, Price, Quantity,Avatar, Unit, Highlight, Product.ProductTypeID as ProductTypeID, ProductType.Name as ProductTypeName 
-        FROM Product INNER JOIN ProductType ON Product.ProductTypeID= ProductType.ProductTypeID 
-        WHERE Replace(CONCAT(ProductID,'',Product.Name, Price, Quantity, Unit, Highlight, Product.ProductTypeID, Product.Name),' ','') Like ?
-        AND (? IS NULL OR ? = Product.ProductTypeID )
-        AND (? IS NULL OR ? = Product.ProductID )
-        AND (? IS NULL OR ? <= Product.Price )
-        AND (? IS NULL OR ? >= Product.Price )
-        LIMIT ?,?`,
+      SELECT P.ProductID, P.Name as ProductName, Price, P.Quantity,Avatar, Unit, Highlight, P.ProductTypeID as ProductTypeID, PT.Name as ProductTypeName, IFNULL(SUM(DB.Quantity),0) as SoldQuantity, IFNULL(ROUND(AVG(R.Rating),1),0) as Rating
+      FROM Product P INNER JOIN ProductType PT ON P.ProductTypeID= PT.ProductTypeID 
+      LEFT JOIN DetailBill DB ON DB.ProductID= P.ProductID
+      LEFT JOIN Rating R ON R.ProductID= P.ProductID
+        WHERE Replace(CONCAT(P.ProductID,'',P.Name, Price, P.Quantity, Unit, Highlight, P.ProductTypeID, P.Name),' ','') Like ?
+        AND (? IS NULL OR ? = P.ProductTypeID )
+        AND (? IS NULL OR ? = P.ProductID )
+        AND (? IS NULL OR ? <= P.Price )
+        AND (? IS NULL OR ? >= P.Price )
+        AND (? IS NULL OR ? = P.Highlight)
+        GROUP BY P.ProductID, P.Name, Price, P.Quantity ,Avatar, Unit, Highlight, P.ProductTypeID , PT.Name
+        ORDER BY ${orderField} ${ordero}
+        LIMIT ?,?
+        `,
       [
         `%${search}%`,
         productType,
@@ -33,28 +41,30 @@ const Product = {
         priceMin ? priceMin : null,
         priceMax ? priceMax : null,
         priceMax ? priceMax : null,
+        highLight,
+        highLight,
         numberOffset,
         numberFetchNext,
       ],
       callback
-    );
+    )
   },
   addProduct: (data, callback) => {
-    db.query("INSERT INTO Product SET ?", data, callback);
+    db.query("INSERT INTO Product SET ?", data, callback)
   },
   updateProduct: (rowUpdateString, productID, callback) => {
     db.query(
       `UPDATE Product SET ${rowUpdateString} Where ProductID =? `,
       [productID],
       callback
-    );
+    )
   },
   deleteProduct: (productID, callback) => {
-    db.query(`DELETE From Product Where ProductID = ? `, [productID], callback);
+    db.query(`DELETE From Product Where ProductID = ? `, [productID], callback)
   },
   countProducts: (callback) => {
-    db.query(`SELECT COUNT(ProductID) as NumberProduct From Product`, callback);
+    db.query(`SELECT COUNT(ProductID) as NumberProduct From Product`, callback)
   },
-};
+}
 
-module.exports = Product;
+module.exports = Product

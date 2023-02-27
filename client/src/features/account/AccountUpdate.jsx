@@ -62,9 +62,7 @@ export default function AccountUpdate() {
   //handle submit save update account
   const onSubmit = async (data) => {
     const { ID, IsActive, Role, Username, ...dataSubmit } = data
-
     let isValid = true
-
     if (data.PhoneNumber !== user.PhoneNumber) {
       await checkPhoneNumber({ phoneNumber: data.PhoneNumber, username: data.Username })
         .unwrap()
