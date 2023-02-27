@@ -187,10 +187,4 @@ Insert Into Rating(Username,ProductID,Rating) Values('duytran1@gmail.com','22','
 Insert Into Rating(Username,ProductID,Rating) Values('duytran1@gmail.com','20','4');
 
 
-  SELECT P.ProductID, P.Name as ProductName, Price, P.Quantity,Avatar, Unit, Highlight, P.ProductTypeID as ProductTypeID, PT.Name as ProductTypeName, IFNULL(SUM(DB.Quantity),0) as SoldQuantity, IFNULL(ROUND(AVG(R.Rating),1),0) as Rating
-      FROM Product P INNER JOIN ProductType PT ON P.ProductTypeID= PT.ProductTypeID 
-      LEFT JOIN DetailBill DB ON DB.ProductID= P.ProductID
-      LEFT JOIN Rating R ON R.ProductID= P.ProductID
-         GROUP BY P.ProductID, P.Name, Price, P.Quantity ,Avatar, Unit, Highlight, P.ProductTypeID , PT.Name
-      ORDER BY SoldQuantity ASC
    

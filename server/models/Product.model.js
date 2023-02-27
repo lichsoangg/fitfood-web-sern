@@ -1,4 +1,4 @@
-const db = require("../utils/connect_mysql")
+const db = require("../utils/connect_mysql");
 const Product = {
   getProducts: (
     {
@@ -28,7 +28,7 @@ const Product = {
         AND (? IS NULL OR ? >= P.Price )
         AND (? IS NULL OR ? = P.Highlight)
         GROUP BY P.ProductID, P.Name, Price, P.Quantity ,Avatar, Unit, Highlight, P.ProductTypeID , PT.Name
-        ORDER BY ${orderField} ${ordero}
+        ORDER BY ${orderField} ${order}
         LIMIT ?,?
         `,
       [
@@ -47,24 +47,24 @@ const Product = {
         numberFetchNext,
       ],
       callback
-    )
+    );
   },
   addProduct: (data, callback) => {
-    db.query("INSERT INTO Product SET ?", data, callback)
+    db.query("INSERT INTO Product SET ?", data, callback);
   },
   updateProduct: (rowUpdateString, productID, callback) => {
     db.query(
       `UPDATE Product SET ${rowUpdateString} Where ProductID =? `,
       [productID],
       callback
-    )
+    );
   },
   deleteProduct: (productID, callback) => {
-    db.query(`DELETE From Product Where ProductID = ? `, [productID], callback)
+    db.query(`DELETE From Product Where ProductID = ? `, [productID], callback);
   },
   countProducts: (callback) => {
-    db.query(`SELECT COUNT(ProductID) as NumberProduct From Product`, callback)
+    db.query(`SELECT COUNT(ProductID) as NumberProduct From Product`, callback);
   },
-}
+};
 
-module.exports = Product
+module.exports = Product;

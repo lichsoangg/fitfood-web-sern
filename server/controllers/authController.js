@@ -21,11 +21,11 @@ const authController = {
           return res.status(400).json({ message: err.message, status: 400 });
         }
         const { username, role } = data;
-        const accessToken = signAccessToken(username, role);
+        const AccessToken = signAccessToken(username, role);
         signRefreshToken(username, role, res);
         return res
           .status(201)
-          .json({ username, isValid: 0, accessToken, status: 201 });
+          .json({ username, isValid: 0, AccessToken, status: 201 });
       });
     } catch (err) {
       next(err);
@@ -97,11 +97,11 @@ const authController = {
               .status(401)
               .json({ message: "Tài khoản hoặc mật khẩu không đúng" });
           const { Password, ...otherInfo } = data[0];
-          const accessToken = signAccessToken(username, data[0].Role);
+          const AccessToken = signAccessToken(username, data[0].Role);
           signRefreshToken(username, data[0].Role, res);
           return res.status(200).json({
             ...otherInfo,
-            accessToken,
+            AccessToken,
             status: 200,
           });
         } else {
@@ -137,7 +137,7 @@ const authController = {
           signRefreshToken(user.Username, user.Role, res);
           return res
             .status(200)
-            .json({ status: 200, accessToken: newAccessToken });
+            .json({ status: 200, AccessToken: newAccessToken });
         }
       );
     } catch (err) {
