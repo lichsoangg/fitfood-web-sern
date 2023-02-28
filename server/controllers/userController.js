@@ -34,7 +34,8 @@ const userController = {
         if (!err) {
           let avatar = dataUser?.Avatar;
           if (avatar) {
-            avatar = `${process.env.IMAGE_DATA_URL}${dataUser?.Avatar}`;
+            const originalUrl = `${req.protocol}://${req.get("host")}`;
+            avatar = `${originalUrl}/images/${item?.Avatar}`;
           }
           res.status(200).json({
             data: _.omit({ ...dataUser, Avatar: avatar }, "Password"),

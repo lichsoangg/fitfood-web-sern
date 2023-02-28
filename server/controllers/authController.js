@@ -110,7 +110,8 @@ const authController = {
           //change url for avatar
           let avatar = data[0]?.Avatar;
           if (avatar) {
-            avatar = `${process.env.IMAGE_DATA_URL}${data[0]?.Avatar}`;
+            const originalUrl = `${req.protocol}://${req.get("host")}`;
+            avatar = `${originalUrl}/images/${item?.Avatar}`;
           }
           return res.status(200).json({
             data: {
