@@ -111,7 +111,7 @@ const authController = {
           let avatar = data[0]?.Avatar;
           if (avatar) {
             const originalUrl = `${req.protocol}://${req.get("host")}`;
-            avatar = `${originalUrl}/images/${item?.Avatar}`;
+            avatar = `${originalUrl}/images/${data[0]?.Avatar}`;
           }
           return res.status(200).json({
             data: {
