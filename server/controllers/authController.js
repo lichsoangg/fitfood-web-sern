@@ -16,6 +16,9 @@ const authController = {
   register: async (req, res, next) => {
     try {
       const data = req.body;
+      const salt = await bcrypt.genSalt(10);
+      const passwordHashed = await bcrypt.hash(data.password, salt);
+      data.password = passwordHashed;
       User.addUser(data, (err, response) => {
         if (err) {
           return res.status(400).json({ message: err.message, status: 400 });
