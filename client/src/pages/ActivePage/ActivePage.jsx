@@ -21,13 +21,6 @@ export default function ActivePage({ children }) {
         <span className='activePage__description description-left'>Vui lòng nhập mã xác thực: </span>
         <AuthVerifyEmail />
       </div>
-      <h2 className='activePage__title'>Xác thực Email</h2>
-      <span className='activePage__description description-left'>
-        Chúng tôi đã gửi mã xác thực đến email: <br />
-        <strong>{username}@gmail.com</strong>
-      </span>
-      <span className='activePage__description description-left'>Vui lòng nhập mã xác thực: </span>
-      <AuthVerifyEmail />
     </div>
   )
   return renderActivePage

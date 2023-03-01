@@ -64,15 +64,14 @@ export default function ProductManagement() {
   const handleClickDeleteEmployee = () => {
     Swal.fire({
       title: 'Bạn có chắc chắn muốn xóa nhân viên này?',
-      text: "Nhân viên này sẽ bị xóa khỏi cơ sở dữ liệu vĩnh viễn!",
+      text: 'Nhân viên này sẽ bị xóa khỏi cơ sở dữ liệu vĩnh viễn!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#ff2203',
-      cancelButtonText: "Trở về",
+      cancelButtonText: 'Trở về',
       confirmButtonText: 'Xóa'
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
     })
   }
@@ -140,7 +139,7 @@ export default function ProductManagement() {
           <div className='products-management__table'>
             {/* header */}
             <div className='products-management__table--row'>
-              <div className='table-data  table-data-center' >Mã</div>
+              <div className='table-data  table-data-center'>Mã</div>
               <div className='table-data'>Tên sản phẩm</div>
               <div className='table-data  table-data-center'>Giá</div>
               <div className='table-data  table-data-center'>Số lượng tồn kho</div>
@@ -153,12 +152,12 @@ export default function ProductManagement() {
             {/* table data */}
             {products?.data &&
               products.data.map((product) => {
-                {/* const province = SearchObjectArray(product.Province * 1, provinces, 'code').name */ }
+                {
+                  /* const province = SearchObjectArray(product.Province * 1, provinces, 'code').name */
+                }
                 return (
                   <div key={product?.ProductID} className='products-management__table--row'>
-                    <div className='table-data  table-data-center'>
-                      {product.ProductID}
-                    </div>
+                    <div className='table-data  table-data-center'>{product.ProductID}</div>
                     <div className='table-data'>
                       <div className='table-data__image-name'>
                         <img src={product.Avatar} alt={`Fitfood ${product?.Name}`} />

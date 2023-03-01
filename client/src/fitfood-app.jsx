@@ -21,6 +21,7 @@ import TypeProductManagement from './pages/Admin/pages/TypeProductManagement/Typ
 import BillManagement from './pages/BillManagement'
 import ReportRevenue from './pages/ReportRevenue/ReportRevenue'
 import Backup from './pages/Backup/Backup'
+import { ROLES } from './constants/utils'
 function FitFoodApp() {
   return (
     <ErrorBoundaryComponent>
@@ -50,7 +51,7 @@ function FitFoodAppRoutes() {
         </Route>
       </Route>
       {/* private route admin layout*/}
-      <Route element={<PrivateRoute requiredRole={['Admin']} />}>
+      <Route element={<PrivateRoute requiredRole={[ROLES.ADMIN]} />}>
         <Route path={path.admin} element={<Admin />}>
           <Route index element={<EmployeeManagement />} />
           <Route path={path.productManagement} element={<ProductManagement />} />
@@ -58,7 +59,6 @@ function FitFoodAppRoutes() {
           <Route path={path.billManagement} element={<BillManagement />} />
           <Route path={path.revenueReport} element={<ReportRevenue />} />
           <Route path={path.backup} element={<Backup />} />
-
         </Route>
       </Route>
     </Routes>

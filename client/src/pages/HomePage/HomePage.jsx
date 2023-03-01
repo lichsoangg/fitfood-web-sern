@@ -21,7 +21,6 @@ import ProductImage2 from '../../assets/images/product2.jpg'
 import ProductImage3 from '../../assets/images/product3.jpg'
 import ProductImage4 from '../../assets/images/product4.jfif'
 
-
 import './HomePage.scss'
 import ProductItem from '../../components/ProductItem'
 import path from '../../constants/path'

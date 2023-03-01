@@ -1,6 +1,10 @@
 @import '../../scss/import.scss';
-.activePageWrapper {
+.activePage {
   width: 100%;
+  min-width: 450px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
   @include flexMid(center);
   display: flex;
   flex-direction: column;

@@ -11,6 +11,7 @@ import Error from '../../components/Error/Error'
 import UsernameIcon from '../../assets/icons/username.png'
 import { useLoginMutation } from './authApi'
 import path from '../../constants/path'
+import { ROLES } from '../../constants/utils'
 
 const schema = yup
   .object({
@@ -32,23 +33,27 @@ export default function AuthLogin() {
   const dispatch = useDispatch()
 
   //change to page previous when have token
-  const currentAuth = useSelector(selectCurrentAuth)
+  const { role } = useSelector(selectCurrentAuth)
   const token = useSelector(selectCurrentToken)
 
   useEffect(() => {
     if (token) {
-      if (currentAuth?.role !== 'Khách hàng') {
-        navigate('/admin')
-      } else navigate(location?.state?.from?.pathname || path.home, { replace: true })
+      if (Number(role) === Number(ROLES.ADMIN)) {
+        navigate(path.admin)
+      }
+      if (Number(role) === Number(ROLES.CUSTOMER)) {
+        navigate(location?.state?.from?.pathname || path.home, { replace: true })
+      }
     }
-  }, [token, navigate, location])
+  }, [token, navigate, location, role])
   //handle submit login
   const onSubmit = async (data) => {
     try {
       const user = await login(data).unwrap()
-      console.log(user)
-      const { Username, IsActive, Role, accessToken } = user
-      dispatch(setCredentials(Username, IsActive, Role, accessToken))
+      const {
+        data: { Username, IsActive, Role, AccessToken }
+      } = user
+      dispatch(setCredentials(Username, IsActive, Role, AccessToken))
     } catch (err) {
       console.warn(err)
     }

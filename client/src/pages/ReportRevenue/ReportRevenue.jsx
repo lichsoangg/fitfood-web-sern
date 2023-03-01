@@ -7,7 +7,6 @@ import ProductImage_16 from '../../assets/images/ProductAvatar_16.png'
 import ProductImage_19 from '../../assets/images/ProductAvatar_19.png'
 import ProductImage_21 from '../../assets/images/ProductAvatar_21.png'
 
-
 let indexproductid = 1
 const data = [
   {
@@ -23,14 +22,12 @@ const data = [
     Image: ProductImage_1
   },
 
-
   {
     ProductID: indexproductid++,
     Name: 'Gói chay',
     Revenue: '600.000',
     Image: ProductImage_21
-  },
-
+  }
 ]
 export default function ReportRevenue() {
   return (

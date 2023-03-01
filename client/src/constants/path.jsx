@@ -17,7 +17,6 @@ const path = {
   billManagement: 'quan-ly-hoa-don',
   revenueReport: 'bao-cao-doanh-thu',
   backup: 'back-up'
-
 }
 
 export default path

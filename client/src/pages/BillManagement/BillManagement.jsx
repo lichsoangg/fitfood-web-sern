@@ -6,49 +6,49 @@ import { useModal } from '../../hooks/useModal'
 import ProductImage_1 from '../../assets/images/ProductAvatar_1.png'
 import ProductImage_2 from '../../assets/images/ProductAvatar_2.png'
 
-import "./BillManagement.scss"
+import './BillManagement.scss'
 let billidindex = 15
-const data = [{
-  BillID: billidindex++,
-  Date: '2019-11-02',
-  State: true,
-  EmployeeName: "Phạm Duy Nam",
-  CustomerName: "Công Hoàng",
-  Revenue: "1.120.000"
-},
-{
-  BillID: billidindex++,
-  Date: '2020-05-03',
-  State: true,
-  EmployeeName: "Trần Hạ Khương Duy",
-  CustomerName: "Trương Hữu Tài",
-  Revenue: "370.000"
-},
-{
-  BillID: billidindex++,
-  Date: '2020-06-13',
-  State: true,
-  EmployeeName: "Dương Thị Thu Thuỷ",
-  CustomerName: "Nguyễn Thành Nhân",
-  Revenue: "120.000"
-},
-{
-  BillID: billidindex++,
-  Date: '2022-12-14',
-  State: true,
-  EmployeeName: "Nhật Hoàng",
-  CustomerName: "Thái Bảo",
-  Revenue: "500.000"
-},
+const data = [
+  {
+    BillID: billidindex++,
+    Date: '2019-11-02',
+    State: true,
+    EmployeeName: 'Phạm Duy Nam',
+    CustomerName: 'Công Hoàng',
+    Revenue: '1.120.000'
+  },
+  {
+    BillID: billidindex++,
+    Date: '2020-05-03',
+    State: true,
+    EmployeeName: 'Trần Hạ Khương Duy',
+    CustomerName: 'Trương Hữu Tài',
+    Revenue: '370.000'
+  },
+  {
+    BillID: billidindex++,
+    Date: '2020-06-13',
+    State: true,
+    EmployeeName: 'Dương Thị Thu Thuỷ',
+    CustomerName: 'Nguyễn Thành Nhân',
+    Revenue: '120.000'
+  },
+  {
+    BillID: billidindex++,
+    Date: '2022-12-14',
+    State: true,
+    EmployeeName: 'Nhật Hoàng',
+    CustomerName: 'Thái Bảo',
+    Revenue: '500.000'
+  }
 ]
 let indexproductid = 1
 const data1 = [
-
   {
     ProductID: indexproductid++,
     Name: 'Nước Mát Thảo Mộc',
     Quantity: 1,
-    Price: "100.000",
+    Price: '100.000',
     Revenue: '100.000',
     Image: ProductImage_1
   },
@@ -56,11 +56,10 @@ const data1 = [
     ProductID: indexproductid++,
     Name: 'FITFOOD JUICE SWEETIE',
     Quantity: 2,
-    Price: "200.000",
+    Price: '200.000',
     Revenue: '400.000',
     Image: ProductImage_2
-  },
-
+  }
 ]
 export default function BillManagement() {
   const {
@@ -71,7 +70,7 @@ export default function BillManagement() {
   return (
     <>
       <div className='bills-management'>
-        <h4 >Quản lý hóa đơn</h4>
+        <h4>Quản lý hóa đơn</h4>
 
         <div className='employees-management__operation'>
           <div className='employees-management__operation--search'>
@@ -97,7 +96,7 @@ export default function BillManagement() {
           </div>
           <div className='employees-management__operation--role'>
             <label>Chọn nhân viên</label>
-            <span >{'Tất cả'}</span>
+            <span>{'Tất cả'}</span>
             {/* <span ref={activeModalRef}>{queryConfig?.role ? queryConfig?.role : 'Tất cả'}</span> */}
             {/* {open && (
               <DropdownBase
@@ -119,12 +118,11 @@ export default function BillManagement() {
                 </div>
               </DropdownBase>
             )} */}
-
           </div>
           <div className='employees-management__operation--role'>
             <label>Chọn khách hàng</label>
             {/* <span ref={activeModalRef}>{queryConfig?.role ? queryConfig?.role : 'Tất cả'}</span> */}
-            <span >{'Tất cả'}</span>
+            <span>{'Tất cả'}</span>
 
             {/* {open && (
               <DropdownBase
@@ -146,7 +144,6 @@ export default function BillManagement() {
                 </div>
               </DropdownBase>
             )} */}
-
           </div>
           <AcceptButton
             width='200px'
@@ -174,15 +171,13 @@ export default function BillManagement() {
               data.map((bill) => {
                 return (
                   <div key={bill?.BillID} className='employees-management__table--row'>
-                    <div className='table-data' style={{ textAlign: "center" }}>
+                    <div className='table-data' style={{ textAlign: 'center' }}>
                       {bill.BillID}
                     </div>
+                    <div className='table-data'>{bill.Date}</div>
                     <div className='table-data'>
-                      {bill.Date}
-                    </div>
-                    <div className='table-data'>
-                      <div style={{ display: "flex", gap: "8px" }}>
-                        <div className="circleOn"></div>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <div className='circleOn'></div>
                         <span>Đã hoàn thành</span>
                       </div>
                     </div>
@@ -208,7 +203,7 @@ export default function BillManagement() {
                             />
                           </svg>
                         </div>
-                        <div className='table-data__operation--icon' >
+                        <div className='table-data__operation--icon'>
                           <svg
                             width='24'
                             height='24'
@@ -261,9 +256,9 @@ export default function BillManagement() {
         {openInputEmployee && (
           <ModalBase styleContent={{ width: '1100px', height: 'max-content' }} setOpen={setOpenInputEmployee}>
             <div className='employeeInput__form'>
-              <h3 style={{ display: "block", width: "100%" }}>Thêm hóa đơn </h3>
+              <h3 style={{ display: 'block', width: '100%' }}>Thêm hóa đơn </h3>
 
-              <div className='formInput' style={{ width: "100%" }}>
+              <div className='formInput' style={{ width: '100%' }}>
                 <input
                   type='text'
                   className='formInput__input'
@@ -272,11 +267,7 @@ export default function BillManagement() {
                   placeholder=' '
                   autoComplete='off'
                 />
-                <span className='formInput__placeHolder' >
-                  Chọn ngày tạo hóa đơn
-                </span>
-
-
+                <span className='formInput__placeHolder'>Chọn ngày tạo hóa đơn</span>
               </div>
 
               <div className='formInput' style={{ width: 'calc(50% - 16px)' }}>
@@ -300,13 +291,22 @@ export default function BillManagement() {
               <div className='employees-management__table-wrapper'>
                 <h4>Chi tiết hóa đơn</h4>
                 <div className='employees-management__table'>
-                  <div className='employees-management__table--row' style={{ gridTemplateColumns: "140px 2fr 1fr 1fr 1fr 1fr" }}>
+                  <div
+                    className='employees-management__table--row'
+                    style={{ gridTemplateColumns: '140px 2fr 1fr 1fr 1fr 1fr' }}
+                  >
                     <div className='table-data  table-data-center'>Mã sản phẩm</div>
                     <div className='table-data'>Sản phẩm</div>
-                    <div className='table-data  table-data-center' style={{ textAlign: "center" }}>Giá</div>
-                    <div className='table-data  table-data-center' style={{ textAlign: "center" }}>Số lượng</div>
+                    <div className='table-data  table-data-center' style={{ textAlign: 'center' }}>
+                      Giá
+                    </div>
+                    <div className='table-data  table-data-center' style={{ textAlign: 'center' }}>
+                      Số lượng
+                    </div>
 
-                    <div className='table-data  table-data-center' style={{ textAlign: "center" }}>Thành tiền</div>
+                    <div className='table-data  table-data-center' style={{ textAlign: 'center' }}>
+                      Thành tiền
+                    </div>
 
                     <div className='table-data'></div>
                   </div>
@@ -314,21 +314,32 @@ export default function BillManagement() {
                   {data1 &&
                     data1.map((product) => {
                       return (
-                        <div key={product?.ID} className='employees-management__table--row' style={{ gridTemplateColumns: "140px 2fr 1fr 1fr 1fr 1fr" }}>
-                          <div className='table-data table-data-center' style={{ textAlign: "center" }}>{product.ProductID}</div>
+                        <div
+                          key={product?.ID}
+                          className='employees-management__table--row'
+                          style={{ gridTemplateColumns: '140px 2fr 1fr 1fr 1fr 1fr' }}
+                        >
+                          <div className='table-data table-data-center' style={{ textAlign: 'center' }}>
+                            {product.ProductID}
+                          </div>
                           <div className='table-data'>
                             <div className='table-data__image-name'>
                               <img src={product.Image} alt={`Fitfood ${product?.Name}`} />
                               <span>{product.Name}</span>
                             </div>
                           </div>
-                          <div className='table-data table-data-center' style={{ textAlign: "center" }}>{product.Price}</div>
-                          <div className='table-data table-data-center' style={{ textAlign: "center" }}>{product.Quantity}</div>
-                          <div className='table-data table-data-center' style={{ textAlign: "center" }}>{product.Revenue}</div>
+                          <div className='table-data table-data-center' style={{ textAlign: 'center' }}>
+                            {product.Price}
+                          </div>
+                          <div className='table-data table-data-center' style={{ textAlign: 'center' }}>
+                            {product.Quantity}
+                          </div>
+                          <div className='table-data table-data-center' style={{ textAlign: 'center' }}>
+                            {product.Revenue}
+                          </div>
                           <div className='table-data'>
                             <div className='table-data__operation'>
-
-                              <div className='table-data__operation--icon' >
+                              <div className='table-data__operation--icon'>
                                 <svg
                                   width='24'
                                   height='24'
@@ -364,7 +375,9 @@ export default function BillManagement() {
                       )
                     })}
                 </div>
-                <h3 style={{ marginLeft: "auto", textAlign: "right" }}>Tổng tiền hóa đơn: <strong style={{ color: "#ff2033" }}> 500.000 vnđ</strong></h3>
+                <h3 style={{ marginLeft: 'auto', textAlign: 'right' }}>
+                  Tổng tiền hóa đơn: <strong style={{ color: '#ff2033' }}> 500.000 vnđ</strong>
+                </h3>
               </div>
             </div>
           </ModalBase>

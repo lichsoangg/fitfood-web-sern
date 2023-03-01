@@ -24,7 +24,7 @@ const User = {
   },
   updateActive: (username, callback) => {
     db.query(
-      "UPDATE USER SET IsActive=1 WHERE Username=?",
+      "UPDATE USER SET IsActive=2 WHERE Username=?",
       [username],
       callback
     );

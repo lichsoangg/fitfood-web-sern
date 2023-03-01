@@ -30,10 +30,9 @@ export default function AuthVerifyEmail() {
     const response = await verifyEmail({ code }).unwrap()
     if (response?.status === 200) {
       SuccessNotify(response?.message)
-      dispatch(setActiveUser(1))
+      dispatch(setActiveUser(2))
     }
   }
-
   // const renderListInput=
   const handleSendEmail = async () => {
     const response = await sendVerifyEmail().unwrap()

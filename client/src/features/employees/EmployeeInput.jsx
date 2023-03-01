@@ -7,10 +7,10 @@ import image from '../../assets/svg/image.svg'
 import roles from '../../constants/roles'
 import gender from '../../constants/gender'
 import { useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from '../api/apiProvince'
-import { useAddEmployeeMutation, useUpdateEmployeeMutation } from "./employeesApi"
+import { useAddEmployeeMutation, useUpdateEmployeeMutation } from './employeesApi'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import Error from "../../components/Error/Error"
+import Error from '../../components/Error/Error'
 import { useEffect } from 'react'
 const schema = yup.object({
   Username: yup.string().required('Email là bắt buộc').email('Email không đúng định dạng'),
@@ -38,7 +38,8 @@ const EmployeeInput = React.forwardRef(({ editEmployee, setOpenInputEmployee, se
     skip: !watch('District')
   })
   const [addEmployee, { isLoading: isaddEmployeeLoading, error: addEmployeeError }] = useAddEmployeeMutation()
-  const [updateEmployee, { isLoading: isUpdateEmployeeLoading, error: updateEmployeeError }] = useUpdateEmployeeMutation()
+  const [updateEmployee, { isLoading: isUpdateEmployeeLoading, error: updateEmployeeError }] =
+    useUpdateEmployeeMutation()
   const onSubmit = async (data) => {
     let formData = new FormData()
     for (const key in data) {
@@ -73,10 +74,18 @@ const EmployeeInput = React.forwardRef(({ editEmployee, setOpenInputEmployee, se
           <div className='employeeInput__form--top employeeInput__form--top-left'>
             <div className='avatar'>
               {fileAvatar && <img src={URL.createObjectURL(fileAvatar)} alt='' />}
-              {!fileAvatar && <img src={editEmployee?.Avatar ? editEmployee.Avatar : image} alt='' style={{ border: '1px dashed #111112' }} />}
+              {!fileAvatar && (
+                <img
+                  src={editEmployee?.Avatar ? editEmployee.Avatar : image}
+                  alt=''
+                  style={{ border: '1px dashed #111112' }}
+                />
+              )}
             </div>
             <div className='button'>
-              <InputButton onChange={(e) => setFileAvatar(e.target.files[0])}>{editEmployee?.Avatar ? `Đổi ảnh đại diện` : `Thêm ảnh đại diện`}</InputButton>
+              <InputButton onChange={(e) => setFileAvatar(e.target.files[0])}>
+                {editEmployee?.Avatar ? `Đổi ảnh đại diện` : `Thêm ảnh đại diện`}
+              </InputButton>
             </div>
           </div>
           <div className='employeeInput__form--top employeeInput__form--top-right'>

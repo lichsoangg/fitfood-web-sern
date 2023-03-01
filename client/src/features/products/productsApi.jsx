@@ -11,7 +11,7 @@ export const productsApi = apiSlice.injectEndpoints({
         }
       },
       providesTags: ['Products']
-    }),
+    })
     //   addEmployee: builder.mutation({
     //     query: (data) => ({
     //       url: '/employees/add',

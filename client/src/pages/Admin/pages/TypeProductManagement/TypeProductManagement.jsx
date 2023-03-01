@@ -1,14 +1,14 @@
-import { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
-import { AcceptButton } from "../../../../components/Buttons/Buttons"
-import Error from "../../../../components/Error/Error"
-import Loading from "../../../../components/Loading/Loading"
-import ModalBase from "../../../../components/ModalBase"
-import Pagination from "../../../../components/Pagination/Pagination"
-import { useGetProductTypesQuery } from "../../../../features/typeProduct/typeProductApi"
-import { useModal } from "../../../../hooks/useModal"
-import useQueryParams from "../../../../hooks/useQueryParams"
-import "./TypeProductManagement.scss"
+import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { AcceptButton } from '../../../../components/Buttons/Buttons'
+import Error from '../../../../components/Error/Error'
+import Loading from '../../../../components/Loading/Loading'
+import ModalBase from '../../../../components/ModalBase'
+import Pagination from '../../../../components/Pagination/Pagination'
+import { useGetProductTypesQuery } from '../../../../features/typeProduct/typeProductApi'
+import { useModal } from '../../../../hooks/useModal'
+import useQueryParams from '../../../../hooks/useQueryParams'
+import './TypeProductManagement.scss'
 const initialQuery = {
   limit: 5,
   page: 1
@@ -29,8 +29,6 @@ export default function TypeProductManagement() {
     setOpen: setOpenInputEmployee
   } = useModal()
 
-
-
   const handleEditEmployee = (employee) => {
     // setEditEmployee(employee)
     // setOpenInputEmployee(true)
@@ -46,7 +44,6 @@ export default function TypeProductManagement() {
     //   confirmButtonText: 'Xóa'
     // }).then((result) => {
     //   if (result.isConfirmed) {
-
     //   }
     // })
   }
@@ -56,7 +53,6 @@ export default function TypeProductManagement() {
         <h4>Quản lý loại sản phẩm</h4>
 
         <div className='productTypes-management__operation'>
-
           <AcceptButton
             width='300px'
             styleButton={{ height: '100%', borderRadius: '4px', marginLeft: 'auto' }}
@@ -69,7 +65,9 @@ export default function TypeProductManagement() {
           <div className='productTypes-management__table'>
             {/* header */}
             <div className='productTypes-management__table--row'>
-              <div className='table-data' style={{ textAlign: "center" }}>Mã</div>
+              <div className='table-data' style={{ textAlign: 'center' }}>
+                Mã
+              </div>
               <div className='table-data'>Tên loại sản phẩm</div>
               <div className='table-data'></div>
             </div>
@@ -79,7 +77,7 @@ export default function TypeProductManagement() {
               productTypes.data.map((productType) => {
                 return (
                   <div key={productType?.ProductTypeID} className='productTypes-management__table--row'>
-                    <div className='table-data' style={{ textAlign: "center" }}>
+                    <div className='table-data' style={{ textAlign: 'center' }}>
                       {productType.ProductTypeID}
                     </div>
 
@@ -154,13 +152,13 @@ export default function TypeProductManagement() {
         {/* Input Employee */}
         {openInputEmployee && (
           <ModalBase styleContent={{ width: '500px', height: 'max-content' }} setOpen={setOpenInputEmployee}>
-            <div className="addTypeproduct">
+            <div className='addTypeproduct'>
               <h3>Thêm loại sản phẩm</h3>
               <div className='formInput'>
                 <input type={'text'} className='formInput__input' placeholder=' ' autoComplete='off' />
                 <span className='formInput__placeHolder'>Tên loại sản phẩm</span>
               </div>
-              <Error errorMessage={"Bạn không có quyền thực hiện chức năng này"} />
+              <Error errorMessage={'Bạn không có quyền thực hiện chức năng này'} />
               <AcceptButton>Thêm loại sản phẩm</AcceptButton>
             </div>
             {/* <EmployeeInput editEmployee={editEmployee} setOpenInputEmployee={setOpenInputEmployee} setEditEmployee={setEditEmployee} /> */}

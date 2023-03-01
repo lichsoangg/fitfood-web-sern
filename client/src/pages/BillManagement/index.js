@@ -1,3 +1,3 @@
-import BillManagement from "./BillManagement"
+import BillManagement from './BillManagement'
 
 export default BillManagement

@@ -169,9 +169,9 @@ function Dropdown({ data, isLoading = false, trigger, styleFormInput, placeHolde
           style={
             trigger
               ? {
-                opacity: `${getValues(trigger) ? 1 : 0.4}`,
-                border: `${errors[name] ? '0.8px solid red' : ''}`
-              }
+                  opacity: `${getValues(trigger) ? 1 : 0.4}`,
+                  border: `${errors[name] ? '0.8px solid red' : ''}`
+                }
               : { border: `${errors[name] ? '0.8px solid red' : ''}` }
           }
         />

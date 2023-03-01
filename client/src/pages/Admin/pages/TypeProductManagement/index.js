@@ -1,3 +1,3 @@
-import TypeProductManagement from "./TypeProductManagement"
+import TypeProductManagement from './TypeProductManagement'
 
 export default TypeProductManagement

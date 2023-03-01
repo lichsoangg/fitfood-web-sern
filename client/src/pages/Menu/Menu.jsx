@@ -1,13 +1,13 @@
-import TitleSection from "../../components/TitleSection"
-import "./Menu.scss"
+import TitleSection from '../../components/TitleSection'
+import './Menu.scss'
 import Slider from '@material-ui/core/Slider'
-import { useState } from "react"
+import { useState } from 'react'
 import { Select, MenuItem } from '@material-ui/core'
-import { useModal } from "../../hooks/useModal"
-import DropdownBase from "../../components/DropdownBase/DropdownBase"
-import { v4 as uuidv4 } from "uuid"
-import ProductItem from "../../components/ProductItem"
-import Pagination from "../../components/Pagination/Pagination"
+import { useModal } from '../../hooks/useModal'
+import DropdownBase from '../../components/DropdownBase/DropdownBase'
+import { v4 as uuidv4 } from 'uuid'
+import ProductItem from '../../components/ProductItem'
+import Pagination from '../../components/Pagination/Pagination'
 
 import ProductImage1 from '../../assets/images/product1.jpeg'
 import ProductImage2 from '../../assets/images/product2.jpg'
@@ -26,25 +26,28 @@ export default function Menu() {
     // console.log(newValue)
   }
   return (
-    <div className="menu">
-      <section className="menu-top">
-        <div className="mainWrapper container">
-          <TitleSection title="Lựa chọn sản phẩm" styleBorder={{ borderColor: "#ffffff" }} styleGroup={{ alignItems: "center", paddingTop: '40px' }}></TitleSection>
+    <div className='menu'>
+      <section className='menu-top'>
+        <div className='mainWrapper container'>
+          <TitleSection
+            title='Lựa chọn sản phẩm'
+            styleBorder={{ borderColor: '#ffffff' }}
+            styleGroup={{ alignItems: 'center', paddingTop: '40px' }}
+          ></TitleSection>
         </div>
       </section>
-      <section className="products mainWrapper container">
-        <div className="products__filter">
+      <section className='products mainWrapper container'>
+        <div className='products__filter'>
           <h3>Lọc sản phẩm</h3>
-          <label htmlFor="menu-search">Tìm kiếm sản phẩm</label>
-          <input type="text" placeholder="Nhập nội dung cần tìm" id="menu-search" className="products__filter--search" />
-          <label htmlFor="menu-search">Giá sản phẩm</label>
-          <Slider
-            value={value}
-            onChange={rangeSelector}
-            valueLabelDisplay="auto"
-            min={0}
-            max={1000000}
+          <label htmlFor='menu-search'>Tìm kiếm sản phẩm</label>
+          <input
+            type='text'
+            placeholder='Nhập nội dung cần tìm'
+            id='menu-search'
+            className='products__filter--search'
           />
+          <label htmlFor='menu-search'>Giá sản phẩm</label>
+          <Slider value={value} onChange={rangeSelector} valueLabelDisplay='auto' min={0} max={1000000} />
           <div className='employees-management__operation--role'>
             <label>Chọn loại sản phẩm</label>
             <span ref={activeModalRef}>{'Tất cả'}</span>
@@ -71,17 +74,15 @@ export default function Menu() {
           </div>
           <div className='employees-management__operation--rating'>
             <label>Đánh giá sản phẩm</label>
-            <span >⭐⭐⭐⭐⭐</span>
-            <span >⭐⭐⭐⭐ trở lên</span>
-            <span >⭐⭐⭐ trở lên</span>
-            <span >⭐⭐ trở lên</span>
-            <span >⭐ trở lên</span>
-
+            <span>⭐⭐⭐⭐⭐</span>
+            <span>⭐⭐⭐⭐ trở lên</span>
+            <span>⭐⭐⭐ trở lên</span>
+            <span>⭐⭐ trở lên</span>
+            <span>⭐ trở lên</span>
           </div>
         </div>
-        <div className="products__wrapper">
-
-          <div className="products__wrapper--list">
+        <div className='products__wrapper'>
+          <div className='products__wrapper--list'>
             {[...Array(1).keys()].map((item) => {
               return (
                 <>
@@ -95,10 +96,11 @@ export default function Menu() {
               )
             })}
           </div>
-          <Pagination pageSize={10} stylePagination={{ margin: "20px 20px 20px auto", width: "max-content" }}></Pagination>
-
+          <Pagination
+            pageSize={10}
+            stylePagination={{ margin: '20px 20px 20px auto', width: 'max-content' }}
+          ></Pagination>
         </div>
-
       </section>
     </div>
   )
