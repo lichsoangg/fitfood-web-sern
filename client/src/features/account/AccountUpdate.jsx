@@ -1,20 +1,16 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { AcceptButton, CancelButton, InputButton, MainButton } from '../../components/Buttons/Buttons'
-import Form from '../../components/Form/Form'
-import { useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from '../api/apiProvince'
-import { useGetMeQuery, useUpdateAccountMutation } from './accountApi'
-import womanAvatar from '../../assets/images/woman_avatar.png'
-import manAvatar from '../../assets/images/man_avatar.png'
-import { useCallback } from 'react'
-import Loading from '../../components/Loading/Loading'
-import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import React, { useCallback, useEffect, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import manAvatar from '../../assets/images/man_avatar.png'
+import womanAvatar from '../../assets/images/woman_avatar.png'
+import { AcceptButton, CancelButton, InputButton, MainButton } from '../../components/Buttons/Buttons'
 import Error from '../../components/Error/Error'
+import Form from '../../components/Form/Form'
+import Loading from '../../components/Loading/Loading'
+import { useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from '../api/apiProvince'
 import { useCheckPhoneNumberMutation } from '../authentication/authApi'
-import { useUpdateEmployeeMutation } from '../employees/employeesApi'
+import { useGetMeQuery, useUpdateAccountMutation } from './accountApi'
 const dataGender = [
   { id: 1, value: 'Nam' },
   { id: 2, value: 'Nữ' }
@@ -42,10 +38,10 @@ export default function AccountUpdate() {
     reset,
     watch,
     setError,
-    getValues,
     formState: { isDirty }
   } = methods
-  const { data: user } = useGetMeQuery()
+  const { data } = useGetMeQuery()
+  const user = data?.data
   const { data: provinces, isFetching: provincesLoading } = useGetProvincesQuery()
   const { data: districts, isFetching: districtsLoading } = useGetDistrictsQuery(watch('Province'), {
     skip: !watch('Province')
@@ -54,8 +50,7 @@ export default function AccountUpdate() {
     skip: !watch('District')
   })
   const [updateAccount, { isLoading: isUpdateAccountLoading, error: errorUpdateAccount }] = useUpdateAccountMutation()
-  const [updateEmployee, { isLoading: isUpdateEmployeeLoading, error: errorUpdateEmployee }] =
-    useUpdateEmployeeMutation()
+
   const [checkPhoneNumber] = useCheckPhoneNumberMutation()
   let avatar = user?.Avatar ? user?.Avatar : user?.Gender === 0 ? manAvatar : womanAvatar
 
@@ -73,34 +68,23 @@ export default function AccountUpdate() {
           }
         })
     }
+    // const dayOfBirthCopy = new Date(dataSubmit.DayOfBirth)
+    // const dayOfBirthFormat = moment(dayOfBirthCopy).format('YYYY-MM-DD')
+    // dataSubmit.DayOfBirth = dayOfBirthFormat
     if (isValid) {
       let formData = new FormData()
       for (const key in dataSubmit) {
         formData.append(key, dataSubmit[key])
       }
 
-      if (Role === 'Khách hàng') {
-        if (fileAvatar) {
-          formData.append('CustomerAvatar', fileAvatar)
-        } else {
-          formData.delete('CustomerAvatar')
-        }
-        const response = await updateAccount(formData).unwrap()
-        if (response.status === 200) {
-          setFileAvatar(null)
-        }
+      if (fileAvatar) {
+        formData.append('UserAvatar', fileAvatar)
       } else {
-        if (fileAvatar) {
-          formData.append('EmployeeAvatar', fileAvatar)
-        } else {
-          formData.delete('EmployeeAvatar')
-        }
-
-        const response = await updateEmployee({ Username, data: formData }).unwrap()
-
-        if (response.status === 200) {
-          setFileAvatar(null)
-        }
+        formData.delete('UserAvatar')
+      }
+      const response = await updateAccount(formData).unwrap()
+      if (response.status === 200) {
+        setFileAvatar(null)
       }
     }
   }
@@ -173,11 +157,8 @@ export default function AccountUpdate() {
       {errorUpdateAccount && (
         <Error styleError={{ marginTop: '24px' }} errorMessage={errorUpdateAccount.data.message}></Error>
       )}
-      {errorUpdateEmployee && (
-        <Error styleError={{ marginTop: '24px' }} errorMessage={errorUpdateEmployee.data.message}></Error>
-      )}
+
       {isUpdateAccountLoading && <Loading size={3} full />}
-      {isUpdateEmployeeLoading && <Loading size={3} full />}
     </>
   )
 }

@@ -2,7 +2,7 @@ const checkFieldExisted = require("../utils/checkFieldExisted");
 const registerValidatorExisted = {
   checkUsernameExisted: async (req, res, next) => {
     const isUsed = await checkFieldExisted(
-      req.body.username,
+      req.body.Username,
       "Username",
       "User"
     );
@@ -16,8 +16,8 @@ const registerValidatorExisted = {
   },
   checkPhoneNumberExisted: async (req, res, next) => {
     const isUsed = await checkFieldExisted(
-      req.body.phoneNumber,
-      "phoneNumber",
+      req.body.PhoneNumber,
+      "PhoneNumber",
       "User"
     );
     if (isUsed) {

@@ -8,14 +8,14 @@ export const accountApi = apiSlice.injectEndpoints({
     }),
     changePassword: builder.mutation({
       query: (data) => ({
-        url: '/user/updatepassword',
+        url: '/user/update-password',
         method: 'POST',
         body: data
       })
     }),
     updateAccount: builder.mutation({
       query: (data) => ({
-        url: '/customer/update',
+        url: '/user/update',
         method: 'PUT',
         body: data
       }),

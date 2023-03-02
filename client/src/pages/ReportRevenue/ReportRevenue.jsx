@@ -1,11 +1,10 @@
-import './ReportRevenue.scss'
 import dateIcon from '../../assets/icons/calendar.png'
-import CheckboxCircle from '../../components/CheckboxCircle'
-import { AcceptButton } from '../../components/Buttons/Buttons'
 import ProductImage_1 from '../../assets/images/ProductAvatar_1.png'
 import ProductImage_16 from '../../assets/images/ProductAvatar_16.png'
-import ProductImage_19 from '../../assets/images/ProductAvatar_19.png'
 import ProductImage_21 from '../../assets/images/ProductAvatar_21.png'
+import { AcceptButton } from '../../components/Buttons/Buttons'
+import CheckboxCircle from '../../components/CheckboxCircle'
+import './ReportRevenue.scss'
 
 let indexproductid = 1
 const data = [

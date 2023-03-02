@@ -10,6 +10,7 @@ const Product = {
       priceMax,
       priceMin,
       highLight,
+      rating,
       numberOffset,
       numberFetchNext,
     },
@@ -17,7 +18,7 @@ const Product = {
   ) => {
     db.query(
       `
-      SELECT P.ProductID, P.Name as ProductName, Price, P.Quantity,Avatar, Unit, Highlight, P.ProductTypeID as ProductTypeID, PT.Name as ProductTypeName, IFNULL(SUM(DB.Quantity),0) as SoldQuantity, IFNULL(ROUND(AVG(R.Rating),1),0) as Rating
+      SELECT SQL_CALC_FOUND_ROWS P.ProductID, P.Name as ProductName, Price, P.Quantity,Avatar, Unit, Highlight, P.ProductTypeID as ProductTypeID, PT.Name as ProductTypeName, IFNULL(SUM(DB.Quantity),0) as SoldQuantity, IFNULL(ROUND(AVG(R.Rating),1),0) as Rating
       FROM Product P INNER JOIN ProductType PT ON P.ProductTypeID= PT.ProductTypeID 
       LEFT JOIN DetailBill DB ON DB.ProductID= P.ProductID
       LEFT JOIN Rating R ON R.ProductID= P.ProductID
@@ -28,6 +29,7 @@ const Product = {
         AND (? IS NULL OR ? >= P.Price )
         AND (? IS NULL OR ? = P.Highlight)
         GROUP BY P.ProductID, P.Name, Price, P.Quantity ,Avatar, Unit, Highlight, P.ProductTypeID , PT.Name
+        HAVING Rating >= ${rating}
         ORDER BY ${orderField} ${order}
         LIMIT ?,?
         `,

@@ -2,6 +2,7 @@ const Product = require("../models/Product.model");
 const convertObjectToRowUpdateString = require("../utils/convertObjectToRowUpdateString");
 const path = require("path");
 const fs = require("fs");
+const sqlFoundRows = require("../utils/sqlFoundRows");
 const ProductController = {
   getProducts: (req, res, next) => {
     const search = req.query?.search?.replaceAll(" ", "") || "";
@@ -12,6 +13,7 @@ const ProductController = {
     const highLight = Number(req.query.high_light) || null;
     const limit = req.query.limit * 1 || 5;
     const page = req.query.page * 1 || 1;
+    const rating = req.query.rating * 1 || 0;
     const numberOffset = page * limit - limit;
     const numberFetchNext = limit;
     Product.getProducts(
@@ -23,10 +25,11 @@ const ProductController = {
         priceMax,
         priceMin,
         highLight,
+        rating,
         numberOffset,
         numberFetchNext,
       },
-      (err, data) => {
+      async (err, data) => {
         if (err) {
           return res.status(400).json({ status: 400, message: err.message });
         }
@@ -38,14 +41,11 @@ const ProductController = {
           }
           return (item.Avatar = avatar);
         });
-        Product.countProducts((err, response) => {
-          if (err)
-            return res.status(400).json({ status: 400, message: err.message });
-          const pageSize = Math.ceil(response[0]?.NumberProduct / limit);
-          return res
-            .status(200)
-            .json({ status: 200, data: { data: data, pagesize: pageSize } });
-        });
+        const dataLength = await sqlFoundRows();
+        const pageSize = Math.ceil(dataLength / limit);
+        return res
+          .status(200)
+          .json({ status: 200, data: { data: data, pagesize: pageSize } });
       }
     );
   },

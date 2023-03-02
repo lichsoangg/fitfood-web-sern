@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { AcceptButton } from '../../../../components/Buttons/Buttons'
 import Error from '../../../../components/Error/Error'
 import Loading from '../../../../components/Loading/Loading'
@@ -15,14 +14,12 @@ const initialQuery = {
 }
 export default function TypeProductManagement() {
   const location = useLocation()
-  const navigate = useNavigate()
   let queryConfig = useQueryParams()
   if (Object.keys(queryConfig).length === 0) {
     queryConfig = { ...initialQuery }
   }
   const { data: productTypes, isFetching: isGetProductTypesLoading } = useGetProductTypesQuery(queryConfig)
-  const { activeModalRef, open, rect, setOpen } = useModal()
-  const [editEmployee, setEditEmployee] = useState(null)
+
   const {
     activeModalRef: activeModalInputEmployeeRef,
     open: openInputEmployee,

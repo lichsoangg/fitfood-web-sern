@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useReducer } from 'react'
 import { createPortal } from 'react-dom'
 import './Portal.scss'
 const createPortalWrapper = () => {
@@ -13,7 +12,6 @@ const Portal = React.forwardRef(({ overlay = true, children, styleContent = {}, 
   useEffect(() => {
     document.body.appendChild(portalWrapper)
   }, [])
-  const [, forceUpdate] = useReducer((x) => x + 1, 0)
   const handleClickOutside = () => {
     setOpen(false)
   }

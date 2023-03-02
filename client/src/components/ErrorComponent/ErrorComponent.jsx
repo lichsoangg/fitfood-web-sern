@@ -6,7 +6,6 @@ export default function ErrorBoundaryComponent({ children }) {
 }
 
 function ErrorFallBack({ error }) {
-  console.log(error)
   return (
     <div className='errorFallback'>
       <p>Lỗi: {error.message}</p>

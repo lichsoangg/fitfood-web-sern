@@ -17,18 +17,18 @@ const authController = {
     try {
       const data = req.body;
       const salt = await bcrypt.genSalt(10);
-      const passwordHashed = await bcrypt.hash(data.password, salt);
-      data.password = passwordHashed;
+      const passwordHashed = await bcrypt.hash(data.Password, salt);
+      data.Password = passwordHashed;
       User.addUser(data, (err, response) => {
         if (err) {
           return res.status(400).json({ message: err.message, status: 400 });
         }
-        const { username, role } = data;
-        const AccessToken = signAccessToken(username, role);
-        signRefreshToken(username, role, res);
+        const { Username, Role, IsActive } = data;
+        const AccessToken = signAccessToken(Username, Role, IsActive);
+        signRefreshToken(Username, Role, IsActive, res);
         return res.status(201).json({
           data: {
-            Username: username,
+            Username,
             IsValid: 1,
             AccessToken,
           },
@@ -42,9 +42,9 @@ const authController = {
 
   //CHECK USERNAME EXIST
   checkUsername: async (req, res, next) => {
-    if (req.body.username) {
+    if (req.body.Username) {
       const isUsed = await checkFieldExisted(
-        req.body.username,
+        req.body.Username,
         "Username",
         "User"
       );
@@ -60,7 +60,7 @@ const authController = {
     } else {
       return res
         .status(400)
-        .json({ status: 400, message: "Thiếu trường dữ liệu số điện thoại" });
+        .json({ status: 400, message: "Thiếu trường dữ liệu Username" });
     }
   },
   //CHECK PHONE NUMBER EXIST
@@ -105,8 +105,12 @@ const authController = {
               .status(401)
               .json({ message: "Tài khoản hoặc mật khẩu không đúng" });
           const { Password, ...otherInfo } = data[0];
-          const AccessToken = signAccessToken(username, data[0].Role);
-          signRefreshToken(username, data[0].Role, res);
+          const AccessToken = signAccessToken(
+            username,
+            data[0].Role,
+            data[0].IsActive
+          );
+          signRefreshToken(username, data[0].Role, data[0].IsActive, res);
           //change url for avatar
           let avatar = data[0]?.Avatar;
           if (avatar) {
@@ -149,9 +153,13 @@ const authController = {
           const refreshTokenServer = await client.get(user.Username.toString());
           if (refreshTokenServer !== refreshTokenClient)
             return res.status(404).json({ message: "Token không hợp lệ" });
-          const newAccessToken = signAccessToken(user.Username, user.Role);
+          const newAccessToken = signAccessToken(
+            user.Username,
+            user.Role,
+            user.IsActive
+          );
 
-          signRefreshToken(user.Username, user.Role, res);
+          signRefreshToken(user.Username, user.Role, user.IsActive, res);
           return res
             .status(200)
             .json({ status: 200, data: { AccessToken: newAccessToken } });

@@ -8,10 +8,10 @@ import gender from '../../../constants/gender'
 export default function InformationForm() {
   return (
     <>
-      <Form.Input placeHolder='Họ tên' icon={nameIcon} name='name' />
-      <Form.InputDate placeHolder='Ngày sinh' name='dayOfBirth' />
-      <Form.Input placeHolder='Số điện thoại' icon={phoneNumberIcon} name='phoneNumber' />
-      <Form.Dropdown placeHolder='Giới tính' icon={genderIcon} name='gender' data={gender} />
+      <Form.Input placeHolder='Họ tên' icon={nameIcon} name='Name' />
+      <Form.InputDate placeHolder='Ngày sinh' name='DayOfBirth' />
+      <Form.Input placeHolder='Số điện thoại' icon={phoneNumberIcon} name='PhoneNumber' />
+      <Form.Dropdown placeHolder='Giới tính' icon={genderIcon} name='Gender' data={gender} />
     </>
   )
 }

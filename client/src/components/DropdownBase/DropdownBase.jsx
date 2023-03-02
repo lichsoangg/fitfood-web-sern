@@ -1,8 +1,6 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import Portal from '../Portal/Portal'
-import PropTypes from 'prop-types'
-import { useState } from 'react'
-import { useReducer } from 'react'
 export default function DropdownBase({ rect, styleContent, stylePortal, width, children, setOpen }) {
   return (
     <Portal

@@ -4,7 +4,7 @@ import './Pagination.scss'
 
 const RANGE = 2
 export default function Pagination({ stylePagination, queryConfig, pageSize, pathname }) {
-  const currentPage = Number(queryConfig?.page) || 4
+  const currentPage = Number(queryConfig?.page) || 1
   const renderPagination = () => {
     let dotAfter = false
     let dotBefore = false

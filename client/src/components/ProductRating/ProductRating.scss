@@ -1,0 +1,27 @@
+@import '../../scss/reset.scss';
+.product-rating {
+  display: flex;
+  &__star {
+    position: relative;
+    width: 16px;
+    height: 16px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      fill: $cl-primary;
+      stroke: $cl-primary;
+    }
+    .star-filled {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .star-non-filled {
+      svg {
+        fill: none;
+        z-index: 1;
+      }
+    }
+  }
+}

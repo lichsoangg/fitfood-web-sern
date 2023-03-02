@@ -1,21 +1,21 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { useModal } from '../../hooks/useModal'
-import { selectCurrentAuth } from '../authentication/authSlice'
-import { useGetMeQuery } from './accountApi'
-import womanAvatar from '../../assets/images/woman_avatar.png'
 import manAvatar from '../../assets/images/man_avatar.png'
-import { logOut } from '../authentication/authSlice'
-import { useLogoutMutation } from '../authentication/authApi'
-import Loading from '../../components/Loading/Loading'
+import womanAvatar from '../../assets/images/woman_avatar.png'
 import { BoxShadowButton } from '../../components/Buttons/Buttons'
 import DropdownBase from '../../components/DropdownBase/DropdownBase'
+import Loading from '../../components/Loading/Loading'
 import path from '../../constants/path'
+import { useModal } from '../../hooks/useModal'
+import { useLogoutMutation } from '../authentication/authApi'
+import { logOut, selectCurrentAuth } from '../authentication/authSlice'
+import { useGetMeQuery } from './accountApi'
 
 export default function AccountDropdown() {
   const { accessToken: token, role } = useSelector(selectCurrentAuth)
-  const { data: user } = useGetMeQuery(undefined, { skip: !token })
+  const { data } = useGetMeQuery(undefined, { skip: !token })
+  const user = data?.data
   const { activeModalRef, rect, open, setOpen } = useModal()
   const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation()
   const dispatch = useDispatch()
@@ -26,7 +26,6 @@ export default function AccountDropdown() {
     navigate(path.login)
   }
   let avatar = user?.Avatar ? user?.Avatar : user?.Gender === 0 ? manAvatar : womanAvatar
-
   return (
     <>
       <div className='layout__function--user' ref={activeModalRef}>

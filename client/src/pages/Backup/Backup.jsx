@@ -1,4 +1,4 @@
-import { AcceptButton, InputButton, MainButton } from '../../components/Buttons/Buttons'
+import { AcceptButton, InputButton } from '../../components/Buttons/Buttons'
 import { SuccessNotify } from '../../components/Notify/Notify'
 import './Backup.scss'
 export default function Backup() {

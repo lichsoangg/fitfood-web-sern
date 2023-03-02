@@ -5,25 +5,25 @@ import { useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from '..
 export default function AddressForm() {
   const { watch } = useFormContext()
   const { data: provinces, isFetching: provincesLoading } = useGetProvincesQuery()
-  const { data: districts, isFetching: districtsLoading } = useGetDistrictsQuery(watch('province'), {
-    skip: !watch('province')
+  const { data: districts, isFetching: districtsLoading } = useGetDistrictsQuery(watch('Province'), {
+    skip: !watch('Province')
   })
-  const { data: wards, isFetching: wardsLoading } = useGetWardsQuery(watch('district'), {
-    skip: !watch('district')
+  const { data: wards, isFetching: wardsLoading } = useGetWardsQuery(watch('District'), {
+    skip: !watch('District')
   })
 
   return (
     <>
-      <Form.Dropdown placeHolder='Tỉnh' name='province' data={provinces} isLoading={provincesLoading} />
+      <Form.Dropdown placeHolder='Tỉnh' name='Province' data={provinces} isLoading={provincesLoading} />
       <Form.Dropdown
         placeHolder='Huyện'
-        name='district'
-        trigger='province'
+        name='District'
+        trigger='Province'
         data={districts}
         isLoading={districtsLoading}
       />
-      <Form.Dropdown placeHolder='Xã' name='ward' trigger='ward' data={wards} isLoading={wardsLoading} />
-      <Form.Input placeHolder='Địa chỉ' name='address' />
+      <Form.Dropdown placeHolder='Xã' name='Ward' trigger='Ward' data={wards} isLoading={wardsLoading} />
+      <Form.Input placeHolder='Địa chỉ' name='Address' />
     </>
   )
 }

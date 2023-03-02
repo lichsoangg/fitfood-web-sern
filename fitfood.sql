@@ -156,8 +156,12 @@ Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('3','12',
 Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('3','13',13123,'210000');
 Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('4','5',1123222,'150000');
 Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('4','6',2123,'200000');
-
-
+Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('4','13',4123,'200000');
+Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('4','2',441223,'200000');
+Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('4','3',122312,'200000');
+Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('4','12',123,'200000');
+Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('4','14',44532,'200000');
+Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('4','15',140030,'200000');
 -- Data Cart
 Insert Into cart(Username, ProductID, Quantity) Values('duytran@gmail.com','1',3);
 Insert Into cart(Username, ProductID, Quantity) Values('duytran@gmail.com','2',3);
@@ -171,13 +175,16 @@ Insert Into cart(Username, ProductID, Quantity) Values('duytran1@gmail.com','3',
 -- Data Rating
 Insert Into rating(Username, ProductID, Rating) Values('duytran1@gmail.com','1',4.3);
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','1','5');
+Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','2','4.8');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','3','5');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','4','3.5');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','5','3.5');
+Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','6','4.1');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','7','3.9');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','8','3.8');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','9','3.5');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','10','4.6');
+Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','12','4.9');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','13','4.4');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','15','4.2');
 Insert Into rating(Username,ProductID,Rating) Values('duytran@gmail.com','17','5');

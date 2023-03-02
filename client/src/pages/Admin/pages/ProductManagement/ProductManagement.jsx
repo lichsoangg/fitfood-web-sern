@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createSearchParams, useLocation, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { AcceptButton } from '../../../../components/Buttons/Buttons'
@@ -10,7 +9,6 @@ import { useGetProductsQuery } from '../../../../features/products/productsApi'
 import useDebounce from '../../../../hooks/useDebounce'
 import { useModal } from '../../../../hooks/useModal'
 import useQueryParams from '../../../../hooks/useQueryParams'
-import SearchObjectArray from '../../../../utils/SearchObjectArray'
 import './ProductManagement.scss'
 const initialQuery = {
   limit: 5,
@@ -24,8 +22,8 @@ export default function ProductManagement() {
     queryConfig = { ...initialQuery }
   }
   const { data: products, isFetching: isGetEmployeeFetching } = useGetProductsQuery(queryConfig)
-  const { activeModalRef, open, rect, setOpen } = useModal()
-  const [editEmployee, setEditEmployee] = useState(null)
+  const { setOpen } = useModal()
+  const [setEditEmployee] = useState(null)
   const {
     activeModalRef: activeModalInputEmployeeRef,
     open: openInputEmployee,

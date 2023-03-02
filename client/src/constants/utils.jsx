@@ -7,3 +7,8 @@ export const ACTIVE = {
   NO: 1,
   OK: 2
 }
+
+export const HIGHLIGHTS = {
+  NO: 1,
+  YES: 2
+}

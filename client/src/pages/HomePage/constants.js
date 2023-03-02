@@ -18,24 +18,24 @@ const howitworks = [
   {
     id: uuidv4(),
     image: (
-      <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <svg width={24} height={24} viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <path
           d='M20.5 11.3V7.04001C20.5 3.01001 19.56 2 15.78 2H8.22C4.44 2 3.5 3.01001 3.5 7.04001V18.3C3.5 20.96 4.96001 21.59 6.73001 19.69L6.73999 19.68C7.55999 18.81 8.80999 18.88 9.51999 19.83L10.53 21.18'
           stroke='#141414'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
         <path
           d='M18.2 21.4C19.9673 21.4 21.4 19.9673 21.4 18.2C21.4 16.4327 19.9673 15 18.2 15C16.4327 15 15 16.4327 15 18.2C15 19.9673 16.4327 21.4 18.2 21.4Z'
           stroke='#141414'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
-        <path d='M22 22L21 21' stroke='#141414' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' />
-        <path d='M8 7H16' stroke='#141414' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' />
-        <path d='M9 11H15' stroke='#141414' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' />
+        <path d='M22 22L21 21' stroke='#141414' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M8 7H16' stroke='#141414' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M9 11H15' stroke='#141414' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
       </svg>
     ),
     name: 'Chọn Gói Ăn',
@@ -44,7 +44,7 @@ const howitworks = [
   {
     id: uuidv4(),
     image: (
-      <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <svg width={24} height={24} viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <path
           d='M18.9702 22.75H4.97021C1.22021 22.75 1.22021 20.67 1.22021 19V18C1.22021 17.04 2.01021 16.25 2.97021 16.25H20.9702C21.9302 16.25 22.7202 17.04 22.7202 18V19C22.7202 20.67 22.7202 22.75 18.9702 22.75ZM2.97021 17.75C2.83021 17.75 2.72021 17.86 2.72021 18V19C2.72021 20.64 2.72021 21.25 4.97021 21.25H18.9702C21.2202 21.25 21.2202 20.64 21.2202 19V18C21.2202 17.86 21.1102 17.75 20.9702 17.75H2.97021Z'
           fill='#141414'
@@ -69,45 +69,45 @@ const howitworks = [
   {
     id: uuidv4(),
     image: (
-      <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <path
           d='M12 14H13C14.1 14 15 13.1 15 12V2H6C4.5 2 3.19001 2.82999 2.51001 4.04999'
           stroke='#141414'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
         <path
           d='M2 17C2 18.66 3.34 20 5 20H6C6 18.9 6.9 18 8 18C9.1 18 10 18.9 10 20H14C14 18.9 14.9 18 16 18C17.1 18 18 18.9 18 20H19C20.66 20 22 18.66 22 17V14H19C18.45 14 18 13.55 18 13V10C18 9.45 18.45 9 19 9H20.29L18.58 6.01001C18.22 5.39001 17.56 5 16.84 5H15V12C15 13.1 14.1 14 13 14H12'
           stroke='#141414'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
         <path
           d='M8 22C9.10457 22 10 21.1046 10 20C10 18.8954 9.10457 18 8 18C6.89543 18 6 18.8954 6 20C6 21.1046 6.89543 22 8 22Z'
           stroke='#141414'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
         <path
           d='M16 22C17.1046 22 18 21.1046 18 20C18 18.8954 17.1046 18 16 18C14.8954 18 14 18.8954 14 20C14 21.1046 14.8954 22 16 22Z'
           stroke='#141414'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
         <path
           d='M22 12V14H19C18.45 14 18 13.55 18 13V10C18 9.45 18.45 9 19 9H20.29L22 12Z'
           stroke='#141414'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
-        <path d='M2 8H8' stroke='#141414' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' />
-        <path d='M2 11H6' stroke='#141414' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' />
-        <path d='M2 14H4' stroke='#141414' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' />
+        <path d='M2 8H8' stroke='#141414' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M2 11H6' stroke='#141414' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M2 14H4' stroke='#141414' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
       </svg>
     ),
     name: 'Giao hàng',
@@ -116,7 +116,7 @@ const howitworks = [
   {
     id: uuidv4(),
     image: (
-      <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <svg width={24} height={24} viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <path
           d='M12 15.25C10.21 15.25 8.75 13.79 8.75 12C8.75 10.21 10.21 8.75 12 8.75C13.79 8.75 15.25 10.21 15.25 12C15.25 13.79 13.79 15.25 12 15.25ZM12 10.25C11.04 10.25 10.25 11.04 10.25 12C10.25 12.96 11.04 13.75 12 13.75C12.96 13.75 13.75 12.96 13.75 12C13.75 11.04 12.96 10.25 12 10.25Z'
           fill='#292D32'

@@ -9,7 +9,6 @@ import { useMultiStepForm } from '../../hooks/useMultiStepForm'
 import AccountForm from '../../pages/Register/AccountForm/AccountForm'
 import AddressForm from '../../pages/Register/AddressForm/AddressForm'
 import InformationForm from '../../pages/Register/InformationForm/InformationForm'
-
 import Error from '../../components/Error/Error'
 import {
   useAddNewCustomerMutation,
@@ -22,22 +21,22 @@ import path from '../../constants/path'
 
 const schema = yup
   .object({
-    username: yup.string().required('Email là bắt buộc').email('Email không đúng định dạng'),
-    password: yup.string().required('Mật khẩu là bắt buộc').min(6, 'Mật khẩu tối thiểu là 6 kí tự'),
-    confirmPassword: yup
+    Username: yup.string().required('Email là bắt buộc').email('Email không đúng định dạng'),
+    Password: yup.string().required('Mật khẩu là bắt buộc').min(6, 'Mật khẩu tối thiểu là 6 kí tự'),
+    ConfirmPassword: yup
       .string()
       .required('Xác nhận mật khẩu là bắt buộc')
-      .oneOf([yup.ref('password')], 'Xác nhận mật khẩu không đúng'),
-    name: yup.string().required('Họ tên là bắt buộc'),
-    dayOfBirth: yup.string().required('Ngày sinh là bắt buộc'),
-    phoneNumber: yup
+      .oneOf([yup.ref('Password')], 'Xác nhận mật khẩu không đúng'),
+    Name: yup.string().required('Họ tên là bắt buộc'),
+    DayOfBirth: yup.string().required('Ngày sinh là bắt buộc'),
+    PhoneNumber: yup
       .string()
       .required('Số điện thoại là bắt buộc')
       .matches(/((09|03|07|08|05)+([0-9]{8})\b)/g, 'Số điện thoại không đúng định dạng'),
-    gender: yup.string().required('Giới tính là bắt buộc'),
-    province: yup.string().required('Tỉnh là bắt buộc'),
-    district: yup.string().required('Huyện là bắt buộc'),
-    address: yup.string().required('Địa chỉ là bắt buộc')
+    Gender: yup.string().required('Giới tính là bắt buộc'),
+    Province: yup.string().required('Tỉnh là bắt buộc'),
+    District: yup.string().required('Huyện là bắt buộc'),
+    Address: yup.string().required('Địa chỉ là bắt buộc')
   })
   .required()
 export default function AuthRegister() {
@@ -80,25 +79,25 @@ export default function AuthRegister() {
     const value = getValues()
 
     if (currentStepIndex === 0) {
-      isValid = await trigger(['username', 'password', 'confirmPassword'])
+      isValid = await trigger(['Username', 'Password', 'ConfirmPassword'])
       if (isValid) {
         // check register username already exist
         try {
-          await checkUsername(value)
+          await checkUsername({ Username: value.Username })
             .unwrap()
             .catch((err) => {
               if (err.status === 409) {
                 isValid = false
-                setError('username', { type: 'custom', message: 'Tài khoản đã tồn tại' })
+                setError('Username', { type: 'custom', message: 'Tài khoản đã tồn tại' })
               }
             })
         } catch (err) {
-          console.log(err)
+          setError('PhoneNumber', { type: 'custom', message: e.message })
         }
       }
     }
     if (currentStepIndex === 1) {
-      isValid = await trigger(['name', 'dayOfBirth', 'phoneNumber', 'gender'])
+      isValid = await trigger(['Name', 'DayOfBirth', 'PhoneNumber', 'Gender'])
       if (isValid) {
         // check register phoneNumber already exist
         try {
@@ -107,23 +106,26 @@ export default function AuthRegister() {
             .catch((err) => {
               if (err.status === 409) {
                 isValid = false
-                setError('phoneNumber', { type: 'custom', message: 'Số điện thoại đã tồn tại' })
+                setError('PhoneNumber', { type: 'custom', message: 'Số điện thoại đã tồn tại' })
               }
             })
         } catch (error) {
-          console.log(error)
+          setError('PhoneNumber', { type: 'custom', message: error.message })
         }
       }
     }
-    if (currentStepIndex === 2) isValid = await trigger(['province', 'district', 'ward', 'ad  dress'])
+    if (currentStepIndex === 2) isValid = await trigger(['Province', 'District', 'Ward', 'Address'])
     // if valid and not last step next to step next in multi step form
     if (!isLastStep && isValid) next()
     //last step and valid validation submit register
     if (isLastStep && isValid) {
       try {
-        const user = await addNewCustomer(value).unwrap()
-        const { username, IsActive, accessToken } = user
-        dispatch(setCredentials(username, IsActive, `Khách hàng`, accessToken))
+        delete value.ConfirmPassword
+        value.Role = 2
+        const data = await addNewCustomer(value).unwrap()
+        const { data: user } = data
+        const { Username: username, IsActive: isActive, AccessToken: accessToken } = user
+        dispatch(setCredentials(username, isActive, 1, accessToken))
         if (accessToken) {
           await sendVerifyEmail().unwrap()
         }

@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     img {
+      -o-object-fit: cover;
       object-fit: cover;
     }
   }
@@ -53,6 +54,7 @@
       pointer-events: none;
       border-radius: 50%;
       cursor: pointer;
+      -o-object-fit: cover;
       object-fit: cover;
       width: 28px;
       height: 28px;
@@ -67,6 +69,11 @@
       box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
       li:first-child {
         padding: 24px 12px;
+        font-weight: 700;
+        font-style: italic;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       li:not(:first-child) {
         padding: 8px 12px;

@@ -16,12 +16,12 @@ import Admin from './pages/Admin'
 import EmployeeManagement from './pages/Admin/pages/EmployeeManagement'
 import ProductManagement from './pages/Admin/pages/ProductManagement'
 import FaqsPage from './pages/FaqsPage'
-import Menu from './pages/Menu'
 import TypeProductManagement from './pages/Admin/pages/TypeProductManagement/TypeProductManagement'
 import BillManagement from './pages/BillManagement'
 import ReportRevenue from './pages/ReportRevenue/ReportRevenue'
 import Backup from './pages/Backup/Backup'
 import { ROLES } from './constants/utils'
+import ProductList from './pages/ProductList/ProuductList'
 function FitFoodApp() {
   return (
     <ErrorBoundaryComponent>
@@ -37,7 +37,7 @@ function FitFoodAppRoutes() {
       <Route path={path.home} element={<MainLayout />}>
         {/* public route */}
         <Route index element={<HomePage />} />
-        <Route path={path.menu} element={<Menu />} />
+        <Route path={path.menu} element={<ProductList />} />
         <Route path={path.faqs} element={<FaqsPage />} />
         <Route path={path.login} element={<Login />} />
         <Route path={path.register} element={<Register />} />

@@ -5,7 +5,11 @@ const User = {
     db.query("INSERT INTO User SET ?", data, callback);
   },
   getUserWithUsername: (username, callback) => {
-    db.query("SELECT * FROM User WHERE Username=?", [username], callback);
+    db.query(
+      "SELECT *,DATE_FORMAT(DayOfBirth,'%Y-%m-%d') AS DayOfBirth  FROM User WHERE Username=?",
+      [username],
+      callback
+    );
   },
   updateUser: (rowUpdateString, username, callback) => {
     db.query(

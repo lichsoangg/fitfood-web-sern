@@ -22,14 +22,14 @@ export const registerAPI = apiSlice.injectEndpoints({
     }),
     checkUsername: builder.mutation({
       query: (data) => ({
-        url: '/auth/checkusername',
+        url: '/auth/check-username',
         method: 'POST',
         body: data
       })
     }),
     checkPhoneNumber: builder.mutation({
       query: (data) => ({
-        url: '/auth/checkphonenumber',
+        url: '/auth/check-phone-number',
         method: 'POST',
         body: data
       })

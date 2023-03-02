@@ -22,11 +22,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     const refreshResult = await baseQuery('/auth/refresh', api, extraOptions)
     //refresh token valid
     if (refreshResult?.data) {
-      const decodeToken = jwt_decode(refreshResult.data.accessToken)
-      const accountActive = api.getState().auth.data.isActive
-      api.dispatch(
-        setCredentials(decodeToken.Username, accountActive, decodeToken.Role, refreshResult.data.accessToken)
-      )
+      const { AccessToken: accessToken } = refreshResult.data.data
+      const decodeToken = jwt_decode(accessToken)
+      const { Username: username, IsActive: isActive, Role: role } = decodeToken
+      api.dispatch(setCredentials(username, isActive, role, accessToken))
       result = await baseQuery(args, api, extraOptions)
     }
     //refresh token invalid
