@@ -3,6 +3,7 @@ const convertObjectToRowUpdateString = require("../utils/convertObjectToRowUpdat
 const path = require("path");
 const fs = require("fs");
 const sqlFoundRows = require("../utils/sqlFoundRows");
+const connection = require("../utils/connect_mysql");
 const ProductController = {
   getProducts: (req, res, next) => {
     const search = req.query?.search?.replaceAll(" ", "") || "";

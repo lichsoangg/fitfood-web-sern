@@ -10,6 +10,7 @@ const randomNumberVerifyEmail = require("../utils/randomNumberVerifyEmail.js");
 const nodemailer = require("nodemailer");
 const stringVerifyEmailTemplate = require("../utils/stringEmailTemplate.js");
 const checkFieldExisted = require("../utils/checkFieldExisted");
+const connection = require("../utils/connect_mysql.js");
 
 const authController = {
   //REGISTER
@@ -23,6 +24,8 @@ const authController = {
         if (err) {
           return res.status(400).json({ message: err.message, status: 400 });
         }
+        connection.end();
+
         const { Username, Role, IsActive } = data;
         const AccessToken = signAccessToken(Username, Role, IsActive);
         signRefreshToken(Username, Role, IsActive, res);
