@@ -2,6 +2,7 @@ const path = {
   home: '/',
   calorieCaculator: '/tinh-calo',
   menu: '/thuc-don',
+  productDetail: '/:productUrl',
   faqs: '/faqs',
   about: '/ve-chung-toi',
   login: '/dang-nhap',

@@ -13,7 +13,6 @@ import Unauthorized from './pages/Unauthorized'
 
 //admin page
 import Admin from './pages/Admin'
-import EmployeeManagement from './pages/Admin/pages/EmployeeManagement'
 import ProductManagement from './pages/Admin/pages/ProductManagement'
 import FaqsPage from './pages/FaqsPage'
 import TypeProductManagement from './pages/Admin/pages/TypeProductManagement/TypeProductManagement'
@@ -21,7 +20,8 @@ import BillManagement from './pages/BillManagement'
 import ReportRevenue from './pages/ReportRevenue/ReportRevenue'
 import Backup from './pages/Backup/Backup'
 import { ROLES } from './constants/utils'
-import ProductList from './pages/ProductList/ProuductList'
+import ProductList from './pages/ProductList/ProductList'
+import ProductDetail from './pages/ProductDetail'
 function FitFoodApp() {
   return (
     <ErrorBoundaryComponent>
@@ -42,6 +42,7 @@ function FitFoodAppRoutes() {
         <Route path={path.login} element={<Login />} />
         <Route path={path.register} element={<Register />} />
         <Route path={path.forgotPassword} element={<ForgotPassword />} />
+        <Route path={`${path.menu}${path.productDetail}`} element={<ProductDetail />} />
 
         {/* private route */}
         <Route element={<PrivateRoute />}>
@@ -53,7 +54,6 @@ function FitFoodAppRoutes() {
       {/* private route admin layout*/}
       <Route element={<PrivateRoute requiredRole={[ROLES.ADMIN]} />}>
         <Route path={path.admin} element={<Admin />}>
-          <Route index element={<EmployeeManagement />} />
           <Route path={path.productManagement} element={<ProductManagement />} />
           <Route path={path.productTypeManagement} element={<TypeProductManagement />} />
           <Route path={path.billManagement} element={<BillManagement />} />

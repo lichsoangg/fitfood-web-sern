@@ -12,3 +12,9 @@ export const HIGHLIGHTS = {
   NO: 1,
   YES: 2
 }
+
+export const SORT_PRODUCTS = {
+  BEST_SOLD: 'best',
+  PRICE_DESC: 'DESC',
+  PRICE_ASC: 'ASC'
+}

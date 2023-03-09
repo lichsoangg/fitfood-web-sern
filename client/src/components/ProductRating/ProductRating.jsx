@@ -40,7 +40,9 @@ export default function ProductRating({ rating }) {
             )
           })}
         </div>
-      ) : null}
+      ) : (
+        <></>
+      )}
     </>
   )
 }

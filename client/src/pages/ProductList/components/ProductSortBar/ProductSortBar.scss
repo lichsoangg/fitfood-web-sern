@@ -1,0 +1,32 @@
+@import '../../../../scss/import.scss';
+.products-sort-bar {
+  padding: 12px;
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  border-radius: 6px;
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    cursor: pointer;
+    font-weight: 700;
+
+    width: max-content;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba($cl-primary, 0.9);
+    &:hover {
+      border-color: $cl-primary;
+      background: $cl-primary;
+      color: white;
+    }
+    &-active {
+      border-color: $cl-primary;
+      background: $cl-primary;
+      color: white;
+    }
+  }
+}

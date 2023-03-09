@@ -15,8 +15,8 @@ import { ROLES } from '../../constants/utils'
 
 const schema = yup
   .object({
-    username: yup.string().required('Email là bắt buộc').email('Email không đúng định dạng'),
-    password: yup.string().required('Mật khẩu là bắt buộc')
+    Username: yup.string().required('Email là bắt buộc').email('Email không đúng định dạng'),
+    Password: yup.string().required('Mật khẩu là bắt buộc')
   })
   .required()
 export default function AuthLogin() {
@@ -61,8 +61,8 @@ export default function AuthLogin() {
   return (
     <FormProvider {...methods}>
       <form className='loginForm' onSubmit={handleSubmit(onSubmit)}>
-        <Form.Input placeHolder='Email *' icon={UsernameIcon} name='username' />
-        <Form.Input placeHolder='Mật khẩu*' name='password' type='password' />
+        <Form.Input placeHolder='Email *' icon={UsernameIcon} name='Username' />
+        <Form.Input placeHolder='Mật khẩu*' name='Password' type='password' />
         <Form.ForgotPasswordText />
         {error?.data && <Error errorMessage={error.data.message} />}
         {error?.error && <Error errorMessage={error.error} />}

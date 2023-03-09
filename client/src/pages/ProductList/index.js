@@ -1,3 +1,3 @@
-import Menu from './Menu'
+import ProductList from './ProductList'
 
-export default Menu
+export default ProductList

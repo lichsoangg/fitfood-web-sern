@@ -89,15 +89,15 @@ const authController = {
   //LOGIN
   login: async (req, res, next) => {
     try {
-      const { username, password } = req.body;
-      if (!username || !password)
+      const { Username, Password: PasswordLogin } = req.body;
+      if (!Username || !PasswordLogin)
         return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
-      User.getUserWithUsername(username, async (err, data) => {
+      User.getUserWithUsername(Username, async (err, data) => {
         if (err)
           return res.status(400).json({ message: "Yêu cầu không hợp lệ" });
         if (data?.length) {
           const validPassword = await bcrypt.compare(
-            password,
+            PasswordLogin,
             data[0].Password
           );
           if (!validPassword)
@@ -106,11 +106,11 @@ const authController = {
               .json({ message: "Tài khoản hoặc mật khẩu không đúng" });
           const { Password, ...otherInfo } = data[0];
           const AccessToken = signAccessToken(
-            username,
+            Username,
             data[0].Role,
             data[0].IsActive
           );
-          signRefreshToken(username, data[0].Role, data[0].IsActive, res);
+          signRefreshToken(Username, data[0].Role, data[0].IsActive, res);
           //change url for avatar
           let avatar = data[0]?.Avatar;
           if (avatar) {
