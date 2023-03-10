@@ -39,25 +39,47 @@
 
 .layout__function {
   @include flexMid(unset);
-  gap: 14px;
+  gap: 20px;
   &--cart {
+    position: relative;
+    .quantity {
+      position: absolute;
+      right: -12px;
+      top: -10px;
+      color: white;
+      font-weight: 500;
+      padding: 4px;
+      background-color: red;
+      border-radius: 30px;
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content;
+      min-width: 28px;
+      height: 28px;
+      z-index: 2;
+
+      @include flexMid(center);
+    }
     cursor: pointer;
     svg {
-      path {
-        stroke-width: 30;
-      }
+      pointer-events: none;
+      width: 30px;
+      height: 30px;
+      z-index: 5;
+      stroke: white;
     }
   }
 
   &--user {
     img {
+      border: 2px solid $cl-white;
       pointer-events: none;
       border-radius: 50%;
       cursor: pointer;
       -o-object-fit: cover;
       object-fit: cover;
-      width: 28px;
-      height: 28px;
+      width: 36px;
+      height: 36px;
     }
     &-modal {
       display: flex;

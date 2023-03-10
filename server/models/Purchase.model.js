@@ -16,7 +16,7 @@ const Purchase = {
   },
   getProductsInCart: ({ username }, callback) => {
     db.query(
-      `SELECT C.ProductID, C.Quantity,P.Name, Unit, P.Avatar, P.Price  
+      `SELECT C.ProductID, C.Quantity,P.Name, Unit, P.Avatar, P.Price ,P.Quantity as MaxQuantity 
     FROM Cart C INNER JOIN Product P ON C.ProductID= P.ProductID
     WHERE 1=1 
     AND (? IS NULL OR ? = C.Username) 

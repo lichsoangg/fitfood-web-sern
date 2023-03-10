@@ -160,6 +160,7 @@ body {
   font-size: $fz-default;
   background: white;
   position: relative;
+  overflow-x: hidden;
 }
 
 input {

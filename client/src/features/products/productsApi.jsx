@@ -2,7 +2,7 @@ import { apiSlice } from '../api/apiSlice'
 
 function providesProductList(resultsWithIds, tagType) {
   return resultsWithIds
-    ? [{ type: tagType, id: 'LIST' }, ...resultsWithIds.map(({ ProductID }) => ({ type: tagType, ProductID }))]
+    ? [{ type: tagType, id: 'LIST' }, ...resultsWithIds.map(({ ProductID }) => ({ type: tagType, id: ProductID }))]
     : [{ type: tagType, id: 'LIST' }]
 }
 

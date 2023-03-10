@@ -3,12 +3,12 @@ import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
-import Error from '../../components/Error/Error'
-import Form from '../../components/Form/Form'
-import Loading from '../../components/Loading/Loading'
-import { SuccessNotify } from '../../components/Notify/Notify'
-import { useSendVerifyEmailMutation, useVerifyEmailMutation } from './authApi'
-import { setActiveUser } from './authSlice'
+import Error from '../../../components/Error/Error'
+import Form from '../../../components/Form/Form'
+import Loading from '../../../components/Loading/Loading'
+import { SuccessNotify } from '../../../components/Notify/Notify'
+import { useSendVerifyEmailMutation, useVerifyEmailMutation } from '../../../features/authentication/authApi'
+import { setActiveUser } from '../../../features/authentication/authSlice'
 
 const schema = yup
   .object({

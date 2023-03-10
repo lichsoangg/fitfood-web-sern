@@ -1,6 +1,6 @@
 import React from 'react'
-import AccountChangePassword from '../../../features/account/AccountChangePassword'
 import './ChangePassword.scss'
+import AccountChangePassword from './components/AccountChangePassword'
 export default function ChangePassword() {
   return (
     <div className='changePassword'>

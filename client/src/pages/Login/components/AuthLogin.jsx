@@ -3,15 +3,15 @@ import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
-import Form from '../../components/Form/Form'
-import { selectCurrentAuth, setCredentials, selectCurrentToken } from './authSlice'
+import Form from '../../../components/Form/Form'
+import { selectCurrentAuth, setCredentials, selectCurrentToken } from '../../../features/authentication/authSlice'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import Error from '../../components/Error/Error'
-import UsernameIcon from '../../assets/icons/username.png'
-import { useLoginMutation } from './authApi'
-import path from '../../constants/path'
-import { ROLES } from '../../constants/utils'
+import Error from '../../../components/Error/Error'
+import UsernameIcon from '../../../assets/icons/username.png'
+import { useLoginMutation } from '../../../features/authentication/authApi'
+import path from '../../../constants/path'
+import { ROLES } from '../../../constants/utils'
 
 const schema = yup
   .object({
@@ -42,7 +42,6 @@ export default function AuthLogin() {
         navigate(path.admin)
       }
       if (Number(role) === Number(ROLES.CUSTOMER)) {
-        console.log(location)
         navigate(location?.state?.from?.pathname || path.home, { replace: true })
       }
     }

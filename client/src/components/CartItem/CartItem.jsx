@@ -1,0 +1,74 @@
+import './CartItem.scss'
+import product1 from '../../assets/images/product2.jpg'
+import QuantityController from '../QuantityController/QuantityController'
+import { useState } from 'react'
+import { formatCurrency } from '../../utils/utils'
+import { useDeleteCartMutation, useUpdateCartMutation } from '../../features/purchase/purchaseApi'
+import { ErrorNotify, SuccessNotify } from '../Notify/Notify'
+import { useDisableClick } from '../../hooks/useDisableClick'
+import Loading from '../Loading/Loading'
+export default function CartItem({ product }) {
+  const [quantity, setQuantity] = useState(product?.Quantity)
+  const [updateCart, { isLoading: isUpdateCartLoading }] = useUpdateCartMutation()
+  const [deleteCart, { isLoading: isDeleteCartLoading }] = useDeleteCartMutation()
+
+  const onChangeFunc = async (value) => {
+    try {
+      const response = await updateCart({ ProductID: product.ProductID, Quantity: value }).unwrap()
+      console.log(response)
+      if (Number(response.status) === 200) {
+        SuccessNotify(response.message)
+      }
+    } catch (error) {
+      ErrorNotify(error.data.message)
+    }
+  }
+  const onChangeFuncLocalState = (value) => {
+    setQuantity(value)
+  }
+
+  const handleDeleteCart = async () => {
+    try {
+      const response = await deleteCart([product.ProductID]).unwrap()
+      console.log(response)
+      if (Number(response.status) === 200) {
+        SuccessNotify(response.message)
+      }
+    } catch (error) {
+      ErrorNotify(error.data.message)
+    }
+  }
+  useDisableClick(isUpdateCartLoading || isDeleteCartLoading)
+  return (
+    <div className='cart-item'>
+      {isUpdateCartLoading || isDeleteCartLoading ? (
+        <Loading size={3} />
+      ) : (
+        <>
+          {' '}
+          <div className='cart-item__image'>
+            <img src={product?.Avatar} alt={product.Name} />
+          </div>
+          <div className='cart-item__name-quantity'>
+            <h4> {product?.Name}</h4>
+            <QuantityController
+              maxValue={product?.MaxQuantity}
+              value={quantity}
+              stylesInput={{ width: '50px' }}
+              onChangeFunc={onChangeFuncLocalState}
+              onDecreaseFunc={onChangeFunc}
+              onIncreaseFunc={onChangeFunc}
+              onBlur={onChangeFunc}
+            />
+          </div>
+          <div className='cart-item__price'>{formatCurrency(product?.Price * product?.Quantity)}đ</div>
+          <div className='cart-item__delete' onClick={handleDeleteCart}>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}>
+              <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
+            </svg>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}

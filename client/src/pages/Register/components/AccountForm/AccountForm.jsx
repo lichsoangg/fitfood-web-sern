@@ -1,6 +1,6 @@
 import React from 'react'
-import UsernameIcon from '../../../assets/icons/username.png'
-import Form from '../../../components/Form/Form'
+import UsernameIcon from '../../../../assets/icons/username.png'
+import Form from '../../../../components/Form/Form'
 
 export default function AccountForm() {
   return (

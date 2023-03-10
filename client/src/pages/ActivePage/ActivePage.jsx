@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import NewEmail from '../../assets/images/email.png'
 import { selectCurrentAuth } from '../../features/authentication/authSlice'
-import AuthVerifyEmail from '../../features/authentication/AuthVerifyEmail'
 import './ActivePage.scss'
+import AuthVerifyEmail from './components/AuthVerifyEmail'
 
 export default function ActivePage({ children }) {
   const { username } = useSelector(selectCurrentAuth)

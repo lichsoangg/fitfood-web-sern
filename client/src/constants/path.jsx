@@ -1,5 +1,6 @@
 const path = {
   home: '/',
+  payment: '/thanh-toan',
   calorieCaculator: '/tinh-calo',
   menu: '/thuc-don',
   productDetail: '/:productUrl',

@@ -1,5 +1,5 @@
 import './NoData.scss'
-export default function NoData({ image, message, imageStyles, messageStyles }) {
+export default function NoData({ image, message, imageStyles, messageStyles, children }) {
   return (
     <div className='no-data'>
       {image && (
@@ -8,7 +8,7 @@ export default function NoData({ image, message, imageStyles, messageStyles }) {
         </div>
       )}
       <div className='no-data__message' style={{ ...messageStyles }}>
-        {message}
+        {message ? message : children}
       </div>
     </div>
   )

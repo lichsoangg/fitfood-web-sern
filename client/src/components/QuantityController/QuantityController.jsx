@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import './QuantityController.scss'
-export default function QuantityController({ value, maxValue, onChangeFunc, onIncreaseFunc, onDecreaseFunc }) {
+export default function QuantityController({
+  value,
+  maxValue,
+  onChangeFunc,
+  onIncreaseFunc,
+  onDecreaseFunc,
+  stylesInput,
+  onBlur
+}) {
   const [localValue, setLocalValue] = useState(value || 1)
   const handleInputChange = (e) => {
     const value = e.target.value
@@ -11,20 +19,24 @@ export default function QuantityController({ value, maxValue, onChangeFunc, onIn
   }
   const handleInputDecrease = () => {
     setLocalValue((prevNumber) => handleNumberValue({ value: Number(prevNumber) - 1, minValue: 1, maxValue }))
-    onChangeFunc &&
-      onChangeFunc((prevNumber) => handleNumberValue({ value: Number(prevNumber) - 1, minValue: 1, maxValue }))
-    onDecreaseFunc && onDecreaseFunc()
+    onChangeFunc && onChangeFunc(handleNumberValue({ value: Number(localValue) - 1, minValue: 1, maxValue }))
+    onDecreaseFunc && onDecreaseFunc(handleNumberValue({ value: Number(localValue) - 1, minValue: 1, maxValue }))
   }
   const handleInputIncrease = () => {
     setLocalValue((prevNumber) => handleNumberValue({ value: Number(prevNumber) + 1, minValue: 1, maxValue }))
-    onChangeFunc &&
-      onChangeFunc((prevNumber) => handleNumberValue({ value: Number(prevNumber) + 1, minValue: 1, maxValue }))
-    onIncreaseFunc && onIncreaseFunc()
+    onChangeFunc && onChangeFunc(handleNumberValue({ value: Number(localValue) + 1, minValue: 1, maxValue }))
+    onIncreaseFunc && onIncreaseFunc(handleNumberValue({ value: Number(localValue) + 1, minValue: 1, maxValue }))
   }
-
+  const handleInputBlur = (e) => {
+    const value = e.target.value
+    onBlur && onBlur(value)
+  }
   return (
     <div className='quantity-controller'>
-      <div className='quantity-controller__minus' onClick={handleInputDecrease}>
+      <div
+        className={`quantity-controller__minus ${value <= 1 ? 'quantity-controller-disabled' : ''}`}
+        onClick={handleInputDecrease}
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -36,9 +48,17 @@ export default function QuantityController({ value, maxValue, onChangeFunc, onIn
           <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 12h-15' />
         </svg>
       </div>
-      <input value={localValue} onChange={handleInputChange} />
+      <input
+        value={value || localValue}
+        onChange={handleInputChange}
+        onBlur={handleInputBlur}
+        style={{ ...stylesInput }}
+      />
 
-      <div className='quantity-controller__plus' onClick={handleInputIncrease}>
+      <div
+        className={`quantity-controller__plus ${value >= Number(maxValue) ? 'quantity-controller-disabled' : ''}`}
+        onClick={handleInputIncrease}
+      >
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'

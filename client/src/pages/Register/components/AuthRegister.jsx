@@ -4,20 +4,20 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
-import Form from '../../components/Form/Form'
-import { useMultiStepForm } from '../../hooks/useMultiStepForm'
-import AccountForm from '../../pages/Register/AccountForm/AccountForm'
-import AddressForm from '../../pages/Register/AddressForm/AddressForm'
-import InformationForm from '../../pages/Register/InformationForm/InformationForm'
-import Error from '../../components/Error/Error'
+import Form from '../../../components/Form/Form'
+import { useMultiStepForm } from '../../../hooks/useMultiStepForm'
+import AccountForm from './AccountForm/AccountForm'
+import AddressForm from './AddressForm/AddressForm'
+import InformationForm from './InformationForm/InformationForm'
+import Error from '../../../components/Error/Error'
 import {
   useAddNewCustomerMutation,
   useCheckPhoneNumberMutation,
   useCheckUsernameMutation,
   useSendVerifyEmailMutation
-} from './authApi'
-import { selectCurrentToken, setCredentials } from './authSlice'
-import path from '../../constants/path'
+} from '../../../features/authentication/authApi'
+import { selectCurrentToken, setCredentials } from '../../../features/authentication/authSlice'
+import path from '../../../constants/path'
 
 const schema = yup
   .object({

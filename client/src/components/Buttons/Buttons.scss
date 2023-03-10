@@ -82,13 +82,12 @@
 .button-cancel {
   border-radius: 20px;
   padding: 12px 24px;
-  // border-radius: 3px;
   font-size: 16px;
   font-weight: 600;
   @include flexMid(center);
-
+  transition: all 0.4s;
   &:hover {
-    opacity: 0.5;
+    opacity: 0.5 !important;
   }
 }
 

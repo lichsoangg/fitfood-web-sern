@@ -12,6 +12,14 @@ const purchaseController = {
       Purchase.getProductsInCart({ username }, (err, productsInCart) => {
         if (err)
           return res.status(400).json({ status: 400, message: err.message });
+        productsInCart.map((item) => {
+          let avatar = item?.Avatar;
+          if (avatar) {
+            const originalUrl = `${req.protocol}://${req.get("host")}`;
+            avatar = `${originalUrl}/images/${item?.Avatar}`;
+          }
+          return (item.Avatar = avatar);
+        });
         return res
           .status(200)
           .json({ status: 200, data: { data: productsInCart } });
@@ -21,6 +29,14 @@ const purchaseController = {
       Purchase.getBills({ username, state }, (err, bills) => {
         if (err)
           return res.status(400).json({ status: 400, message: err.message });
+        bills.map((item) => {
+          let avatar = item?.Avatar;
+          if (avatar) {
+            const originalUrl = `${req.protocol}://${req.get("host")}`;
+            avatar = `${originalUrl}/images/${item?.Avatar}`;
+          }
+          return (item.Avatar = avatar);
+        });
         const purchase = bills.reduce((result, product) => {
           const {
             ProductID,

@@ -7,11 +7,11 @@ export default function DropdownBase({ rect, styleContent, stylePortal, width, c
       styleContent={{
         left: `${rect?.left + window?.scrollX}px`,
         top: `${rect?.top + rect?.height + 4}px`,
-        width: `${width ? width : rect.width}px`,
+        width: `${width ? width : rect?.width}px`,
         ...styleContent
       }}
       setOpen={setOpen}
-      stylePortal={{ ...stylePortal }}
+      stylePortal={{ zIndex: '100', ...stylePortal }}
     >
       {children}
     </Portal>

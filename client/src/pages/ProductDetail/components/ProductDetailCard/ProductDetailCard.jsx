@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import ProductNotFoundImage from '../../../../assets/svg/product_not_found.svg'
 import { AcceptButton } from '../../../../components/Buttons/Buttons'
 import Error from '../../../../components/Error/Error'
 import Loading from '../../../../components/Loading/Loading'
@@ -9,10 +9,8 @@ import { ErrorNotify, SuccessNotify } from '../../../../components/Notify/Notify
 import ProductRating from '../../../../components/ProductRating/ProductRating'
 import QuantityController from '../../../../components/QuantityController/QuantityController'
 import { selectCurrentAuth } from '../../../../features/authentication/authSlice'
-import { useGetProductQuery } from '../../../../features/products/productsApi'
 import { useAddToCartMutation } from '../../../../features/purchase/purchaseApi'
-import { formatCurrency, formatNumberToSocialStyle, getIdFromUrl } from '../../../../utils/utils'
-import ProductNotFoundImage from '../../../../assets/svg/product_not_found.svg'
+import { formatCurrency, formatNumberToSocialStyle } from '../../../../utils/utils'
 import './ProductDetailCard.scss'
 export default function ProductDetailCard({ Product, isGetProductFetching }) {
   const [addToCart, { isLoading: isAddToCartLoading }] = useAddToCartMutation()
@@ -50,11 +48,13 @@ export default function ProductDetailCard({ Product, isGetProductFetching }) {
           <div className='product-detail__card--right'>
             <div className='name'>{Product.ProductName}</div>
             <div className='review'>
-              <div className='rating'>
-                <span>{Product.Rating}</span>
-                <ProductRating rating={Product.Rating} />
-              </div>
-              <span className='line'>|</span>
+              {Product.Rating ? (
+                <div className='rating'>
+                  <span>{Product.Rating}</span>
+                  <ProductRating rating={Product.Rating} />
+                </div>
+              ) : null}
+              {Product.Rating ? <span className='line'>|</span> : null}
               <span className='sold'>{formatNumberToSocialStyle(Product.SoldQuantity)} đã bán</span>
             </div>
             <div className='price'>

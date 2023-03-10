@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import Form from '../../components/Form/Form'
+import Form from '../../../../components/Form/Form'
 import * as yup from 'yup'
-import { useChangePasswordMutation } from './accountApi'
-import Error from '../../components/Error/Error'
-import Loading from '../../components/Loading/Loading'
-import { SuccessNotify } from '../../components/Notify/Notify'
+import { useChangePasswordMutation } from '../../../../features/account/accountApi'
+import Error from '../../../../components/Error/Error'
+import Loading from '../../../../components/Loading/Loading'
+import { SuccessNotify } from '../../../../components/Notify/Notify'
 const schema = yup
   .object({
     password: yup.string().required('Mật khẩu hiện tại là bắt buộc'),

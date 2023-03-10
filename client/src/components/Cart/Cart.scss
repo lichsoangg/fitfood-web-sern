@@ -1,0 +1,54 @@
+@import '../../scss/import.scss';
+
+.cart {
+  position: fixed;
+  height: 100vh;
+  width: 50rem;
+  background-color: $cl-white;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  top: 0;
+  right: 0;
+  padding: 24px 24px 24px;
+  &__operation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    &--close {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      transition: all 0.4s;
+      cursor: pointer;
+      svg {
+        pointer-events: none;
+      }
+      &:hover {
+        svg {
+          stroke: $cl-primary;
+        }
+      }
+    }
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: 80%;
+    padding-right: 20px;
+    overflow-y: auto;
+  }
+  &__price-payment {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .price {
+      font-weight: 700;
+      font-size: $fz-large;
+      strong {
+        color: $cl-primary;
+      }
+    }
+  }
+}

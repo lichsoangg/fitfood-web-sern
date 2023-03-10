@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import ForgotPasswordImage from '../../assets/images/forgot_password.png'
 import path from '../../constants/path'
-import AuthPasswordEmail from '../../features/authentication/AuthPasswordEmail'
 import { selectCurrentToken } from '../../features/authentication/authSlice'
+import AuthPasswordEmail from './components/AuthPasswordEmail'
 import './ForgotPassword.scss'
 
 export default function ForgotPassword() {

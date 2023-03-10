@@ -3,11 +3,11 @@ import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
-import Error from '../../components/Error/Error'
-import Form from '../../components/Form/Form'
-import { SuccessNotify } from '../../components/Notify/Notify'
-import path from '../../constants/path'
-import { useResetPasswordMutation } from './authApi'
+import Error from '../../../components/Error/Error'
+import Form from '../../../components/Form/Form'
+import { SuccessNotify } from '../../../components/Notify/Notify'
+import path from '../../../constants/path'
+import { useResetPasswordMutation } from '../../../features/authentication/authApi'
 
 const schema = yup
   .object({

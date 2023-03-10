@@ -22,6 +22,7 @@ import Backup from './pages/Backup/Backup'
 import { ROLES } from './constants/utils'
 import ProductList from './pages/ProductList/ProductList'
 import ProductDetail from './pages/ProductDetail'
+import Payment from './pages/Payment'
 function FitFoodApp() {
   return (
     <ErrorBoundaryComponent>
@@ -49,6 +50,7 @@ function FitFoodAppRoutes() {
           <Route path={path.changePassword} element={<ChangePassword />} />
           <Route path={path.accountInfo} element={<AccountInformation />} />
           <Route path={path.unauthorized} element={<Unauthorized />} />
+          <Route path={path.payment} element={<Payment />} />
         </Route>
       </Route>
       {/* private route admin layout*/}

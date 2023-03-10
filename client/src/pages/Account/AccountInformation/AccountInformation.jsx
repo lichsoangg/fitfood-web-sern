@@ -1,6 +1,6 @@
 import React from 'react'
-import AccountUpdate from '../../../features/account/AccountUpdate'
 import './AccountInformation.scss'
+import AccountUpdate from './components/AccountUpdate'
 export default function AccountInformation() {
   return (
     <div className='accountInformation'>

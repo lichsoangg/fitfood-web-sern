@@ -1,9 +1,9 @@
 import React from 'react'
-import Form from '../../../components/Form/Form'
-import phoneNumberIcon from '../../../assets/icons/phonenumber.png'
-import nameIcon from '../../../assets/icons/name.png'
-import genderIcon from '../../../assets/icons/gender.png'
-import gender from '../../../constants/gender'
+import Form from '../../../../components/Form/Form'
+import phoneNumberIcon from '../../../../assets/icons/phonenumber.png'
+import nameIcon from '../../../../assets/icons/name.png'
+import genderIcon from '../../../../assets/icons/gender.png'
+import gender from '../../../../constants/gender'
 
 export default function InformationForm() {
   return (

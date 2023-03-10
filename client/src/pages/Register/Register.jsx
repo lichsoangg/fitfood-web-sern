@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import ErrorBoundaryComponent from '../../components/ErrorComponent/ErrorComponent'
 import path from '../../constants/path'
-import AuthRegister from '../../features/authentication/AuthRegister'
+import AuthRegister from './components/AuthRegister'
 import './Register.scss'
 
 export default function Register() {
