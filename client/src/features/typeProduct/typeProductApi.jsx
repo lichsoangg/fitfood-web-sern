@@ -11,24 +11,6 @@ export const typeProductApi = apiSlice.injectEndpoints({
         }
       },
       providesTags: ['product-type']
-    }),
-    addEmployee: builder.mutation({
-      query: (data) => ({
-        url: '/employees/add',
-        method: 'POST',
-        body: data
-      }),
-      invalidatesTags: ['Employees']
-    }),
-    updateEmployee: builder.mutation({
-      query: ({ Username, data }) => {
-        return {
-          url: `/employees/${Username}`,
-          method: 'PUT',
-          body: data
-        }
-      },
-      invalidatesTags: ['Employees']
     })
   })
 })

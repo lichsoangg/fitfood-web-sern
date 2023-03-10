@@ -1,0 +1,18 @@
+@import '../../../../scss/import.scss';
+.product-similar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+  margin-top: 40px;
+  &__title {
+    font-size: $fz-large;
+    font-weight: 700;
+  }
+  &__list {
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

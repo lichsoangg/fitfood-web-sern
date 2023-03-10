@@ -1,0 +1,21 @@
+@import '../../scss/import.scss';
+.no-data {
+  margin: auto auto;
+  @include flexMid(center);
+  flex-direction: column;
+  gap: 20px;
+
+  &__image {
+    width: 200px;
+    img {
+      width: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+  &__message {
+    font-weight: 700;
+    font-size: large;
+    color: $cl-black;
+  }
+}

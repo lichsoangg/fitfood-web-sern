@@ -42,6 +42,7 @@ export default function AuthLogin() {
         navigate(path.admin)
       }
       if (Number(role) === Number(ROLES.CUSTOMER)) {
+        console.log(location)
         navigate(location?.state?.from?.pathname || path.home, { replace: true })
       }
     }

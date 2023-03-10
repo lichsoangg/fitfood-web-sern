@@ -4,9 +4,13 @@ import './Error.scss'
 export default function Error({ errorMessage, styleError, children }) {
   return (
     <div className='error' style={styleError}>
-      <img src={dangerIcon} alt='danger icon fitfood' className='error__image' />
-      {errorMessage && <span className='error__message'>{errorMessage}</span>}
-      {children && <span className='error__message'>{children}</span>}
+      {errorMessage || children ? (
+        <>
+          <img src={dangerIcon} alt='danger icon fitfood' className='error__image' />
+          {errorMessage && <span className='error__message'>{errorMessage}</span>}
+          {children && <span className='error__message'>{children}</span>}
+        </>
+      ) : null}
     </div>
   )
 }

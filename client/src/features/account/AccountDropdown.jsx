@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import manAvatar from '../../assets/images/man_avatar.png'
 import womanAvatar from '../../assets/images/woman_avatar.png'
 import { BoxShadowButton } from '../../components/Buttons/Buttons'
@@ -20,6 +20,7 @@ export default function AccountDropdown() {
   const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const handleClickLogout = async () => {
     await logout().unwrap()
     dispatch(logOut())
@@ -54,7 +55,7 @@ export default function AccountDropdown() {
           )}
         </>
       ) : (
-        <Link to={path.login}>
+        <Link to={path.login} state={{ from: location }}>
           <BoxShadowButton>Đăng nhập</BoxShadowButton>
         </Link>
       )}

@@ -73,7 +73,7 @@ const purchaseController = {
             }
             return res.status(201).json({
               status: 201,
-              message: "Thêm sản phẩm vào giỏ hàng thành công",
+              message: "Thêm vào giỏ hàng thành công",
             });
           }
         );
@@ -85,7 +85,7 @@ const purchaseController = {
           }
           return res.status(201).json({
             status: 201,
-            message: "Thêm sản phẩm vào giỏ hàng thành công",
+            message: "Thêm vào giỏ hàng thành công",
           });
         });
       }

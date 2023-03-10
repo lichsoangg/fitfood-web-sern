@@ -30,6 +30,7 @@ const upload = multer({
 }).single("ProductAvatar");
 
 router.get("/", ProductController.getProducts);
+router.get("/:id", ProductController.getProduct);
 router.post(
   "/",
   [verifyToken, checkRole(RolePermissions.Product.Add), upload],

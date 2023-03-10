@@ -3,9 +3,11 @@
   @include flexMid(unset);
   gap: 8px;
   margin-top: 6px;
+  min-height: 20px;
   &__image {
     width: 12px;
     height: 12px;
+    -o-object-fit: cover;
     object-fit: cover;
   }
   &__message {

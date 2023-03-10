@@ -115,28 +115,28 @@ INSERT INTO producttype (`Name`) Values ('Đồ ăn');
 
 
 -- Data Product
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('NƯỚC MÁT THẢO MỘC',100000,15,'Chai',1,'ProductAvatar_1.png','1');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('FITFOOD JUICE SWEETIE',200000,100,'Chai',2,'ProductAvatar_2.png','1');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('FITFOOD JUICE GREENIE',100000,100,'Chai',2,'ProductAvatar_3.png','1');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('BOX Ức gà mềm mọng',379000,100,'Hộp',1,'ProductAvatar_4.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Cơm gạo lức ăn liền ',100000,80,'Gói',1,'ProductAvatar_5.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Nhân Burger Gà Teriyaki',100000,87,'Gói',2,'ProductAvatar_6.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Ức gà ăn liền ',199000,100,'Hộp',1,'ProductAvatar_7.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gạo lứt Rong Biển',100000,80,'Hộp',1,'ProductAvatar_8.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gạo lứt Chà Bông',100000,100,'Hộp',1,'ProductAvatar_9.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('NƯỚC MÁT THẢO MỘC',100000,1234,'Chai',1,'ProductAvatar_1.png','1');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('FITFOOD JUICE SWEETIE',200000,21353,'Chai',2,'ProductAvatar_2.png','1');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('FITFOOD JUICE GREENIE',100000,42341,'Chai',2,'ProductAvatar_3.png','1');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('BOX Ức gà mềm mọng',379000,123,'Hộp',1,'ProductAvatar_4.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Cơm gạo lức ăn liền ',100000,4321,'Gói',1,'ProductAvatar_5.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Nhân Burger Gà Teriyaki',100000,123,'Gói',2,'ProductAvatar_6.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Ức gà ăn liền ',199000,342,'Hộp',1,'ProductAvatar_7.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gạo lứt Rong Biển',100000,2453,'Hộp',1,'ProductAvatar_8.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gạo lứt Chà Bông',100000,3246,'Hộp',1,'ProductAvatar_9.png','2');
 Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Bánh ngói hạnh nhân',129000,100,'Hộp',1,'ProductAvatar_10.png','2');
 Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Biscotti vị socola',129000,97,'Hộp',1,'ProductAvatar_11.png','2');
 Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Biscotti vị trà xanh ',100000,100,'Hộp',2,'ProductAvatar_12.png','2');
 Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Biscotti vị truyền thống',100000,100,'Hộp',2,'ProductAvatar_13.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Tempeh Tương Nén',100000,100,'Gói',2,'ProductAvatar_14.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Bánh mì ngũ cốc',85000,100,'Hộp',2,'ProductAvatar_15.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói FIT 1',600000,100,'Gói',1,'ProductAvatar_16.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói FIT 2',600000,100,'Gói',1,'ProductAvatar_17.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói FIT 3',600000,100,'Gói',1,'ProductAvatar_18.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói MEAT-S',1200000,100,'Gói',1,'ProductAvatar_19.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Tempeh Tương Nén',100000,455,'Gói',2,'ProductAvatar_14.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Bánh mì ngũ cốc',85000,4567,'Hộp',2,'ProductAvatar_15.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói FIT 1',600000,324,'Gói',1,'ProductAvatar_16.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói FIT 2',600000,567,'Gói',1,'ProductAvatar_17.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói FIT 3',600000,678,'Gói',1,'ProductAvatar_18.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói MEAT-S',1200000,564,'Gói',1,'ProductAvatar_19.png','2');
 Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói MEAT',950000,100,'Gói',1,'ProductAvatar_20.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói chay',600000,100,'Gói',1,'ProductAvatar_21.png','2');
-Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói Full',750000,100,'Gói',1,'ProductAvatar_21.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói chay',600000,323,'Gói',1,'ProductAvatar_21.png','2');
+Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeID) Values ('Gói Full',750000,123,'Gói',1,'ProductAvatar_21.png','2');
 
 
 
@@ -198,3 +198,12 @@ Insert Into rating(Username,ProductID,Rating) Values('duytran1@gmail.com','22','
 Insert Into rating(Username,ProductID,Rating) Values('duytran1@gmail.com','20','4');
 
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+
+   
+      SELECT SQL_CALC_FOUND_ROWS P.ProductID, P.Name as ProductName, Price, P.Quantity,Avatar, Unit, Highlight, P.ProductTypeID as ProductTypeID, PT.Name as ProductTypeName, IFNULL(SUM(DB.Quantity),0) as SoldQuantity, IFNULL(ROUND(AVG(R.Rating),1),0) as Rating
+      FROM Product P INNER JOIN ProductType PT ON P.ProductTypeID= PT.ProductTypeID 
+      LEFT JOIN DetailBill DB ON DB.ProductID= P.ProductID
+      LEFT JOIN Rating R ON R.ProductID= P.ProductID
+        WHERE Replace(CONCAT(P.ProductID,'',P.Name, Price, P.Quantity, Unit, Highlight, P.ProductTypeID, P.Name),' ','') Like '%%'
+        AND (2 IS NULL OR 2 = P.ProductID )
+        GROUP BY P.ProductID, P.Name, Price, P.Quantity ,Avatar, Unit, Highlight, P.ProductTypeID , PT.Name

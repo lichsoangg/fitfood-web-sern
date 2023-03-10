@@ -1,1 +1,12 @@
 @import '../../scss/import.scss';
+.product-detail {
+  width: 100%;
+  background: $cl-white;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

@@ -29,28 +29,31 @@ const Product = {
         AND (? IS NULL OR ? >= P.Price )
         AND (? IS NULL OR ? = P.Highlight)
         GROUP BY P.ProductID, P.Name, Price, P.Quantity ,Avatar, Unit, Highlight, P.ProductTypeID , PT.Name
-        HAVING Rating >= ${rating}
-        ORDER BY ${orderField} ${order}
-        LIMIT ?,?
+      ${rating ? `HAVING Rating >= ${rating}` : ""}
+      ${order ? ` ORDER BY ${orderField} ${order}` : ""} 
+       ${
+         (numberOffset === 0 || numberOffset) && numberFetchNext
+           ? `LIMIT ${numberOffset},${numberFetchNext}`
+           : ``
+       }
         `,
       [
-        `%${search}%`,
-        productType,
-        productType,
+        `%${search ? search : ""}%`,
+        productType ? productType : null,
+        productType ? productType : null,
         productID ? productID : null,
         productID ? productID : null,
         priceMin ? priceMin : null,
         priceMin ? priceMin : null,
         priceMax ? priceMax : null,
         priceMax ? priceMax : null,
-        highLight,
-        highLight,
-        numberOffset,
-        numberFetchNext,
+        highLight ? highLight : null,
+        highLight ? highLight : null,
       ],
       callback
     );
   },
+
   addProduct: (data, callback) => {
     db.query("INSERT INTO Product SET ?", data, callback);
   },

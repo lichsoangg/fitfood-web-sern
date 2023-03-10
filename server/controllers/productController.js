@@ -50,6 +50,20 @@ const ProductController = {
       }
     );
   },
+  getProduct: (req, res, next) => {
+    const { id: productID } = req.params;
+    Product.getProducts({ productID }, (err, response) => {
+      if (err) return res.status(400).json({ status: 400, message: err });
+      const data = response[0];
+      let avatar = data?.Avatar;
+      if (avatar) {
+        const originalUrl = `${req.protocol}://${req.get("host")}`;
+        avatar = `${originalUrl}/images/${data?.Avatar}`;
+        data.Avatar = avatar;
+      }
+      return res.status(200).json(data);
+    });
+  },
   addProduct: (req, res, next) => {
     const data = req.body;
     if (req.file) {

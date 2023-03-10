@@ -1,5 +1,11 @@
 import { apiSlice } from '../api/apiSlice'
 
+function providesProductList(resultsWithIds, tagType) {
+  return resultsWithIds
+    ? [{ type: tagType, id: 'LIST' }, ...resultsWithIds.map(({ ProductID }) => ({ type: tagType, ProductID }))]
+    : [{ type: tagType, id: 'LIST' }]
+}
+
 export const productsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
@@ -10,27 +16,17 @@ export const productsApi = apiSlice.injectEndpoints({
           params: queryConfig
         }
       },
-      providesTags: ['Products']
+      providesTags: (result) => providesProductList(result.data.data, 'Products')
+    }),
+    getProduct: builder.query({
+      query: (id) => {
+        return {
+          url: `/products/${id}`
+        }
+      },
+      providesTags: (result, error, id) => [{ type: 'Products', id }]
     })
-    //   addEmployee: builder.mutation({
-    //     query: (data) => ({
-    //       url: '/employees/add',
-    //       method: 'POST',
-    //       body: data
-    //     }),
-    //     invalidatesTags: ['Employees']
-    //   }),
-    //   updateEmployee: builder.mutation({
-    //     query: ({ Username, data }) => {
-    //       return {
-    //         url: `/employees/${Username}`,
-    //         method: 'PUT',
-    //         body: data
-    //       }
-    //     },
-    //     invalidatesTags: ['Employees']
-    //   })
   })
 })
 
-export const { useGetProductsQuery } = productsApi
+export const { useGetProductsQuery, useGetProductQuery } = productsApi

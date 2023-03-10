@@ -1,0 +1,33 @@
+@import '../../scss/import.scss';
+.quantity-controller {
+  @include flexMid(unset);
+  height: 30px;
+  &__plus,
+  &__minus {
+    width: 30px;
+    height: 100%;
+    cursor: pointer;
+    border: 1px solid rgba($cl-grey, 0.3);
+    svg {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  }
+  input {
+    border-top: 1px solid rgba($cl-grey, 0.3);
+    border-bottom: 1px solid rgba($cl-grey, 0.3);
+    border-right: none;
+    border-left: none;
+    width: 100px;
+    text-align: center;
+    font-weight: 600;
+    color: $cl-black;
+    font-size: $fz-medium;
+    height: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

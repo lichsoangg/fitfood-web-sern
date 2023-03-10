@@ -1,5 +1,7 @@
 import React from 'react'
+import { useDisableClick } from '../../hooks/useDisableClick'
 import './Buttons.scss'
+import Loading from '../../components/Loading/Loading'
 export function ThreeDimensionButton({ children, handleClickButton }) {
   return (
     <div className='button-three-dimension' onClick={handleClickButton}>
@@ -26,10 +28,16 @@ export function InputButton({ children, ...rest }) {
     </div>
   )
 }
-const AcceptButton = React.forwardRef(({ children, width, styleButton, ...rest }, ref) => {
+const AcceptButton = React.forwardRef(({ children, width, styleButton, isLoading, ...rest }, ref) => {
+  useDisableClick(isLoading)
   return (
-    <button className='button-accept' style={{ width: `${width}`, ...styleButton }} {...rest} ref={ref || null}>
-      {children}
+    <button
+      className='button-accept'
+      style={{ width: `${width}`, opacity: `${isLoading ? '0.6' : '1'}`, ...styleButton }}
+      {...rest}
+      ref={ref || null}
+    >
+      {isLoading ? <Loading color={'white'} /> : children}
     </button>
   )
 })
