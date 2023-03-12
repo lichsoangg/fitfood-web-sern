@@ -48,6 +48,7 @@ export default function AccountDropdown() {
                 {role !== `Khách hàng` ? <Link to={path.admin}>Trang Admin </Link> : <></>}
                 <Link to={path.accountInfo}>Thông tin cá nhân </Link>
                 <Link to={path.changePassword}>Đổi mật khẩu </Link>
+                <Link to={path.paymentHistory}>Lịch sử giao dịch</Link>
                 <hr />
                 <li onClick={handleClickLogout}>Đăng xuất</li>
               </ul>

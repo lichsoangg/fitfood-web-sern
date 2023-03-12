@@ -13,6 +13,7 @@ const path = {
   accountInfo: '/thong-tin-ca-nhan',
   unauthorized: '/unauthorized',
   admin: '/admin',
+  paymentHistory: '/lich-su-giao-dich',
   employeeManagement: 'quan-ly-nhan-vien',
   productManagement: 'quan-ly-san-pham',
   productTypeManagement: 'quan-ly-loai-san-pham',

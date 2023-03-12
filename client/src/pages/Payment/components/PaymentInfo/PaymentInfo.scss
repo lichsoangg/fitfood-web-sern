@@ -1,0 +1,15 @@
+@import '../../../../scss/import.scss';
+.payment-info {
+  h3 {
+    font-size: $fz-large;
+    font-weight: 700;
+    text-align: center;
+    margin: 24px 0px;
+  }
+  &__form {
+    display: grid;
+    gap: 60px;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+}

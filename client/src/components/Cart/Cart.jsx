@@ -1,16 +1,13 @@
 import { useSelector } from 'react-redux'
 import { selectCurrentAuth } from '../../features/authentication/authSlice'
 import { useGetPurchaseQuery } from '../../features/purchase/purchaseApi'
-import { formatCurrency } from '../../utils/utils'
+import { formatCurrency, handleCalcSumPrice } from '../../utils/utils'
 import { AcceptButton } from '../Buttons/Buttons'
-import CartItem from '../CartItem'
-import Loading from '../Loading/Loading'
-import NoData from '../NoData/NoData'
-import ProductNotFoundImage from '../../assets/svg/product_not_found.svg'
 
 import './Cart.scss'
 import { Link } from 'react-router-dom'
 import path from '../../constants/path'
+import CartList from '../CartList'
 export default function Cart({ open, setOpen }) {
   const { accessToken: isAuthenticated } = useSelector(selectCurrentAuth)
   const { data: productsInCartData, isFetching: isProductsInCartFetching } = useGetPurchaseQuery(
@@ -32,29 +29,12 @@ export default function Cart({ open, setOpen }) {
           </svg>
         </div>
       </div>
-      <div className='cart__list'>
-        {isProductsInCartFetching ? (
-          <Loading size={3} />
-        ) : cartProducts ? (
-          cartProducts.map((product) => {
-            return <CartItem product={product}></CartItem>
-          })
-        ) : isAuthenticated ? (
-          <NoData
-            message={'Không có sản phẩm trong giỏ hàng'}
-            image={ProductNotFoundImage}
-            imageStyles={{ width: '100px' }}
-          />
-        ) : (
-          <NoData image={ProductNotFoundImage} imageStyles={{ width: '100px' }}>
-            Vui lòng{' '}
-            <Link to={path.login} style={{ color: '#ff2033' }} onClick={() => setOpen(false)}>
-              đăng nhập
-            </Link>{' '}
-            để xem giỏ hàng
-          </NoData>
-        )}
-      </div>
+      <CartList
+        cartProducts={cartProducts}
+        isAuthenticated={isAuthenticated}
+        isProductsInCartFetching={isProductsInCartFetching}
+        setOpen={setOpen}
+      />
       {!isAuthenticated || cartProducts?.length < 1 ? null : (
         <div className='cart__price-payment'>
           <div className='price'>
@@ -67,10 +47,4 @@ export default function Cart({ open, setOpen }) {
       )}
     </div>
   )
-}
-function handleCalcSumPrice(products) {
-  const sum = products?.reduce((sumPrice, product) => {
-    return Number(sumPrice) + Number(product.Price * product.Quantity)
-  }, 0)
-  return sum
 }

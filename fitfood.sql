@@ -59,6 +59,9 @@ CREATE TABLE product(
 CREATE TABLE bill(
 	BillID int NOT NULL AUTO_INCREMENT,
     Date date NOT NULL,
+	Name varchar(100) NOT NULL,
+    PhoneNumber varchar(10) NOT NULL,
+    Address varchar(500) NOT NULL,
     State int NOT NULL,
     Username varchar(100) NOT NULL,
     CONSTRAINT CK_Bill_State CHECK(State=1 OR State=2),
@@ -142,11 +145,19 @@ Insert Into product (Name, Price, Quantity, Unit, Highlight,Avatar, ProductTypeI
 
 
 -- Data Bill
-Insert Into bill (Date, State, Username) Values ('2020-10-11',1,'duytran@gmail.com');
-Insert Into bill (Date, State, Username) Values ('2020-10-11',2,'duytran@gmail.com');
-Insert Into bill (Date, State, Username) Values ('2021-10-11',1,'duytran@gmail.com');
-Insert Into bill (Date, State, Username) Values ('2021-10-11',1,'duytran1@gmail.com');
--- Data Detail Bill
+Insert Into bill (Date,Name, PhoneNumber,Address, State, Username) Values ('2020-10-11','Duy','0333122222','An Hòa Đông',1,'duytran@gmail.com');
+Insert Into bill (Date,Name, PhoneNumber,Address, State, Username) Values ('2020-10-11','Duy','0333122222','An Hòa Đông',2,'duytran@gmail.com');
+Insert Into bill (Date,Name, PhoneNumber,Address, State, Username) Values ('2021-10-11','Duy','0333122222','An Hòa Đông',1,'duytran@gmail.com');
+Insert Into bill (Date,Name, PhoneNumber,Address, State, Username) Values ('2021-10-11','Duy','0333122222','An Hòa Đông',1,'duytran1@gmail.com');
+Insert Into bill (Date,Name, PhoneNumber,Address, State, Username) Values ('2021-12-21','Duy','0333122222','An Hòa Đông',1,'duytran1@gmail.com');
+
+
+SELECT B.BillID, Date, State, B.Name as CustomerName, B.PhoneNumber,B.Address,SUM(DB.SalePrice * DB.Quantity) as Price,DB.ProductID, DB.Quantity,P.Name, Unit, P.Avatar, DB.SalePrice
+        FROM Bill B INNER JOIN User U ON B.Username=U.Username
+        INNER JOIN DetailBIll DB ON DB.BillID = B.BillID
+        INNER JOIN Product P ON DB.ProductID= P.ProductID
+        WHERE 1=1 
+        GROUP BY B.BillID, Date, State, B.Name, B.PhoneNumber,B.Address
 
 Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('1','1',11,'150000');
 Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('1','3',5342,'100000');
@@ -199,11 +210,3 @@ Insert Into rating(Username,ProductID,Rating) Values('duytran1@gmail.com','20','
 
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 
-   
-      SELECT SQL_CALC_FOUND_ROWS P.ProductID, P.Name as ProductName, Price, P.Quantity,Avatar, Unit, Highlight, P.ProductTypeID as ProductTypeID, PT.Name as ProductTypeName, IFNULL(SUM(DB.Quantity),0) as SoldQuantity, IFNULL(ROUND(AVG(R.Rating),1),0) as Rating
-      FROM Product P INNER JOIN ProductType PT ON P.ProductTypeID= PT.ProductTypeID 
-      LEFT JOIN DetailBill DB ON DB.ProductID= P.ProductID
-      LEFT JOIN Rating R ON R.ProductID= P.ProductID
-        WHERE Replace(CONCAT(P.ProductID,'',P.Name, Price, P.Quantity, Unit, Highlight, P.ProductTypeID, P.Name),' ','') Like '%%'
-        AND (2 IS NULL OR 2 = P.ProductID )
-        GROUP BY P.ProductID, P.Name, Price, P.Quantity ,Avatar, Unit, Highlight, P.ProductTypeID , PT.Name

@@ -24,5 +24,5 @@ DropdownBase.propTypes = {
     top: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired
-  }).isRequired
+  })
 }

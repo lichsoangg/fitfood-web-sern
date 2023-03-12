@@ -17,12 +17,12 @@ import ProductManagement from './pages/Admin/pages/ProductManagement'
 import FaqsPage from './pages/FaqsPage'
 import TypeProductManagement from './pages/Admin/pages/TypeProductManagement/TypeProductManagement'
 import BillManagement from './pages/BillManagement'
-import ReportRevenue from './pages/ReportRevenue/ReportRevenue'
 import Backup from './pages/Backup/Backup'
 import { ROLES } from './constants/utils'
 import ProductList from './pages/ProductList/ProductList'
 import ProductDetail from './pages/ProductDetail'
 import Payment from './pages/Payment'
+import PaymentHistory from './pages/PaymentHistory'
 function FitFoodApp() {
   return (
     <ErrorBoundaryComponent>
@@ -51,6 +51,7 @@ function FitFoodAppRoutes() {
           <Route path={path.accountInfo} element={<AccountInformation />} />
           <Route path={path.unauthorized} element={<Unauthorized />} />
           <Route path={path.payment} element={<Payment />} />
+          <Route path={path.paymentHistory} element={<PaymentHistory />} />
         </Route>
       </Route>
       {/* private route admin layout*/}
@@ -59,7 +60,6 @@ function FitFoodAppRoutes() {
           <Route path={path.productManagement} element={<ProductManagement />} />
           <Route path={path.productTypeManagement} element={<TypeProductManagement />} />
           <Route path={path.billManagement} element={<BillManagement />} />
-          <Route path={path.revenueReport} element={<ReportRevenue />} />
           <Route path={path.backup} element={<Backup />} />
         </Route>
       </Route>

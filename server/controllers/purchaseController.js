@@ -45,24 +45,32 @@ const purchaseController = {
             Unit,
             Avatar,
             SalePrice,
+            Price,
             ...restProduct
           } = product;
           if (result[product.BillID]) {
-            result[product.BillID].products = [
-              ...result[product.BillID].products,
+            result[product.BillID].Products = [
+              ...result[product.BillID].Products,
               { ProductID, Quantity, Name, Unit, Avatar, SalePrice },
             ];
+            result[product.BillID].Price += Price;
           } else {
             result[product.BillID] = {
               ...restProduct,
-              products: [
+              Price,
+              Products: [
                 { ProductID, Quantity, Name, Unit, Avatar, SalePrice },
               ],
             };
           }
           return result;
         }, {});
-        const data = Object.values(purchase);
+        let data = Object.values(purchase);
+        data = _.orderBy(
+          data,
+          ["Date", "State", "BillID"],
+          ["desc", "asc", "desc"]
+        );
         return res.status(200).json({ status: 200, data: { data } });
       });
     }
@@ -165,6 +173,9 @@ const purchaseController = {
       {
         Date: bill.Date,
         State: bill.State,
+        Name: bill.Name,
+        PhoneNumber: bill.PhoneNumber,
+        Address: bill.Address,
         Username: username,
       },
       (err, response) => {
@@ -179,10 +190,20 @@ const purchaseController = {
           if (err) {
             return res.status(400).json({ status: 400, message: err.message });
           }
-          return res.status(200).json({
-            status: 200,
-            message: "Đặt hàng thành công",
-          });
+          Purchase.deleteCart(
+            { username, productIDArray: [] },
+            (err, responseDelete) => {
+              if (err) {
+                return res
+                  .status(400)
+                  .json({ status: 400, message: err.message });
+              }
+              return res.status(200).json({
+                status: 200,
+                message: "Đặt hàng thành công",
+              });
+            }
+          );
         });
       }
     );

@@ -139,7 +139,18 @@ InputNumberVerify.propTypes = {
   name: PropTypes.string.isRequired
 }
 // ------------------------------- Dropdown ----------------------------------
-function Dropdown({ data, isLoading = false, trigger, styleFormInput, placeHolder, icon, name, ...rest }) {
+function Dropdown({
+  data,
+  getValueOfDropdown,
+  isLoading = false,
+  trigger,
+  getValueSave,
+  styleFormInput,
+  placeHolder,
+  icon,
+  name,
+  ...rest
+}) {
   const { activeModalRef, open, rect, setOpen } = useModal()
   //useFormComtext api react hook form
   const {
@@ -151,6 +162,7 @@ function Dropdown({ data, isLoading = false, trigger, styleFormInput, placeHolde
 
   const handleClickDropdown = (e) => {
     setValue(name, e.target.getAttribute('data-id'))
+
     setOpen(false)
   }
 
@@ -200,7 +212,7 @@ function Dropdown({ data, isLoading = false, trigger, styleFormInput, placeHolde
               data &&
               data.map((item) => {
                 return (
-                  <span key={item.id} data-id={item.id}>
+                  <span key={item.id} data-id={item.id} data-value={item.value}>
                     {item.value}
                   </span>
                 )

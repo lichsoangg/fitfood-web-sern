@@ -24,3 +24,10 @@ export function getIdFromUrl(url) {
   const arr = url.split('-i-')
   return arr[arr.length - 1]
 }
+
+export function handleCalcSumPrice(products) {
+  const sum = products?.reduce((sumPrice, product) => {
+    return Number(sumPrice) + Number(product.Price * product.Quantity)
+  }, 0)
+  return sum
+}

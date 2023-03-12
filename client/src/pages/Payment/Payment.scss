@@ -1,1 +1,83 @@
 @import '../../scss/import.scss';
+.payment {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: calc(100vh - 370px);
+  padding-top: 40px;
+  &__status {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    &--line {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: $cl-grey-soft;
+      width: 100%;
+      height: 1px;
+      &-active {
+        background-color: $cl-primary;
+        width: 0;
+        transition: 0.4s all;
+      }
+    }
+    &--item {
+      @include flexMid(center);
+      flex-direction: column;
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content;
+      font-weight: 500;
+      font-size: $fz-default;
+      color: #818181;
+      position: relative;
+      transition: 0.4 all;
+      .circle {
+        background: $cl-grey-soft;
+        color: #818181;
+        @include flexMid(center);
+        font-size: $fz-default;
+
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+      span {
+        text-align: center;
+        position: absolute;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      &-active {
+        .circle {
+          background: $cl-primary !important;
+          color: $cl-white !important;
+          font-weight: 700 !important;
+        }
+        color: $cl-primary;
+        font-weight: 700;
+      }
+    }
+  }
+  .paymentForm {
+    width: 100%;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    margin-top: 24px;
+    @include flexMid(center);
+    flex-direction: column;
+    gap: 36px;
+    &__step {
+      width: 100%;
+      height: 600px;
+    }
+  }
+}

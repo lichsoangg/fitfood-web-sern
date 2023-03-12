@@ -2,7 +2,7 @@ const db = require("../utils/connect_mysql");
 const Purchase = {
   getBills: ({ username, state }, callback) => {
     db.query(
-      `SELECT B.BillID, Date, State, B.Username,DB.ProductID, DB.Quantity,P.Name, Unit, P.Avatar, DB.SalePrice  
+      `SELECT B.BillID, DATE_FORMAT(Date,'%Y-%m-%d') as Date, State, B.Name as CustomerName, B.PhoneNumber,B.Address,DB.ProductID, DB.Quantity,P.Name, Unit, P.Avatar, DB.SalePrice,(DB.SalePrice * DB.Quantity) as Price
         FROM Bill B INNER JOIN User U ON B.Username=U.Username
         INNER JOIN DetailBIll DB ON DB.BillID = B.BillID
         INNER JOIN Product P ON DB.ProductID= P.ProductID

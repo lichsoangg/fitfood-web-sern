@@ -1,0 +1,52 @@
+@import '../../../../scss/import.scss';
+.payment-history-item {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: $fz-medium;
+  &__price {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin: 6px 0px 6px;
+    strong {
+      color: $cl-primary;
+    }
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 8px;
+    .top {
+      @include flexMid(space-between);
+      .left {
+        display: flex;
+        gap: 20px;
+      }
+      .right {
+        @include flexMid(unset);
+        gap: 8px;
+        .circle {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+        }
+      }
+    }
+    .bottom {
+      @include flexMid(space-between);
+    }
+  }
+  &__products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}

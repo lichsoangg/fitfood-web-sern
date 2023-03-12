@@ -25,6 +25,27 @@ export const purchaseApi = apiSlice.injectEndpoints({
       }),
       providesTags: (result) => providesPurchase(result?.data?.data, 'Cart')
     }),
+    getBill: builder.query({
+      query: (queryConfig) => ({
+        url: '/purchase',
+        method: 'GET',
+        credentials: 'include',
+        params: queryConfig
+      }),
+      providesTags: (result) => providesPurchase(result?.data?.data, 'Bill')
+    }),
+    buyProducts: builder.mutation({
+      query: (data) => ({
+        url: '/purchase/buy-products',
+        method: 'POST',
+        body: data,
+        credentials: 'include'
+      }),
+      invalidatesTags: [
+        { type: 'Cart', id: 'LIST' },
+        { type: 'Bill', id: 'LIST' }
+      ]
+    }),
     updateCart: builder.mutation({
       query: (data) => ({
         url: '/purchase/update-cart',
@@ -46,4 +67,11 @@ export const purchaseApi = apiSlice.injectEndpoints({
   })
 })
 
-export const { useAddToCartMutation, useGetPurchaseQuery, useUpdateCartMutation, useDeleteCartMutation } = purchaseApi
+export const {
+  useAddToCartMutation,
+  useBuyProductsMutation,
+  useGetPurchaseQuery,
+  useUpdateCartMutation,
+  useDeleteCartMutation,
+  useGetBillQuery
+} = purchaseApi

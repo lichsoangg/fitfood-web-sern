@@ -1,0 +1,24 @@
+@import '../../../../scss/import.scss';
+.payment-cart {
+  height: 600px;
+  width: 100%;
+  h3 {
+    font-size: $fz-large;
+    font-weight: 700;
+    text-align: center;
+    margin: 12px 0px;
+  }
+  &__price {
+    margin-left: auto;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    margin-top: 20px;
+    width: max-content;
+    font-weight: 700;
+    font-size: $fz-large;
+    strong {
+      color: $cl-primary;
+    }
+  }
+  overflow-y: auto;
+}

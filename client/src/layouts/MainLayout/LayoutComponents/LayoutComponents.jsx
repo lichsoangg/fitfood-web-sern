@@ -21,7 +21,6 @@ function Logo() {
       <div className='layout__logo'>
         <div className='layout__logo--image'>
           <img src={logo} alt='Fitfood logo' />
-          <h1>Fitfood</h1>
         </div>
       </div>
     </Link>

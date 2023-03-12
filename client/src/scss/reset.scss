@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 @import './variables.scss';
-
 html,
 body,
 div,
@@ -143,9 +142,6 @@ a {
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
 }
 
 html,
@@ -220,6 +216,48 @@ p {
   background: rgba($cl-primary, 0.9);
   border-radius: 6px;
 }
+
+h1 {
+  font-size: 72px;
+  line-height: 74px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: $fz-largest;
+  line-height: 62px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: $fz-large;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: $fz-medium;
+  font-weight: 700;
+}
+
+.body1 {
+  font-size: $fz-medium;
+}
+
+.body2 {
+  font-size: $fz-medium;
+  font-weight: 600;
+}
+
+.body3,
+.body4 {
+  font-size: $fz-default;
+  font-weight: 500;
+}
+
+.body5 {
+  font-size: $fz-small;
+}
+
 .swiper-pagination-bullet {
   width: 24px !important;
   height: 24px !important;
