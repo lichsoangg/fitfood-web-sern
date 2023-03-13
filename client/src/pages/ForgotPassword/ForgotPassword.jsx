@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import ForgotPasswordImage from '../../assets/images/forgot_password.png'
@@ -19,6 +20,9 @@ export default function ForgotPassword() {
   }, [token, navigate, location])
   return (
     <div className='forgotPassword'>
+      <Helmet>
+        <title>Quên mật khẩu | Fitfood</title>
+      </Helmet>
       <div className='forgotPassword__image'>
         <img src={ForgotPasswordImage} alt='' />
       </div>

@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import Loading from '../../components/Loading/Loading'
 import { selectCurrentAuth } from '../../features/authentication/authSlice'
@@ -13,6 +14,9 @@ export default function PaymentHistory() {
   const bills = billsData?.data?.data
   return (
     <div className='payment-history'>
+      <Helmet>
+        <title>Lịch sử giao dịch | Fitfood</title>
+      </Helmet>
       <h3>Lịch sử giao dịch</h3>
       <div className='payment-history__list'>
         {isBillsFetchingData ? <Loading full size={4}></Loading> : null}

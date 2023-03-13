@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import path from '../../constants/path'
 import { formatCurrency, formatNumberToSocialStyle, generateUrlByNameAndId } from '../../utils/utils'
 import ProductRating from '../ProductRating'
+
 import './ProductItem.scss'
 export default function ProductItem({ image, id, name, rating, price, unit, soldQuantity, hoverColor = '#ffffff' }) {
   return (

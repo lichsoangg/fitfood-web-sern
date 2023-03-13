@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import fitfoodImage from '../../assets/images/logo_fitfood.png'
 import Navbar from '../../components/Navbar'
 import path from '../../constants/path'
+import { Helmet } from 'react-helmet'
 import './Admin.scss'
 const homeIcon = () => (
   <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -66,6 +67,10 @@ export default function Admin() {
 
   return (
     <div className='admin'>
+      <Helmet>
+        {/* HTML Meta Tags */}
+        <title>Admin - Fitfood</title>
+      </Helmet>
       <div className='admin__navbar' style={{ width: `${toggle ? '20%' : '5%'}` }}>
         <Navbar toggle={toggle} setToggle={setToggle}>
           <Navbar.Toggle />

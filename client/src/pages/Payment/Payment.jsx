@@ -14,6 +14,8 @@ import PaymentCart from './components/PaymentCart/PaymentCart'
 import PaymentInfo from './components/PaymentInfo/PaymentInfo'
 import PaymentMethod from './components/PaymentMethod/PaymentMethod'
 import PaymentSuccess from './components/PaymentSuccess'
+import { Helmet } from 'react-helmet'
+
 import './Payment.scss'
 
 const schema = yup
@@ -108,6 +110,26 @@ export default function Payment() {
   useDisableClick(isBuyProductsLoading)
   return (
     <div className='payment mainWrapper container'>
+      <Helmet>
+        {/* HTML Meta Tags */}
+        <title>Thanh toán - Fitfood</title>
+        <meta name='description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        {/* Google / Search Engine Tags */}
+        <meta itemProp='name' content='Thanh toán - Fitfood' />
+        <meta itemProp='description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        <meta itemProp='image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+        {/* Facebook Meta Tags */}
+        <meta property='og:url' content='https://www.fitfood.kd14.me' />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content='Thanh toán - Fitfood' />
+        <meta property='og:description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        <meta property='og:image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+        {/* Twitter Meta Tags */}
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content='Thanh toán - Fitfood' />
+        <meta name='twitter:description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        <meta name='twitter:image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+      </Helmet>
       {cartProducts?.length < 1 || currentStepIndex === 3 ? null : (
         <div className='payment__status'>
           <div className='payment__status--line'></div>
@@ -144,7 +166,7 @@ export default function Payment() {
               back={back}
               isFirstStep={isFirstStep}
               isLastStep={isLastStep}
-              textSubmit='Đăng ký'
+              textSubmit='Thanh toán'
               isLoading={isBuyProductsLoading}
             />
           )}

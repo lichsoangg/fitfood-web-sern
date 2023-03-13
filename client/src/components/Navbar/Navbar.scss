@@ -42,6 +42,7 @@
     transition: 0.4s all $cubic;
     &:hover {
       color: $cl-primary;
+      background-color: $cl-primary;
     }
     &--image {
       @include flexMid(center);
@@ -74,6 +75,7 @@
   a:hover,
   &__item.active {
     color: $cl-primary;
+    background-color: $cl-primary;
     svg {
       fill: $cl-white;
       path {

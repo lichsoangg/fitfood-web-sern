@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper'
+import { Helmet } from 'react-helmet'
+
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
@@ -16,14 +18,14 @@ import BannerImage2 from '../../assets/images/slider_homepage2.jpeg'
 import BannerImage3 from '../../assets/images/slider_homepage3.jpeg'
 import BannerImage4 from '../../assets/images/slider_homepage4.jpeg'
 
+import ProductItem from '../../components/ProductItem/ProductItem'
 import TitleSection from '../../components/TitleSection'
 import path from '../../constants/path'
+import { HIGHLIGHTS } from '../../constants/utils'
 import { useGetProductsQuery } from '../../features/products/productsApi'
 import TestimonialItem from './components/TestimonialItem'
 import { howitworks, partners, testimonials } from './constants'
 import './HomePage.scss'
-import { HIGHLIGHTS } from '../../constants/utils'
-import ProductItem from '../../components/ProductItem/ProductItem'
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -34,6 +36,26 @@ export default function HomePage() {
   }
   return (
     <div className='homepage'>
+      <Helmet>
+        {/* HTML Meta Tags */}
+        <title>Trang chủ - Fitfood</title>
+        <meta name='description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        {/* Google / Search Engine Tags */}
+        <meta itemProp='name' content='Trang chủ - Fitfood' />
+        <meta itemProp='description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        <meta itemProp='image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+        {/* Facebook Meta Tags */}
+        <meta property='og:url' content='https://www.fitfood.kd14.me' />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content='Trang chủ - Fitfood' />
+        <meta property='og:description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        <meta property='og:image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+        {/* Twitter Meta Tags */}
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content='Trang chủ - Fitfood' />
+        <meta name='twitter:description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        <meta name='twitter:image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+      </Helmet>
       {/*Banner*/}
       <section className='banner'>
         <Swiper

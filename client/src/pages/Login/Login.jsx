@@ -1,4 +1,6 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
+
 import { Link, useLocation } from 'react-router-dom'
 import appleIcon from '../../assets/icons/appleid.png'
 import facebookIcon from '../../assets/icons/facebook.png'
@@ -13,6 +15,26 @@ export default function Login() {
   return (
     <ErrorBoundaryComponent>
       <div className='login'>
+        <Helmet>
+          {/* HTML Meta Tags */}
+          <title>Đăng nhập - Fitfood</title>
+          <meta name='description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+          {/* Google / Search Engine Tags */}
+          <meta itemProp='name' content='Đăng nhập - Fitfood' />
+          <meta itemProp='description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+          <meta itemProp='image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+          {/* Facebook Meta Tags */}
+          <meta property='og:url' content='https://www.fitfood.kd14.me' />
+          <meta property='og:type' content='website' />
+          <meta property='og:title' content='Đăng nhập - Fitfood' />
+          <meta property='og:description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+          <meta property='og:image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+          {/* Twitter Meta Tags */}
+          <meta name='twitter:card' content='summary_large_image' />
+          <meta name='twitter:title' content='Đăng nhập - Fitfood' />
+          <meta name='twitter:description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+          <meta name='twitter:image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+        </Helmet>
         <h3 className='login__header'>Đăng nhập vào Fitfood</h3>
         <div className='login__description body4'>
           Bạn không có tài khoản?{' '}

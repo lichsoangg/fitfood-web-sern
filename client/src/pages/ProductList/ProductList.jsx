@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { useGetProductsQuery } from '../../features/products/productsApi'
 import useQueryParams from '../../hooks/useQueryParams'
-
+import { Helmet } from 'react-helmet'
 import Pagination from '../../components/Pagination/Pagination'
 import ProductItem from '../../components/ProductItem'
 import TitleSection from '../../components/TitleSection'
@@ -34,6 +34,26 @@ export default function ProductList() {
 
   return (
     <div className='menu'>
+      <Helmet>
+        {/* HTML Meta Tags */}
+        <title>Đặt món - Fitfood</title>
+        <meta name='description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        {/* Google / Search Engine Tags */}
+        <meta itemProp='name' content='Đặt món - Fitfood' />
+        <meta itemProp='description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        <meta itemProp='image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+        {/* Facebook Meta Tags */}
+        <meta property='og:url' content='https://www.fitfood.kd14.me' />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content='Đặt món - Fitfood' />
+        <meta property='og:description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        <meta property='og:image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+        {/* Twitter Meta Tags */}
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content='Đặt món - Fitfood' />
+        <meta name='twitter:description' content='Ghé Fitfood để lựa chọn những thực phẩm chất lượng nhé!' />
+        <meta name='twitter:image' content='https://api.fitfood.kd14.me/images/slider_homepage2.jpeg' />
+      </Helmet>
       <section className='menu-top'>
         <div className='mainWrapper container'>
           <TitleSection

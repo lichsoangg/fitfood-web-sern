@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import NewEmail from '../../assets/images/email.png'
 import { selectCurrentAuth } from '../../features/authentication/authSlice'
@@ -9,6 +10,9 @@ export default function ActivePage({ children }) {
   const { username } = useSelector(selectCurrentAuth)
   const renderActivePage = (
     <div className='activePageWrapper'>
+      <Helmet>
+        <title>Kích hoạt tài khoản | Fitfood</title>
+      </Helmet>
       <div className='activePage'>
         <div className='activePage__image'>
           <img src={NewEmail} alt='Verification Email Fitfood' />
