@@ -182,6 +182,24 @@ export default function HomePage() {
                 scrollbar={{
                   hide: true
                 }}
+                breakpoints={{
+                  // 320: {
+                  //   slidesPerView: 2,
+                  //   spaceBetween: 20
+                  // },
+                  // 480: {
+                  //   slidesPerView: 3,
+                  //   spaceBetween: 30
+                  // },
+                  768: {
+                    slidesPerView: 3,
+                    spaceBetween: 40
+                  },
+                  1280: {
+                    slidesPerView: 4,
+                    spaceBetween: 40
+                  }
+                }}
               >
                 {products.map((product) => {
                   return (

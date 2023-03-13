@@ -71,7 +71,7 @@ export default function Admin() {
         {/* HTML Meta Tags */}
         <title>Admin - Fitfood</title>
       </Helmet>
-      <div className='admin__navbar' style={{ width: `${toggle ? '20%' : '5%'}` }}>
+      <div className={`admin__navbar ${toggle ? 'admin__navbar-open' : ''}`}>
         <Navbar toggle={toggle} setToggle={setToggle}>
           <Navbar.Toggle />
           <Navbar.Item image={fitfoodImage} title='Fitfood Admin Page' />
@@ -84,7 +84,7 @@ export default function Admin() {
           </Navbar.List>
         </Navbar>
       </div>
-      <div className='admin__outlet' style={{ width: `${toggle ? '80%' : '95%'}` }}>
+      <div className={`admin__outlet ${toggle ? 'admin__outlet-navbar-open' : ''}`}>
         <Outlet />
       </div>
     </div>

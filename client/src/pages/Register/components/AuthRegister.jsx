@@ -126,8 +126,8 @@ export default function AuthRegister() {
         const data = await addNewCustomer(value).unwrap()
         if (data.status === 201) {
           const { data: user } = data
-          const { Username: username, IsActive: isActive, AccessToken: accessToken } = user
-          dispatch(setCredentials(username, isActive, 1, accessToken))
+          const { Username: username, AccessToken: accessToken } = user
+          dispatch(setCredentials(username, 1, 2, accessToken))
           if (accessToken) {
             await sendVerifyEmail().unwrap()
           }

@@ -7,14 +7,58 @@
   margin: 0 auto;
   max-width: 1440px;
 
-  &__navbar,
   &__outlet {
     transition: 0.6s all $cubic;
     background-color: $cl-grey-dimmed;
     position: relative;
+    width: 95%;
+    &-navbar-open {
+      width: 80%;
+    }
   }
   &__navbar {
     transition: 0.6s all $cubic;
     background-color: $cl-black;
+    position: relative;
+    width: 5%;
+
+    &-open {
+      width: 20%;
+    }
   }
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .admin {
+    &__outlet {
+      width: 100%;
+      margin-left: 50px;
+
+      &-navbar-open {
+        width: 100%;
+      }
+    }
+    &__navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      width: 50px;
+      height: 100vh;
+      &-open {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
 }

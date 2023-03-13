@@ -32,7 +32,6 @@
     z-index: 50;
     color: $cl-white;
     h2 {
-      font-size: 70px;
       color: $cl-white;
       text-transform: uppercase;
       text-align: center;
@@ -48,4 +47,25 @@
       }
     }
   }
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .banner-item {
+    &__content {
+      h2 {
+        font-size: 65px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
 }

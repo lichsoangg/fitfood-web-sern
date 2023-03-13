@@ -341,3 +341,48 @@
     transform: translateY(-100%);
   }
 }
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .homepage {
+    .how-it-work {
+      &-main {
+        &__list {
+          grid-template-columns: repeat(2, minmax(240px, 1fr));
+          grid-template-rows: 1fr 1fr;
+        }
+      }
+    }
+    .enviromental {
+      &-list {
+        &__item {
+          &--content {
+            display: -webkit-box;
+
+            height: 60px;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+    }
+    .partners {
+      &__list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+}

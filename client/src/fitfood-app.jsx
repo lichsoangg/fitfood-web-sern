@@ -145,26 +145,26 @@ function FitFoodAppRoutes() {
             }
           />
         </Route>
-      </Route>
-      {/* private route admin layout*/}
-      <Route element={<PrivateRoute requiredRole={[ROLES.ADMIN]} />}>
-        <Route
-          path={path.admin}
-          element={
-            <Suspense fallback={<Loading full size={3}></Loading>}>
-              <Admin />
-            </Suspense>
-          }
-        >
+        {/* private route admin layout*/}
+        <Route element={<PrivateRoute requiredRole={[ROLES.ADMIN]} />}>
           <Route
             path={path.admin}
             element={
               <Suspense fallback={<Loading full size={3}></Loading>}>
-                <ProductManagement />
+                <Admin />
               </Suspense>
             }
-            index
-          />
+          >
+            <Route
+              path={path.admin}
+              element={
+                <Suspense fallback={<Loading full size={3}></Loading>}>
+                  <ProductManagement />
+                </Suspense>
+              }
+              index
+            />
+          </Route>
         </Route>
       </Route>
     </Routes>

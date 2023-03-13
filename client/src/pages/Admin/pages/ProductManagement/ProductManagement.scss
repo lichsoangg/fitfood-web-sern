@@ -167,69 +167,66 @@
   }
 }
 
-.employee-management__operation--role-dropdown {
-  display: flex;
-  flex-direction: column;
-  height: 200px;
-  margin-top: 8px;
-  border: 1px solid $cl-black;
-  background-color: white;
-  border-radius: 4px;
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .products-management {
+    h4 {
+    }
 
-  span {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    padding-left: 16px;
+    &__operation {
+      &--search {
+        svg {
+        }
 
-    &:hover {
-      background-color: $cl-primary;
-      color: white;
+        input {
+        }
+      }
+
+      &--role {
+        span {
+        }
+      }
+    }
+
+    &__table-wrapper {
+    }
+
+    &__table {
+      width: 98%;
+      &--row {
+        .table-data {
+          &-center {
+          }
+          &__image-name {
+            img {
+            }
+          }
+
+          &__operation {
+          }
+        }
+      }
+
+      &--row:first-child {
+      }
+
+      &--row:not(:first-child) {
+      }
+      &--row:not(:first-child):nth-child(even) {
+      }
+    }
+    &__bottom-bar {
     }
   }
 }
 
-.employeeInput {
-  width: 100%;
-  height: 100%;
+@media (min-width: 768px) and (max-width: 1024px) {
+}
 
-  &__form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+}
 
-    &--top {
-      display: flex;
-      flex-direction: column;
-      width: calc(50% - 16px);
-      gap: 32px;
+@media (min-width: 481px) and (max-width: 767px) {
+}
 
-      &-left {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .avatar {
-          width: 120px;
-          height: 120px;
-          border-radius: 4px;
-          // border: 1px dashed $cl-black;
-        }
-
-        img {
-          width: 100%;
-          height: 100%;
-          -o-object-fit: cover;
-          object-fit: cover;
-          border-radius: inherit;
-        }
-
-        .button {
-          width: -webkit-max-content;
-          width: -moz-max-content;
-          width: max-content;
-        }
-      }
-    }
-  }
+@media (min-width: 320px) and (max-width: 480px) {
 }

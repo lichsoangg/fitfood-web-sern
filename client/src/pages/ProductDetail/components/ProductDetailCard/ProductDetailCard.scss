@@ -73,3 +73,20 @@
     }
   }
 }
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .product-detail__card {
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+}
