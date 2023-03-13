@@ -46,10 +46,10 @@ export default function HomePage() {
         >
           <SwiperSlide>
             <BannerItem image={BannerImage1}>
-              <h1>
+              <h2>
                 <small>Kế hoạch đồ ăn sạch cho </small>
                 một lối sống lành mạnh
-              </h1>
+              </h2>
               <HoverButton styleButton={{ marginTop: '12px' }} onClick={handleToShopping}>
                 Đặt Ngay
               </HoverButton>
@@ -57,10 +57,10 @@ export default function HomePage() {
           </SwiperSlide>
           <SwiperSlide>
             <BannerItem image={BannerImage2}>
-              <h1>
+              <h2>
                 Trải nghiệm đồ ăn sạch
                 <small>tươi ngon giàu dinh dưỡng</small>
-              </h1>
+              </h2>
               <HoverButton styleButton={{ marginTop: '12px' }} onClick={handleToShopping}>
                 Đặt Ngay
               </HoverButton>
@@ -68,10 +68,10 @@ export default function HomePage() {
           </SwiperSlide>
           <SwiperSlide>
             <BannerItem image={BannerImage4}>
-              <h1>
+              <h2>
                 <small>Nhà cung cấp đồ ăn sạch</small>
                 lớn nhất Sài Gòn
-              </h1>
+              </h2>
               <AcceptButton
                 styleButton={{ marginTop: '12px', height: '4px', padding: '0px', width: '200px' }}
                 onClick={handleToShopping}
@@ -80,10 +80,10 @@ export default function HomePage() {
           </SwiperSlide>
           <SwiperSlide>
             <BannerItem image={BannerImage3}>
-              <h1>
+              <h2>
                 Giải pháp HEALTHY FOOD
                 <small>giao tận nơi</small>
-              </h1>
+              </h2>
               <AcceptButton
                 styleButton={{ marginTop: '12px', height: '4px', padding: '0px', width: '200px' }}
                 onClick={handleToShopping}
@@ -203,7 +203,7 @@ export default function HomePage() {
           <div className='enviromental-list'>
             <div className='enviromental-list__item'>
               <div className='enviromental-list__item--image'>
-                <img src={EnviromentalImage1} alt='' />
+                <img src={EnviromentalImage1} alt='Bảo vệ môi trường' />
               </div>
               <p className='enviromental-list__item--content'>
                 Nhà cung cấp duy nhất sử dung túi Nylon sinh học tự hủy thân thiện với môi trường
@@ -211,7 +211,7 @@ export default function HomePage() {
             </div>
             <div className='enviromental-list__item'>
               <div className='enviromental-list__item--image'>
-                <img src={EnviromentalImage2} alt='' />
+                <img src={EnviromentalImage2} alt='Bảo vệ môi trường' />
               </div>
               <p className='enviromental-list__item--content'>
                 Rửa sạch lại hộp nhựa đen để nhận hoàn tiền 10,000 cho mỗi 10 hộp
@@ -219,7 +219,7 @@ export default function HomePage() {
             </div>
             <div className='enviromental-list__item'>
               <div className='enviromental-list__item--image'>
-                <img src={EnviromentalImage3} alt='' />
+                <img src={EnviromentalImage3} alt='Bảo vệ môi trường' />
               </div>
               <p className='enviromental-list__item--content'>
                 Fitfood chỉ cung cấp 01 bộ muỗng nĩa mỗi ngày để giảm thiểu rác thải nhựa

@@ -31,11 +31,14 @@
     flex-direction: column;
     z-index: 50;
     color: $cl-white;
-    h1 {
+    h2 {
       font-size: 70px;
       color: $cl-white;
       text-transform: uppercase;
       text-align: center;
+      font-size: 72px;
+      line-height: 74px;
+      font-weight: 600;
       line-height: normal;
       small {
         font-weight: 300;
