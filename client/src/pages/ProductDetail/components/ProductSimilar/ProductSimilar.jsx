@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 import Loading from '../../../../components/Loading/Loading'
 import ProductItem from '../../../../components/ProductItem/ProductItem'
 import { useGetProductsQuery } from '../../../../features/products/productsApi'
@@ -21,7 +20,7 @@ export default function ProductSimilar({ ProductTypeID }) {
                     <ProductItem
                       id={product.ProductID}
                       image={product.Avatar}
-                      name={product.ProductName}
+                      name={product.Name}
                       price={product.Price}
                       unit={product.Unit}
                       rating={product.Rating}

@@ -18,6 +18,7 @@ import {
 } from '../../../features/authentication/authApi'
 import { selectCurrentToken, setCredentials } from '../../../features/authentication/authSlice'
 import path from '../../../constants/path'
+import { ErrorNotify } from '../../../components/Notify/Notify'
 
 const schema = yup
   .object({
@@ -123,11 +124,15 @@ export default function AuthRegister() {
         delete value.ConfirmPassword
         value.Role = 2
         const data = await addNewCustomer(value).unwrap()
-        const { data: user } = data
-        const { Username: username, IsActive: isActive, AccessToken: accessToken } = user
-        dispatch(setCredentials(username, isActive, 1, accessToken))
-        if (accessToken) {
-          await sendVerifyEmail().unwrap()
+        if (data.status === 201) {
+          const { data: user } = data
+          const { Username: username, IsActive: isActive, AccessToken: accessToken } = user
+          dispatch(setCredentials(username, isActive, 1, accessToken))
+          if (accessToken) {
+            await sendVerifyEmail().unwrap()
+          }
+        } else {
+          ErrorNotify(data?.data?.message)
         }
       } catch (err) {
         console.log(err)

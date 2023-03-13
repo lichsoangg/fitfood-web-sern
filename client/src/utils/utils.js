@@ -1,4 +1,5 @@
 export function formatNumberToSocialStyle(value) {
+  if (!value) return null
   return new Intl.NumberFormat('en', {
     notation: 'compact',
     maximumFractionDigits: 1
@@ -9,10 +10,13 @@ export function formatNumberToSocialStyle(value) {
 }
 
 export function formatCurrency(currency) {
+  if (!currency) return null
   return new Intl.NumberFormat('de-DE').format(currency)
 }
 
 export function removeSpecialCharacter(str) {
+  if (!str) return null
+  // eslint-disable-next-line no-useless-escape
   return str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, '')
 }
 

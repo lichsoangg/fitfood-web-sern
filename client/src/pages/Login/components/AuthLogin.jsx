@@ -39,7 +39,7 @@ export default function AuthLogin() {
   useEffect(() => {
     if (token) {
       if (Number(role) === Number(ROLES.ADMIN)) {
-        navigate(path.admin)
+        navigate(path.admin, { replace: true })
       }
       if (Number(role) === Number(ROLES.CUSTOMER)) {
         navigate(location?.state?.from?.pathname || path.home, { replace: true })

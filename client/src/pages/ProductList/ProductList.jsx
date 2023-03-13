@@ -19,7 +19,8 @@ const initialQuery = {
   page: 1,
   price_min: 50000,
   price_max: 1400000,
-  order: SORT_PRODUCTS.BEST_SOLD
+  order: SORT_PRODUCTS.DESC,
+  orderField: 'SoldQuantity'
 }
 export default function ProductList() {
   const location = useLocation()
@@ -58,7 +59,7 @@ export default function ProductList() {
                         key={uuidv4()}
                         id={product.ProductID}
                         image={product.Avatar}
-                        name={product.ProductName}
+                        name={product.Name}
                         price={product.Price}
                         unit={product.Unit}
                         rating={product.Rating}

@@ -11,6 +11,7 @@ import { useModal } from '../../../../hooks/useModal'
 import { useLogoutMutation } from '../../../../features/authentication/authApi'
 import { logOut, selectCurrentAuth } from '../../../../features/authentication/authSlice'
 import { useGetMeQuery } from '../../../../features/account/accountApi'
+import { ROLES } from '../../../../constants/utils'
 
 export default function AccountDropdown() {
   const { accessToken: token, role } = useSelector(selectCurrentAuth)
@@ -30,7 +31,7 @@ export default function AccountDropdown() {
   return (
     <>
       <div className='layout__function--user' ref={activeModalRef}>
-        {user ? <img src={avatar} alt='Fitfood user avatar' /> : token ? <Loading size={2} color='#fdfbfa' /> : <></>}
+        {!token ? null : <img src={avatar} alt='Fitfood user avatar' />}
       </div>
       {token ? (
         <>
@@ -45,7 +46,7 @@ export default function AccountDropdown() {
               <ul className='layout__function--user-modal' onClick={() => setOpen(false)}>
                 <li>{user?.Name}</li>
                 <hr />
-                {role !== `Khách hàng` ? <Link to={path.admin}>Trang Admin </Link> : <></>}
+                {role === ROLES.ADMIN ? <Link to={path.admin}>Trang Admin </Link> : <></>}
                 <Link to={path.accountInfo}>Thông tin cá nhân </Link>
                 <Link to={path.changePassword}>Đổi mật khẩu </Link>
                 <Link to={path.paymentHistory}>Lịch sử giao dịch</Link>

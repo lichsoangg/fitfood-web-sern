@@ -103,10 +103,13 @@ CREATE TABLE rating(
 
 -- Data User
 Insert Into user(Username,Password, Role, IsActive, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar) Values(
-'duytran@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',2,2,'Khánh Duy','2000-09-01','0333121131','1','79','773','27283','Ho Chi Minh','EmployeeAvatar_1.png'
+'duytran@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',2,2,'Khánh Duy','2000-09-01','0333121131','1','79','773','27283','Ho Chi Minh',null
 );
 Insert Into user(Username,Password, Role, IsActive, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar) Values(
-'duytran1@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',2,2,'Khánh Duy','2000-09-01','0333121132','1','79','773','27283','Ho Chi Minh','EmployeeAvatar_2.png'
+'duytran1@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',2,2,'Khánh Duy','2000-09-01','0333121132','1','79','773','27283','Ho Chi Minh',null
+);
+Insert Into user(Username,Password, Role, IsActive, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar) Values(
+'admin@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',1,2,'Khánh Duy','2000-09-01','0333121133','1','79','773','27283','Ho Chi Minh',null
 );
 
 
@@ -152,12 +155,7 @@ Insert Into bill (Date,Name, PhoneNumber,Address, State, Username) Values ('2021
 Insert Into bill (Date,Name, PhoneNumber,Address, State, Username) Values ('2021-12-21','Duy','0333122222','An Hòa Đông',1,'duytran1@gmail.com');
 
 
-SELECT B.BillID, Date, State, B.Name as CustomerName, B.PhoneNumber,B.Address,SUM(DB.SalePrice * DB.Quantity) as Price,DB.ProductID, DB.Quantity,P.Name, Unit, P.Avatar, DB.SalePrice
-        FROM Bill B INNER JOIN User U ON B.Username=U.Username
-        INNER JOIN DetailBIll DB ON DB.BillID = B.BillID
-        INNER JOIN Product P ON DB.ProductID= P.ProductID
-        WHERE 1=1 
-        GROUP BY B.BillID, Date, State, B.Name, B.PhoneNumber,B.Address
+
 
 Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('1','1',11,'150000');
 Insert Into detailbill (BillID, ProductID,Quantity, SalePrice) Values ('1','3',5342,'100000');
@@ -181,7 +179,6 @@ Insert Into cart(Username, ProductID, Quantity) Values('duytran@gmail.com','5',3
 Insert Into cart(Username, ProductID, Quantity) Values('duytran1@gmail.com','1',3);
 Insert Into cart(Username, ProductID, Quantity) Values('duytran1@gmail.com','2',2);
 Insert Into cart(Username, ProductID, Quantity) Values('duytran1@gmail.com','3',4);
-
 
 -- Data Rating
 Insert Into rating(Username, ProductID, Rating) Values('duytran1@gmail.com','1',4.3);

@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createSearchParams, useLocation, useNavigate } from 'react-router-dom'
-import useDebounce from '../../hooks/useDebounce'
 import { formatCurrency } from '../../utils/utils'
 import './FilterPriceRange.scss'
 

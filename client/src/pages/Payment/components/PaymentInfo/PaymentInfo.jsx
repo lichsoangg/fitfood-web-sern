@@ -24,7 +24,7 @@ export default function PaymentInfo() {
     } else {
       reset(user)
     }
-  }, [])
+  }, [reset, getValues, user])
 
   useEffect(() => {
     resetForm()

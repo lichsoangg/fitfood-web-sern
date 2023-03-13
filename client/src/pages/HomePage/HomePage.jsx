@@ -5,7 +5,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { v4 as uuidv4 } from 'uuid'
-import { AcceptButton } from '../../components/Buttons/Buttons'
+import { AcceptButton, HoverButton } from '../../components/Buttons/Buttons'
 import BannerItem from './components/BannerItem'
 
 import EnviromentalImage1 from '../../assets/images/enviromental1.jpeg'
@@ -32,7 +32,6 @@ export default function HomePage() {
   const handleToShopping = () => {
     navigate(path.menu)
   }
-  console.log(products)
   return (
     <div className='homepage'>
       {/*Banner*/}
@@ -51,9 +50,9 @@ export default function HomePage() {
                 <small>Kế hoạch đồ ăn sạch cho </small>
                 một lối sống lành mạnh
               </h1>
-              <AcceptButton styleButton={{ marginTop: '12px' }} onClick={handleToShopping}>
+              <HoverButton styleButton={{ marginTop: '12px' }} onClick={handleToShopping}>
                 Đặt Ngay
-              </AcceptButton>
+              </HoverButton>
             </BannerItem>
           </SwiperSlide>
           <SwiperSlide>
@@ -62,9 +61,9 @@ export default function HomePage() {
                 Trải nghiệm đồ ăn sạch
                 <small>tươi ngon giàu dinh dưỡng</small>
               </h1>
-              <AcceptButton styleButton={{ marginTop: '12px' }} onClick={handleToShopping}>
+              <HoverButton styleButton={{ marginTop: '12px' }} onClick={handleToShopping}>
                 Đặt Ngay
-              </AcceptButton>
+              </HoverButton>
             </BannerItem>
           </SwiperSlide>
           <SwiperSlide>
@@ -168,7 +167,7 @@ export default function HomePage() {
                       <ProductItem
                         id={product.ProductID}
                         image={product.Avatar}
-                        name={product.ProductName}
+                        name={product.Name}
                         price={product.Price}
                         unit={product.Unit}
                         rating={product.Rating}

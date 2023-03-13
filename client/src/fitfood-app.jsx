@@ -15,9 +15,7 @@ import Unauthorized from './pages/Unauthorized'
 import Admin from './pages/Admin'
 import ProductManagement from './pages/Admin/pages/ProductManagement'
 import FaqsPage from './pages/FaqsPage'
-import TypeProductManagement from './pages/Admin/pages/TypeProductManagement/TypeProductManagement'
-import BillManagement from './pages/BillManagement'
-import Backup from './pages/Backup/Backup'
+
 import { ROLES } from './constants/utils'
 import ProductList from './pages/ProductList/ProductList'
 import ProductDetail from './pages/ProductDetail'
@@ -57,10 +55,7 @@ function FitFoodAppRoutes() {
       {/* private route admin layout*/}
       <Route element={<PrivateRoute requiredRole={[ROLES.ADMIN]} />}>
         <Route path={path.admin} element={<Admin />}>
-          <Route path={path.productManagement} element={<ProductManagement />} />
-          <Route path={path.productTypeManagement} element={<TypeProductManagement />} />
-          <Route path={path.billManagement} element={<BillManagement />} />
-          <Route path={path.backup} element={<Backup />} />
+          <Route path={path.admin} element={<ProductManagement />} index />
         </Route>
       </Route>
     </Routes>

@@ -8,7 +8,9 @@ const ProductController = {
   getProducts: (req, res, next) => {
     const search = req.query?.search?.replaceAll(" ", "") || "";
     const productType = req.query.product_type || null;
-    const order = req.query.order || "best";
+    const order = req.query.order || "DESC";
+    const orderField = req.query.orderField || "SoldQuantity";
+
     const priceMax = Number(req.query.price_max) || null;
     const priceMin = Number(req.query.price_min) || null;
     const highLight = Number(req.query.high_light) || null;
@@ -21,8 +23,8 @@ const ProductController = {
       {
         search,
         productType,
-        order: order === "best" ? "DESC" : order,
-        orderField: order === "best" ? "SoldQuantity" : "Price",
+        order: order,
+        orderField: orderField,
         priceMax,
         priceMin,
         highLight,
@@ -79,7 +81,6 @@ const ProductController = {
   updateProduct: (req, res, next) => {
     const data = req.body;
     const productID = req.params.productID;
-
     if (req.file) {
       Product.getProducts(
         {
@@ -90,8 +91,9 @@ const ProductController = {
           numberFetchNext: 1,
         },
         async (err, product) => {
-          if (err)
+          if (err) {
             return res.status(400).json({ status: 400, message: err.message });
+          }
           if (product[0]?.Avatar) {
             let fileOldNameWithPath = path.join(
               __dirname,

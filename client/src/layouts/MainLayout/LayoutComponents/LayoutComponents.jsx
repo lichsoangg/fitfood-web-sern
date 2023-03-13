@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import logo from '../../../assets/images/logo.png'
 import Cart from '../../../components/Cart'
 import DropdownBase from '../../../components/DropdownBase/DropdownBase'
@@ -10,6 +10,7 @@ import { selectCurrentAuth } from '../../../features/authentication/authSlice'
 import { useGetPurchaseQuery } from '../../../features/purchase/purchaseApi'
 import { useModal } from '../../../hooks/useModal'
 import AccountDropdown from './components/AccountDropdown'
+import NavLinkItem from './components/NavLinkItem'
 import './LayoutComponents.scss'
 export default function LayoutComponents() {
   return null
@@ -37,30 +38,33 @@ function Menu() {
         left: activeItem.offsetLeft,
         width: activeItem.offsetWidth
       })
+      activeItem.style.color = '#ff2033'
     } else {
       setCoords({
         left: 0,
         width: 0
       })
+      const listNotActiveNavLink = document.querySelectorAll('.layout__menu--item')
+      listNotActiveNavLink.forEach((item) => {
+        item.style.color = 'white'
+        item.style.transform = 'scale(1)'
+        item.style.opacity = '0.5'
+      })
     }
   }, [location])
   return (
     <ul className='layout__menu body4'>
-      <NavLink to={path.home} className='layout__menu--item' end>
+      <NavLinkItem to={path.home} className='layout__menu--item' setCoords={setCoords} end>
         Trang chủ
-      </NavLink>
-      {/* <NavLink to={path.calorieCaculator} className='layout__menu--item'>
-        Tính calo
-      </NavLink> */}
-      <NavLink to={path.menu} className='layout__menu--item'>
+      </NavLinkItem>
+
+      <NavLinkItem to={path.menu} className='layout__menu--item' setCoords={setCoords}>
         Đặt hàng
-      </NavLink>
-      <NavLink to={path.faqs} className='layout__menu--item'>
+      </NavLinkItem>
+      <NavLinkItem to={path.faqs} className='layout__menu--item' setCoords={setCoords}>
         FAQs
-      </NavLink>
-      {/* <NavLink to={path.about} className='layout__menu--item'>
-        Về chúng tôi
-      </NavLink> */}
+      </NavLinkItem>
+
       <div
         className='layout__menu--underBorder'
         style={{ left: `${coords?.left}px`, width: `${coords?.width}px` }}

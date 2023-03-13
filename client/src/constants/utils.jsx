@@ -14,7 +14,6 @@ export const HIGHLIGHTS = {
 }
 
 export const SORT_PRODUCTS = {
-  BEST_SOLD: 'best',
-  PRICE_DESC: 'DESC',
-  PRICE_ASC: 'ASC'
+  DESC: 'DESC',
+  ASC: 'ASC'
 }

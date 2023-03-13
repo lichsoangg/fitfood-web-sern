@@ -11,7 +11,6 @@ export default function PaymentHistory() {
     { skip: !isAuthenticated }
   )
   const bills = billsData?.data?.data
-  console.log(bills)
   return (
     <div className='payment-history'>
       <h3>Lịch sử giao dịch</h3>

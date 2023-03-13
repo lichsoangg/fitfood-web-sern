@@ -1,7 +1,4 @@
-import { useSelector } from 'react-redux'
 import CartList from '../../../../components/CartList/CartList'
-import { selectCurrentAuth } from '../../../../features/authentication/authSlice'
-import { useGetPurchaseQuery } from '../../../../features/purchase/purchaseApi'
 import { formatCurrency, handleCalcSumPrice } from '../../../../utils/utils'
 import './PaymentCart.scss'
 export default function PaymentCart({ cartProducts, isAuthenticated, isProductsInCartFetching }) {

@@ -1,5 +1,4 @@
 import CartItem from '../../../../components/CartItem'
-import CartList from '../../../../components/CartList/CartList'
 import { formatCurrency } from '../../../../utils/utils'
 import './PaymentHistoryItem.scss'
 
@@ -14,7 +13,7 @@ export default function PaymentHistoryItem({ bill }) {
   return (
     <div className='payment-history-item'>
       <div className='payment-history-item__info'>
-        <div className='top'>
+        <div className='payment-history-item__info--top'>
           <div className='left'>
             <div className='name'>Người nhận: {bill.CustomerName}</div>
             <div className='phone'>Số điện thoại:{bill.PhoneNumber}</div>
@@ -24,7 +23,7 @@ export default function PaymentHistoryItem({ bill }) {
             <span style={{ color: `${colorStateBill}` }}>{textStateBill}</span>
           </div>
         </div>
-        <div className='bottom'>
+        <div className='payment-history-item__info--bottom'>
           <span>{bill.Address}</span>
           <div className='date'>Ngày đặt hàng: {bill.Date}</div>
         </div>

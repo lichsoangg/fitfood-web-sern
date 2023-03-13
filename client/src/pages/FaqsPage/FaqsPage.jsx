@@ -2,7 +2,7 @@ import TitleSection from '../../components/TitleSection'
 import FaqsItem from './components/FaqsItem'
 import { faqss } from './constants'
 import './FaqsPage.scss'
-
+import { v4 as uuidv4 } from 'uuid'
 export default function FaqsPage() {
   const handleClickOpenItem = (e) => {
     const previousActiveFaqs = document.querySelector('.faqs-item__content-list-active')
@@ -27,6 +27,7 @@ export default function FaqsPage() {
             faqss.map((faqs) => {
               return (
                 <FaqsItem
+                  key={uuidv4()}
                   title={faqs.title}
                   handleClickOpenItem={handleClickOpenItem}
                   descriptions={faqs.descriptions}

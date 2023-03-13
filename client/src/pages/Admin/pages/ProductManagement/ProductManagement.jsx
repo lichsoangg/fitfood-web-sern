@@ -4,15 +4,21 @@ import Swal from 'sweetalert2'
 import { AcceptButton } from '../../../../components/Buttons/Buttons'
 import Loading from '../../../../components/Loading/Loading'
 import ModalBase from '../../../../components/ModalBase'
+import { ErrorNotify, SuccessNotify } from '../../../../components/Notify/Notify'
 import Pagination from '../../../../components/Pagination/Pagination'
-import { useGetProductsQuery } from '../../../../features/products/productsApi'
+import { HIGHLIGHTS, SORT_PRODUCTS } from '../../../../constants/utils'
+import { useDeleteProductMutation, useGetProductsQuery } from '../../../../features/products/productsApi'
 import useDebounce from '../../../../hooks/useDebounce'
 import { useModal } from '../../../../hooks/useModal'
 import useQueryParams from '../../../../hooks/useQueryParams'
+import { formatCurrency, formatNumberToSocialStyle } from '../../../../utils/utils'
+import ProductInput from './components/ProductInput'
 import './ProductManagement.scss'
 const initialQuery = {
   limit: 5,
-  page: 1
+  page: 1,
+  order: SORT_PRODUCTS.ASC,
+  orderField: 'ProductID'
 }
 export default function ProductManagement() {
   const location = useLocation()
@@ -21,59 +27,55 @@ export default function ProductManagement() {
   if (Object.keys(queryConfig).length === 0) {
     queryConfig = { ...initialQuery }
   }
-  const { data: products, isFetching: isGetEmployeeFetching } = useGetProductsQuery(queryConfig)
-  const { setOpen } = useModal()
-  const [setEditEmployee] = useState(null)
+  const { data, isFetching: isGetProductFetching } = useGetProductsQuery(queryConfig)
+  const products = data?.data?.data
+  const pageSize = data?.data?.pagesize
+  const [editProduct, setEditProduct] = useState(null)
   const {
-    activeModalRef: activeModalInputEmployeeRef,
-    open: openInputEmployee,
-    setOpen: setOpenInputEmployee
+    activeModalRef: activeModalInputProductRef,
+    open: openInputProduct,
+    setOpen: setOpenInputProduct
   } = useModal()
+
+  const [deleteProduct, { isLoading: isDeleteProductLoading }] = useDeleteProductMutation()
   //debounce search
   const [search, setSearch] = useState('')
-  const debounceSearch = useDebounce(search, 500)
+  const debounceSearch = useDebounce(search, 400)
   useEffect(() => {
     navigate({
       pathname: location?.pathname,
       search: createSearchParams({ ...queryConfig, page: 1, search: debounceSearch }).toString()
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceSearch])
 
-  // dropdown roles filter
-  const handleClickDropdownRoles = (e) => {
-    if (e.target.innerHTML === 'Tất cả') {
-      navigate({
-        pathname: location?.pathname,
-        search: createSearchParams({ ...queryConfig, page: 1, role: '' }).toString()
-      })
-    } else {
-      navigate({
-        pathname: location?.pathname,
-        search: createSearchParams({ ...queryConfig, page: 1, role: e.target.innerHTML.toString() }).toString()
-      })
-    }
-    setOpen(false)
+  const handleEditProduct = (product) => {
+    setEditProduct(product)
+    setOpenInputProduct(true)
   }
-
-  const handleEditEmployee = (product) => {
-    setEditEmployee(product)
-    setOpenInputEmployee(true)
-  }
-  const handleClickDeleteEmployee = () => {
+  const handleClickDeleteProduct = ({ id }) => {
     Swal.fire({
-      title: 'Bạn có chắc chắn muốn xóa nhân viên này?',
-      text: 'Nhân viên này sẽ bị xóa khỏi cơ sở dữ liệu vĩnh viễn!',
+      title: 'Bạn có chắc chắn muốn sản phẩm này này?',
+      text: 'Sản phẩm này sẽ bị xóa khỏi cơ sở dữ liệu vĩnh viễn!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#ff2203',
       cancelButtonText: 'Trở về',
       confirmButtonText: 'Xóa'
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
+        try {
+          const response = await deleteProduct(id).unwrap()
+          if (response.status === 200) {
+            setOpenInputProduct(false)
+            SuccessNotify('Xóa sản phẩm thành công')
+          }
+        } catch (error) {
+          ErrorNotify(error?.data?.message)
+        }
       }
     })
   }
-  console.log(products)
   return (
     <>
       <div className='products-management'>
@@ -101,34 +103,11 @@ export default function ProductManagement() {
               />
             </svg>
           </div>
-          {/* <div className='products-management__operation--role'>
-            <label>Chọn chức vụ</label>
-            <span ref={activeModalRef}>{queryConfig?.role ? queryConfig?.role : 'Tất cả'}</span>
-            {open && (
-              <DropdownBase
-                rect={rect}
-                setOpen={setOpen}
-                styleContent={{ position: 'absolute', transform: `translate(${window.scrollX}px,${window.scrollY}px)` }}
-              >
-                <div className='product-management__operation--role-dropdown'>
-                  {roles.map((role) => {
-                    if (role !== queryConfig?.role) {
-                      return (
-                        <span key={uuidv4()} onClick={handleClickDropdownRoles}>
-                          {role}
-                        </span>
-                      )
-                    }
-                    return null
-                  })}
-                </div>
-              </DropdownBase>
-            )}
-          </div> */}
+
           <AcceptButton
             width='200px'
             styleButton={{ height: '100%', borderRadius: '4px', marginLeft: 'auto' }}
-            ref={activeModalInputEmployeeRef}
+            ref={activeModalInputProductRef}
           >
             Thêm sản phẩm
           </AcceptButton>
@@ -148,28 +127,27 @@ export default function ProductManagement() {
             </div>
 
             {/* table data */}
-            {products?.data &&
-              products.data.map((product) => {
-                {
-                  /* const province = SearchObjectArray(product.Province * 1, provinces, 'code').name */
-                }
+            {products &&
+              products?.map((product) => {
                 return (
                   <div key={product?.ProductID} className='products-management__table--row'>
                     <div className='table-data  table-data-center'>{product.ProductID}</div>
                     <div className='table-data'>
                       <div className='table-data__image-name'>
                         <img src={product.Avatar} alt={`Fitfood ${product?.Name}`} />
-                        <span>{product.ProductName}</span>
+                        <span>{product.Name}</span>
                       </div>
                     </div>
-                    <div className='table-data table-data-center'>{product.Price}</div>
-                    <div className='table-data  table-data-center'>{product.Quantity}</div>
+                    <div className='table-data table-data-center'>{formatCurrency(product.Price)}đ</div>
+                    <div className='table-data  table-data-center'>{formatNumberToSocialStyle(product.Quantity)}</div>
                     <div className='table-data  table-data-center'>{product.Unit}</div>
-                    <div className='table-data  table-data-center'>{product.Highlight}</div>
+                    <div className='table-data  table-data-center'>
+                      {product.Highlight === HIGHLIGHTS.YES ? 'Có' : 'Không'}
+                    </div>
                     <div className='table-data  table-data-center'>{product.ProductTypeName}</div>
                     <div className='table-data'>
                       <div className='table-data__operation'>
-                        <div className='table-data__operation--icon' onClick={() => handleEditEmployee(product)}>
+                        <div className='table-data__operation--icon' onClick={() => handleEditProduct(product)}>
                           <svg
                             width='24'
                             height='24'
@@ -185,7 +163,10 @@ export default function ProductManagement() {
                             />
                           </svg>
                         </div>
-                        <div className='table-data__operation--icon' onClick={() => handleClickDeleteEmployee()}>
+                        <div
+                          className='table-data__operation--icon'
+                          onClick={() => handleClickDeleteProduct({ id: product.ProductID })}
+                        >
                           <svg
                             width='24'
                             height='24'
@@ -223,10 +204,10 @@ export default function ProductManagement() {
           </div>
         </div>
         <div className='products-management__bottom-bar'>
-          {products?.pageSize > 1 && (
+          {pageSize > 1 && (
             <Pagination
               queryConfig={queryConfig}
-              pageSize={products?.pageSize}
+              pageSize={pageSize}
               pathname={location?.pathname}
               stylePagination={{ marginLeft: 'auto' }}
             />
@@ -234,15 +215,24 @@ export default function ProductManagement() {
         </div>
         {/* Pagination */}
 
-        {/* Input Employee */}
-        {openInputEmployee && (
-          <ModalBase styleContent={{ width: '1100px', height: 'max-content' }} setOpen={setOpenInputEmployee}>
-            {/* <EmployeeInput editEmployee={editEmployee} setOpenInputEmployee={setOpenInputEmployee} setEditEmployee={setEditEmployee} /> */}
+        {/* Input Product */}
+        {openInputProduct && (
+          <ModalBase styleContent={{ width: '1100px', height: 'max-content' }} setOpen={setOpenInputProduct}>
+            {/* <ProductInput
+              editProduct={editProduct}
+              setOpenInputProduct={setOpenInputProduct}
+              setEditProduct={setEditProduct}
+            /> */}
+            <ProductInput
+              editProduct={editProduct}
+              setEditProduct={setEditProduct}
+              setOpenInputProduct={setOpenInputProduct}
+            />
           </ModalBase>
         )}
 
         {/* Loading */}
-        {isGetEmployeeFetching && <Loading size={3} full />}
+        {(isGetProductFetching || isDeleteProductLoading) && <Loading size={3} full />}
       </div>
     </>
   )

@@ -18,6 +18,7 @@
     width: 30px;
     height: 30px;
     border-radius: 100%;
+    z-index: 50;
     @include flexMid(center);
     &--icon {
       transition: 0.4s all $cubic;
@@ -39,6 +40,9 @@
     margin-top: 8px;
     margin-bottom: 8px;
     transition: 0.4s all $cubic;
+    &:hover {
+      color: $cl-primary;
+    }
     &--image {
       @include flexMid(center);
       width: 68px;
@@ -69,7 +73,7 @@
   }
   a:hover,
   &__item.active {
-    background-color: $cl-primary;
+    color: $cl-primary;
     svg {
       fill: $cl-white;
       path {

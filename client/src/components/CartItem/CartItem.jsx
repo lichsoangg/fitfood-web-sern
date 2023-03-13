@@ -1,12 +1,11 @@
-import './CartItem.scss'
-import product1 from '../../assets/images/product2.jpg'
-import QuantityController from '../QuantityController/QuantityController'
 import { useState } from 'react'
-import { formatCurrency } from '../../utils/utils'
 import { useDeleteCartMutation, useUpdateCartMutation } from '../../features/purchase/purchaseApi'
-import { ErrorNotify, SuccessNotify } from '../Notify/Notify'
 import { useDisableClick } from '../../hooks/useDisableClick'
+import { formatCurrency } from '../../utils/utils'
 import Loading from '../Loading/Loading'
+import { ErrorNotify, SuccessNotify } from '../Notify/Notify'
+import QuantityController from '../QuantityController/QuantityController'
+import './CartItem.scss'
 export default function CartItem({ product, style, noPrice = false, noDelete = false, noQuantityController = false }) {
   const [quantity, setQuantity] = useState(product?.Quantity)
   const [updateCart, { isLoading: isUpdateCartLoading }] = useUpdateCartMutation()
@@ -15,7 +14,7 @@ export default function CartItem({ product, style, noPrice = false, noDelete = f
   const onChangeFunc = async (value) => {
     try {
       const response = await updateCart({ ProductID: product.ProductID, Quantity: value }).unwrap()
-      console.log(response)
+
       if (Number(response.status) === 200) {
         SuccessNotify(response.message)
       }

@@ -42,11 +42,11 @@ export default function ProductDetailCard({ Product, isGetProductFetching }) {
         <>
           <div className='product-detail__card--left'>
             <div className='image'>
-              <img src={Product.Avatar} alt={Product.ProductName} />
+              <img src={Product.Avatar} alt={Product.Name} />
             </div>
           </div>
           <div className='product-detail__card--right'>
-            <div className='name'>{Product.ProductName}</div>
+            <div className='name'>{Product.Name}</div>
             <div className='review'>
               {Product.Rating ? (
                 <div className='rating'>

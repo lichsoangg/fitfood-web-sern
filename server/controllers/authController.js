@@ -22,9 +22,8 @@ const authController = {
       data.Password = passwordHashed;
       User.addUser(data, (err, response) => {
         if (err) {
-          return res.status(400).json({ message: err.message, status: 400 });
+          return res.status(400).json({ message: err, status: 400 });
         }
-        connection.end();
 
         const { Username, Role, IsActive } = data;
         const AccessToken = signAccessToken(Username, Role, IsActive);

@@ -98,6 +98,36 @@
   color: $cl-grey-light;
   cursor: pointer;
 }
+.button-hover {
+  border-radius: 20px;
+  padding: 12px 36px;
+  font-size: 16px;
+  font-weight: 700;
+  color: $cl-primary;
+  border: 2px solid $cl-primary;
+  background: transparent;
+  cursor: pointer;
+  @include flexMid(center);
+  overflow: hidden;
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 0;
+    right: 0;
+    background: $cl-primary;
+    transition: all 0.4s $cubic;
+    z-index: -1;
+  }
+  &:hover::after {
+    left: 0 !important;
+    width: 100% !important;
+  }
+  &:hover {
+    color: $cl-white;
+  }
+}
 
 .button-cancel {
   border: 1px solid $cl-primary;

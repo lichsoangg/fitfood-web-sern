@@ -1,11 +1,11 @@
+/* eslint-disable no-useless-escape */
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import * as yup from 'yup'
 import Form from '../../components/Form/Form'
 import { ErrorNotify, SuccessNotify } from '../../components/Notify/Notify'
-import { useGetDistrictsQuery, useGetProvincesQuery, useGetWardsQuery } from '../../features/api/apiProvince'
 import { selectCurrentAuth } from '../../features/authentication/authSlice'
 import { useBuyProductsMutation, useGetPurchaseQuery } from '../../features/purchase/purchaseApi'
 import { useDisableClick } from '../../hooks/useDisableClick'

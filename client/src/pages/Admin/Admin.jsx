@@ -4,7 +4,6 @@ import fitfoodImage from '../../assets/images/logo_fitfood.png'
 import Navbar from '../../components/Navbar'
 import path from '../../constants/path'
 import './Admin.scss'
-import Header from '../../layouts/MainLayout/Header/Header'
 const homeIcon = () => (
   <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
     <path
@@ -75,10 +74,8 @@ export default function Admin() {
           <Navbar.Item Svg={homeIcon} title='Trở về trang chủ' navigate={path.home} />
           <Navbar.Border />
           <Navbar.List>
-            <Navbar.Item Svg={employeesIcon} title='Quản lý nhân viên' navigate={path.admin} end />
-            <Navbar.Item Svg={productsIcon} title='Quản lý hàng hoá' navigate={path.productManagement} />
-            <Navbar.Item Svg={productsIcon} title='Quản lý hàng hoá' navigate={path.productManagement} />
-            <Navbar.Item Svg={productsIcon} title='Quản lý hàng hoá' navigate={path.productManagement} />
+            <Navbar.Item Svg={productsIcon} title='Quản lý hàng hoá' navigate={path.admin} end />
+            <Navbar.Item Svg={employeesIcon} title='Quản lý nhân viên' navigate={path.employeeManagement} />
           </Navbar.List>
         </Navbar>
       </div>

@@ -7,16 +7,16 @@ export default function ProductSortBar({ queryConfig }) {
   const navigate = useNavigate()
 
   //sort
-  const handleSortProduct = (orderSignal) => {
+  const handleSortProduct = ({ order, orderField }) => {
     navigate({
       pathname: location?.pathname,
-      search: createSearchParams({ ...queryConfig, page: 1, order: orderSignal }).toString()
+      search: createSearchParams({ ...queryConfig, page: 1, order, orderField }).toString()
     })
   }
   return (
     <div className='products-sort-bar'>
       <div
-        onClick={() => handleSortProduct(SORT_PRODUCTS.BEST_SOLD)}
+        onClick={() => handleSortProduct({ order: SORT_PRODUCTS.DESC, orderField: 'SoldQuantity' })}
         className={`products-sort-bar__item ${
           queryConfig.order === SORT_PRODUCTS.BEST_SOLD || !queryConfig.order ? 'products-sort-bar__item-active' : ''
         }`}
@@ -24,7 +24,7 @@ export default function ProductSortBar({ queryConfig }) {
         Bán chạy
       </div>
       <div
-        onClick={() => handleSortProduct(SORT_PRODUCTS.PRICE_ASC)}
+        onClick={() => handleSortProduct({ order: SORT_PRODUCTS.ASC, orderField: 'Price' })}
         className={`products-sort-bar__item ${
           queryConfig.order === SORT_PRODUCTS.PRICE_ASC ? 'products-sort-bar__item-active' : ''
         }`}
@@ -32,7 +32,7 @@ export default function ProductSortBar({ queryConfig }) {
         Giá: Thấp đến Cao
       </div>
       <div
-        onClick={() => handleSortProduct(SORT_PRODUCTS.PRICE_DESC)}
+        onClick={() => handleSortProduct({ order: SORT_PRODUCTS.DESC, orderField: 'Price' })}
         className={`products-sort-bar__item ${
           queryConfig.order === SORT_PRODUCTS.PRICE_DESC ? 'products-sort-bar__item-active' : ''
         }`}

@@ -23,6 +23,7 @@ export default function ProductAsideFilter({ queryConfig, initialQuery }) {
       pathname: location?.pathname,
       search: createSearchParams({ ...queryConfig, page: 1, search: debounceSearch }).toString()
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceSearch])
 
   const handleSearch = (e) => {
