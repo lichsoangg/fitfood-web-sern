@@ -1,26 +1,29 @@
+import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import ErrorBoundaryComponent from './components/ErrorComponent/ErrorComponent'
+import Loading from './components/Loading/Loading'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import path from './constants/path'
-import MainLayout from './layouts/MainLayout'
-import AccountInformation from './pages/Account/AccountInformation'
-import ChangePassword from './pages/Account/ChangePassword'
-import ForgotPassword from './pages/ForgotPassword'
-import HomePage from './pages/HomePage'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Unauthorized from './pages/Unauthorized'
+import { ROLES } from './constants/utils'
+
+const MainLayout = lazy(() => import('./layouts/MainLayout'))
+const HomePage = lazy(() => import('./pages/HomePage'))
+const FaqsPage = lazy(() => import('./pages/FaqsPage'))
+const Login = lazy(() => import('./pages/Login'))
+const Register = lazy(() => import('./pages/Register'))
+const AccountInformation = lazy(() => import('./pages/Account/AccountInformation'))
+const ChangePassword = lazy(() => import('./pages/Account/ChangePassword'))
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'))
+const Unauthorized = lazy(() => import('./pages/Unauthorized'))
+const ProductList = lazy(() => import('./pages/ProductList/ProductList'))
+const ProductDetail = lazy(() => import('./pages/ProductDetail'))
+const Payment = lazy(() => import('./pages/Payment'))
+const PaymentHistory = lazy(() => import('./pages/PaymentHistory'))
+const Admin = lazy(() => import('./pages/Admin'))
+const ProductManagement = lazy(() => import('./pages/Admin/pages/ProductManagement'))
 
 //admin page
-import Admin from './pages/Admin'
-import ProductManagement from './pages/Admin/pages/ProductManagement'
-import FaqsPage from './pages/FaqsPage'
 
-import { ROLES } from './constants/utils'
-import ProductList from './pages/ProductList/ProductList'
-import ProductDetail from './pages/ProductDetail'
-import Payment from './pages/Payment'
-import PaymentHistory from './pages/PaymentHistory'
 function FitFoodApp() {
   return (
     <ErrorBoundaryComponent>
@@ -33,29 +36,135 @@ function FitFoodAppRoutes() {
   return (
     <Routes>
       {/* main layout */}
-      <Route path={path.home} element={<MainLayout />}>
+      <Route
+        path={path.home}
+        element={
+          <Suspense fallback={<Loading full size={3}></Loading>}>
+            <MainLayout />
+          </Suspense>
+        }
+      >
         {/* public route */}
-        <Route index element={<HomePage />} />
-        <Route path={path.menu} element={<ProductList />} />
-        <Route path={path.faqs} element={<FaqsPage />} />
-        <Route path={path.login} element={<Login />} />
-        <Route path={path.register} element={<Register />} />
-        <Route path={path.forgotPassword} element={<ForgotPassword />} />
-        <Route path={`${path.menu}${path.productDetail}`} element={<ProductDetail />} />
+        <Route
+          index
+          element={
+            <Suspense fallback={<Loading full size={3}></Loading>}>
+              <HomePage />
+            </Suspense>
+          }
+        />
+        <Route
+          path={path.menu}
+          element={
+            <Suspense fallback={<Loading full size={3}></Loading>}>
+              <ProductList />
+            </Suspense>
+          }
+        />
+        <Route
+          path={path.faqs}
+          element={
+            <Suspense fallback={<Loading full size={3}></Loading>}>
+              <FaqsPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path={path.login}
+          element={
+            <Suspense>
+              <Login />
+            </Suspense>
+          }
+        />
+        <Route
+          path={path.register}
+          element={
+            <Suspense fallback={<Loading full size={3}></Loading>}>
+              <Register />
+            </Suspense>
+          }
+        />
+        <Route
+          path={path.forgotPassword}
+          element={
+            <Suspense fallback={<Loading full size={3}></Loading>}>
+              <ForgotPassword />
+            </Suspense>
+          }
+        />
+        <Route
+          path={`${path.menu}${path.productDetail}`}
+          element={
+            <Suspense fallback={<Loading full size={3}></Loading>}>
+              <ProductDetail />
+            </Suspense>
+          }
+        />
 
         {/* private route */}
         <Route element={<PrivateRoute />}>
-          <Route path={path.changePassword} element={<ChangePassword />} />
-          <Route path={path.accountInfo} element={<AccountInformation />} />
-          <Route path={path.unauthorized} element={<Unauthorized />} />
-          <Route path={path.payment} element={<Payment />} />
-          <Route path={path.paymentHistory} element={<PaymentHistory />} />
+          <Route
+            path={path.changePassword}
+            element={
+              <Suspense fallback={<Loading full size={3}></Loading>}>
+                <ChangePassword />
+              </Suspense>
+            }
+          />
+          <Route
+            path={path.accountInfo}
+            element={
+              <Suspense fallback={<Loading full size={3}></Loading>}>
+                <AccountInformation />
+              </Suspense>
+            }
+          />
+          <Route
+            path={path.unauthorized}
+            element={
+              <Suspense fallback={<Loading full size={3}></Loading>}>
+                <Unauthorized />
+              </Suspense>
+            }
+          />
+          <Route
+            path={path.payment}
+            element={
+              <Suspense fallback={<Loading full size={3}></Loading>}>
+                <Payment />
+              </Suspense>
+            }
+          />
+          <Route
+            path={path.paymentHistory}
+            element={
+              <Suspense fallback={<Loading full size={3}></Loading>}>
+                <PaymentHistory />
+              </Suspense>
+            }
+          />
         </Route>
       </Route>
       {/* private route admin layout*/}
       <Route element={<PrivateRoute requiredRole={[ROLES.ADMIN]} />}>
-        <Route path={path.admin} element={<Admin />}>
-          <Route path={path.admin} element={<ProductManagement />} index />
+        <Route
+          path={path.admin}
+          element={
+            <Suspense fallback={<Loading full size={3}></Loading>}>
+              <Admin />
+            </Suspense>
+          }
+        >
+          <Route
+            path={path.admin}
+            element={
+              <Suspense fallback={<Loading full size={3}></Loading>}>
+                <ProductManagement />
+              </Suspense>
+            }
+            index
+          />
         </Route>
       </Route>
     </Routes>
