@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import logo from '../../../assets/images/logo.png'
+import { BoxShadowButton } from '../../../components/Buttons/Buttons'
 import Cart from '../../../components/Cart'
 import DropdownBase from '../../../components/DropdownBase/DropdownBase'
 import Loading from '../../../components/Loading/Loading'
@@ -52,24 +53,69 @@ function Menu() {
       })
     }
   }, [location])
+  const { activeModalRef, rect, open, setOpen } = useModal()
+  const { accessToken: isAuthenticated } = useSelector(selectCurrentAuth)
   return (
-    <ul className='layout__menu body4'>
-      <NavLinkItem to={path.home} className='layout__menu--item' setCoords={setCoords} end>
-        Trang chủ
-      </NavLinkItem>
+    <>
+      <ul className='layout__menu-responsive body4' ref={activeModalRef}>
+        <div className='layout__menu-responsive--icon'>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}>
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5'
+            />
+          </svg>
+        </div>
+        <DropdownBase
+          rect={rect}
+          setOpen={setOpen}
+          stylePortal={{
+            opacity: `${open ? '1' : '0'}`,
+            pointerEvents: `${open ? 'auto' : 'none'}`,
+            transform: `${open ? 'translateX(0)' : 'translateX(-100%)'}`,
+            visibility: `${open ? 'visible' : 'hidden'}`,
+            height: `100vh`,
+            position: 'fixed'
+          }}
+        >
+          <div className='layout__menu-responsive--list'>
+            <NavLink to={path.home} className='layout__menu-responsive--item' setCoords={setCoords} end>
+              Trang chủ
+            </NavLink>
 
-      <NavLinkItem to={path.menu} className='layout__menu--item' setCoords={setCoords}>
-        Đặt hàng
-      </NavLinkItem>
-      <NavLinkItem to={path.faqs} className='layout__menu--item' setCoords={setCoords}>
-        FAQs
-      </NavLinkItem>
+            <NavLink to={path.menu} className='layout__menu-responsive--item' setCoords={setCoords}>
+              Đặt hàng
+            </NavLink>
+            <NavLink to={path.faqs} className='layout__menu-responsive--item' setCoords={setCoords}>
+              FAQs
+            </NavLink>
+            {isAuthenticated ? null : (
+              <Link to={path.login} state={{ from: location }}>
+                <BoxShadowButton>Đăng nhập</BoxShadowButton>
+              </Link>
+            )}
+          </div>
+        </DropdownBase>
+      </ul>
+      <ul className='layout__menu body4'>
+        <NavLinkItem to={path.home} className='layout__menu--item' setCoords={setCoords} end>
+          Trang chủ
+        </NavLinkItem>
 
-      <div
-        className='layout__menu--underBorder'
-        style={{ left: `${coords?.left}px`, width: `${coords?.width}px` }}
-      ></div>
-    </ul>
+        <NavLinkItem to={path.menu} className='layout__menu--item' setCoords={setCoords}>
+          Đặt hàng
+        </NavLinkItem>
+        <NavLinkItem to={path.faqs} className='layout__menu--item' setCoords={setCoords}>
+          FAQs
+        </NavLinkItem>
+
+        <div
+          className='layout__menu--underBorder'
+          style={{ left: `${coords?.left}px`, width: `${coords?.width}px` }}
+        ></div>
+      </ul>
+    </>
   )
 }
 

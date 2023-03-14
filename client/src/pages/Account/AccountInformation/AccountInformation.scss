@@ -49,3 +49,41 @@
     }
   }
 }
+@media (min-width: 1025px) and (max-width: 1280px) {
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .accountInformation {
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .accountInformation {
+    width: 80%;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .accountInformation {
+    width: 80%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .accountInformation {
+    width: 98%;
+    &__form {
+      flex-direction: column;
+      &--top {
+        flex-direction: column;
+        &-form-buttons {
+          margin-left: unset;
+        }
+      }
+      &--inputs {
+        width: 100%;
+      }
+    }
+  }
+}

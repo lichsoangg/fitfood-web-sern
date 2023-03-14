@@ -217,7 +217,11 @@ export default function ProductManagement() {
 
         {/* Input Product */}
         {openInputProduct && (
-          <ModalBase styleContent={{ width: '1100px', height: 'max-content' }} setOpen={setOpenInputProduct}>
+          <ModalBase
+            styleContent={{ height: 'max-content' }}
+            setOpen={setOpenInputProduct}
+            stylePortal={{ height: '100vh', width: '100vw' }}
+          >
             {/* <ProductInput
               editProduct={editProduct}
               setOpenInputProduct={setOpenInputProduct}

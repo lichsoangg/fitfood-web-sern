@@ -69,13 +69,118 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+  .payment-history-item {
+    &__price {
+    }
+    &__info {
+      &--top {
+      }
+      &--bottom {
+        flex-direction: column;
+        align-items: unset;
+        gap: 8px;
+      }
+    }
+    &__products {
+    }
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .payment-history-item {
+    &__price {
+    }
+    &__info {
+      &--top {
+      }
+      &--bottom {
+        flex-direction: column;
+        align-items: unset;
+        gap: 8px;
+      }
+    }
+    &__products {
+    }
+  }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
+  .payment-history-item {
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    &__price {
+    }
+    &__info {
+      &--top {
+        flex-direction: column;
+        align-items: unset;
+        gap: 8px;
+
+        .right {
+          order: -1;
+        }
+        .left {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+      &--bottom {
+        flex-direction: column;
+        align-items: unset;
+        gap: 8px;
+        .date {
+          order: -1;
+        }
+      }
+    }
+    &__products {
+      .cart-item {
+        &__name-quantity {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
+  .payment-history-item {
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+    &__price {
+    }
+    &__info {
+      &--top {
+        flex-direction: column;
+        align-items: unset;
+        gap: 8px;
+
+        .right {
+          order: -1;
+        }
+        .left {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+      &--bottom {
+        flex-direction: column;
+        align-items: unset;
+        gap: 8px;
+        .date {
+          order: -1;
+        }
+      }
+    }
+    &__products {
+      .cart-item {
+        &__name-quantity,
+        &__quantity {
+          display: none;
+        }
+      }
+    }
+  }
 }

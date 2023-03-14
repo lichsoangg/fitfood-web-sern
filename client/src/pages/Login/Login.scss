@@ -1,5 +1,7 @@
 @import '../../scss/import.scss';
 .login {
+  height: -webkit-max-content;
+  height: -moz-max-content;
   height: max-content;
   min-height: calc(100vh - 380px);
   @include flexMid(center);
@@ -43,10 +45,19 @@
   }
   .loginForm {
     width: 320px;
+    height: -webkit-max-content;
+    height: -moz-max-content;
     height: max-content;
     margin-top: 24px;
     @include flexMid(center);
     flex-direction: column;
     gap: 36px;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .login {
+    &__header {
+      text-align: center;
+    }
   }
 }

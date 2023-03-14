@@ -37,7 +37,7 @@ export default function ProductDetailCard({ Product, isGetProductFetching }) {
     }
   }
   return (
-    <div className='product-detail__card'>
+    <div className='product-detail__card mainWrapper container'>
       {Product ? (
         <>
           <div className='product-detail__card--left'>

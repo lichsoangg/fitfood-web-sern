@@ -10,6 +10,31 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  position: relative;
+  &--operation {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    &--close {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      transition: all 0.4s;
+      cursor: pointer;
+
+      svg {
+        pointer-events: none;
+      }
+      &:hover {
+        svg {
+          stroke: $cl-primary;
+        }
+      }
+    }
+  }
   h3 {
     font-weight: 700;
     font-size: medium;
@@ -130,4 +155,49 @@
   border-radius: 6px;
   margin-left: auto;
   cursor: pointer;
+}
+.products__filter-responsive {
+  width: 100%;
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .products__filter {
+    &--operation {
+      display: block;
+      &--close {
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .products__filter {
+    &--operation {
+      display: block;
+      &--close {
+      }
+    }
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .products__filter {
+    &--operation {
+      display: block;
+      &--close {
+      }
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .products__filter {
+    &--operation {
+      display: block;
+      &--close {
+      }
+    }
+  }
 }

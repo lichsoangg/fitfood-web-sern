@@ -8,7 +8,7 @@ import DropdownBase from '../../../../components/DropdownBase/DropdownBase'
 import FilterPriceRange from '../../../../components/FilterPriceRange'
 import './ProductAsideFilter.scss'
 import Loading from '../../../../components/Loading/Loading'
-export default function ProductAsideFilter({ queryConfig, initialQuery }) {
+export default function ProductAsideFilter({ setOpenFilterAside, queryConfig, initialQuery, className }) {
   const location = useLocation()
   const navigate = useNavigate()
   const { activeModalRef, open, rect, setOpen } = useModal()
@@ -63,8 +63,18 @@ export default function ProductAsideFilter({ queryConfig, initialQuery }) {
       search: createSearchParams({ ...initialQuery }).toString()
     })
   }
+  const handleCloseFilterAside = () => {
+    setOpenFilterAside && setOpenFilterAside(false)
+  }
   return (
-    <div className='products__filter'>
+    <div className={`products__filter ${className}`}>
+      <div className='products__filter--operation'>
+        <div className='products__filter--operation--close' onClick={handleCloseFilterAside}>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke={'black'}>
+            <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
+          </svg>
+        </div>
+      </div>
       <h3>Lọc sản phẩm</h3>
       {/* Search Products */}
       <label htmlFor='search'>Tìm kiếm sản phẩm</label>

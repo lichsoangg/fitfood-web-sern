@@ -13,6 +13,8 @@ import { SORT_PRODUCTS } from '../../constants/utils'
 import ProductAsideFilter from './components/ProductAsideFilter'
 import ProductSortBar from './components/ProductSortBar'
 import './ProductList.scss'
+import { useModal } from '../../hooks/useModal'
+import DropdownBase from '../../components/DropdownBase/DropdownBase'
 
 const initialQuery = {
   limit: 6,
@@ -31,6 +33,7 @@ export default function ProductList() {
   const { data: productsData, isFetching: isGetProductLoading } = useGetProductsQuery(queryConfig)
 
   const products = productsData?.data
+  const { activeModalRef, rect, open, setOpen } = useModal()
 
   return (
     <div className='menu'>
@@ -65,6 +68,40 @@ export default function ProductList() {
       </section>
       <section className='products mainWrapper container'>
         <ProductAsideFilter initialQuery={initialQuery} queryConfig={queryConfig} />
+        <div className='products__filter-group-responsive' ref={activeModalRef}>
+          <span>Lọc sản phẩm</span>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} className='w-6 h-6'>
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75'
+            />
+          </svg>
+          <DropdownBase
+            rect={rect}
+            setOpen={setOpen}
+            stylePortal={{
+              opacity: `${open ? '1' : '0'}`,
+              pointerEvents: `${open ? 'auto' : 'none'}`,
+              visibility: `${open ? 'visible' : 'hidden'}`
+            }}
+            styleContent={{
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              width: '90%',
+              transform: 'translate(-50%,-50%)'
+            }}
+          >
+            <ProductAsideFilter
+              className='products__filter-responsive'
+              initialQuery={initialQuery}
+              queryConfig={queryConfig}
+              setOpenFilterAside={setOpen}
+            />
+          </DropdownBase>
+        </div>
+
         <div className='products__wrapper'>
           {isGetProductLoading ? (
             <Loading size={3} />

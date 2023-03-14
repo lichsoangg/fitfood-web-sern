@@ -178,21 +178,26 @@ export default function HomePage() {
                   prevEl: '.product-list-homepage__prev',
                   nextEl: '.product-list-homepage__next'
                 }}
-                modules={[Navigation, Scrollbar]}
+                autoplay={{
+                  delay: 2000,
+                  disableOnInteraction: true
+                }}
+                loop={true}
+                modules={[Navigation, Scrollbar, Autoplay]}
                 scrollbar={{
                   hide: true
                 }}
                 breakpoints={{
-                  // 320: {
-                  //   slidesPerView: 2,
-                  //   spaceBetween: 20
-                  // },
-                  // 480: {
-                  //   slidesPerView: 3,
-                  //   spaceBetween: 30
-                  // },
+                  320: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 20
+                  },
+                  481: {
+                    slidesPerView: 1,
+                    spaceBetween: 40
+                  },
                   768: {
-                    slidesPerView: 3,
+                    slidesPerView: 2,
                     spaceBetween: 40
                   },
                   1280: {
@@ -292,6 +297,20 @@ export default function HomePage() {
             }}
             centeredSlides={true}
             modules={[Autoplay, Pagination]}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 20
+              },
+              481: {
+                slidesPerView: 1,
+                spaceBetween: 40
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 40
+              }
+            }}
           >
             {testimonials &&
               testimonials.map((testimonial) => {
