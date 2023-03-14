@@ -1,5 +1,5 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { useSelector } from 'react-redux'
 import NewEmail from '../../assets/images/email.png'
 import { selectCurrentAuth } from '../../features/authentication/authSlice'

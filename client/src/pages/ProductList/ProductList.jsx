@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { useGetProductsQuery } from '../../features/products/productsApi'
 import useQueryParams from '../../hooks/useQueryParams'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import Pagination from '../../components/Pagination/Pagination'
 import ProductItem from '../../components/ProductItem'
 import TitleSection from '../../components/TitleSection'

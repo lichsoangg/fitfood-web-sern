@@ -14,7 +14,7 @@ import PaymentCart from './components/PaymentCart/PaymentCart'
 import PaymentInfo from './components/PaymentInfo/PaymentInfo'
 import PaymentMethod from './components/PaymentMethod/PaymentMethod'
 import PaymentSuccess from './components/PaymentSuccess'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 import './Payment.scss'
 

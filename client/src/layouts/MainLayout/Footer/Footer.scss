@@ -36,3 +36,14 @@
     }
   }
 }
+@media (min-width: 320px) and (max-width: 480px) {
+  .footer {
+    &__top {
+      justify-content: center !important;
+
+      .layout__menu-responsive {
+        display: none;
+      }
+    }
+  }
+}

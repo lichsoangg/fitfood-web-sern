@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 import 'swiper/css'
 import 'swiper/css/pagination'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import './ChangePassword.scss'
 import AccountChangePassword from './components/AccountChangePassword'
 export default function ChangePassword() {

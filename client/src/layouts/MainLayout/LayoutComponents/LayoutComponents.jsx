@@ -80,18 +80,18 @@ function Menu() {
           }}
         >
           <div className='layout__menu-responsive--list'>
-            <NavLink to={path.home} className='layout__menu-responsive--item' setCoords={setCoords} end>
+            <NavLink to={path.home} className='layout__menu-responsive--item' onClick={() => setOpen(false)} end>
               Trang chủ
             </NavLink>
 
-            <NavLink to={path.menu} className='layout__menu-responsive--item' setCoords={setCoords}>
+            <NavLink to={path.menu} className='layout__menu-responsive--item' onClick={() => setOpen(false)}>
               Đặt hàng
             </NavLink>
-            <NavLink to={path.faqs} className='layout__menu-responsive--item' setCoords={setCoords}>
+            <NavLink to={path.faqs} className='layout__menu-responsive--item' onClick={() => setOpen(false)}>
               FAQs
             </NavLink>
             {isAuthenticated ? null : (
-              <Link to={path.login} state={{ from: location }}>
+              <Link to={path.login} state={{ from: location }} onClick={() => setOpen(false)}>
                 <BoxShadowButton>Đăng nhập</BoxShadowButton>
               </Link>
             )}

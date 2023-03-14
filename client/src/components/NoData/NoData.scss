@@ -4,7 +4,6 @@
   @include flexMid(center);
   flex-direction: column;
   gap: 20px;
-
   &__image {
     width: 200px;
     img {
@@ -16,6 +15,7 @@
   &__message {
     font-weight: 700;
     font-size: large;
+    text-align: center;
     color: $cl-black;
   }
 }

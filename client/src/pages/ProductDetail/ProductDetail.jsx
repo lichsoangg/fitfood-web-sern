@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 import { useGetProductQuery } from '../../features/products/productsApi'
 import { getIdFromUrl } from '../../utils/utils'
@@ -35,7 +35,7 @@ export default function ProductDetail() {
         <meta name='twitter:image' content={`${Product.Avatar}`} />
       </Helmet>
       <ProductDetailCard Product={Product} isGetProductFetching={isGetProductFetching} />
-      <ProductSimilar ProductTypeID={Product?.ProductTypeID} />
+      <ProductSimilar ProductTypeID={Product?.ProductTypeID} currentProductID={Product.ProductID} />
     </div>
   )
 }

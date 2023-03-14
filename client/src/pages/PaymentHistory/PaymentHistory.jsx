@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { useSelector } from 'react-redux'
 import Loading from '../../components/Loading/Loading'
 import { selectCurrentAuth } from '../../features/authentication/authSlice'

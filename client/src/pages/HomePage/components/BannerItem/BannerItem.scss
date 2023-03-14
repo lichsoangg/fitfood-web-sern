@@ -68,7 +68,7 @@
   .banner-item {
     &__content {
       h2 {
-        font-size: 48px;
+        font-size: 30px;
       }
     }
   }
@@ -78,7 +78,10 @@
   .banner-item {
     &__content {
       h2 {
-        font-size: 48px;
+        font-size: 16px;
+      }
+      small {
+        font-size: 28px !important;
       }
     }
   }

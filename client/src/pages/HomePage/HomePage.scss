@@ -530,10 +530,25 @@
         clip-path: polygon(0 0, 100% 0%, 100% 20%, 0% 30%);
       }
       &__content {
+        .title-section {
+          align-items: center;
+          margin-bottom: 8px;
+        }
         top: 30%;
         left: 50%;
         transform: translateX(-50%);
         width: 75%;
+        p {
+          margin-bottom: 8px;
+        }
+      }
+    }
+    .how-it-work {
+      .title-section {
+        &__text {
+          font-size: 20px;
+          letter-spacing: unset;
+        }
       }
     }
     .product {
@@ -555,7 +570,7 @@
     .enviromental {
       .title-section {
         &__text {
-          font-size: 20px;
+          font-size: 18px;
           letter-spacing: unset;
           text-align: center;
         }

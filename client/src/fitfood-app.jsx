@@ -5,7 +5,8 @@ import Loading from './components/Loading/Loading'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import path from './constants/path'
 import { ROLES } from './constants/utils'
-
+import { HelmetProvider } from 'react-helmet-async'
+import useScrollToTop from './hooks/useScrollToTop'
 const MainLayout = lazy(() => import('./layouts/MainLayout'))
 const HomePage = lazy(() => import('./pages/HomePage'))
 const FaqsPage = lazy(() => import('./pages/FaqsPage'))
@@ -25,9 +26,12 @@ const ProductManagement = lazy(() => import('./pages/Admin/pages/ProductManageme
 //admin page
 
 function FitFoodApp() {
+  useScrollToTop()
   return (
     <ErrorBoundaryComponent>
-      <FitFoodAppRoutes />
+      <HelmetProvider>
+        <FitFoodAppRoutes />
+      </HelmetProvider>
     </ErrorBoundaryComponent>
   )
 }

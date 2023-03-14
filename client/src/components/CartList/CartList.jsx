@@ -31,7 +31,6 @@ export default function CartList({ cartProducts, isProductsInCartFetching, isAut
         </NoData>
       ) : (
         <NoData image={ProductNotFoundImage} imageStyles={{ width: '100px' }}>
-          Vui lòng{' '}
           <Link
             to={path.login}
             style={{ color: '#ff2033' }}
@@ -39,8 +38,9 @@ export default function CartList({ cartProducts, isProductsInCartFetching, isAut
               setOpen && setOpen(false)
             }}
           >
-            đăng nhập
+            Đăng nhập
           </Link>{' '}
+          <br />
           để xem giỏ hàng
         </NoData>
       )}

@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 import TitleSection from '../../components/TitleSection'
 import FaqsItem from './components/FaqsItem'
