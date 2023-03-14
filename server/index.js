@@ -12,11 +12,19 @@ const productTypeRoute = require("./routes/product_type");
 
 const app = express();
 
+let whitelistCors = process.env.WHITE_LIST.split(", ");
 //middlewares
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN_URL,
+    origin: function (origin, callback) {
+      if (whitelistCors.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
 
