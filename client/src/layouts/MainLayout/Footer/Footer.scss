@@ -3,7 +3,7 @@
 .footer {
   background: url(../../../assets/images/bg-footer.png) no-repeat left top / cover;
   .mainWrapper {
-    padding: 130px 40px 20px;
+    padding: 100px 40px 20px;
     width: 100%;
     height: -webkit-max-content;
     height: -moz-max-content;
@@ -33,6 +33,9 @@
       flex-direction: column;
       gap: 16px;
       color: $cl-white;
+      a {
+        color: $cl-primary;
+      }
     }
   }
 }

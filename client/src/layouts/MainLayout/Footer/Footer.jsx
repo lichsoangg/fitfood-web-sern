@@ -67,10 +67,21 @@ function Center() {
 }
 
 function Bottom() {
+  const date = new Date()
+  console.log(date)
   return (
     <div className='footer__bottom body5'>
       <span>Bảo mật và điều khoản</span>
-      <span>© 2022 Một sản phẩm của KhanhDuy</span>
+      <span>
+        © Clone{' '}
+        <a href='https://fitfood.vn/' target='_blank'>
+          fitfood.vn
+        </a>{' '}
+        của{' '}
+        <a href='https://github.com/khanhduy-14' target='_blank'>
+          khanhduy-14
+        </a>{' '}
+      </span>
     </div>
   )
 }
