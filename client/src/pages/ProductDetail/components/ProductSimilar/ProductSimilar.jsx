@@ -5,15 +5,11 @@ import { useGetProductsQuery } from '../../../../features/products/productsApi'
 import './ProductSimilar.scss'
 export default function ProductSimilar({ ProductTypeID, currentProductID }) {
   const { data: productsData, isFetching: isProductsFetching } = useGetProductsQuery(
-    { product_type: ProductTypeID, limit: 10, page: 1 },
+    { product_type: ProductTypeID, limit: 4, page: 1 },
     { skip: !ProductTypeID }
   )
-  let productsClone = productsData?.data?.data
-  // if (products.length <= 0) return
-  const randomNumber = Math.floor(Math.random() * productsClone?.length)
-  let products = productsClone?.slice(randomNumber, randomNumber + 4)
-  // console.log(products)
-  products = productsClone?.filter((product) => Number(product.ProductID) !== currentProductID)
+  let products = productsData?.data?.data
+
   return (
     <div className='product-similar mainWrapper container'>
       {!isProductsFetching ? (
