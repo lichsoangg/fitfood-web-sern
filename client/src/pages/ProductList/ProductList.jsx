@@ -22,7 +22,7 @@ const initialQuery = {
   price_min: 50000,
   price_max: 1400000,
   order: SORT_PRODUCTS.DESC,
-  orderField: 'SoldQuantity'
+  order_field: 'SoldQuantity'
 }
 export default function ProductList() {
   const location = useLocation()

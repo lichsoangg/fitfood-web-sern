@@ -10,7 +10,7 @@ export default function ProductSortBar({ queryConfig }) {
   const handleSortProduct = ({ order, orderField }) => {
     navigate({
       pathname: location?.pathname,
-      search: createSearchParams({ ...queryConfig, page: 1, order, orderField }).toString()
+      search: createSearchParams({ ...queryConfig, page: 1, order, order_field: orderField }).toString()
     })
   }
   return (

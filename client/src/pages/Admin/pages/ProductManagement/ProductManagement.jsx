@@ -18,7 +18,7 @@ const initialQuery = {
   limit: 5,
   page: 1,
   order: SORT_PRODUCTS.ASC,
-  orderField: 'ProductID'
+  order_field: 'ProductID'
 }
 export default function ProductManagement() {
   const location = useLocation()

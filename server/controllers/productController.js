@@ -9,7 +9,7 @@ const ProductController = {
     const search = req.query?.search?.replaceAll(" ", "") || "";
     const productType = req.query.product_type || null;
     const order = req.query.order || "DESC";
-    const orderField = req.query.orderField || "SoldQuantity";
+    const orderField = req.query.order_field || "SoldQuantity";
 
     const priceMax = Number(req.query.price_max) || null;
     const priceMin = Number(req.query.price_min) || null;
@@ -63,7 +63,7 @@ const ProductController = {
         avatar = `${originalUrl}/images/${data?.Avatar}`;
         data.Avatar = avatar;
       }
-      return res.status(200).json(data);
+      return res.status(200).json({ status: 200, data });
     });
   },
   addProduct: (req, res, next) => {
