@@ -1,9 +1,14 @@
-import { useCallback, useRef } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useCallback, useEffect, useRef } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import useHover from '../../../../../hooks/useHover'
 
 export default function NavLinkItem({ children, setCoords, ...rest }) {
   const hoverRef = useRef()
+  const location = useLocation()
+
+  useEffect(() => {
+    handleForItem({ hover: false })
+  }, [location.pathname])
 
   const callbackMouseOver = useCallback(() => {
     const node = hoverRef.current

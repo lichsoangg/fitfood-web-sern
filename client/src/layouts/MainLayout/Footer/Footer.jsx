@@ -67,8 +67,7 @@ function Center() {
 }
 
 function Bottom() {
-  const date = new Date()
-  console.log(date)
+
   return (
     <div className='footer__bottom body5'>
       <span>Bảo mật và điều khoản</span>

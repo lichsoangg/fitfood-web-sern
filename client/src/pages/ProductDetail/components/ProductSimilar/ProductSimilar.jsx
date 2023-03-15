@@ -8,12 +8,12 @@ export default function ProductSimilar({ ProductTypeID, currentProductID }) {
     { product_type: ProductTypeID, limit: 10, page: 1 },
     { skip: !ProductTypeID }
   )
-  let products = productsData?.data?.data
+  let productsClone = productsData?.data?.data
   // if (products.length <= 0) return
-  const randomNumber = Math.floor(Math.random() * products?.length)
-  products = products?.slice(randomNumber, randomNumber + 4)
+  const randomNumber = Math.floor(Math.random() * productsClone?.length)
+  let products = productsClone?.slice(randomNumber, randomNumber + 4)
   // console.log(products)
-  products = products?.filter((product) => Number(product.ProductID) !== currentProductID)
+  products = productsClone?.filter((product) => Number(product.ProductID) !== currentProductID)
   return (
     <div className='product-similar mainWrapper container'>
       {!isProductsFetching ? (
