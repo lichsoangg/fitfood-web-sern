@@ -4,13 +4,16 @@
   "description": "Server for Fitfood E-commerce website",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon --legacy-watch index.js",
+    "serve": "node index.js"
   },
   "author": "Khanh Duy",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "chokidar": "^3.5.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

@@ -1,0 +1,70 @@
+version: "3"
+networks:
+  appnetwork:
+    name: appnetwork
+    driver: bridge
+services:
+  mysql_server:
+    image: mysql/mysql-server:8.0.32
+    container_name: mysql_server
+    restart: always
+    command: --lower_case_table_names=1
+    networks:
+      - appnetwork
+    expose:
+      - "3306"
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_DATABASE=FITFOOD
+      - MYSQL_CHARACTER_SET_SERVER=utf8mb4
+      - MYSQL_COLLATION_SERVER=utf8mb4_unicode_ci
+    volumes:
+      - "./fitfood.sql:/docker-entrypoint-initdb.d/init.sql"
+  redis_server:
+    image: redis:latest
+    container_name: redis:7.0-alpine
+    networks:
+      - appnetwork
+    restart: always
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: server
+    environment:
+      - PORT_REDIS=6379
+      - HOST_REDIS=redis_server
+      - HOST_MYSQL=mysql_server
+      - WHITE_LIST="client:3000"
+    networks:
+      - appnetwork
+    volumes:
+      - ./server/.:/app
+      - ./wait-for-it.sh:/app/wait-for-it.sh
+      - /app/node_modules
+    ports:
+      - "3005:3001"
+    command: sh -c "/app/wait-for-it.sh -t 0 redis_server:6379 &&
+      /app/wait-for-it.sh -t 0 mysql_server:3306 &&
+      yarn start"
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: client
+    environment:
+      - REACT_APP_API_PROVINCE_URL=https://api.mysupership.vn/v1/partner/areas/
+      - REACT_APP_API_FITFOOD_URL=server:3001/api/
+    volumes:
+      - ./client/.:/app
+      - ./wait-for-it.sh:/app/wait-for-it.sh
+      - /app/node_modules
+    networks:
+      - appnetwork
+    ports:
+      - "3004:3000"
+    command: sh -c "/app/wait-for-it.sh -t 0 server:3001 &&
+      yarn start"

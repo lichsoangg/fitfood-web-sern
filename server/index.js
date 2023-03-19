@@ -40,14 +40,14 @@ app.use("/api/products", productsRoute);
 app.use("/api/product-type", productTypeRoute);
 
 app.use((req, res, next) => {
-  const err = new Error("This route doesn't exist");
+  const err = new Error("This route doesn't exisst");
   err.status = 500;
   next(err);
 });
 
 app.use((err, req, res, next) => {
   const status = err.status || 400;
-  res.status(status).json({ message: err.message });
+  res.json({ message: err.message });
 });
 
 const PORT = process.env.PORT || 8000;

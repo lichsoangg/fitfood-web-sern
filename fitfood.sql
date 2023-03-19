@@ -1,7 +1,6 @@
- CREATE DATABASE fitfood;
+--  CREATE DATABASE fitfood;
 
-USE fitfood;
-
+-- USE fitfood;
 -- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 -- flush privileges;
 
@@ -54,6 +53,8 @@ CREATE TABLE product(
 	CONSTRAINT PK_Product_Id PRIMARY KEY(ProductID),
     CONSTRAINT FK_ProductType_Product FOREIGN KEY(ProductTypeId) REFERENCES ProductType(ProductTypeId)
 );
+
+
 -- State 1: Order: 2:Success
 -- Table Bill
 CREATE TABLE bill(
@@ -100,7 +101,8 @@ CREATE TABLE rating(
     CONSTRAINT FK_RATING_Username FOREIGN KEY(Username) REFERENCES User(Username),
     CONSTRAINT FK_RATING_Product FOREIGN KEY(ProductID) REFERENCES Product(ProductID)
 );
-
+ALTER DATABASE FITFOOD CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE product CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- Data User
 Insert Into user(Username,Password, Role, IsActive, Name, DayOfBirth, PhoneNumber, Gender, Province, District, Ward, Address, Avatar) Values(
 'duytran@gmail.com','$2b$10$3vZxIa867MB5iQw6BNQhtOel/fpsqc5WqkaGFLEmrcn3hGmo/B3IC',2,2,'Khánh Duy','2000-09-01','0333121131','1','79','773','27283','Ho Chi Minh',null
