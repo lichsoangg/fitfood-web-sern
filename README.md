@@ -18,6 +18,7 @@
 - [Website](#website)
 - [API](#api)
 - [This project is created using](#this-project-is-created-using)
+- [Quick start](#quick-start)
 - [Features](#bugs-and-feature-requests)
 - [Demo](#demo)
 - [Creators](#creators)
@@ -42,6 +43,25 @@ Website link: [https://www.fitfood.kd14.me/](https://www.fitfood.kd14.me/)
 - Server: <img src="./resources/images/nodejs.png" width="16" height="16" /> Nodejs, <img src="./resources/images/expressjs.png" width="16" height="16" /> ExpressJs
 - Database: <img src="./resources/images/mysql.png" width="16" height="16" /> Mysql, <img src="./resources/images/redis.png" width="16" height="16" /> Redis
 - Deploy: <img src="./resources/images/ubuntu.png" width="16" height="16" /> Ubuntu server 20.04
+
+---
+
+## Quick start
+
+`Start with docker` you can get Fitfood E-commerce Webapp in minutes by running the following command:\
+_Make sure you in fitfood_ecommerce folder and have docker, docker-compose_
+
+- Production Environment:
+
+  ```
+   docker-compose -f docker-compose.prod.yml up --build
+  ```
+
+- Development Environment:
+
+  ```
+   docker-compose -f docker-compose.dev.yml up --build
+  ```
 
 ---
 
