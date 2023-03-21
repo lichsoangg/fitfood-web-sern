@@ -1,5 +1,6 @@
 FROM node:18-alpine
 
+RUN apk update && apk add curl --no-cache
 ENV PORT=3001
 ENV ACCESS_SECRET_KEY=b/NdxwgaYrFIyJxmlbaU8FDxABPy7WjPFU7T2eMyg2g=
 ENV REFRESH_SECRET_KEY=b/djasdjasjuHHHG12388HHHJDKSKDIEOEOEOOIRR=
@@ -13,7 +14,6 @@ ENV PASSWORD_MYSQL=12345678
 ENV EMAIL=tranhakhanhduy2001@gmail.com
 ENV EMAIL_PASSWORD=pvyktypovblprveb
 
-RUN apk update && apk add bash
 
 
 WORKDIR /app
@@ -21,8 +21,9 @@ WORKDIR /app
 COPY ./package.json ./yarn.lock .
 
 
-
+WORKDIR /app
 RUN yarn install --frozen-lockfile --no-cache
 COPY . .
+
 
 CMD ["yarn", "serve"]

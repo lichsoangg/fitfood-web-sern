@@ -1,5 +1,5 @@
 FROM node:18-alpine
-
+RUN apk update && apk add curl --no-cache
 ENV PORT=3001
 ENV ACCESS_SECRET_KEY=b/NdxwgaYrFIyJxmlbaU8FDxABPy7WjPFU7T2eMyg2g=
 ENV REFRESH_SECRET_KEY=b/djasdjasjuHHHG12388HHHJDKSKDIEOEOEOOIRR=

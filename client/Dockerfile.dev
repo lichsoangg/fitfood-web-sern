@@ -3,7 +3,7 @@ FROM node:18-alpine as development
 ENV REACT_APP_API_PROVINCE_URL=https://api.mysupership.vn/v1/partner/areas/
 ENV REACT_APP_API_FITFOOD_URL=https://api.fitfood.kd14.me/api/
 
-RUN apk update && apk add bash
+
 RUN echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
 
 #install packages

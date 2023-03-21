@@ -39,6 +39,10 @@ app.use("/api/purchase", purchaseRoute);
 app.use("/api/products", productsRoute);
 app.use("/api/product-type", productTypeRoute);
 
+app.get("/health", (req, res) => {
+  res.sendStatus(200);
+});
+
 app.use((req, res, next) => {
   const err = new Error("This route doesn't exisst");
   err.status = 500;
