@@ -16,7 +16,7 @@ export const productsApi = apiSlice.injectEndpoints({
           params: queryConfig
         }
       },
-      providesTags: (result) => providesProductList(result.data.data, 'Products')
+      providesTags: (result) => providesProductList(result?.data.data, 'Products')
     }),
     getProduct: builder.query({
       query: (id) => {

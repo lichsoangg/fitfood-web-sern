@@ -72,7 +72,7 @@ export default function HomePage() {
                 <small>Kế hoạch đồ ăn sạch cho </small>
                 một lối sống lành mạnh
               </h2>
-              <HoverButton styleButton={{ marginTop: '12px' }} onClick={handleToShopping}>
+              <HoverButton styleButton={{ marginTop: '12px' }} onClick={handleToShopping} data-testid='button-shopping'>
                 Đặt Ngay
               </HoverButton>
             </BannerItem>

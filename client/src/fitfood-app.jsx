@@ -26,7 +26,6 @@ const ProductManagement = lazy(() => import('./pages/Admin/pages/ProductManageme
 //admin page
 
 function FitFoodApp() {
-  useScrollToTop()
   return (
     <ErrorBoundaryComponent>
       <HelmetProvider>
@@ -37,6 +36,7 @@ function FitFoodApp() {
 }
 
 function FitFoodAppRoutes() {
+  useScrollToTop()
   return (
     <Routes>
       {/* main layout */}

@@ -20,7 +20,7 @@ export default function LayoutComponents() {
 function Logo() {
   return (
     <Link to={path.home}>
-      <div className='layout__logo'>
+      <div className='layout__logo' data-testid='logo-main'>
         <div className='layout__logo--image'>
           <img src={logo} alt='Fitfood logo' />
         </div>

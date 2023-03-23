@@ -10,8 +10,12 @@ export function ThreeDimensionButton({ children, handleClickButton }) {
   )
 }
 
-export function BoxShadowButton({ children }) {
-  return <div className='button-box-shadow'>{children}</div>
+export function BoxShadowButton({ children, ...rest }) {
+  return (
+    <div className='button-box-shadow' {...rest}>
+      {children}
+    </div>
+  )
 }
 export function MainButton({ children, ...rest }) {
   return (

@@ -58,7 +58,7 @@ export default function AccountDropdown() {
         </>
       ) : (
         <Link to={path.login} state={{ from: location }}>
-          <BoxShadowButton>Đăng nhập</BoxShadowButton>
+          <BoxShadowButton data-testid='button-login'>Đăng nhập</BoxShadowButton>
         </Link>
       )}
       {isLogoutLoading && <Loading size={3} full />}
