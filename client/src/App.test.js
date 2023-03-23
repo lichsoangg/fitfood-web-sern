@@ -1,6 +1,7 @@
 import { render, screen, waitFor, act, fireEvent } from '@testing-library/react'
 import App from './App'
 import AppProvider from './AppProvider'
+import path from './constants/path'
 test('renders fit-food-app', async () => {
   await act(async () => {
     render(
@@ -16,13 +17,23 @@ test('renders fit-food-app', async () => {
     },
     { timeout: '5000' }
   )
-  await fireEvent.click(screen.getByTestId('button-shopping'))
+  await fireEvent.click(screen.getByTestId('button-login'))
 
   await waitFor(
     () => {
-      expect(document.querySelector('title')?.textContent).toBe('Đặt món - Fitfood')
+      expect(document.querySelector('title')?.textContent).toBe('Đăng nhập - Fitfood')
     },
     { timeout: '5000' }
   )
-  screen.debug(document.body.parentElement, 999999999)
+})
+
+test('Render router login page', async () => {
+  window.history.pushState({}, 'Test Page', path.login)
+  render(<App />, { wrapper: AppProvider })
+  await waitFor(
+    () => {
+      expect(document.querySelector('title')?.textContent).toBe('Đăng nhập - Fitfood')
+    },
+    { timeout: '5000' }
+  )
 })

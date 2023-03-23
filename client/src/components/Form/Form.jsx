@@ -54,7 +54,7 @@ function Input({ placeHolder, styleInput, styleFormInput, type, icon, name, ...r
           <img src={show ? showPasswordIcon : hidePasswordIcon} alt='Fitfood Password icon' />
         </div>
       )}
-      {errors[`${name}`] && <Error errorMessage={errors[`${name}`].message} />}
+      {<Error errorMessage={errors[`${name}`]?.message} />}
     </div>
   )
 }
