@@ -20,6 +20,7 @@
 - [This project is created using](#this-project-is-created-using)
 - [Quick start](#quick-start)
 - [Features](#bugs-and-feature-requests)
+- [Testing](#testing)
 - [Demo](#demo)
 - [Creators](#creators)
 - [Thanks](#thanks)
@@ -87,6 +88,16 @@ _Make sure you in fitfood_ecommerce folder and have docker, docker-compose_
 - Products Management
   - CRUD
   - Filter, Order
+
+---
+
+## Testing
+
+Command line:
+
+```js
+yarn test
+```
 
 ---
 
