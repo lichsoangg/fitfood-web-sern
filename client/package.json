@@ -24,7 +24,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
     "redux-persist": "^6.0.0",
-    "sass": "^1.55.0",
+    "sass": "^1.60.0",
     "sweetalert2": "^11.6.15",
     "swiper": "^8.4.5",
     "uuid": "^9.0.0",
@@ -40,12 +40,24 @@
     "lint": "eslint --ext js,jsx,ts,tsx src/",
     "lint:fix": "eslint --fix --ext js,jsx,ts,tsx src/",
     "prettier": "prettier --check \"src/**/(*.jsx|*.js|*.tsx|*ts|*.css|*.scss)\"",
-    "prettier:fix": "prettier --write \"src/**/(*.jsx|*.js|*.tsx|*ts|*.css|*.scss)\""
+    "prettier:fix": "prettier --write \"src/**/(*.jsx|*.js|*.tsx|*ts|*.css|*.scss)\"",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -61,11 +73,27 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/node-logger": "^6.5.16",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/preset-scss": "^1.0.3",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
+    "babel-plugin-named-exports-order": "^0.0.2",
+    "css-loader": "5.2.6",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "msw": "^1.2.0",
     "prettier": "^2.7.1",
-    "source-map-explorer": "^2.5.3"
+    "sass-loader": "10.1.1",
+    "source-map-explorer": "^2.5.3",
+    "style-loader": "2.0.0",
+    "webpack": "^5.76.3"
   },
   "jest": {
     "moduleNameMapper": {

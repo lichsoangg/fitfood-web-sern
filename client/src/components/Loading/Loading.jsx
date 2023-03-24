@@ -1,6 +1,6 @@
 import React from 'react'
 import './Loading.scss'
-export default function Loading({ size, full, ...styleOther }) {
+export default function Loading({ size = 2, full, ...styleOther }) {
   let style = {}
   if (full) {
     style = {

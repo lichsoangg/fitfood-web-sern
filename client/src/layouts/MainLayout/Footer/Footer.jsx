@@ -7,7 +7,6 @@ export default function Footer() {
     <FooterWrapper>
       <Footer.Top>
         <LayoutComponents.Logo />
-        <LayoutComponents.Menu />
         <LayoutComponents.Contact />
       </Footer.Top>
       <Footer.Center />
