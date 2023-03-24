@@ -67,17 +67,16 @@ function Center() {
 }
 
 function Bottom() {
-
   return (
     <div className='footer__bottom body5'>
       <span>Bảo mật và điều khoản</span>
       <span>
         © Clone{' '}
-        <a href='https://fitfood.vn/' target='_blank'>
+        <a href='https://fitfood.vn/' target='_blank' rel='noreferrer'>
           fitfood.vn
         </a>{' '}
         của{' '}
-        <a href='https://github.com/khanhduy-14' target='_blank'>
+        <a href='https://github.com/khanhduy-14' target='_blank' rel='noreferrer'>
           khanhduy-14
         </a>{' '}
       </span>

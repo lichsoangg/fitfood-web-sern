@@ -2,21 +2,15 @@ import { render, screen, waitFor, act, fireEvent } from '@testing-library/react'
 import App from './App'
 import AppProvider from './AppProvider'
 import path from './constants/path'
+import { delay } from './test/utils'
 test('renders fit-food-app', async () => {
   await act(async () => {
-    render(
-      <AppProvider>
-        <App />
-      </AppProvider>
-    )
+    render(<App />, { wrapper: AppProvider })
   })
+  await delay(2000)
+  const products = await screen.findByTestId('products')
+  expect(products).toBeInTheDocument()
 
-  await waitFor(
-    () => {
-      expect(document.querySelector('title')?.textContent).toBe('Trang chủ - Fitfood')
-    },
-    { timeout: '5000' }
-  )
   await fireEvent.click(screen.getByTestId('button-login'))
 
   await waitFor(
@@ -28,8 +22,11 @@ test('renders fit-food-app', async () => {
 })
 
 test('Render router login page', async () => {
-  window.history.pushState({}, 'Test Page', path.login)
-  render(<App />, { wrapper: AppProvider })
+  await act(async () => {
+    window.history.pushState({}, 'Test Page', path.login)
+    render(<App />, { wrapper: AppProvider })
+  })
+
   await waitFor(
     () => {
       expect(document.querySelector('title')?.textContent).toBe('Đăng nhập - Fitfood')

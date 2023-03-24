@@ -1,0 +1,332 @@
+const responseLogin = {
+  data: {
+    Username: 'duytran@gmail.com',
+    Role: 2,
+    IsActive: 2,
+    Name: 'Khánh Duy2',
+    DayOfBirth: '2000-09-01',
+    PhoneNumber: '0333121131',
+    Gender: 1,
+    Province: '79',
+    District: '773',
+    Ward: '27283',
+    Address: 'Ho Chi Minh',
+    Avatar: '',
+    AccessToken:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VybmFtZSI6ImR1eXRyYW5AZ21haWwuY29tIiwiUm9sZSI6MiwiSXNBY3RpdmUiOjIsImlhdCI6MTY3OTU5NDI5NSwiZXhwIjoxNjc5NTk0NTk1fQ.Qw6nhkkvUQNpRjmb0ifEzAEU48iTw2-NOVJFIv6P-QQ'
+  },
+  status: 200
+}
+
+const responseProducts = {
+  status: 200,
+  data: {
+    data: [
+      {
+        ProductID: 5,
+        Name: 'Cơm gạo lức ăn liền ',
+        Price: 100000,
+        Quantity: 4321,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_5.png',
+        Unit: 'Gói',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '1123224',
+        Rating: 3.5
+      },
+      {
+        ProductID: 2,
+        Name: 'FITFOOD JUICE SWEETIE',
+        Price: 200000,
+        Quantity: 21353,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_2.png',
+        Unit: 'Chai',
+        Highlight: 2,
+        ProductTypeID: 1,
+        ProductTypeName: 'Đồ uống',
+        SoldQuantity: '448349',
+        Rating: 4.8
+      },
+      {
+        ProductID: 12,
+        Name: 'Biscotti vị trà xanh ',
+        Price: 100000,
+        Quantity: 100,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_12.png',
+        Unit: 'Hộp',
+        Highlight: 2,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '240015',
+        Rating: 4.9
+      },
+      {
+        ProductID: 15,
+        Name: 'Bánh mì ngũ cốc',
+        Price: 85000,
+        Quantity: 4567,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_15.png',
+        Unit: 'Hộp',
+        Highlight: 2,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '140030',
+        Rating: 4.2
+      },
+      {
+        ProductID: 3,
+        Name: 'FITFOOD JUICE GREENIE',
+        Price: 100000,
+        Quantity: 42341,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_3.png',
+        Unit: 'Chai',
+        Highlight: 2,
+        ProductTypeID: 1,
+        ProductTypeName: 'Đồ uống',
+        SoldQuantity: '127658',
+        Rating: 5
+      },
+      {
+        ProductID: 14,
+        Name: 'Tempeh Tương Nén',
+        Price: 100000,
+        Quantity: 455,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_14.png',
+        Unit: 'Gói',
+        Highlight: 2,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '44532',
+        Rating: 0
+      },
+      {
+        ProductID: 13,
+        Name: 'Biscotti vị truyền thống',
+        Price: 100000,
+        Quantity: 100,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_13.png',
+        Unit: 'Hộp',
+        Highlight: 2,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '18078',
+        Rating: 4.4
+      },
+      {
+        ProductID: 6,
+        Name: 'Nhân Burger Gà Teriyaki',
+        Price: 100000,
+        Quantity: 123,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_6.png',
+        Unit: 'Gói',
+        Highlight: 2,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '2123',
+        Rating: 4.1
+      },
+      {
+        ProductID: 1,
+        Name: 'NƯỚC MÁT THẢO MỘC',
+        Price: 100000,
+        Quantity: 1234,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_1.png',
+        Unit: 'Chai',
+        Highlight: 1,
+        ProductTypeID: 1,
+        ProductTypeName: 'Đồ uống',
+        SoldQuantity: '28',
+        Rating: 4.7
+      },
+      {
+        ProductID: 8,
+        Name: 'Gạo lứt Rong Biển',
+        Price: 100000,
+        Quantity: 2453,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_8.png',
+        Unit: 'Hộp',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '9',
+        Rating: 3.8
+      },
+      {
+        ProductID: 9,
+        Name: 'Gạo lứt Chà Bông',
+        Price: 100000,
+        Quantity: 3246,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_9.png',
+        Unit: 'Hộp',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 3.5
+      },
+      {
+        ProductID: 10,
+        Name: 'Bánh ngói hạnh nhân',
+        Price: 129000,
+        Quantity: 100,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_10.png',
+        Unit: 'Hộp',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 4.6
+      },
+      {
+        ProductID: 11,
+        Name: 'Biscotti vị socola',
+        Price: 129000,
+        Quantity: 97,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_11.png',
+        Unit: 'Hộp',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 0
+      },
+      {
+        ProductID: 4,
+        Name: 'BOX Ức gà mềm mọng',
+        Price: 379000,
+        Quantity: 123,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_4.png',
+        Unit: 'Hộp',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 3.5
+      },
+      {
+        ProductID: 7,
+        Name: 'Ức gà ăn liền ',
+        Price: 199000,
+        Quantity: 342,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_7.png',
+        Unit: 'Hộp',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 3.9
+      },
+      {
+        ProductID: 16,
+        Name: 'Gói FIT 1',
+        Price: 600000,
+        Quantity: 324,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_16.png',
+        Unit: 'Gói',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 0
+      },
+      {
+        ProductID: 17,
+        Name: 'Gói FIT 2',
+        Price: 600000,
+        Quantity: 567,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_17.png',
+        Unit: 'Gói',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 5
+      },
+      {
+        ProductID: 18,
+        Name: 'Gói FIT 3',
+        Price: 600000,
+        Quantity: 678,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_18.png',
+        Unit: 'Gói',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 3.8
+      },
+      {
+        ProductID: 19,
+        Name: 'Gói MEAT-S',
+        Price: 1200000,
+        Quantity: 564,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_19.png',
+        Unit: 'Gói',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 4.7
+      },
+      {
+        ProductID: 20,
+        Name: 'Gói MEAT',
+        Price: 950000,
+        Quantity: 100,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_20.png',
+        Unit: 'Gói',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 4.3
+      },
+      {
+        ProductID: 21,
+        Name: 'Gói chay',
+        Price: 600000,
+        Quantity: 323,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_21.png',
+        Unit: 'Gói',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 4.4
+      },
+      {
+        ProductID: 22,
+        Name: 'Gói Full',
+        Price: 750000,
+        Quantity: 123,
+        Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_21.png',
+        Unit: 'Gói',
+        Highlight: 1,
+        ProductTypeID: 2,
+        ProductTypeName: 'Đồ ăn',
+        SoldQuantity: '0',
+        Rating: 3.5
+      }
+    ],
+    pagesize: 1
+  }
+}
+
+const responseProduct = {
+  status: 200,
+  data: {
+    ProductID: 2,
+    Name: 'FITFOOD JUICE SWEETIE',
+    Price: 200000,
+    Quantity: 21353,
+    Avatar: 'http://api.fitfood.kd14.me/images/ProductAvatar_2.png',
+    Unit: 'Chai',
+    Highlight: 2,
+    ProductTypeID: 1,
+    ProductTypeName: 'Đồ uống',
+    SoldQuantity: '448349',
+    Rating: 4.8
+  }
+}
+export { responseLogin, responseProducts, responseProduct }

@@ -40,6 +40,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
   reducerPath: 'api-fitfood',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Account'],
+  tagTypes: ['Account', 'Products'],
   endpoints: () => ({})
 })

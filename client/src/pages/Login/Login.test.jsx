@@ -2,6 +2,7 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import App from '../../App'
 import AppProvider from '../../AppProvider'
 import path from '../../constants/path'
+import { delay } from '../../test/utils'
 
 describe('Login', () => {
   let emailInput, passwordInput, submitButton
@@ -56,14 +57,13 @@ describe('Login', () => {
           value: '123123'
         }
       })
+    })
+    act(() => {
       fireEvent.submit(submitButton)
     })
 
-    await waitFor(() => {
-      expect(screen.queryByText('Email là bắt buộc')).not.toBeInTheDocument()
-      expect(screen.queryByText('Mật khẩu là bắt buộc')).not.toBeInTheDocument()
-      expect(screen.queryByText('Email không đúng định dạng')).not.toBeInTheDocument()
-      expect(document.querySelector('title')?.textContent).toBe('Trang chủ - Fitfood')
-    })
+    await delay(5000)
+    const products = await screen.findByTestId('products')
+    expect(products).toBeInTheDocument()
   })
 })
