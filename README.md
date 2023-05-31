@@ -8,7 +8,7 @@
   <p align="center">
     Web e-commerce using SERN stack
     <br>
-    <a href="https://www.fitfood.kd14.me/">Visit Website</a>
+<!--     <a href="https://www.fitfood.kd14.me/">Visit Website</a> -->
 
   </p>
 </p>
