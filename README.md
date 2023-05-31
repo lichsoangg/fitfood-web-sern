@@ -30,7 +30,7 @@
 
 ## API
 
-- API link: [https://api.fitfood.kd14.me/api/](https://api.fitfood.kd14.me/api/)
+<!-- - API link: [https://api.fitfood.kd14.me/api/](https://api.fitfood.kd14.me/api/) -->
 - API documentation: [Documentation (Click to view)](./api-document.md)
 
 ---
