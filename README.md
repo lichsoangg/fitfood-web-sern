@@ -15,19 +15,16 @@
 
 ## Table of contents
 
-- [Website](#website)
 - [API](#api)
 - [This project is created using](#this-project-is-created-using)
 - [Quick start](#quick-start)
-- [Features](#bugs-and-feature-requests)
+- [Features](#features)
 - [Testing](#testing)
 - [Demo](#demo)
 - [Creators](#creators)
 - [Thanks](#thanks)
 
-## Website
 
-Website link: [https://www.fitfood.kd14.me/](https://www.fitfood.kd14.me/)
 
 ---
 
@@ -232,7 +229,7 @@ View more ...
 
 </details>
 
-and view more in [https://www.fitfood.kd14.me/](https://www.fitfood.kd14.me/)
+
 
 ## Creators
 
