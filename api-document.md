@@ -1,6 +1,6 @@
 # FITFOOD API
 
-URL: `https://api.fitfood.kd14.me/api/`\
+<!-- URL: `https://api.fitfood.kd14.me/api/`\ -->
 TOKEN: `headers: authorization: Bearer ` <**token**>
 
 ## Response Format
